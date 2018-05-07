@@ -1,0 +1,23 @@
+{
+  "name": "utpmaissaudavel",
+  "version": "1.0",
+  "description": "UTP Mais Saudavel - Sistema para Fisioterapia",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaeldouglasdeveloper/utpmaissaudavel.git"
+  },
+  "keywords": [
+    "css",
+    "js",
+    "html",
+    "template",
+    "admin",
+    "bootstrap",
+    "theme",
+    "backend",
+    "responsive"
+  ],
+}
