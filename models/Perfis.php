@@ -1,0 +1,12 @@
+<?php
+
+class Perfis {
+    
+    CONST ADMINISTRADOR = 1;
+    CONST COORDENADOR = 2;
+    CONST FISIOTERAPEUTA = 3;
+    CONST SECRETARIA = 4;
+    CONST ALUNO = 5;
+    CONST PACIENTE = 6;
+    CONST MEDICO = 7;    
+}
