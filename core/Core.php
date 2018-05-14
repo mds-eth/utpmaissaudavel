@@ -3,26 +3,36 @@
 class Core {
 
     public function run() {
-        
+
         $url = '/';
         $params = array();
         if (isset($_GET['url'])) {
             $url .= $_GET['url'];
         }
 
+
+
         if (!empty($_POST)) {
             $params['email'] = $_POST['email'];
             $params['senha'] = $_POST['senha'];
+        }
+
+        if (isset($_GET['cep'])) {
+            $params = $_GET['cep'];
+        }
+
+        if (isset($_GET['perfil'])) {
+            $params = $_GET['perfil'];
         }
 
         if (!empty($url) && $url != '/') {
 
             $url = explode('/', $url);
             array_shift($url);
-            
+
             $currentController = $url[0] . 'Controller';
             array_shift($url);
-            
+
             if (isset($url[0]) && !empty($url[0])) {
                 $currentAction = $url[0];
                 array_shift($url);
@@ -38,10 +48,10 @@ class Core {
             $currentController = 'homeController';
             $currentAction = 'index';
         }
-        
-        $current = new $currentController();                 
-        
-        call_user_func_array(array($current, $currentAction), $params);
+
+        $current = new $currentController();      
+
+        call_user_func_array(array($current, $currentAction), array($params));
     }
 
 }

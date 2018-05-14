@@ -21,10 +21,11 @@ class Usuarios extends Model {
         try {
 
             $sql = "INSERT INTO utpmaissaudavel.pessoas(nome_pessoa, data_nascimento, sexo, cpf, rg, email,
-                formacao, status, criado_por, criado_em, atualizado_por, atualizado_em) VALUES(:nome_pessoa, :data_nascimento, :sexo, :cpf, :rg, :email,
+                formacao, status, criado_por, criado_em, atualizado_por, atualizado_em) VALUES(:nome_pessoa, 
+                :data_nascimento, :sexo, :cpf, :rg, :email,
                 :formacao, :status, :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
 
-                       
+
             $pdo->bindValue('?', $this->getNome(), PDO::PARAM_STR);
             $pdo->bindValue('?', $this->getDataNascimento(), PDO::PARAM_STR);
             $pdo->bindValue('?', $this->getSexo(), PDO::PARAM_STR);
@@ -36,7 +37,6 @@ class Usuarios extends Model {
             $pdo->bindValue('?', $this->getCriadoPor(), PDO::PARAM_STR);
             $pdo->bindValue('?', $this->getAtualizadoPor(), PDO::PARAM_STR);
             $pdo->bindValue('?', $this->getAtualizadoEm(), PDO::PARAM_STR);
-            
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

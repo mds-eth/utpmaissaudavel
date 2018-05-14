@@ -15,6 +15,11 @@ class Controller {
 
     public function loadTemplate($viewName, $dados = array()) {
 
+        if (empty($dados)) {
+
+            $dados = 'template';
+        }
+
         require 'views/template.php';
     }
 

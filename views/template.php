@@ -27,45 +27,39 @@
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-users"></i> Usuários <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo BASE_URL; ?>usuarios/cadastrar">Cadastrar</a></li>
-                                            <li><a href="<?php echo BASE_URL; ?>usuarios/editar">Editar</a></li>
+                                            <li><a href="<?php echo BASE_URL; ?>usuarios/cadastrar">Cadastrar</a></li>                                            
                                             <li><a href="<?php echo BASE_URL; ?>usuarios/visualizar">Visualizar</a></li>                                            
                                         </ul>
                                     </li>
                                     <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR) : ?>
                                         <li><a><i class="fa fa-edit"></i> Perfis <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
-                                                <li><a href="<?php echo BASE_URL; ?>perfis/cadastrar">Cadastrar</a></li>                                                
-                                                <li><a href="<?php echo BASE_URL; ?>usuarios/editar">Editar</a></li>
+                                                <li><a href="<?php echo BASE_URL; ?>perfis/cadastrar">Cadastrar</a></li>                                                                                                
                                                 <li><a href="<?php echo BASE_URL; ?>usuarios/visualizar">Visualizar</a></li>                                                    
                                             </ul>
                                         </li>                                    
                                         <li><a><i class="fa fa-arrow-up"></i> URLs <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
-                                                <li><a href="form.html">Cadastrar</a></li>
-                                                <li><a href="form_advanced.html">Editar</a></li>
+                                                <li><a href="form.html">Cadastrar</a></li>                                                
                                                 <li><a href="form_validation.html">Visualizar</a></li> 
                                             </ul>
                                         </li>
                                     <?php endif ?>
                                     <li><a><i class="fa fa-hospital-o"></i> Unidades de Saúde <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="form.html">Cadastrar</a></li>
-                                            <li><a href="form_advanced.html">Editar</a></li>
+                                            <li><a href="form.html">Cadastrar</a></li>                                            
                                             <li><a href="form_validation.html">Visualizar</a></li> 
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-stethoscope"></i> Triagem <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="form.html">Cadastrar</a></li>
-                                            <li><a href="form_advanced.html">Editar</a></li>
+                                            <li><a href="form.html">Cadastrar</a></li>                                            
                                             <li><a href="form_validation.html">Visualizar</a></li> 
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-calendar"></i> Agendamentos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="form.html">Cadastrar</a></li>
-                                            <li><a href="form_advanced.html">Editar</a></li>
+                                            <li><a href="form.html">Cadastrar</a></li>                                            
                                             <li><a href="form_validation.html">Visualizar</a></li> 
                                         </ul>
                                     </li>                                    
@@ -165,8 +159,8 @@
 
                 <div class="right_col" role="main">
                     <div class="row">
-                        <div class="col-md-8 col-sm-8 col-xs-12">                                           
-                            <?php $this->loadViewInTemplate($viewName, $viewData); ?>
+                        <div>                                   
+                            <?php $this->loadViewInTemplate($viewName, null); ?>
                         </div>
                     </div>
                 </div>                
@@ -181,6 +175,9 @@
         <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery.min.js"></script>    
         <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/custom.min.js"></script>
-        <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/validator/validator.js"></script>
+        <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/validator/validator.js"></script>        
+        <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery.inputmask.bundle.min.js"></script>
+        <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/usuarios/cadastrar.js"></script>
+        <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/perfis/cadastrar.js"></script>
     </body>
 </html>
