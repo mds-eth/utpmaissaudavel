@@ -2,28 +2,14 @@
 
 class perfisController extends Controller {
 
-    public function cadastrar($perfil) {
-        
+    public function cadastrar() {
+
         $dados = array();
 
-        if (!is_null($perfil) && !empty($perfil)) {
-
-            try {
-
-                $perfil = new Perfis();
-                $perfil->setPerfil($perfil);
-
-                $retorno = $perfil->gravaPerfil();
-
-
-                $this->loadTemplate('perfis/cadastrar', $dados);
-            } catch (Exception $e) {
-                
-            }
-        }
+        $this->loadTemplate('perfis/cadastrar', $dados);
     }
 
-    public function novo() {
+    public function novo($perfil) {
 
         die("cheguei aqui");
 
@@ -31,6 +17,17 @@ class perfisController extends Controller {
 
             $nomePerfil = $_POST['perfil'];
         }
+    }
+
+    public function verificaAcessoUrl($url) {
+
+        if ($url != null || !empty($url)) {
+
+            $perfil = new Perfis();
+            $perfil->setUrl($url);
+        }
+        
+        return true;
     }
 
 }

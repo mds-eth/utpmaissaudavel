@@ -1,6 +1,6 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
-    $('#formLogin').submit(function (event) {
+    $('#formLogin').submit(function(event) {
 
         event.preventDefault();
 
@@ -14,7 +14,7 @@ $(document).ready(function () {
             type: 'POST',
             url: 'login/logar',
             data: {email: email, senha: senha},
-            success: function (retorno) {
+            success: function(retorno) {
 
                 if (retorno == 1) {
                     window.location.href = '/home';
@@ -24,10 +24,7 @@ $(document).ready(function () {
                         title: 'Email ou senha incorretos',
                         confirmButtonText: 'OK'
                     });
-                } else {
-                    window.location.href = '../../login/new_pass.php';
                 }
-
             }
         });
     });

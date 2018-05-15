@@ -11,10 +11,12 @@ class Perfis extends Model {
     CONST MEDICO = 7;
 
     private $perfil;
+    private $url;
 
     public function gravaPerfil() {
 
         $idUsuario = $_SESSION['usuario']['id_usuario'];
+        $date = date('d-m-Y H:i');
 
         $sql = $this->db->prepare("SELECT nome_perfil FROM perfis as p WHERE p.nome_perfil = :nome");
         $sql->bindValue(':nome', $this->getPerfil(), PDO::PARAM_STR);
@@ -23,20 +25,25 @@ class Perfis extends Model {
 
         $retorno = $sql->fetchObject();
 
-        var_dump($retorno);
-        die('retorno do banco');
+        if (!is_null($retorno) || !empty($retorno)) {
 
-        if (!is_null($this->getPerfil())) {
-
-            $sql = $this->db->prepare("INSERT INTO utpmaissaudavel.perfis (nome, criado_por, criado_em, atualizado_por, atualizado_em) 
+            $sql = $this->db->prepare("INSERT INTO utpmaissaudavel.perfis (nome, criado_por, criado_em, atualizado_por, atualizado_em)
                 VALUES (:nome, :criado_por, :criado_em, :atualizado_por, :atualizado_em)");
 
-            try {
-                
-            } catch (Exception $exc) {
-                echo $exc->getMessage();
-            }
+            $sql->bindValue(':nome', $this->getPerfil(), PDO::PARAM_STR);
+            $sql->bindValue(':criado_por', $idUsuario, PDO::PARAM_INT);
+            $sql->bindValue(':criado_em', $date, PDO::PARAM_STR);
+
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    public function verificaAcessoUrl() {
+        
+        return true;
+
     }
 
     function getPerfil() {
@@ -45,6 +52,14 @@ class Perfis extends Model {
 
     function setPerfil($perfil) {
         $this->perfil = $perfil;
+    }
+
+    function getUrl() {
+        return $this->url;
+    }
+
+    function setUrl($url) {
+        $this->url = $url;
     }
 
 }

@@ -4,13 +4,19 @@ class Core {
 
     public function run() {
 
+        $acesso = $_SERVER['REQUEST_URI'];
+        $perfil = new perfisController();
+        $retorno = $perfil->verificaAcessoUrl($acesso);
+
+        if ($retorno == false) {
+            return BASE_URL . 'home';
+        }
+
         $url = '/';
         $params = array();
         if (isset($_GET['url'])) {
             $url .= $_GET['url'];
         }
-
-
 
         if (!empty($_POST)) {
             $params['email'] = $_POST['email'];
@@ -28,6 +34,7 @@ class Core {
         if (!empty($url) && $url != '/') {
 
             $url = explode('/', $url);
+
             array_shift($url);
 
             $currentController = $url[0] . 'Controller';
@@ -49,7 +56,7 @@ class Core {
             $currentAction = 'index';
         }
 
-        $current = new $currentController();      
+        $current = new $currentController();
 
         call_user_func_array(array($current, $currentAction), array($params));
     }
