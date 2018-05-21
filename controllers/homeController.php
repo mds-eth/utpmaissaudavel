@@ -1,13 +1,20 @@
 <?php
 
-class homeController extends Controller {
+class homeController extends controller {
+    private $pessoas;
     
-    public function index(){
-        
-        $dados = array();
-        
-        $this->loadTemplate('home', $dados);
-        
-        
+    public function __construct() {
+        $this->pessoas = new Pessoas();
+        if (!$this->pessoas->logado()) {
+            header('Location: '.URL.'/login');
+        }
     }
+
+    public function index() {
+        $dados = array();
+        $this->loadTemplate('home', $dados);
+    }
+
 }
+
+?>

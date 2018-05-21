@@ -1,33 +1,52 @@
 <?php
 
-require 'environment.php';
+define('versao', 'prd'); // Alterar para 'prd' quando for colocar em produção.
+define('drive', 'mysql'); // coloca o drive do banco que será usado.
+define('URL', 'http://utpmaissaudavel.com.br'); // Sempre alterar quando iniciar novo projeto.
 
+global $config;
 $config = array();
 
-if (ENVIRONMENT == 'development') {
+$host = '(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521))
+           (CONNECT_DATA = (SERVER = DEDICATED) (SID = BANCO)))';
 
-    define("BASE_URL", "http://utpmaissaudavel.com.br/");
-    $config['dbname'] = 'utpmaissaudavel';
-    $config['host'] = '127.0.0.1';
-    $config['dbuser'] = 'root';
-    $config['dbpass'] = 'root';
-} else {
-
-    define("BASE_URL", "http://utpmaissaudavel.com.br/");
-    $config['dbname'] = 'classificados';
-    $config['host'] = '127.0.0.1';
-    $config['dbuser'] = 'root';
-    $config['dbpass'] = 'root';
+if (versao == 'dsv') {
+    if (drive == 'sqlvr') {
+        $config['dbname'] = '';
+        $config['host'] = '';
+        $config['user'] = '';
+        $config['pass'] = '';
+    }
+    if (drive == 'mysql') {
+        $config['dbname'] = 'utpmaissaudavel';
+        $config['host'] = '127.0.0.1';
+        $config['user'] = 'root';
+        $config['pass'] = 'root';
+    }
+    if (drive == 'oracle') {
+        $config['host'] = $host;
+        $config['user'] = 'system';
+        $config['pass'] = 'forca';
+    }
 }
 
-global $db;
-try {
-    $db = new PDO("mysql:dbname=" . $config['dbname'] . ";host=" . $config['host'], $config['dbuser'], $config['dbpass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-} catch (PDOException $e) {
-    echo "ERRO: " . $e->getMessage();
-    exit;
+if (versao == 'prd') {
+    if (drive == 'sqlvr') {
+        $config['dbname'] = '';
+        $config['host'] = '';
+        $config['user'] = '';
+        $config['pass'] = '';
+    }
+    if (drive == 'mysql') {
+        $config['dbname'] = 'utpmaissaudavel';
+        $config['host'] = '127.0.0.1';
+        $config['user'] = 'root';
+        $config['pass'] = 'root';
+    }
+    if (drive == 'oracle') {
+        $config['host'] = $host;
+        $config['user'] = 'system';
+        $config['pass'] = 'forca';
+    }
 }
+?>

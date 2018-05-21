@@ -1,5 +1,9 @@
-RewriteEngine On        
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$  /index.php?url=$1 [QSA,L]
 
+# Descomentar quando for colocar em produção(prd)
+RewriteRule ^(.*)$ /index.php?q=$1 [QSA,L]
+
+# Comentar quando for colocar em produção(prd)
+#RewriteRule ^(.*)$ /sistarefas/index.php/$1 [L]

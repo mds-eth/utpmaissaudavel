@@ -13,7 +13,8 @@ class Login extends Model {
 
             if (!empty($this->getEmail() && !empty($this->getSenha()))) {
 
-                $sql = $this->db->prepare("SELECT u.id_usuario, p.id_pessoa, p.nome_pessoa, p.email, pe.nome_perfil, pe.id_perfil FROM usuarios AS u
+                $sql = $this->db->prepare("SELECT u.id_usuario, p.id_pessoa, p.nome_pessoa, p.email, 
+                            pe.nome_perfil, pe.id_perfil FROM usuarios AS u
                             JOIN pessoas AS p on u.fk_id_pessoa = p.id_pessoa
                             JOIN perfis AS pe on u.id_usuario = pe.id_perfil
                             AND p.email = :email
@@ -40,11 +41,10 @@ class Login extends Model {
                     return false;
                 }
             }
-
-            return true;
         } catch (Exception $ex) {
             return false;
         }
+        return true;
     }
 
     function getEmail() {

@@ -2,7 +2,7 @@
 
 class urlsController extends Controller {
     
-    public function cadastrar(){
+    public function index(){
         
     }
 

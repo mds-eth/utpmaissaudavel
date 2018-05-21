@@ -19,14 +19,14 @@
                     </label>
                     <div class="col-md-4">
                         <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
-                    </div>
+                    </div>                    
                 </div>
 
                 <div class="item form-group">
                     <label class="col-md-1 col-sm-3 col-xs-12" for="data_nascimento">Data de nascimento<span class="required">*</span>
                     </label>
                     <div class="col-md-4">
-                        <input type="text" id="data_nascimento" name="data_nascimento" class="form-control col-md-7 col-xs-12" data-inputmask="'mask': '99/99/9999'">
+                        <input class='date form-control' type="date" id="data_nascimento" name="data_nascimento" required='required'>
                     </div>
                 </div>
 
@@ -35,10 +35,10 @@
                     </label>
                     <div class="col-md-4">
                         <p>
-
-                            M:<input type="radio" class="flat" name="sexo" id="sexo" value="M" checked="" required />
-                            F: <input type="radio" class="flat" name="sexo" id="sexo" value="F" />
+                            <input type="radio" class="flat" name="sexo" id="sexo" value="M" />Masculino<br/> 
+                            <input type="radio" class="flat" name="sexo" id="sexo" value="F" />Feminino
                         </p>
+
                     </div>
                 </div>
 
@@ -172,22 +172,39 @@
                     <div class="col-md-4">
                         <input type="text" id="complemento" name="complemento" class="form-control">
                     </div>
-                </div>
-                <div class="item form-group">
-                    <label class="col-md-1 col-sm-3 col-xs-12" for="pais">País<span class="required">*</span>
-                    </label>
-                    <div class="col-md-4">
-                        <input type="text" id="pais" name="pais" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <a href="<?php echo BASE_URL ?>home"><button class="btn btn-danger" type="button">Cancelar</button></a>
-                        <button class="btn btn-primary" type="reset">Limpar</button>
-                        <button type="submit" class="btn btn-success">Gravar</button>
-                    </div>
-                </div>
+                </div>                           
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Perfil Usuário</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+
+                <div class="item form-group">
+                    <label class="col-md-1 col-sm-3 col-xs-12" for="perfil">Perfil <span class="required">*</span>
+                    </label>
+                    <div class="col-md-2">
+                        <select class="form-control" id="perfil" name="perfil">
+                            <?php foreach ($perfis as $perfil) : ?>
+                                <option value="<?= $perfil['id_perfil'] ?>"><?= $perfil['nome_perfil'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>                
+            </div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <button id="gravar" class="btn btn-success btn-xs">Gravar</button>
+                    <button class="btn btn-primary btn-xs" type="reset">Limpar</button>
+                    <a href="<?php echo URL ?>/home"><button class="btn btn-danger btn-xs" type="button">Cancelar</button></a>
+                </div>
+            </div>
+        </div>        
+    </div>    
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/pessoas/pessoas.js"></script>        
 </form>

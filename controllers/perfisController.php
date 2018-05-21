@@ -1,33 +1,52 @@
 <?php
 
-class perfisController extends Controller {
+class perfisController extends controller {
 
-    public function cadastrar() {
+    private $perfil;
+
+    public function __construct() {
+        $this->perfil = new Perfis();
+    }
+
+    public function index() {
 
         $dados = array();
 
         $this->loadTemplate('perfis/cadastrar', $dados);
     }
 
-    public function novo($perfil) {
+    public function cadastrar() {
 
-        die("cheguei aqui");
+        try {
 
-        if (!empty($_POST) && $_POST != null) {
+            $dados = array();
 
-            $nomePerfil = $_POST['perfil'];
+            if (isset($_POST['perfil']) && !empty($_POST['perfil'])) {
+                $perfil = trim($_POST['perfil']);
+                $this->perfil->setPerfil($perfil);
+                $retorno = $this->perfil->gravaPerfil();
+
+                echo $retorno;
+            } else {
+                $this->loadTemplate('perfis/cadastrar', $dados);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
         }
     }
 
-    public function verificaAcessoUrl($url) {
+    public function visualizar() {
 
-        if ($url != null || !empty($url)) {
+        $dados = array();
 
-            $perfil = new Perfis();
-            $perfil->setUrl($url);
+        try {
+
+            $dados['perfis'] = $this->perfil->buscaPerfis();
+
+            $this->loadTemplate('perfis/visualizar', $dados);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
         }
-        
-        return true;
     }
 
 }

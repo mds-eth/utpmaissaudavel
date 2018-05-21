@@ -1,30 +1,31 @@
 <?php
 
-class loginController extends Controller {
+class loginController extends controller {
+
+    private $pessoas;
+
+    public function __construct() {
+        $this->pessoas = new Pessoas();
+    }
+
+    public function index() {
+
+        $dados = array();
+        $this->loadView('login', $dados);
+    }
 
     public function logar() {
 
-        if (!empty($_POST['email']) && !empty($_POST['senha'])) {
-
-            $email = trim($_POST['email']);
-            $senha = trim(md5($_POST['senha']));
-
-            $login = new Login();
-            $login->setEmail($email);
-            $login->setSenha($senha);
-
-            $retorno = $login->logar();
-
-            if ($retorno) {
-                echo $retorno;
-            } else {
-                return false;
-            }
-        }
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
+        $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
+        echo $this->pessoas->validaLogin($email, md5($senha));
     }
 
-    public function novaSenha() {
+    public function logout() {
 
+        unset($_SESSION['usuario']);
+        session_destroy();
+        header('Location: ' . URL . '/login');
     }
 
 }
