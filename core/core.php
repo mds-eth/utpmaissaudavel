@@ -5,46 +5,52 @@ class core {
     public function run() {
 
         global $config;
+        if (versao == 'dsv') {
 
-        if (versao == 'dsv') { // Valida o Ambiente atual.
-            $url = explode("index.php", $_SERVER['PHP_SELF']); // Pega o que foi acesado pelo usuário sem o index.php
-            $url = end($url); // Pega o fim da URL.
+            $url = explode("index.php", $_SERVER['PHP_SELF']);
+            $url = end($url);
         }
 
-        if (versao == 'prd') { // Valida o Ambiente atual.
-            $url = '/' . (isset($_GET['q']) ? $_GET['q'] : ''); // pega a url que foi acessada via GET.
+        if (versao == 'prd') {
+
+            $url = '/' . (isset($_GET['q']) ? $_GET['q'] : '');
         }
 
         $params = array();
-        if (!empty($url) && $url != '/') { //valida se URL está vazia e diferente de barra.
-            $url = explode('/', $url); // Tirando a barra da URL.
-            array_shift($url);
-            $currentController = $url[0] . 'Controller'; // Passa o Controller atual.
+        if (!empty($url) && $url != '/') {
 
-            if (!class_exists($currentController)) { // Validando se a Classe Controller existe.
+            $url = explode('/', $url);
+            array_shift($url);
+            $currentController = $url[0] . 'Controller';
+            if (!class_exists($currentController)) {
                 exit("<b>ERRO:</b> $currentController não encontrada.");
             }
 
-            array_shift($url); // Remove a primeira chave do array.
+            array_shift($url);
 
-            if (isset($url[0]) && !empty($url[0])) { // Valida se foi digitado uma Action depois do Controller.
-                $currentAction = $url[0]; // Passa a Action atual.
-                if (!method_exists($currentController, $currentAction)) { // Valida se existe o método na Classe.
+            if (isset($url[0]) && !empty($url[0])) {
+
+                $currentAction = $url[0];
+
+                if (!method_exists($currentController, $currentAction)) {
+
                     exit("<b>ERRO:</b> Método $currentAction não encontrado.");
                 }
-                array_shift($url); // Remove a primeira chave do array.
+
+                array_shift($url);
             } else {
-                $currentAction = 'index'; // Padrão da Action 'index'.
+                $currentAction = 'index';
             }
-            if (count($url) > 0) { // Valida se a URL tem paramentros depois da Action.
+
+            if (count($url) > 0) {
                 $params = $url;
             }
-        } else { // Caso o usuário não acessa nada.
+        } else {
             $currentController = 'homeController';
             $currentAction = 'index';
         }
-        $c = new $currentController(); // Instancia a classe Controller.
-        call_user_func_array(array($c, $currentAction), $params); // Carrega o Controller com as Actions e os params.
+        $c = new $currentController();
+        call_user_func_array(array($c, $currentAction), $params);
     }
 
 }

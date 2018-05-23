@@ -8,7 +8,6 @@ class Pessoas extends model {
     private $cpf;
     private $rg;
     private $email;
-    private $formacao;
     private $status;
     private $criadoPor;
     private $criadoEm;
@@ -24,9 +23,9 @@ class Pessoas extends model {
         try {
 
             $sql = "INSERT INTO pessoas(nome_pessoa, data_nascimento, sexo, cpf, rg, email,
-                formacao, status, criado_por, criado_em, atualizado_por, atualizado_em) VALUES(:nome_pessoa, 
+                 status, criado_por, criado_em, atualizado_por, atualizado_em) VALUES(:nome_pessoa, 
                 :data_nascimento, :sexo, :cpf, :rg, :email,
-                :formacao, :status, :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
+                :status, :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
 
 
             $sql->bindValue(':nome_pessoa', $this->getNome(), PDO::PARAM_STR);
@@ -35,7 +34,6 @@ class Pessoas extends model {
             $sql->bindValue(':cpf', $this->getCpf(), PDO::PARAM_STR);
             $sql->bindValue(':rg', $this->getRg(), PDO::PARAM_STR);
             $sql->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
-            $sql->bindValue(':formacao', $this->getFormacao(), PDO::PARAM_STR);
             $sql->bindValue(':status', $status, PDO::PARAM_STR);
             $sql->bindValue(':criado_por', $idUsuario, PDO::PARAM_STR);
             $sql->bindValue(':criado_em', $date, PDO::PARAM_STR);
@@ -44,19 +42,11 @@ class Pessoas extends model {
 
             $sql->execute();
 
-            $fkUsuario = $this->db->lastInsertId();
+            $fkIdPessoa = $this->db->lastInsertId();
 
-            return $fkUsuario;
+            return $fkIdPessoa;
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
-        }
-    }
-
-    public function logado() {
-        if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -101,7 +91,15 @@ class Pessoas extends model {
 
         $retorno = $sql->fetchObject();
 
-        if (empty($retorno) || !$retorno) {
+        if (empty($retorno)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function logado() {
+        if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
             return true;
         } else {
             return false;
@@ -148,10 +146,6 @@ class Pessoas extends model {
         return $this->email;
     }
 
-    function getFormacao() {
-        return $this->formacao;
-    }
-
     function getStatus() {
         return $this->status;
     }
@@ -194,10 +188,6 @@ class Pessoas extends model {
 
     function setEmail($email) {
         $this->email = $email;
-    }
-
-    function setFormacao($formacao) {
-        $this->formacao = $formacao;
     }
 
     function setStatus($status) {

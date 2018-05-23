@@ -2,61 +2,86 @@
 
 class pessoasController extends controller {
 
-    private $pessoas;
-    private $telefone;
+    private $pessoa;
 
     public function __construct() {
 
-        $this->pessoas = new Pessoas();
-        $this->telefone = new Telefones;
+        $this->pessoa = new Pessoas();
+        if (!$this->pessoa->logado()) {
+            header('Location: ' . URL . '/login');
+        }
     }
 
     public function cadastrar() {
 
         $dados = array();
 
-        if (isset($_POST) && !empty($_POST)) {
+        try {
 
-            /* dados usuario */
-            $nome = trim($_POST['nome']);
-            $dataNascimento = trim($_POST['dataNascimento']);
-            $sexo = trim($_POST['sexo']);
-            $cpf = trim($_POST['cpf']);
-            $rg = trim($_POST['rg']);
-            $email = trim($_POST['email']);
+            if (isset($_POST) && !empty($_POST)) {
 
-            $this->pessoas->setNome($nome);
-            $this->pessoas->setDataNascimento($dataNascimento);
-            $this->pessoas->setSexo($sexo);
-            $this->pessoas->setCpf($cpf);
-            $this->pessoas->setRg($rg);
-            $this->pessoas->setEmail($email);
+                /* dados usuario */
+                $nome = trim($_POST['nome']);
+                $dataNascimento = trim($_POST['dataNascimento']);
+                $sexo = trim($_POST['sexo']);
+                $cpf = trim($_POST['cpf']);
+                $rg = trim($_POST['rg']);
+                $email = trim($_POST['email']);
 
-            $fkPessoa = $this->pessoas->gravar();
 
-            /* dados contato */
-            $residencial = trim($_POST['residencial']);
-            $celular = trim($_POST['celular']);
-            $contato = trim($_POST['contato']);
+                $this->pessoa->setNome($nome);
+                $this->pessoa->setDataNascimento($dataNascimento);
+                $this->pessoa->setSexo($sexo);
+                $this->pessoa->setCpf($cpf);
+                $this->pessoa->setRg($rg);
+                $this->pessoa->setEmail($email);
 
-            /* dados endereço */
-            $cep = trim($_POST['cep']);
-            $rua = trim($_POST['rua']);
-            $bairro = trim($_POST['bairro']);
-            $cidade = trim($_POST['cidade']);
-            $estado = trim($_POST['estado']);
-            $numero = trim($_POST['numero']);
-            $complemento = trim($_POST['complemento']);
+                $fkIdPessoa = $this->pessoa->gravar();
 
-            /* id perfil */
-            $perfil = trim($_POST['perfil']);
-        } else {
+                /* dados contato */
+                $residencial = trim($_POST['residencial']);
+                $celular = trim($_POST['celular']);
+                $contato = trim($_POST['contato']);
 
-            $perfis = new Perfis();
-            $dados['perfis'] = $perfis->buscaPerfis();
+                $telefone = new Telefones($residencial, $celular, $contato, $fkIdPessoa);
+                $telefone->gravar();
 
-            $this->loadTemplate('pessoas/cadastrar', $dados);
+                /* dados endereço */
+                $cep = trim($_POST['cep']);
+                $rua = trim($_POST['rua']);
+                $bairro = trim($_POST['bairro']);
+                $cidade = trim($_POST['cidade']);
+                $estado = trim($_POST['estado']);
+                $numero = trim($_POST['numero']);
+                $complemento = trim($_POST['complemento']);
+
+                $endereco = new Enderecos($cep, $rua, $bairro, $cidade, $estado, $numero, $complemento, $fkIdPessoa);
+                $endereco->gravar();
+
+                /* id perfil */
+                $perfil = trim($_POST['perfil']);
+                $usuario = new Usuarios($perfil, $fkIdPessoa);
+                $usuario->gravar();
+
+                echo true;
+            } else {
+
+                $perfis = new Perfis();
+                $dados['perfis'] = $perfis->buscaPerfis();
+
+                $this->loadTemplate('pessoas/cadastrar', $dados);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
         }
+    }
+
+    public function visualizar() {
+
+        $dados = array();
+        $pessoas = $this->pessoa->listaTodos();
+
+        $this->loadTemplate('pessoas/visualizar', $dados);
     }
 
     public function buscaCep() {
@@ -83,8 +108,9 @@ class pessoasController extends controller {
 
     public function validaCpf() {
 
-        $cpf = $_GET['cpf'];
-        $retorno = $this->usuarios->validaCpf($cpf);
+        $cpf = $_POST['cpf'];
+        echo $this->pessoa->validaCpf($cpf);
+        exit();
     }
 
 }

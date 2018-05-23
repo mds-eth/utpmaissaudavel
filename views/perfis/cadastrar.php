@@ -20,10 +20,10 @@
                 </div>
                 <div class="form-group">
                     <div style="float: right;">
-                        <button id="gravar" class="btn btn-success">Gravar</button>
-                        <button class="btn btn-primary" type="reset">Limpar</button>
+                        <button id="gravar" class="btn btn-success btn-xs">Gravar</button>
+                        <button class="btn btn-primary btn-xs" type="reset">Limpar</button>
                         <a href="<?php echo URL ?>/home">
-                            <button class="btn btn-danger" type="button">Cancelar</button>
+                            <button class="btn btn-danger btn-xs" type="button">Cancelar</button>
                         </a>                                               
                     </div>
                 </div>

@@ -1,12 +1,6 @@
 <?php
 
-class loginController extends controller {
-
-    private $pessoas;
-
-    public function __construct() {
-        $this->pessoas = new Pessoas();
-    }
+class loginController extends controller {    
 
     public function index() {
 
@@ -15,10 +9,12 @@ class loginController extends controller {
     }
 
     public function logar() {
+        
+        $pessoa = new Pessoas();
 
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
-        echo $this->pessoas->validaLogin($email, md5($senha));
+        echo $pessoa->validaLogin($email, md5($senha));
     }
 
     public function logout() {

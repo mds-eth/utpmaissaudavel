@@ -36,3 +36,4 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/custom.js"></script>

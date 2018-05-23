@@ -17,6 +17,7 @@ class controller {
     }
 
     public function loadViewInTemplate($viewName, $viewData = array()) {
+        
         extract($viewData); // Transforma a chave do array em variavel.
         $file = 'views/' . $viewName . '.php';
         if (file_exists($file)) {

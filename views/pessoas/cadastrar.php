@@ -1,6 +1,6 @@
 <div class="page-title">
     <div class="title_left">
-        <h3>Cadastrar Usuários</h3>
+        <h3>Cadastro de Pessoas</h3>
     </div>
 </div>
 <form id="formUsuario" data-parsley-validate class="form-horizontal form-label-left">
@@ -45,14 +45,14 @@
                 <div class="item form-group">
                     <label class="col-md-1 col-sm-3 col-xs-12" for="cpf">CPF<span class="required">*</span></label>
                     <div class="col-md-2">
-                        <input type="text" id="cpf" name="cpf" class="form-control" data-inputmask="'mask' : '999-999-999-99'">
+                        <input type="text" id="cpf" name="cpf" class="form-control" required="required" data-inputmask="'mask' : '999-999-999-99'">
                     </div>
                 </div>
 
                 <div class="item form-group">
                     <label class="col-md-1 col-sm-3 col-xs-12" for="rg">RG<span class="required">*</span></label>
                     <div class="col-md-2">
-                        <input type="text" id="rg" name="rg" class="form-control" data-inputmask="'mask' : '99-999-999-9'">
+                        <input type="text" id="rg" name="rg" class="form-control" required="required" data-inputmask="'mask' : '99-999-999-9'">
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@
                     <label class="col-md-1 col-sm-3 col-xs-12" for="residencial">Telefone Residencial <span class="required">*</span>
                     </label>
                     <div class="col-md-2">
-                        <input id="residencial" name="residencial" type="text" class="form-control" data-inputmask="'mask' : '(99) 9999-9999'">
+                        <input id="residencial" name="residencial" type="text" class="form-control" required="required" data-inputmask="'mask' : '(99) 9999-9999'">
                     </div>
                 </div>
 
@@ -96,14 +96,14 @@
                     <label class="col-md-1 col-sm-3 col-xs-12" for="celular">Telefone Celular <span class="required">*</span>
                     </label>
                     <div class="col-md-2">
-                        <input id="celular" name="celular" type="text" class="form-control" data-inputmask="'mask' : '(99) 99999-9999'">
+                        <input id="celular" name="celular" type="text" class="form-control" required="required" data-inputmask="'mask' : '(99) 99999-9999'">
                     </div>
                 </div>
                 <div class="item form-group">
                     <label class="col-md-1 col-sm-3 col-xs-12" for="contato">Telefone Para Contato <span class="required">*</span>
                     </label>
                     <div class="col-md-2">
-                        <input id="contato" name="contato" type="text" class="form-control" data-inputmask="'mask' : '(99) 99999-9999'">
+                        <input id="contato" name="contato" type="text" class="form-control" required="required" data-inputmask="'mask' : '(99) 99999-9999'">
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                     <label class="col-md-1 col-sm-3 col-xs-12" for="cep">CEP<span class="required">*</span>
                     </label>
                     <div class="col-md-2">
-                        <input type="text" id="cep" name="cep" class="form-control" data-inputmask="'mask' : '99999-999'">
+                        <input type="text" id="cep" name="cep" class="form-control" required="required" data-inputmask="'mask' : '99999-999'">
                     </div>
                 </div>
 
@@ -130,7 +130,7 @@
                     <label class="col-md-1 col-sm-3 col-xs-12" for="rua">Rua <span class="required">*</span>
                     </label>
                     <div class="col-md-4">
-                        <input type="text" id="rua" name="rua" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="rua" name="rua" required="required" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
 
@@ -146,7 +146,7 @@
                     <label class="col-md-1 col-sm-3 col-xs-12" for="cidade">Cidade<span class="required">*</span>
                     </label>
                     <div class="col-md-4">
-                        <input type="text" id="cidade" name="cidade" class="form-control">
+                        <input type="text" id="cidade" name="cidade" required="required" class="form-control">
                     </div>
                 </div>
 
@@ -154,7 +154,7 @@
                     <label class="col-md-1 col-sm-3 col-xs-12" for="uf">Estado<span class="required">*</span>
                     </label>
                     <div class="col-md-4">
-                        <input type="text" id="uf" name="uf" class="form-control">
+                        <input type="text" id="uf" name="uf" class="form-control" required="required">
                     </div>
                 </div>
 
@@ -162,7 +162,7 @@
                     <label class="col-md-1 col-sm-3 col-xs-12" for="numero">Número<span class="required">*</span>
                     </label>
                     <div class="col-md-4">
-                        <input type="text" id="numero" name="numero" class="form-control">
+                        <input type="text" id="numero" name="numero" class="form-control" required="required">
                     </div>
                 </div>
 
@@ -170,7 +170,7 @@
                     <label class="col-md-1 col-sm-3 col-xs-12" for="complemento">Complemento<span class="required">*</span>
                     </label>
                     <div class="col-md-4">
-                        <input type="text" id="complemento" name="complemento" class="form-control">
+                        <input type="text" id="complemento" name="complemento" class="form-control" required="required">
                     </div>
                 </div>                           
             </div>
@@ -205,6 +205,6 @@
                 </div>
             </div>
         </div>        
-    </div>    
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/pessoas/pessoas.js"></script>        
+    </div>        
 </form>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/pessoas/pessoas.js"></script>        

@@ -1,39 +1,12 @@
 var autentica = {
     init: function () {
-        $('#logar').on('click', autentica.form);
-        $('#email').on('keyup', autentica.enter);
-        $('#senha').on('keyup', autentica.enter);
+        $('#logar').on('click', autentica.logar);
+
     },
-    enter: function (e) {
-        if (e.which == 13) {
-            if ($('#email').val() == '') {
-                alert('Informe o e-mail.');
-                $('#email').focus();
-                return;
-            }
-            if ($('#senha').val() == '') {
-                alert('Informe a senha.');
-                $('#senha').focus();
-                return;
-            }
-        }
-        autentica.logar();
-    },
-    form: function () {
-        if ($('#email').val() == '') {
-            alert('Informe o e-mail.');
-            $('#email').focus();
-            return;
-        }
-        if ($('#senha').val() == '') {
-            alert('Informe a senha.');
-            $('#senha').focus();
-            return;
-        }
-        autentica.logar();
-    },
-    logar: function () {
-        $.post({
+
+    logar: function () { 
+        
+        $.ajax({
             type: 'POST',
             url: 'login/logar',
             data: {
@@ -43,8 +16,8 @@ var autentica = {
             success: function (result) {
 
                 if (result) {
-                    window.location = URL;
-                } else if (result === false) {
+                    window.location = URL + '/home';
+                } else {
                     swal({
                         type: 'warning',
                         title: 'Email ou senha incorretos',

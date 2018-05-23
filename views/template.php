@@ -4,19 +4,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="images/favicon.ico" type="image/ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
         <title>UTP Mais Saudável</title>
         <link href="<?php echo URL; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>/assets/css/custom.min.css" rel="stylesheet">
+        <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>   
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/sweetAlert.js"></script>                
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/custom.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/validator/validator.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.inputmask.bundle.min.js"></script>    
-        <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>        
+
+
     </head>
     <body class="nav-md">
         <div class="container body">
@@ -199,4 +196,9 @@
             </div>
         </div>           
     </body>
+
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/sweetAlert.js"></script>                
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/custom.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/validator/validator.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.inputmask.bundle.min.js"></script>  
 </html>
