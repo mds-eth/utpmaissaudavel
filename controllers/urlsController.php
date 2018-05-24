@@ -14,19 +14,24 @@ class urlsController extends controller {
         $this->perfil = new Perfis();
     }
 
-    public function index() {
-        
-    }
-
     public function cadastrar() {
+            
+        try {
 
-        var_dump($_POST);
-        die('pqp');
+            if (isset($_POST['url']) && !empty($_POST['url'])) {
 
-        $dados = array();
-        $dados['perfil'] = $this->perfil->buscaPerfis();
+                var_dump($_POST);
+                die("cai aqui");
+            } else {
 
-        $this->loadTemplate('urls/cadastrar', $dados);
+                $dados = array();
+                $dados['perfil'] = $this->perfil->buscaPerfis();
+
+                $this->loadTemplate('urls/cadastrar', $dados);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
     public function visualizar() {

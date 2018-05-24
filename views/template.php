@@ -12,8 +12,6 @@
         <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>   
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/bootstrap.min.js"></script>
-
-
     </head>
     <body class="nav-md">
         <div class="container body">
@@ -180,7 +178,7 @@
                     </div>
                 </div>
 
-                <div class="right_col" role="main">
+                <div class="right_col">
                     <div class="row">
                         <div>
                             <?= $this->loadViewInTemplate($viewName, $viewData); ?>
@@ -196,7 +194,6 @@
             </div>
         </div>           
     </body>
-
     <script type="text/javascript" src="<?php echo URL; ?>/assets/js/sweetAlert.js"></script>                
     <script type="text/javascript" src="<?php echo URL; ?>/assets/js/custom.min.js"></script>
     <script type="text/javascript" src="<?php echo URL; ?>/assets/js/validator/validator.js"></script>

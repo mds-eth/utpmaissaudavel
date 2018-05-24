@@ -17,7 +17,13 @@ class Pessoas extends model {
     public function gravar() {
 
         $status = 1;
+        $rg = $this->getRg();
+        $cpf = $this->getCpf();
+        $sexo = $this->getSexo();
+        $email = $this->getEmail();
         $date = date("Y-m-d H-i-s");
+        $nomePessoa = $this->getNome();
+        $dataNascimento = $this->getDataNascimento();
         $idUsuario = $_SESSION['usuario']['id_usuario'];
 
         try {
@@ -27,37 +33,37 @@ class Pessoas extends model {
                 :data_nascimento, :sexo, :cpf, :rg, :email,
                 :status, :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
 
+            $pdo = $this->db->prepare($sql);
 
-            $sql->bindValue(':nome_pessoa', $this->getNome(), PDO::PARAM_STR);
-            $sql->bindValue(':data_nascimento', $this->getDataNascimento(), PDO::PARAM_STR);
-            $sql->bindValue(':sexo', $this->getSexo(), PDO::PARAM_STR);
-            $sql->bindValue(':cpf', $this->getCpf(), PDO::PARAM_STR);
-            $sql->bindValue(':rg', $this->getRg(), PDO::PARAM_STR);
-            $sql->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
-            $sql->bindValue(':status', $status, PDO::PARAM_STR);
-            $sql->bindValue(':criado_por', $idUsuario, PDO::PARAM_STR);
-            $sql->bindValue(':criado_em', $date, PDO::PARAM_STR);
-            $sql->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_STR);
-            $sql->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
+            $pdo->bindValue(':nome_pessoa', $nomePessoa, PDO::PARAM_STR);
+            $pdo->bindValue(':data_nascimento', $dataNascimento, PDO::PARAM_STR);
+            $pdo->bindValue(':sexo', $sexo, PDO::PARAM_STR);
+            $pdo->bindValue(':cpf', $cpf, PDO::PARAM_STR);
+            $pdo->bindValue(':rg', $rg, PDO::PARAM_STR);
+            $pdo->bindValue(':email', $email, PDO::PARAM_STR);
+            $pdo->bindValue(':status', $status, PDO::PARAM_STR);
+            $pdo->bindValue(':criado_por', $idUsuario, PDO::PARAM_STR);
+            $pdo->bindValue(':criado_em', $date, PDO::PARAM_STR);
+            $pdo->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_STR);
+            $pdo->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
 
-            $sql->execute();
+            $pdo->execute();
 
             $fkIdPessoa = $this->db->lastInsertId();
 
             return $fkIdPessoa;
         } catch (Exception $exc) {
+
             echo $exc->getTraceAsString();
         }
     }
 
     public function validaLogin($email, $senha) {
 
-        $sql = $this->db->prepare("SELECT u.id_usuario, p.id_pessoa, p.nome_pessoa, p.email, 
-                            pe.nome_perfil, pe.id_perfil FROM usuarios AS u
-                            JOIN pessoas AS p on u.fk_id_pessoa = p.id_pessoa
-                            JOIN perfis AS pe on u.id_usuario = pe.id_perfil
-                            AND p.email = :email
-                            AND u.senha = :senha");
+        $sql = $this->db->prepare("select * from usuarios u join pessoas p on u.id_usuario = p.id_pessoa
+                    join perfis as pe on u.fk_id_perfil = pe.id_perfil
+                    and p.email = :email
+                    and u.senha = :senha");
 
         $sql->bindValue(':email', $email, PDO::PARAM_STR);
         $sql->bindValue(':senha', $senha, PDO::PARAM_STR);
@@ -114,8 +120,9 @@ class Pessoas extends model {
         
     }
 
-    public function listaTodos() {
-        
+    public function listaTodosUsuarios() {
+
+        $sql = $this->db->prepare("SELECT * FROM pessoas p JOIN usuarios u ON p.id");
     }
 
     public function listaUnicoUsuario($id) {

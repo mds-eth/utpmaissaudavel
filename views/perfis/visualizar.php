@@ -1,3 +1,9 @@
+<div class="page-title">
+    <div class="title_left">
+        <h3>Perfis de Perfis</h3>
+    </div>        
+</div>
+<div class="clearfix"></div>
 <div class="col-md-12">
     <div class="x_panel">
         <div class="x_title">
@@ -36,4 +42,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo URL; ?>/assets/js/custom.js"></script>

@@ -3,7 +3,7 @@
         <h3>Cadastro de Pessoas</h3>
     </div>
 </div>
-<form id="formUsuario" data-parsley-validate class="form-horizontal form-label-left">
+<div data-parsley-validate class="form-horizontal form-label-left">
     <div class="clearfix"></div>
 
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -196,15 +196,15 @@
                         </select>
                     </div>
                 </div>                
+            </div>            
+        </div>    
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <button id="gravar" class="btn btn-success btn-xs">Gravar</button>
+                <button class="btn btn-primary btn-xs" type="reset">Limpar</button>
+                <a href="<?php echo URL ?>/home"><button class="btn btn-danger btn-xs" type="button">Cancelar</button></a>
             </div>
-            <div class="form-group">
-                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <button id="gravar" class="btn btn-success btn-xs">Gravar</button>
-                    <button class="btn btn-primary btn-xs" type="reset">Limpar</button>
-                    <a href="<?php echo URL ?>/home"><button class="btn btn-danger btn-xs" type="button">Cancelar</button></a>
-                </div>
-            </div>
-        </div>        
+        </div>
     </div>        
-</form>
+</div>
 <script type="text/javascript" src="<?php echo URL; ?>/assets/js/pessoas/pessoas.js"></script>        

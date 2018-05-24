@@ -17,13 +17,22 @@ class controller {
     }
 
     public function loadViewInTemplate($viewName, $viewData = array()) {
-        
+
         extract($viewData); // Transforma a chave do array em variavel.
         $file = 'views/' . $viewName . '.php';
         if (file_exists($file)) {
             include 'views/' . $viewName . '.php';
         } else {
             echo "<b>ERRO:</b> View $viewName não encontrada.";
+        }
+    }
+
+    public function post() {
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            return true;
+        } else {
+            return false;
         }
     }
 

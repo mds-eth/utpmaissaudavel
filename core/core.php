@@ -3,6 +3,7 @@
 class core {
 
     public function run() {
+        
 
         global $config;
         if (versao == 'dsv') {

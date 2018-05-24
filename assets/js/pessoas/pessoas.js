@@ -7,13 +7,11 @@ var pessoas = {
         $('#cpf').on('blur', pessoas.validaCpf);
     },
 
-    gravar: function (e) {
+    gravar: function () {
 
-        e.preventDefault();
-
-        $.post({
-            url: 'cadastrar',
+        $.ajax({
             type: 'POST',
+            url: 'cadastrar',
             data: {
                 nome: $('#nome').val(),
                 dataNascimento: $('#data_nascimento').val(),
@@ -34,9 +32,6 @@ var pessoas = {
                 perfil: $('#perfil').val()
             },
             success: function (retorno) {
-
-                alert(retorno);
-                alert('deu pau');
 
                 if (retorno) {
                     window.location = URL + '/pessoas/visualizar';

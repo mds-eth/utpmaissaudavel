@@ -18,7 +18,7 @@ class pessoasController extends controller {
 
         try {
 
-            if (isset($_POST) && !empty($_POST)) {
+            if ($this->post()) {
 
                 /* dados usuario */
                 $nome = trim($_POST['nome']);
@@ -79,7 +79,7 @@ class pessoasController extends controller {
     public function visualizar() {
 
         $dados = array();
-        $pessoas = $this->pessoa->listaTodos();
+        $pessoas = $this->pessoa->listaTodosUsuarios();
 
         $this->loadTemplate('pessoas/visualizar', $dados);
     }
@@ -108,9 +108,12 @@ class pessoasController extends controller {
 
     public function validaCpf() {
 
-        $cpf = $_POST['cpf'];
-        echo $this->pessoa->validaCpf($cpf);
-        exit();
+        if (isset($_POST) && !empty($_POST)) {
+
+            $cpf = $_POST['cpf'];
+            echo $this->pessoa->validaCpf($cpf);
+            exit();
+        }
     }
 
 }
