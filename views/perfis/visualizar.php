@@ -29,7 +29,7 @@
                             <td><?= $perfil['nome_perfil'] ?></td>
                             <td><?= $perfil['criado_por'] ?></td>
                             <?php $data = $perfil['criado_em'] ?>
-                            <td><?= date('d-m-Y - h-s', strtotime($data)) ?></td>
+                            <td><?= date('d/m/Y', strtotime($data)) ?></td>
                             <td>
                                 <button class="btn btn-info btn-xs">Editar</button>
                                 <button class="btn btn-danger btn-xs">Excluir</button>

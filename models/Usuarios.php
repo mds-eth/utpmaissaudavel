@@ -2,14 +2,9 @@
 
 class Usuarios extends model {
 
-    private $fkIdPerfil;
-    private $fkIdPessoa;
-
-    public function gravar() {
+    public function gravar($fkIdPerfil, $fkIdPessoa) {
 
         $date = date("Y-m-d H-i-s");
-        $fkIdPerfil = $this->getFkIdPerfil();
-        $fkIdPessoa = $this->getFkIdPessoa();
         $idUsuario = $_SESSION['usuario']['id_usuario'];
 
         try {
@@ -19,8 +14,8 @@ class Usuarios extends model {
 
             $pdo = $this->db->prepare($sql);
 
-            $pdo->bindValue(':fk_id_perfil', $fkIdPerfil, PDO::PARAM_STR);
-            $pdo->bindValue(':fk_id_pessoa', $fkIdPessoa, PDO::PARAM_STR);
+            $pdo->bindValue(':fk_id_perfil', $fkIdPerfil, PDO::PARAM_INT);
+            $pdo->bindValue(':fk_id_pessoa', $fkIdPessoa, PDO::PARAM_INT);
             $pdo->bindValue(':senha', null, PDO::PARAM_STR);
             $pdo->bindValue(':criado_por', $idUsuario, PDO::PARAM_STR);
             $pdo->bindValue(':criado_em', $date, PDO::PARAM_STR);
@@ -32,28 +27,6 @@ class Usuarios extends model {
 
             echo $exc->getTraceAsString();
         }
-    }
-
-    public function Usuarios($fkIdPerfil, $fkIdPessoa) {
-
-        $this->fkIdPerfil = $fkIdPerfil;
-        $this->fkIdPessoa = $fkIdPessoa;
-    }
-
-    function getFkIdPerfil() {
-        return $this->fkIdPerfil;
-    }
-
-    function getFkIdPessoa() {
-        return $this->fkIdPessoa;
-    }
-
-    function setFkIdPerfil($fkIdPerfil) {
-        $this->fkIdPerfil = $fkIdPerfil;
-    }
-
-    function setFkIdPessoa($fkIdPessoa) {
-        $this->fkIdPessoa = $fkIdPessoa;
     }
 
 }

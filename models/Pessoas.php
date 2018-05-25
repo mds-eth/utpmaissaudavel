@@ -2,28 +2,10 @@
 
 class Pessoas extends model {
 
-    private $nome;
-    private $dataNascimento;
-    private $sexo;
-    private $cpf;
-    private $rg;
-    private $email;
-    private $status;
-    private $criadoPor;
-    private $criadoEm;
-    private $atualizadoPor;
-    private $atualizadoEm;
-
-    public function gravar() {
+    public function gravar($nomePessoa, $dataNascimento, $sexo, $cpf, $rg, $email) {
 
         $status = 1;
-        $rg = $this->getRg();
-        $cpf = $this->getCpf();
-        $sexo = $this->getSexo();
-        $email = $this->getEmail();
         $date = date("Y-m-d H-i-s");
-        $nomePessoa = $this->getNome();
-        $dataNascimento = $this->getDataNascimento();
         $idUsuario = $_SESSION['usuario']['id_usuario'];
 
         try {
@@ -60,8 +42,8 @@ class Pessoas extends model {
 
     public function validaLogin($email, $senha) {
 
-        $sql = $this->db->prepare("select * from usuarios u join pessoas p on u.id_usuario = p.id_pessoa
-                    join perfis as pe on u.fk_id_perfil = pe.id_perfil
+        $sql = $this->db->prepare("select * from usuarios u join pessoas p on u.fk_id_pessoa = p.id_pessoa
+                    join perfis pe on u.fk_id_perfil = pe.id_perfil
                     and p.email = :email
                     and u.senha = :senha");
 
@@ -105,6 +87,7 @@ class Pessoas extends model {
     }
 
     public function logado() {
+
         if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
             return true;
         } else {
@@ -112,109 +95,44 @@ class Pessoas extends model {
         }
     }
 
-    public function update() {
-        
-    }
+    public function buscaRegistroPessoaEdicao($id) {
 
-    public function delete() {
-        
+        $sql = $this->db->prepare("select id_pessoa, nome_pessoa, data_nascimento, sexo, 
+                        cpf, rg, email, id_telefone, telefone, celular, contato, id_endereco, 
+                        cep, rua, bairro, cidade, estado, numero, complemento
+                        from pessoas p join enderecos e on p.id_pessoa = e.fk_id_pessoa
+                        join telefones t on p.id_pessoa = t.fk_id_pessoa
+                        and id_pessoa = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $sql->execute();
+
+        $retorno = $sql->fetchAll();
+
+        if ($retorno != null || !empty($retorno)) {
+            return $retorno;
+        }
     }
 
     public function listaTodosUsuarios() {
 
-        $sql = $this->db->prepare("SELECT * FROM pessoas p JOIN usuarios u ON p.id");
+        $sql = $this->db->prepare("select * from pessoas p join usuarios u on p.id_pessoa = u.fk_id_pessoa
+                        join enderecos e on p.id_pessoa = e.fk_id_pessoa
+                        join telefones t on p.id_pessoa = t.fk_id_pessoa
+                        join perfis pe on u.fk_id_perfil = pe.id_perfil");
+
+        $sql->execute();
+
+        $return = $sql->fetchAll();
+
+        if ($return != null || !empty($return)) {
+
+            return $return;
+        }
     }
 
     public function listaUnicoUsuario($id) {
         
-    }
-
-    function getNome() {
-        return $this->nome;
-    }
-
-    function getDataNascimento() {
-        return $this->dataNascimento;
-    }
-
-    function getSexo() {
-        return $this->sexo;
-    }
-
-    function getCpf() {
-        return $this->cpf;
-    }
-
-    function getRg() {
-        return $this->rg;
-    }
-
-    function getEmail() {
-        return $this->email;
-    }
-
-    function getStatus() {
-        return $this->status;
-    }
-
-    function getCriadoPor() {
-        return $this->criadoPor;
-    }
-
-    function getCriadoEm() {
-        return $this->criadoEm;
-    }
-
-    function getAtualizadoPor() {
-        return $this->atualizadoPor;
-    }
-
-    function getAtualizadoEm() {
-        return $this->atualizadoEm;
-    }
-
-    function setNome($nome) {
-        $this->nome = $nome;
-    }
-
-    function setDataNascimento($dataNascimento) {
-        $this->dataNascimento = $dataNascimento;
-    }
-
-    function setSexo($sexo) {
-        $this->sexo = $sexo;
-    }
-
-    function setCpf($cpf) {
-        $this->cpf = $cpf;
-    }
-
-    function setRg($rg) {
-        $this->rg = $rg;
-    }
-
-    function setEmail($email) {
-        $this->email = $email;
-    }
-
-    function setStatus($status) {
-        $this->status = $status;
-    }
-
-    function setCriadoPor($criadoPor) {
-        $this->criadoPor = $criadoPor;
-    }
-
-    function setCriadoEm($criadoEm) {
-        $this->criadoEm = $criadoEm;
-    }
-
-    function setAtualizadoPor($atualizadoPor) {
-        $this->atualizadoPor = $atualizadoPor;
-    }
-
-    function setAtualizadoEm($atualizadoEm) {
-        $this->atualizadoEm = $atualizadoEm;
     }
 
 }

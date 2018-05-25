@@ -1,6 +1,6 @@
 <?php
 
-class loginController extends controller {    
+class loginController extends controller {
 
     public function index() {
 
@@ -9,12 +9,16 @@ class loginController extends controller {
     }
 
     public function logar() {
-        
-        $pessoa = new Pessoas();
 
-        $email = isset($_POST['email']) ? $_POST['email'] : '';
-        $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
-        echo $pessoa->validaLogin($email, md5($senha));
+
+        if ($this->post()) {
+
+            $pessoa = new Pessoas();
+
+            $email = isset($_POST['email']) ? $_POST['email'] : '';
+            $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
+            echo $pessoa->validaLogin($email, md5($senha));
+        }
     }
 
     public function logout() {

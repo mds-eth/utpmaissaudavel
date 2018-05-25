@@ -5,6 +5,8 @@ var pessoas = {
         $('#gravar').on('click', pessoas.gravar);
         $('#cep').on('blur', pessoas.buscaCep);
         $('#cpf').on('blur', pessoas.validaCpf);
+        $('.editar').on('click', pessoas.editar);
+        $('.excluir').on('click', pessoas.excluir);
     },
 
     gravar: function () {
@@ -34,7 +36,14 @@ var pessoas = {
             success: function (retorno) {
 
                 if (retorno) {
-                    window.location = URL + '/pessoas/visualizar';
+
+                    setTimeout(function () {
+                        swal({
+                            title: "Cadastrado com Sucesso!",
+                            icon: "success"
+                        });
+                        window.location = URL + '/pessoas/visualizar';
+                    }, 4000);
                 } else {
                     swal({
                         type: 'warning',
@@ -94,4 +103,41 @@ var pessoas = {
 
 $(document).ready(function () {
     pessoas.init();
+
 });
+
+function editar(id) {
+
+    if (id !== null && id !== 'undefined') {
+
+        $.ajax({
+            url: 'buscaPessoaParaEdicao',
+            type: 'POST',
+            data: {id: id},
+            success: function (result) {
+
+                if (result !== null) {
+
+                    $("#myModal").modal("show");
+
+                }
+            }
+        });
+    }
+}
+
+function excluir(id) {
+
+    if (id !== null && id !== 'undefined') {
+
+        $.ajax({
+            url: 'buscaPessoaParaExclusao',
+            type: 'POST',
+            data: {id: id},
+            success: function (result) {
+
+            }
+        });
+    }
+}
+

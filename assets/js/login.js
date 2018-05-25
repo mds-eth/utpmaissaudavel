@@ -4,8 +4,8 @@ var autentica = {
 
     },
 
-    logar: function () { 
-        
+    logar: function () {
+
         $.ajax({
             type: 'POST',
             url: 'login/logar',

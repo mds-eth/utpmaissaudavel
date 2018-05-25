@@ -3,8 +3,10 @@
 class controller {
 
     public function loadView($viewName, $viewData = array()) {
-        extract($viewData); // Transforma a chave do array em variavel.
+
+        extract($viewData);
         $file = 'views/' . $viewName . '.php';
+
         if (file_exists($file)) {
             include 'views/' . $viewName . '.php';
         } else {
@@ -13,6 +15,7 @@ class controller {
     }
 
     public function loadTemplate($viewName, $viewData = array()) {
+
         include 'views/template.php';
     }
 
@@ -28,7 +31,7 @@ class controller {
     }
 
     public function post() {
-        
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             return true;
         } else {

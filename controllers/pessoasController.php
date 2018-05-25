@@ -3,10 +3,17 @@
 class pessoasController extends controller {
 
     private $pessoa;
+    private $telefone;
+    private $endereco;
+    private $usuario;
 
     public function __construct() {
 
         $this->pessoa = new Pessoas();
+        $this->usuario = new Usuarios();
+        $this->endereco = new Enderecos();
+        $this->telefone = new Telefones();
+
         if (!$this->pessoa->logado()) {
             header('Location: ' . URL . '/login');
         }
@@ -20,7 +27,6 @@ class pessoasController extends controller {
 
             if ($this->post()) {
 
-                /* dados usuario */
                 $nome = trim($_POST['nome']);
                 $dataNascimento = trim($_POST['dataNascimento']);
                 $sexo = trim($_POST['sexo']);
@@ -28,25 +34,14 @@ class pessoasController extends controller {
                 $rg = trim($_POST['rg']);
                 $email = trim($_POST['email']);
 
+                $fkIdPessoa = $this->pessoa->gravar($nome, $dataNascimento, $sexo, $cpf, $rg, $email);
 
-                $this->pessoa->setNome($nome);
-                $this->pessoa->setDataNascimento($dataNascimento);
-                $this->pessoa->setSexo($sexo);
-                $this->pessoa->setCpf($cpf);
-                $this->pessoa->setRg($rg);
-                $this->pessoa->setEmail($email);
-
-                $fkIdPessoa = $this->pessoa->gravar();
-
-                /* dados contato */
                 $residencial = trim($_POST['residencial']);
                 $celular = trim($_POST['celular']);
                 $contato = trim($_POST['contato']);
 
-                $telefone = new Telefones($residencial, $celular, $contato, $fkIdPessoa);
-                $telefone->gravar();
+                $this->telefone->gravar($residencial, $celular, $contato, $fkIdPessoa);
 
-                /* dados endereço */
                 $cep = trim($_POST['cep']);
                 $rua = trim($_POST['rua']);
                 $bairro = trim($_POST['bairro']);
@@ -55,13 +50,10 @@ class pessoasController extends controller {
                 $numero = trim($_POST['numero']);
                 $complemento = trim($_POST['complemento']);
 
-                $endereco = new Enderecos($cep, $rua, $bairro, $cidade, $estado, $numero, $complemento, $fkIdPessoa);
-                $endereco->gravar();
+                $this->endereco->gravar($cep, $rua, $bairro, $cidade, $estado, $numero, $complemento, $fkIdPessoa);
 
-                /* id perfil */
                 $perfil = trim($_POST['perfil']);
-                $usuario = new Usuarios($perfil, $fkIdPessoa);
-                $usuario->gravar();
+                $this->usuario->gravar($perfil, $fkIdPessoa);
 
                 echo true;
             } else {
@@ -76,10 +68,41 @@ class pessoasController extends controller {
         }
     }
 
+    public function buscaPessoaParaEdicao() {
+
+        try {
+
+            if ($this->post()) {
+
+                $id = $_POST['id'];
+
+                $pessoa = $this->pessoa->buscaRegistroPessoaEdicao($id);
+
+                echo json_encode($pessoa);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function buscaPessoaParaExclusao() {
+
+        try {
+
+            if ($this->post()) {
+
+                $id = $_POST['id'];
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
     public function visualizar() {
 
         $dados = array();
-        $pessoas = $this->pessoa->listaTodosUsuarios();
+        $dados['pessoas'] = $this->pessoa->listaTodosUsuarios();
+
 
         $this->loadTemplate('pessoas/visualizar', $dados);
     }
