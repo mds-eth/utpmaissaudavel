@@ -59,7 +59,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Excluir Registro</h4>
                     </div>
-                    <form id="form">
+                    <form id="formDel">
                         <div class="modal-body" id="pessoa">       
                         </div>                        
                     </form>

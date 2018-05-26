@@ -69,6 +69,30 @@ class Pessoas extends model {
         }
     }
 
+    public function excluir($idPessoa) {
+
+        $date = date("Y-m-d H-i-s");
+        $status = 0;
+        $idUsuario = $_SESSION['usuario']['id_usuario'];
+
+        try {
+
+            $sql = "UPDATE pessoas SET status = :status, atualizado_por = :atualizado_por, atualizado_em = :atualizado_em WHERE id_pessoa = :id_pessoa";
+
+            $pdo = $this->db->prepare($sql);
+
+            $pdo->bindValue(':status', $status, PDO::PARAM_BOOL);
+            $pdo->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
+            $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
+
+            $pdo->execute();
+        } catch (Exception $exc) {
+
+            echo $exc->getTraceAsString();
+        }
+    }
+
     public function validaLogin($email, $senha) {
 
         $sql = $this->db->prepare("select * from usuarios u join pessoas p on u.fk_id_pessoa = p.id_pessoa
@@ -167,7 +191,8 @@ class Pessoas extends model {
         $sql = $this->db->prepare("select * from pessoas p join usuarios u on p.id_pessoa = u.fk_id_pessoa
                         join enderecos e on p.id_pessoa = e.fk_id_pessoa
                         join telefones t on p.id_pessoa = t.fk_id_pessoa
-                        join perfis pe on u.fk_id_perfil = pe.id_perfil");
+                        join perfis pe on u.fk_id_perfil = pe.id_perfil
+                        and p.status = 1");
 
         $sql->execute();
 

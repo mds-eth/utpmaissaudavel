@@ -104,6 +104,22 @@ class pessoasController extends controller {
         }
     }
 
+    public function excluir() {
+
+        try {
+
+            if ($this->post()) {
+
+                $idPessoa = $_POST['idPessoa'];
+                $this->pessoa->excluir($idPessoa);
+
+                echo true;
+            };
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
     public function buscaPessoaParaEdicao() {
 
         try {

@@ -6,7 +6,7 @@ var pessoas = {
         $('#cpf').on('blur', pessoas.validaCpf);
         $('#gravar').on('click', pessoas.gravar);
         $('#btnExcluir').on('click', pessoas.excluirPessoa);
-        $('#btnEditar').on('click', pessoas.validaCamposFormularioPessoa);
+        $('#btnEditar').on('click', pessoas.validaCamposEditar);
     },
 
     gravar: function () {
@@ -37,13 +37,15 @@ var pessoas = {
 
                 if (retorno) {
 
+                    swal({
+                        title: "Cadastrado com Sucesso!",
+                        icon: "success"
+                    });
+
                     setTimeout(function () {
-                        swal({
-                            title: "Cadastrado com Sucesso!",
-                            icon: "success"
-                        });
                         window.location = URL + '/pessoas/visualizar';
-                    }, 4000);
+                    }, 3000);
+
                 } else {
                     swal({
                         type: 'warning',
@@ -61,105 +63,93 @@ var pessoas = {
         if ($('#nome').val() === '') {
             $('#nome').focus();
             $('#nome').css('border', '1px solid red');
-
+            $('#nome').val('Campo nome não pode ficar vazio');
             return;
+        } else {
+            $('#nome').css('');
         }
 
         if ($('#data_nascimento').val() === '') {
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#cpf').val() === '') {
             $('#cpf').focus();
             $('#cpf').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#rg').val() === '') {
             $('#rg').focus();
             $('#rg').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#email').val() === '') {
             $('#email').focus();
             $('#email').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#residencial').val() === '') {
             $('#residencial').focus();
             $('#residencial').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#celular').val() === '') {
             $('#celular').focus();
             $('#celular').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#contato').val() === '') {
             $('#contato').focus();
             $('#contato').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#cep').val() === '') {
             $('#cep').focus();
             $('#cep').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#rua').val() === '') {
             $('#rua').focus();
             $('#rua').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#bairro').val() === '') {
             $('#bairro').focus();
             $('#bairro').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#cidade').val() === '') {
             $('#cidade').focus();
             $('#cidade').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#estado').val() === '') {
             $('#estado').focus();
             $('#estado').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#numero').val() === '') {
             $('#numero').focus();
             $('#numero').css('border', '1px solid red');
-
             return;
         }
 
         if ($('#complemento').val() === '') {
             $('#complemento').focus();
             $('#complemento').css('border', '1px solid red');
-
             return;
         }
 
@@ -202,7 +192,19 @@ var pessoas = {
 
     excluirPessoa: function () {
 
-        alert("aqui");
+        $.ajax({
+            url: 'excluir',
+            type: 'POST',
+            dataType: 'json',
+            data: {idPessoa: $('#idPessoa').val()},
+            success: function (result) {
+
+                if (result) {
+                    window.location = URL + '/pessoas/visualizar';
+                }
+            }
+        });
+
 
     },
 
@@ -239,12 +241,12 @@ var pessoas = {
             dataType: 'json',
             success: function (result) {
 
-                if (result === 1) {
-
-                    $('#cpf').focus();
-                    $('#cpf').html('Já existe outra pessoa com este mesmo CPF, favor verificar');
-                    $('#cpf').css('border', '1px solid red');
-                }
+                /*if (result === 1) {
+                 
+                 $('#cpf').focus();
+                 $('#cpf').html('Já existe outra pessoa com este mesmo CPF, favor verificar');
+                 $('#cpf').css('border', '1px solid red');
+                 }*/
             }
         });
     }
@@ -324,7 +326,8 @@ function excluir(id) {
 
                     $('#pessoa').html("");
 
-                    var pessoa = "<p style='text-align: center'>Deseja realmente excluir " + result.nome_pessoa + " e todos os seus registros?</p>";
+                    var pessoa = "<p>Deseja realmente excluir " + result.nome_pessoa + " e todos os seus registros?</p>" +
+                            "<input type='hidden' id='idPessoa' name='idPessoa' value='" + result.id_pessoa + "'>";
 
                     $('#pessoa').append(pessoa);
                 }
