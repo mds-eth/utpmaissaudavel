@@ -68,6 +68,42 @@ class pessoasController extends controller {
         }
     }
 
+    public function editar() {
+
+        try {
+
+            if ($this->post()) {
+
+                $idPessoa = $_POST['idPessoa'];
+
+                $nome = trim($_POST['nome']);
+                $dataNascimento = trim($_POST['dataNascimento']);
+                $cpf = trim($_POST['cpf']);
+                $rg = trim($_POST['rg']);
+                $email = trim($_POST['email']);
+                $this->pessoa->atualizar($nome, $dataNascimento, $cpf, $rg, $email, $idPessoa);
+
+                $residencial = trim($_POST['residencial']);
+                $celular = trim($_POST['celular']);
+                $contato = trim($_POST['contato']);
+                $this->telefone->atualizar($residencial, $celular, $contato, $idPessoa);
+
+                $cep = trim($_POST['cep']);
+                $rua = trim($_POST['rua']);
+                $bairro = trim($_POST['bairro']);
+                $cidade = trim($_POST['cidade']);
+                $estado = trim($_POST['estado']);
+                $numero = trim($_POST['numero']);
+                $complemento = trim($_POST['complemento']);
+                $this->endereco->atualizar($cep, $rua, $bairro, $cidade, $estado, $numero, $complemento, $idPessoa);
+
+                echo true;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
     public function buscaPessoaParaEdicao() {
 
         try {
@@ -75,10 +111,9 @@ class pessoasController extends controller {
             if ($this->post()) {
 
                 $id = $_POST['id'];
+                $pessoaEdicao = $this->pessoa->buscaRegistroPessoaEdicao($id);
 
-                $pessoa = $this->pessoa->buscaRegistroPessoaEdicao($id);
-
-                echo json_encode($pessoa);
+                echo json_encode($pessoaEdicao[0]);
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -92,6 +127,9 @@ class pessoasController extends controller {
             if ($this->post()) {
 
                 $id = $_POST['id'];
+                $pessoaExclusao = $this->pessoa->buscaRegistroPessoaExclusao($id);
+
+                echo json_encode($pessoaExclusao[0]);
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -131,11 +169,12 @@ class pessoasController extends controller {
 
     public function validaCpf() {
 
-        if (isset($_POST) && !empty($_POST)) {
+        if ($this->post()) {
 
             $cpf = $_POST['cpf'];
-            echo $this->pessoa->validaCpf($cpf);
-            exit();
+            $retorno = $this->pessoa->validaCpf($cpf);
+
+            echo json_decode($retorno);
         }
     }
 

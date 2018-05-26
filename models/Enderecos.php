@@ -35,4 +35,34 @@ class Enderecos extends model {
         }
     }
 
+    public function atualizar($cep, $rua, $bairro, $cidade, $estado, $numero, $complemento, $idPessoa) {
+
+        $date = date("Y-m-d H-i-s");
+        $idUsuario = $_SESSION['usuario']['id_usuario'];
+
+        try {
+
+            $sql = "UPDATE enderecos SET cep = :cep, rua = :rua, bairro = :bairro, cidade = :cidade, estado = :estado, numero = :numero, complemento = :complemento
+                    WHERE fk_id_pessoa = :id_pessoa";
+
+            $pdo = $this->db->prepare($sql);
+
+            $pdo->bindValue(':cep', $cep, PDO::PARAM_STR);
+            $pdo->bindValue(':rua', $rua, PDO::PARAM_STR);
+            $pdo->bindValue(':bairro', $bairro, PDO::PARAM_STR);
+            $pdo->bindValue(':cidade', $cidade, PDO::PARAM_STR);
+            $pdo->bindValue(':estado', $estado, PDO::PARAM_STR);
+            $pdo->bindValue(':numero', $numero, PDO::PARAM_STR);
+            $pdo->bindValue(':complemento', $complemento, PDO::PARAM_STR);
+            $pdo->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
+            $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
+
+            $pdo->execute();
+        } catch (Exception $exc) {
+
+            echo $exc->getTraceAsString();
+        }
+    }
+
 }

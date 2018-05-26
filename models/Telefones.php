@@ -30,4 +30,29 @@ class Telefones extends model {
         }
     }
 
+    public function atualizar($residencial, $celular, $contato, $idPessoa) {
+
+        $date = date("Y-m-d H-i-s");
+        $idUsuario = $_SESSION['usuario']['id_usuario'];
+
+        try {
+
+            $sql = "UPDATE telefones SET telefone = :residencial, celular = :celular, contato = :contato WHERE fk_id_pessoa = :id_pessoa";
+
+            $pdo = $this->db->prepare($sql);
+
+            $pdo->bindValue(':residencial', $residencial, PDO::PARAM_STR);
+            $pdo->bindValue(':celular', $celular, PDO::PARAM_STR);
+            $pdo->bindValue(':contato', $contato, PDO::PARAM_STR);
+            $pdo->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
+            $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
+
+            $pdo->execute();
+        } catch (Exception $exc) {
+
+            echo $exc->getTraceAsString();
+        }
+    }
+
 }

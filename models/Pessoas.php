@@ -24,9 +24,9 @@ class Pessoas extends model {
             $pdo->bindValue(':rg', $rg, PDO::PARAM_STR);
             $pdo->bindValue(':email', $email, PDO::PARAM_STR);
             $pdo->bindValue(':status', $status, PDO::PARAM_STR);
-            $pdo->bindValue(':criado_por', $idUsuario, PDO::PARAM_STR);
+            $pdo->bindValue(':criado_por', $idUsuario, PDO::PARAM_INT);
             $pdo->bindValue(':criado_em', $date, PDO::PARAM_STR);
-            $pdo->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_STR);
+            $pdo->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_INT);
             $pdo->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
 
             $pdo->execute();
@@ -34,6 +34,35 @@ class Pessoas extends model {
             $fkIdPessoa = $this->db->lastInsertId();
 
             return $fkIdPessoa;
+        } catch (Exception $exc) {
+
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public function atualizar($nomePessoa, $dataNascimento, $cpf, $rg, $email, $idPessoa) {
+
+        $date = date("Y-m-d H-i-s");
+        $idUsuario = $_SESSION['usuario']['id_usuario'];
+
+        try {
+
+            $sql = "UPDATE pessoas SET nome_pessoa = :nome_pessoa, data_nascimento = :data_nascimento, cpf = :cpf, rg = :rg, email = :email, 
+                    atualizado_por = :atualizado_por, atualizado_em = :atualizado_em WHERE id_pessoa = :id_pessoa";
+
+            $pdo = $this->db->prepare($sql);
+
+            $pdo->bindValue(':nome_pessoa', $nomePessoa, PDO::PARAM_STR);
+            $pdo->bindValue(':data_nascimento', $dataNascimento, PDO::PARAM_STR);
+            $pdo->bindValue(':cpf', $cpf, PDO::PARAM_STR);
+            $pdo->bindValue(':rg', $rg, PDO::PARAM_STR);
+            $pdo->bindValue(':email', $email, PDO::PARAM_STR);
+            $pdo->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
+            $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
+
+
+            $pdo->execute();
         } catch (Exception $exc) {
 
             echo $exc->getTraceAsString();
@@ -96,6 +125,25 @@ class Pessoas extends model {
     }
 
     public function buscaRegistroPessoaEdicao($id) {
+
+        $sql = $this->db->prepare("select id_pessoa, nome_pessoa, data_nascimento, sexo, 
+                        cpf, rg, email, id_telefone, telefone, celular, contato, id_endereco, 
+                        cep, rua, bairro, cidade, estado, numero, complemento
+                        from pessoas p join enderecos e on p.id_pessoa = e.fk_id_pessoa
+                        join telefones t on p.id_pessoa = t.fk_id_pessoa
+                        and id_pessoa = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $sql->execute();
+
+        $retorno = $sql->fetchAll();
+
+        if ($retorno != null || !empty($retorno)) {
+            return $retorno;
+        }
+    }
+
+    public function buscaRegistroPessoaExclusao($id) {
 
         $sql = $this->db->prepare("select id_pessoa, nome_pessoa, data_nascimento, sexo, 
                         cpf, rg, email, id_telefone, telefone, celular, contato, id_endereco, 

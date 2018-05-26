@@ -33,33 +33,39 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <div id="myModal" class="form-group modal fade" role="dialog">
-            <div class="modal-dialog">                                                
-                <div class="modal-content" style="width: 800px">
+        </div>        
+        <div id="modalEdit" class="modal fade" role="dialog" >
+            <div class="modal-dialog">                
+                <div class="modal-content" style="border-radius: 10px">
                     <div class="modal-header">
-                        <p><h4>Selecione turno e disciplina, e informe na grade os dias em que ela ocorrerá</h4></p>
-                        <div id="turno"></div>
-                        <div id="optionDisciplines"></div>                                                            
-                        <div id="quantidade"></div>
-                        <div id="cont"></div>
-                        <div id="ok"></div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editar Registro</h4>
                     </div>
-                    <div id="modal-calendario">
-                        <table class="table table-bordered"> 
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center; width: 35px"><b>HORÁRIOS</b</th>
-                                    <th style="text-align: center; width: 35px"><b>SEGUNDA</b</th>
-                                    <th style="text-align: center; width: 35px"><b>TERÇA</b</th>
-                                    <th style="text-align: center; width: 35px"><b>QUARTA</b</th>
-                                    <th style="text-align: center; width: 35px"><b>QUINTA</b</th>
-                                    <th style="text-align: center; width: 35px"><b>SEXTA</b></th>                                                                                                                                            
-                                </tr>
-                            </thead>
-                            <tbody id="calendario-corpo">                                                                
-                            </tbody>
-                        </table>
+                    <form id="form">
+                        <div class="modal-body" id="formularioEdicao">       
+                        </div>                        
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
+                        <button id="btnEditar" class="btn btn-success btn-xs">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalDelete" class="modal fade" role="dialog">
+            <div class="modal-dialog">                
+                <div class="modal-content" style="border-radius: 10px">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Excluir Registro</h4>
+                    </div>
+                    <form id="form">
+                        <div class="modal-body" id="pessoa">       
+                        </div>                        
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
+                        <button id="btnExcluir" class="btn btn-success btn-xs">Excluir</button>
                     </div>
                 </div>
             </div>
@@ -67,3 +73,4 @@
     </div>
 </div>
 <script type="text/javascript" src="<?php echo URL; ?>/assets/js/pessoas/pessoas.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.mask.js"></script>
