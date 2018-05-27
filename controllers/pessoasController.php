@@ -6,6 +6,7 @@ class pessoasController extends controller {
     private $telefone;
     private $endereco;
     private $usuario;
+    private $url;
 
     public function __construct() {
 
@@ -13,9 +14,15 @@ class pessoasController extends controller {
         $this->usuario = new Usuarios();
         $this->endereco = new Enderecos();
         $this->telefone = new Telefones();
+        $this->url = new Urls();
 
         if (!$this->pessoa->logado()) {
             header('Location: ' . URL . '/login');
+        }
+
+        $this->url = new Urls();
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
         }
     }
 
@@ -64,7 +71,8 @@ class pessoasController extends controller {
                 $this->loadTemplate('pessoas/cadastrar', $dados);
             }
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+
+            $this->mandaEmailAdmErroAplicacao($exc);
         }
     }
 

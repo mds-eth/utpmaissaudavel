@@ -5,18 +5,32 @@ var urls = {
     },
 
     cadastrar: function () {
+
+        var url = $('#url').val();
+        var val = [];
+        $(':checkbox:checked').each(function (i) {
+            val[i] = $(this).val();
+        });
+
         $.ajax({
             type: 'POST',
             url: 'cadastrar',
             data: {
-                url: $('#url').val(),
-                perfil: $('#profile').val()
+                url: url,
+                perfis: val
             },
             success: function (result) {
-                console.log(result);
-                return;
+
                 if (result) {
-                    window.location = URL + '/urls/visualizar';
+
+                    setTimeout(function () {
+                        swal({
+                            title: "Cadastrado com Sucesso!",
+                            icon: "success"
+                        });
+                        window.location = URL + '/urls/visualizar';
+                    }, 2000);
+
                 } else {
                     swal({
                         type: 'warning',

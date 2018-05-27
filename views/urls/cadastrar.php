@@ -9,7 +9,7 @@
         <div class="x_title">
             <h2>URL</h2>                
             <div class="clearfix"></div>
-        </div>
+        </div>        
         <div class="x_content">
             <br />                            
             <div class="item form-group">
@@ -26,7 +26,7 @@
                     </label>
                     <div class="col-md-4">
                         <?php foreach ($perfil as $perfis): ?>
-                            <input id="<?= $perfis['id_perfil'] ?>" name="profile[]" value="<?= $perfis['id_perfil'] ?>" type="checkbox"><?= $perfis['nome_perfil'] ?><br>    
+                            <input id="perfil" name="perfil" value="<?= $perfis['id_perfil'] ?>" type="checkbox"><?= $perfis['nome_perfil'] ?><br>    
                         <?php endforeach; ?>
                     </div>
                 </div>

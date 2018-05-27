@@ -4,24 +4,36 @@ class urlsController extends controller {
 
     private $pessoas;
     private $perfil;
+    private $url;
 
     public function __construct() {
+
         $this->pessoas = new Pessoas();
         if (!$this->pessoas->logado()) {
             header('Location: ' . URL . '/login');
         }
 
+        $this->url = new Urls();
         $this->perfil = new Perfis();
+
+        $this->url = new Urls();
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
+        }
     }
 
     public function cadastrar() {
-            
+
         try {
 
-            if (isset($_POST['url']) && !empty($_POST['url'])) {
+            if ($this->post()) {
 
-                var_dump($_POST);
-                die("cai aqui");
+                $url = $_POST['url'];
+                $perfis = $_POST['perfis'];
+
+                $retorno = $this->url->cadastrar($url, $perfis);
+
+                echo $retorno;
             } else {
 
                 $dados = array();
@@ -35,7 +47,17 @@ class urlsController extends controller {
     }
 
     public function visualizar() {
-        
+
+        $dados = array();
+
+        try {
+
+            $dados['urls'] = $this->url->listaTodasUrls();
+
+            $this->loadTemplate('urls/visualizar', $dados);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
 }

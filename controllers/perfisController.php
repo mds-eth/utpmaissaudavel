@@ -4,6 +4,7 @@ class perfisController extends controller {
 
     private $perfil;
     private $pessoas;
+    private $url;
 
     public function __construct() {
 
@@ -12,6 +13,11 @@ class perfisController extends controller {
             header('Location: ' . URL . '/login');
         }
         $this->perfil = new Perfis();
+
+        $this->url = new Urls();
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
+        }
     }
 
     public function index() {

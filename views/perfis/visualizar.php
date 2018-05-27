@@ -1,13 +1,13 @@
 <div class="page-title">
     <div class="title_left">
-        <h3>Perfis de Perfis</h3>
+        <h3>Perfis do Sistema</h3>
     </div>        
 </div>
 <div class="clearfix"></div>
 <div class="col-md-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Perfis do Sistema</h2>
+            <h2>Perfis</h2>
 
             <div class="clearfix"></div>
         </div>

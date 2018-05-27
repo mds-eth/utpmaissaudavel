@@ -38,6 +38,15 @@ class controller {
             return false;
         }
     }
+    
+    protected function mandaEmailAdmErroAplicacao($erro){
+        
+        $para = "michaeldouglas.10.94@gmail.com";
+        $mensagem = "Erro Aplicação UTP - Mais Saudavel";
+        
+        mail($mensagem, $para, $message, $erro);
+        
+    }
 
 }
 
