@@ -44,7 +44,7 @@ var pessoas = {
 
                     setTimeout(function () {
                         window.location = URL + '/pessoas/visualizar';
-                    }, 3000);
+                    }, 2000);
 
                 } else {
                     swal({
@@ -214,7 +214,7 @@ var pessoas = {
 
         $.ajax({
             url: 'buscaCep',
-            type: 'GET',
+            type: 'POST',
             data: {cep: cep},
             dataType: 'json',
             success: function (data) {

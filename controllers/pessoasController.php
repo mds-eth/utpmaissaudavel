@@ -171,23 +171,26 @@ class pessoasController extends controller {
 
     public function buscaCep() {
 
-        $cep = $_GET['cep'];
+        if ($this->post()) {
 
-        $dados = array();
+            $cep = $_POST['cep'];
 
-        try {
+            $dados = array();
 
-            $endereco = simplexml_load_file("http://cep.republicavirtual.com.br/web_cep.php?formato=xml&cep=" . $cep);
+            try {
 
-            $dados['sucesso'] = (string) $endereco->resultado;
-            $dados['rua'] = (string) $endereco->tipo_logradouro . ' ' . $endereco->logradouro;
-            $dados['bairro'] = (string) $endereco->bairro;
-            $dados['cidade'] = (string) $endereco->cidade;
-            $dados['uf'] = (string) $endereco->uf;
+                $endereco = simplexml_load_file("http://cep.republicavirtual.com.br/web_cep.php?formato=xml&cep=" . $cep);
 
-            echo json_encode($dados);
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+                $dados['sucesso'] = (string) $endereco->resultado;
+                $dados['rua'] = (string) $endereco->tipo_logradouro . ' ' . $endereco->logradouro;
+                $dados['bairro'] = (string) $endereco->bairro;
+                $dados['cidade'] = (string) $endereco->cidade;
+                $dados['uf'] = (string) $endereco->uf;
+
+                echo json_encode($dados);
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
         }
     }
 
