@@ -2,6 +2,7 @@
 <html lang="pt-br">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">        
@@ -22,7 +23,6 @@
                             <a href="<?php echo URL; ?>/home" class="site_title"><i class="fa fa-heartbeat"></i> <span>Fisioterapia</span></a>
                         </div>
                         <div class="clearfix"></div>
-
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
                                 <ul class="nav side-menu">
@@ -194,6 +194,19 @@
             </div>
         </div>           
     </body>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.dataTable.min.js"></script>
     <script type="text/javascript" src="<?php echo URL; ?>/assets/js/sweetAlert.js"></script>                
     <script type="text/javascript" src="<?php echo URL; ?>/assets/js/custom.min.js"></script>
     <script type="text/javascript" src="<?php echo URL; ?>/assets/js/validator/validator.js"></script>

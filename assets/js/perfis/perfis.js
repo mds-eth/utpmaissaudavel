@@ -14,7 +14,14 @@ var perfil = {
             success: function (result) {
 
                 if (result) {
-                    window.location = URL + '/perfis/visualizar';
+                    swal({
+                        title: "Cadastrado com Sucesso!",
+                        icon: "success"
+                    });
+                    setTimeout(function () {
+                        window.location = URL + '/perfis/visualizar';
+                    }, 2000);
+
                 } else {
                     swal({
                         type: 'warning',

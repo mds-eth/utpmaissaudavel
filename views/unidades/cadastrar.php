@@ -6,17 +6,16 @@
 <div class="clearfix"></div>
 <div class="col-md-12 col-sm-12 col-xs-12">        
     <div class="x_panel">
-        <div class="x_title">
-            <h4>Unidade de Saúde</h4>                
+        <div class="x_title">                    
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
             <br />                
             <div class="item form-group">
-                <label class="col-md-1 col-sm-3 col-xs-12" for="perfil">Nome <span class="required">*</span>
+                <label class="col-md-1 col-sm-3 col-xs-12" for="unidade">Nome Unidade <span class="required">*</span>
                 </label>
-                <div class="col-md-4">
-                    <input type="text" id="perfil" name="perfil" required="required" class="form-control col-md-7 col-xs-12">
+                <div class="col-md-6">
+                    <input type="text" id="unidade" name="unidade" required="required" class="form-control col-md-7 col-xs-12">
                 </div>
                 <div class="form-group">
                     <div style="float: right;">
@@ -31,5 +30,5 @@
         </div>
     </div>
 </div>   
-<script type="text/javascript" src="<?php echo URL; ?>/assets/js/perfis/perfis.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/unidades/unidades.js"></script>
 

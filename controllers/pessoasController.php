@@ -39,6 +39,7 @@ class pessoasController extends controller {
                 $sexo = trim($_POST['sexo']);
                 $cpf = trim($_POST['cpf']);
                 $rg = trim($_POST['rg']);
+
                 $email = trim($_POST['email']);
 
                 $fkIdPessoa = $this->pessoa->gravar($nome, $dataNascimento, $sexo, $cpf, $rg, $email);

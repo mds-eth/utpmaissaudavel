@@ -65,8 +65,6 @@ var pessoas = {
             $('#nome').css('border', '1px solid red');
             $('#nome').val('Campo nome não pode ficar vazio');
             return;
-        } else {
-            $('#nome').css('');
         }
 
         if ($('#data_nascimento').val() === '') {
@@ -183,11 +181,18 @@ var pessoas = {
             success: function (result) {
 
                 if (result) {
-                    window.location = URL + '/pessoas/visualizar';
+
+                    swal({
+                        title: "Atualizado com Sucesso!",
+                        icon: "success"
+                    });
+
+                    setTimeout(function () {
+                        window.location = URL + '/pessoas/visualizar';
+                    }, 1000);
                 }
             }
         });
-
     },
 
     excluirPessoa: function () {

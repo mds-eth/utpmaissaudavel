@@ -23,13 +23,14 @@ var urls = {
 
                 if (result) {
 
+                    swal({
+                        title: "Cadastrado com Sucesso!",
+                        icon: "success"
+                    });
+
                     setTimeout(function () {
-                        swal({
-                            title: "Cadastrado com Sucesso!",
-                            icon: "success"
-                        });
                         window.location = URL + '/urls/visualizar';
-                    }, 2000);
+                    }, 1000);
 
                 } else {
                     swal({
