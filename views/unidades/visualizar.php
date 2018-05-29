@@ -29,8 +29,8 @@
                             <?php $data = $unidade['criado_em'] ?>
                             <td><?= date('d/m/Y', strtotime($data)) ?></td>
                             <td>
-                                <button id="<?php $unidade['id_unidade_de_saude'] ?>" onclick="editar(this.id)" class="btn btn-info btn-xs">Editar</button>
-                                <button id="<?php $unidade['id_unidade_de_saude'] ?>" onclick="excluir(this.id)" class="btn btn-danger btn-xs">Excluir</button>
+                                <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="editar(this.id)" class="btn btn-info btn-xs editar">Editar</button>
+                                <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="excluir(this.id)" class="btn btn-danger btn-xs excluir">Excluir</button>                                
                             </td>                            
                         </tr>                    
                     <?php endforeach; ?>
@@ -65,7 +65,7 @@
                 <h4 class="modal-title">Excluir Registro</h4>
             </div>
             <form id="formDel">
-                <div class="modal-body" id="pessoa">       
+                <div class="modal-body" id="formularioExclusao">       
                 </div>                        
             </form>
             <div class="modal-footer">

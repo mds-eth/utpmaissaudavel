@@ -3,16 +3,16 @@
 class unidadesController extends controller {
 
     private $url;
-    private $pessoa;
+    private $usuario;
     private $unidade;
 
     public function __construct() {
 
         $this->url = new Urls();
-        $this->pessoa = new Pessoas();
+        $this->usuario = new Usuarios();
         $this->unidade = new Unidades();
 
-        if (!$this->pessoa->logado()) {
+        if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
 
@@ -34,6 +34,54 @@ class unidadesController extends controller {
             $dados = array();
 
             $this->loadTemplate('unidades/cadastrar', $dados);
+        }
+    }
+
+    public function editar() {
+
+        if ($this->post()) {
+
+            $unidade = $_POST['unidade'];
+            $id = $_POST['idUnidade'];
+
+            $this->unidade->setUnidade($unidade);
+            $this->unidade->editar($id);
+
+            echo true;
+        }
+    }
+
+    public function excluir() {
+
+        if ($this->post()) {
+
+            $this->unidade->excluir($_POST['idUnidade']);
+
+            echo true;
+        }
+    }
+
+    public function buscaUnidadeParaEdicao() {
+
+        if ($this->post()) {
+
+            $id = $_POST['id'];
+
+            $unidade = $this->unidade->buscaUnidadeParaEdicao($id);
+
+            echo json_encode($unidade);
+        }
+    }
+
+    public function buscaUnidadeParaExclusao() {
+
+        if ($this->post()) {
+
+            $id = $_POST['id'];
+
+            $unidade = $this->unidade->buscaUnidadeParaEdicao($id);
+
+            echo json_encode($unidade);
         }
     }
 

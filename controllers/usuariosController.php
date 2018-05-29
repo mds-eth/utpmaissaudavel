@@ -2,12 +2,12 @@
 
 class usuariosController extends controller {
 
-    private $pessoas;
+    private $usuario;
     private $url;
 
     public function __construct() {
-        $this->pessoas = new Pessoas();
-        if (!$this->pessoas->logado()) {
+        $this->usuario = new Usuarios();
+        if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
 

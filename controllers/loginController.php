@@ -10,14 +10,12 @@ class loginController extends controller {
 
     public function logar() {
 
-
         if ($this->post()) {
 
-            $pessoa = new Pessoas();
-
-            $email = isset($_POST['email']) ? $_POST['email'] : '';
-            $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
-            echo $pessoa->validaLogin($email, md5($senha));
+            $login = new Login();
+            $login->setEmail(trim(addslashes($_POST['email'])));
+            $login->setSenha(trim(addslashes(md5($_POST['senha']))));
+            echo $login->validaLogin();
         }
     }
 

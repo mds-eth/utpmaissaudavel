@@ -10,8 +10,8 @@ class Perfis extends model {
     CONST PACIENTE = 6;
     CONST MEDICO = 7;
 
-    private $perfil;
     private $url;
+    private $perfil;
 
     public function gravaPerfil() {
 
@@ -21,17 +21,14 @@ class Perfis extends model {
 
             try {
 
-                $idUsuario = $_SESSION['usuario']['id_usuario'];
-                $date = date("Y-m-d H-i-s");
-
                 $sql = $this->db->prepare("INSERT INTO perfis (nome_perfil, criado_por, criado_em, atualizado_por, atualizado_em)
                 VALUES (:nome_perfil, :criado_por, :criado_em, :atualizado_por, :atualizado_em)");
 
                 $sql->bindValue(':nome_perfil', $this->getPerfil(), PDO::PARAM_STR);
-                $sql->bindValue(':criado_por', $idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':criado_em', $date, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
+                $sql->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_STR);
+                $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
 
                 $sql->execute();
 

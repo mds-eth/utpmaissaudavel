@@ -2,25 +2,24 @@
 
 class pessoasController extends controller {
 
+    private $url;
     private $pessoa;
+    private $usuario;
     private $telefone;
     private $endereco;
-    private $usuario;
-    private $url;
 
     public function __construct() {
 
+        $this->url = new Urls();
         $this->pessoa = new Pessoas();
         $this->usuario = new Usuarios();
-        $this->endereco = new Enderecos();
         $this->telefone = new Telefones();
-        $this->url = new Urls();
+        $this->endereco = new Enderecos();
 
-        if (!$this->pessoa->logado()) {
+        if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
 
-        $this->url = new Urls();
         if (!$this->url->verificaUrlSessaoUsuario()) {
             header('Location: ' . URL . '/home');
         }
@@ -34,34 +33,33 @@ class pessoasController extends controller {
 
             if ($this->post()) {
 
-                $nome = trim($_POST['nome']);
-                $dataNascimento = trim($_POST['dataNascimento']);
-                $sexo = trim($_POST['sexo']);
-                $cpf = trim($_POST['cpf']);
-                $rg = trim($_POST['rg']);
+                $this->pessoa->setNome(trim(addslashes($_POST['nome'])));
+                $this->pessoa->setDataNascimento(trim(addslashes($_POST['dataNascimento'])));
+                $this->pessoa->setSexo(trim(addslashes($_POST['sexo'])));
+                $this->pessoa->setCpf(trim(addslashes($_POST['cpf'])));
+                $this->pessoa->setRg(trim(addslashes($_POST['rg'])));
+                $this->pessoa->setEmail(trim(addslashes($_POST['email'])));
+                $fkIdPessoa = $this->pessoa->gravar();
 
-                $email = trim($_POST['email']);
+                $this->telefone->setResidencial(trim(addslashes($_POST['residencial'])));
+                $this->telefone->setCelular(trim(addslashes($_POST['celular'])));
+                $this->telefone->setContato(trim(addslashes($_POST['contato'])));
+                $this->telefone->setFkIdPessoa($fkIdPessoa);
+                $this->telefone->gravar();
 
-                $fkIdPessoa = $this->pessoa->gravar($nome, $dataNascimento, $sexo, $cpf, $rg, $email);
+                $this->endereco->setCep(trim(addslashes($_POST['cep'])));
+                $this->endereco->setRua(trim(addslashes($_POST['rua'])));
+                $this->endereco->setBairro(trim(addslashes($_POST['bairro'])));
+                $this->endereco->setCidade(trim(addslashes($_POST['cidade'])));
+                $this->endereco->setEstado(trim(addslashes($_POST['estado'])));
+                $this->endereco->setNumero(trim(addslashes($_POST['numero'])));
+                $this->endereco->setComplemento(trim(addslashes($_POST['complemento'])));
+                $this->endereco->setFkIdPessoa($fkIdPessoa);
+                $this->endereco->gravar();
 
-                $residencial = trim($_POST['residencial']);
-                $celular = trim($_POST['celular']);
-                $contato = trim($_POST['contato']);
-
-                $this->telefone->gravar($residencial, $celular, $contato, $fkIdPessoa);
-
-                $cep = trim($_POST['cep']);
-                $rua = trim($_POST['rua']);
-                $bairro = trim($_POST['bairro']);
-                $cidade = trim($_POST['cidade']);
-                $estado = trim($_POST['estado']);
-                $numero = trim($_POST['numero']);
-                $complemento = trim($_POST['complemento']);
-
-                $this->endereco->gravar($cep, $rua, $bairro, $cidade, $estado, $numero, $complemento, $fkIdPessoa);
-
-                $perfil = trim($_POST['perfil']);
-                $this->usuario->gravar($perfil, $fkIdPessoa);
+                $this->usuario->setFkIdPerfil(trim(addslashes($_POST['perfil'])));
+                $this->usuario->setFkIdPessoa($fkIdPessoa);
+                $this->usuario->gravar();
 
                 echo true;
             } else {
@@ -85,26 +83,28 @@ class pessoasController extends controller {
 
                 $idPessoa = $_POST['idPessoa'];
 
-                $nome = trim($_POST['nome']);
-                $dataNascimento = trim($_POST['dataNascimento']);
-                $cpf = trim($_POST['cpf']);
-                $rg = trim($_POST['rg']);
-                $email = trim($_POST['email']);
-                $this->pessoa->atualizar($nome, $dataNascimento, $cpf, $rg, $email, $idPessoa);
+                $this->pessoa->setNome(trim(addslashes($_POST['nome'])));
+                $this->pessoa->setDataNascimento(trim(addslashes($_POST['dataNascimento'])));
+                $this->pessoa->setCpf(trim(addslashes($_POST['cpf'])));
+                $this->pessoa->setRg(trim(addslashes($_POST['rg'])));
+                $this->pessoa->setEmail(trim(addslashes($_POST['email'])));
+                $this->pessoa->atualizar($idPessoa);
 
-                $residencial = trim($_POST['residencial']);
-                $celular = trim($_POST['celular']);
-                $contato = trim($_POST['contato']);
-                $this->telefone->atualizar($residencial, $celular, $contato, $idPessoa);
+                $this->telefone->setResidencial(trim(addslashes($_POST['residencial'])));
+                $this->telefone->setCelular(trim(addslashes($_POST['celular'])));
+                $this->telefone->setContato(trim(addslashes($_POST['contato'])));
+                $this->telefone->setFkIdPessoa($idPessoa);
+                $this->telefone->atualizar();
 
-                $cep = trim($_POST['cep']);
-                $rua = trim($_POST['rua']);
-                $bairro = trim($_POST['bairro']);
-                $cidade = trim($_POST['cidade']);
-                $estado = trim($_POST['estado']);
-                $numero = trim($_POST['numero']);
-                $complemento = trim($_POST['complemento']);
-                $this->endereco->atualizar($cep, $rua, $bairro, $cidade, $estado, $numero, $complemento, $idPessoa);
+                $this->endereco->setCep(trim(addslashes($_POST['cep'])));
+                $this->endereco->setRua(trim(addslashes($_POST['rua'])));
+                $this->endereco->setBairro(trim(addslashes($_POST['bairro'])));
+                $this->endereco->setCidade(trim(addslashes($_POST['cidade'])));
+                $this->endereco->setEstado(trim(addslashes($_POST['estado'])));
+                $this->endereco->setNumero(trim(addslashes($_POST['numero'])));
+                $this->endereco->setComplemento(trim(addslashes($_POST['complemento'])));
+                $this->endereco->setFkIdPessoa($idPessoa);
+                $this->endereco->atualizar();
 
                 echo true;
             }
@@ -123,7 +123,7 @@ class pessoasController extends controller {
                 $this->pessoa->excluir($idPessoa);
 
                 echo true;
-            };
+            }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

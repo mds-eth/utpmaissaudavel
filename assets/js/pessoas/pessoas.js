@@ -274,7 +274,7 @@ function editar(id) {
 
                     var formulario = "<div data-parsley-validate class='form-horizontal form-label-left'>" +
                             "<input type='hidden' id='idPessoa' name='idPessoa' value='" + result.id_pessoa + "'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='nome'>Nome <span class='required'></label>" +
+                            "<label for='nome'>Nome <span class='required'></label>" +
                             "<input value='" + result.nome_pessoa + "' type='text' id='nome' name='nome' class='form-control col-md-7 col-xs-12'>" +
                             "<label class='col-md-1 col-sm-3 col-xs-12' for='data_nascimento'>Data Nascimento <span class='required'></label>" +
                             "<input value='" + result.data_nascimento + "' type='text' id='data_nascimento' name='data_nascimento' class='form-control col-md-7 col-xs-12'>" +

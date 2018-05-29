@@ -4,8 +4,6 @@ class Urls extends model {
 
     public function cadastrar($url, $perfis) {
 
-        $date = date("Y-m-d H-i-s");
-        $idUsuario = $_SESSION['usuario']['id_usuario'];
         $retornoValidaUrl = $this->validaUrl($url);
 
         if ($retornoValidaUrl) {
@@ -16,10 +14,10 @@ class Urls extends model {
                 VALUES (:nome_url, :criado_por, :criado_em, :atualizado_por, :atualizado_em)");
 
                 $sql->bindValue(':nome_url', $url, PDO::PARAM_STR);
-                $sql->bindValue(':criado_por', $idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':criado_em', $date, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
+                $sql->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_STR);
+                $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
 
                 $sql->execute();
 
@@ -37,9 +35,6 @@ class Urls extends model {
 
     public function gravaTabelaFronteiraPerfisUrl($fkUrl, $perfis) {
 
-        $date = date("Y-m-d H-i-s");
-        $idUsuario = $_SESSION['usuario']['id_usuario'];
-
         try {
 
             foreach ($perfis as $idPerfil) {
@@ -49,10 +44,10 @@ class Urls extends model {
 
                 $sql->bindValue(':fk_id_url', $fkUrl, PDO::PARAM_INT);
                 $sql->bindValue(':fk_id_perfil', $idPerfil, PDO::PARAM_INT);
-                $sql->bindValue(':criado_por', $idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':criado_em', $date, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_por', $idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':atualizado_em', $date, PDO::PARAM_STR);
+                $sql->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
 
                 $sql->execute();
             }
@@ -96,7 +91,6 @@ class Urls extends model {
 
         $url = $_SERVER['REQUEST_URI'];
         $idPerfilUsuarioLogado = $_SESSION['usuario']['id_perfil'];
-
 
         $sql = $this->db->prepare("select nome_url from urls u
                             join perfis_url p on u.id_url = p.fk_id_url
