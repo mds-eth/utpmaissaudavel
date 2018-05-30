@@ -1,41 +1,39 @@
-<div class="page-title">
-    <div class="title_left">
-        <h3>Unidades de Saúde</h3>
-    </div>        
-</div>
 <div class="clearfix"></div>
-<div class="col-md-12">
+<div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
+            <h2>Unidades de Saúde</h2>            
             <div class="clearfix"></div>
         </div>
-        <div class="x_content">            
-            <table id="datatable-buttons" class="table table-striped table-bordered" style="text-align: center">
-                <thead>
-                    <tr>
-                        <th style="text-align: center">ID</th>
-                        <th style="text-align: center">Unidade de Saúde</th>
-                        <th style="text-align: center">Criado Por</th>
-                        <th style="text-align: center">Criado Em</th>
-                        <th style="text-align: center">Ações</th>                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($unidades as $unidade) : ?>
+        <div class="x_content">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" style="text-align: center">
+                    <thead>
                         <tr>
-                            <td><?= $unidade['id_unidade_de_saude'] ?></td>
-                            <td><?= $unidade['nome'] ?></td>
-                            <td><?= $unidade['criado_por'] ?></td>
-                            <?php $data = $unidade['criado_em'] ?>
-                            <td><?= date('d/m/Y', strtotime($data)) ?></td>
-                            <td>
-                                <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="editar(this.id)" class="btn btn-info btn-xs editar">Editar</button>
-                                <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="excluir(this.id)" class="btn btn-danger btn-xs excluir">Excluir</button>                                
-                            </td>                            
-                        </tr>                    
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                            <th style="text-align: center">ID</th>
+                            <th style="text-align: center">Unidade de Saúde</th>
+                            <th style="text-align: center">Criado Por</th>
+                            <th style="text-align: center">Criado Em</th>
+                            <th style="text-align: center">Ações</th>                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($unidades as $unidade) : ?>
+                            <tr>
+                                <td><?= $unidade['id_unidade_de_saude'] ?></td>
+                                <td><?= $unidade['nome'] ?></td>
+                                <td><?= $unidade['criado_por'] ?></td>
+                                <?php $data = $unidade['criado_em'] ?>
+                                <td><?= date('d/m/Y', strtotime($data)) ?></td>
+                                <td>
+                                    <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="editar(this.id)" class="btn btn-info btn-xs editar">Editar</button>
+                                    <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="excluir(this.id)" class="btn btn-danger btn-xs excluir">Excluir</button>                                
+                                </td>                            
+                            </tr>                    
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

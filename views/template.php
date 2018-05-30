@@ -26,6 +26,32 @@
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
                                 <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-calendar"></i> Agendamentos <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo URL; ?>/agendamentos/cadastrar">Cadastrar</a></li>
+                                            <li><a href="<?php echo URL; ?>/agendamentos/visualizar">Visualizar</a></li>
+                                        </ul>
+                                    </li>
+                                    <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>
+                                        <li><a><i class="fa fa fa-heart"></i> Especialidades <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="<?php echo URL; ?>/especialidades/cadastrar">Cadastrar</a></li>
+                                                <li><a href="<?php echo URL; ?>/especialidades/visualizar">Visualizar</a></li>
+                                            </ul>
+                                        </li>
+                                    <?php endif ?>
+                                    <li><a><i class="fa fa-file-text-o"></i> Formulários <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo URL; ?>/formularios/cadastrar">Cadastrar</a></li>
+                                            <li><a href="<?php echo URL; ?>/formularios/visualizar">Visualizar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-bar-chart"></i> Relatórios <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo URL; ?>/relatorios/cadastrar">Cadastrar</a></li>
+                                            <li><a href="<?php echo URL; ?>/relatorios/visualizar">Visualizar</a></li>
+                                        </ul>
+                                    </li>
                                     <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR) : ?>
                                         <li><a><i class="fa fa-users"></i> Pessoas <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
@@ -48,22 +74,11 @@
                                             </ul>
                                         </li>
                                     <?php endif ?>
+
                                     <li><a><i class="fa fa fa-wheelchair"></i> Pacientes <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="<?php echo URL; ?>/pacientes/cadastrar">Cadastrar</a></li>
                                             <li><a href="<?php echo URL; ?>/pacientes/visualizar">Visualizar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a><i class="fa fa-hospital-o"></i> Unidades de Saúde <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/unidades/cadastrar">Cadastrar</a></li>
-                                            <li><a href="<?php echo URL; ?>/unidades/visualizar">Visualizar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a><i class="fa fa-file-text-o"></i> Formulários <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/formularios/cadastrar">Cadastrar</a></li>
-                                            <li><a href="<?php echo URL; ?>/formularios/visualizar">Visualizar</a></li>
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-stethoscope"></i> Triagem <span class="fa fa-chevron-down"></span></a>
@@ -72,16 +87,10 @@
                                             <li><a href="<?php echo URL; ?>/triagem/visualizar">Visualizar</a></li>
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-calendar"></i> Agendamentos <span class="fa fa-chevron-down"></span></a>
+                                    <li><a><i class="fa fa-hospital-o"></i> Unidades de Saúde <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/agendamentos/cadastrar">Cadastrar</a></li>
-                                            <li><a href="<?php echo URL; ?>/agendamentos/visualizar">Visualizar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a><i class="fa fa-bar-chart"></i> Relatórios <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/relatorios/cadastrar">Cadastrar</a></li>
-                                            <li><a href="<?php echo URL; ?>/relatorios/visualizar">Visualizar</a></li>
+                                            <li><a href="<?php echo URL; ?>/unidades/cadastrar">Cadastrar</a></li>
+                                            <li><a href="<?php echo URL; ?>/unidades/visualizar">Visualizar</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -89,7 +98,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="top_nav">
                     <div class="nav_menu">
                         <nav>
@@ -176,12 +184,9 @@
                         </nav>
                     </div>
                 </div>
-
                 <div class="right_col">
                     <div class="row">
-                        <div>
-                            <?= $this->loadViewInTemplate($viewName, $viewData); ?>
-                        </div>
+                        <?= $this->loadViewInTemplate($viewName, $viewData); ?>
                     </div>
                 </div>
                 <footer>

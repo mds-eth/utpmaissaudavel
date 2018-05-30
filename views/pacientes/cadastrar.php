@@ -10,6 +10,7 @@
         <div class="x_panel">
             <div class="x_title">
                 <h2>Dados Pessoais</h2>
+                <p style="float: right">Campos com * são obrigatórios</p>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">

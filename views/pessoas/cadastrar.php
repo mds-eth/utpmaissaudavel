@@ -5,7 +5,6 @@
 </div>
 <div data-parsley-validate class="form-horizontal form-label-left">
     <div class="clearfix"></div>
-
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">

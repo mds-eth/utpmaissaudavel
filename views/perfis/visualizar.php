@@ -1,44 +1,40 @@
-<div class="page-title">
-    <div class="title_left">
-        <h3>Perfis do Sistema</h3>
-    </div>        
-</div>
 <div class="clearfix"></div>
-<div class="col-md-12">
+<div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Perfis</h2>
-
+            <h2>Perfis Cadastrados no Sistema</h2>            
             <div class="clearfix"></div>
         </div>
-        <div class="x_content">            
-            <table id="datatable-buttons" class="table table-striped table-bordered" style="text-align: center">
-                <thead>
-                    <tr>
-                        <th style="text-align: center">ID</th>
-                        <th style="text-align: center">Nome Perfil</th>
-                        <th style="text-align: center">Criado Por</th>
-                        <th style="text-align: center">Criado Em</th>
-                        <th style="text-align: center">Ações</th>                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($perfis as $perfil) : ?>
+        <div class="x_content">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" style="text-align: center">
+                    <thead>
                         <tr>
-                            <td><?= $perfil['id_perfil'] ?></td>
-                            <td><?= $perfil['nome_perfil'] ?></td>
-                            <td><?= $perfil['criado_por'] ?></td>
-                            <?php $data = $perfil['criado_em'] ?>
-                            <td><?= date('d/m/Y', strtotime($data)) ?></td>
-                            <td>
-                                <button class="btn btn-info btn-xs">Editar</button>
-                                <button class="btn btn-danger btn-xs">Excluir</button>
+                            <th style="text-align: center">ID</th>
+                            <th style="text-align: center">Nome Perfil</th>
+                            <th style="text-align: center">Criado Por</th>
+                            <th style="text-align: center">Criado Em</th>
+                            <th style="text-align: center">Ações</th>                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($perfis as $perfil) : ?>
+                            <tr>
+                                <td><?= $perfil['id_perfil'] ?></td>
+                                <td><?= $perfil['nome_perfil'] ?></td>
+                                <td><?= $perfil['criado_por'] ?></td>
+                                <?php $data = $perfil['criado_em'] ?>
+                                <td><?= date('d/m/Y', strtotime($data)) ?></td>
+                                <td>
+                                    <button class="btn btn-info btn-xs">Editar</button>
+                                    <button class="btn btn-danger btn-xs">Excluir</button>
 
-                            </td>                            
-                        </tr>                    
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                                </td>                            
+                            </tr>                    
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
