@@ -13,8 +13,7 @@
                             <th style="text-align: center">ID</th>
                             <th style="text-align: center">Nome Perfil</th>
                             <th style="text-align: center">Criado Por</th>
-                            <th style="text-align: center">Criado Em</th>
-                            <th style="text-align: center">Ações</th>                        
+                            <th style="text-align: center">Criado Em</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -24,12 +23,7 @@
                                 <td><?= $perfil['nome_perfil'] ?></td>
                                 <td><?= $perfil['criado_por'] ?></td>
                                 <?php $data = $perfil['criado_em'] ?>
-                                <td><?= date('d/m/Y', strtotime($data)) ?></td>
-                                <td>
-                                    <button class="btn btn-info btn-xs">Editar</button>
-                                    <button class="btn btn-danger btn-xs">Excluir</button>
-
-                                </td>                            
+                                <td><?= date('d/m/Y', strtotime($data)) ?></td>                                
                             </tr>                    
                         <?php endforeach; ?>
                     </tbody>

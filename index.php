@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: text/html; charset=utf-8');
+
 /**
  * Inicio da aplicação
  * @author  Michael Douglas Soares
@@ -10,7 +12,7 @@ session_start();
 require 'config.php';
 
 spl_autoload_register(function ($class) {
-    
+
     if (strpos($class, 'Controller') > -1) {
         if (file_exists('controllers/' . $class . '.php')) {
             require_once 'controllers/' . $class . '.php';

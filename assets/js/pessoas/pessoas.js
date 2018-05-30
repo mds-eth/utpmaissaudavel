@@ -2,7 +2,7 @@ var pessoas = {
 
     init: function () {
 
-        $('#cep').on('blur', pessoas.buscaCep);
+        //$('#cep').on('blur', pessoas.buscaCep);
         $('#cpf').on('blur', pessoas.validaCpf);
         $('#gravar').on('click', pessoas.validaCamposForm);
         $('#btnExcluir').on('click', pessoas.excluirPessoa);
@@ -124,7 +124,7 @@ var pessoas = {
                 rua: $('#rua').val(),
                 bairro: $('#bairro').val(),
                 cidade: $('#cidade').val(),
-                estado: $('#uf').val(),
+                estado: $('#estado').val(),
                 numero: $('#numero').val(),
                 complemento: $('#complemento').val(),
                 perfil: $('#perfil').val()
@@ -324,7 +324,7 @@ var pessoas = {
                     $('#rua').val(data.rua);
                     $('#bairro').val(data.bairro);
                     $('#cidade').val(data.cidade);
-                    $('#uf').val(data.uf);
+                    $('#estado').val(data.estado);
                     $('#numero').focus();
                 }
             }

@@ -186,7 +186,7 @@ class pessoasController extends controller {
                 $dados['rua'] = (string) $endereco->tipo_logradouro . ' ' . $endereco->logradouro;
                 $dados['bairro'] = (string) $endereco->bairro;
                 $dados['cidade'] = (string) $endereco->cidade;
-                $dados['uf'] = (string) $endereco->uf;
+                $dados['estado'] = (string) $endereco->uf;
 
                 echo json_encode($dados);
             } catch (Exception $exc) {
