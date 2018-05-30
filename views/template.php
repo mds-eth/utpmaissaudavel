@@ -11,8 +11,8 @@
         <link href="<?php echo URL; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>/assets/css/custom.min.css" rel="stylesheet">
         <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>   
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap.min.js"></script>
     </head>
     <body class="nav-md">
         <div class="container body">
@@ -198,21 +198,21 @@
             </div>
         </div>           
     </body>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.dataTable.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/sweetAlert.js"></script>                
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/validator/validator.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.inputmask.bundle.min.js"></script>  
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/sweetAlert.js"></script>                
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/custom.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery.dataTable.min.js"></script>    
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/validator/validator.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery.inputmask.bundle.min.js"></script>  
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 </html>

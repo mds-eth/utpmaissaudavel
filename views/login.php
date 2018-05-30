@@ -11,7 +11,6 @@
         <link href="<?php echo URL; ?>/assets/css/custom.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>/assets/css/custom.css" rel="stylesheet">        
     </head>
-
     <body class="login">
         <div class="login_wrapper">
             <div class="animate form login_form">
@@ -34,11 +33,11 @@
             </div>            
         </div>        
         <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.min.js"></script>    
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/bootstrap.min.js"></script>        
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/custom.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/login.js"></script>        
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/validator/validator.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/sweetAlert.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery.min.js"></script>    
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap.min.js"></script>        
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/custom.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/login/login.js"></script>        
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/validator/validator.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/sweetAlert.js"></script>
     </body>
 </html>
