@@ -4,7 +4,7 @@
     </div>
 </div>
 <div class="clearfix"></div>    
-<div data-parsley-validate class="form-horizontal form-label-left">   
+<div class="form-horizontal">   
     <div class="row">    
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -78,8 +78,7 @@
                 </div>
                 <div class="x_content">                    
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="cep">CEP</label>
-                        </label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="cep">CEP</label>                        
                         <div class="col-md-8">
                             <input type="text" id="cep" name="cep" class="form-control" required="required" data-inputmask="'mask' : '99999-999'">
                         </div>

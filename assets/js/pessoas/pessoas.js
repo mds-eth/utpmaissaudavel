@@ -8,6 +8,8 @@ var pessoas = {
         $('#excluir').on('click', pessoas.excluirPessoa);
         $('#gravar').on('click', pessoas.validaCamposForm);
         $('#editar').on('click', pessoas.validaCamposEditar);
+        $('#btnReativar').on('click', pessoas.reativarPessoa);
+        $('.reativar').on('click', pessoas.buscaPessoaParaReativar);
     },
 
     validaCamposForm: function () {
@@ -367,6 +369,42 @@ var pessoas = {
         $('#estado').val("");
         $('#numero').val("");
         $('#complemento').val("");
+    },
+
+    buscaPessoaParaReativar: function () {
+
+        $.ajax({
+            url: URL + '/pessoas/buscaPessoaParaReativar',
+            data: {id: $(this).val()},
+            type: 'POST',
+            dataType: 'json',
+            success: function (result) {
+
+                $('#bodyReativar').html("");
+
+                var text = "<p>Deseja realmente reativar " + result.nome_pessoa + "?</p>" +
+                        "<input type='hidden' id='pessoa' name='pessoa' value='" + result.id_pessoa + "'>";
+                $('#bodyReativar').append(text);
+                $('#modalReativar').modal('show');
+            }
+        });
+    },
+
+    reativarPessoa: function () {
+
+        var id = $('#pessoa').val();
+        $.ajax({
+            url: URL + '/pessoas/reativarPessoa',
+            type: 'POST',
+            data: {id: id},
+            success: function (result) {
+
+                if (result) {
+                    swal("Pessoa reativada com sucesso", "success");
+                }
+                window.location = URL + '/pessoas/visualizar';
+            }
+        });
     }
 };
 

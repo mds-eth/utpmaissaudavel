@@ -177,6 +177,24 @@ class pessoasController extends controller {
         $this->loadTemplate('pessoas/inativas', $dados);
     }
 
+    public function buscaPessoaParaReativar() {
+
+        if ($this->post()) {
+
+            $pessoa = $this->pessoa->buscaPessoaParaReativar($_POST['id']);
+
+            echo json_encode($pessoa);
+        }
+    }
+
+    public function reativarPessoa() {
+
+        if ($this->post()) {
+
+            echo $this->pessoa->reativarPessoa($_POST['id']);
+        }
+    }
+
     public function validaCpf() {
 
         if ($this->post()) {

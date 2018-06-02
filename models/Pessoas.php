@@ -180,6 +180,32 @@ class Pessoas extends model {
         }
     }
 
+    public function buscaPessoaParaReativar($id) {
+
+        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa FROM pessoas WHERE id_pessoa = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+
+        $pessoa = $sql->fetchObject();
+
+        return $pessoa;
+    }
+
+    public function reativarPessoa($id) {
+
+        try {
+
+            $sql = $this->db->prepare("UPDATE pessoas SET status = :status WHERE id_pessoa = :id");
+            $sql->bindValue(':status', 1, PDO::PARAM_INT);
+            $sql->bindValue(':id', $id, PDO::PARAM_INT);
+
+            $sql->execute();
+            return true;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
     function getNome() {
         return $this->nome;
     }

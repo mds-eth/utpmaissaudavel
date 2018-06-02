@@ -27,7 +27,7 @@
                                 <?php $data = $inativa['criado_em'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td style="text-align: center">
-                                    <button id="<?= $inativa['id_pessoa']; ?>" onclick="editar(this.id)"  class="editar btn btn-success btn-xs">Reativar</button>                                    
+                                    <button id="reativar" value="<?= $inativa['id_pessoa'] ?>" class="reativar btn btn-success btn-xs">Reativar</button>                                    
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>
@@ -37,38 +37,20 @@
         </div>
     </div>
 </div>
-<div id="modalEdit" class="modal fade" role="dialog" >
+<div id="modalReativar" tabindex="-1" class="modal fade" role="dialog">
     <div class="modal-dialog">                
         <div class="modal-content" style="border-radius: 10px">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Editar Registro</h4>
+                <h4 class="modal-title">Reativar Pessoa</h4>
             </div>
             <form id="form">
-                <div class="modal-body" id="formularioEdicao">       
+                <div class="modal-body" id="bodyReativar">       
                 </div>                        
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnEditar" class="btn btn-success btn-xs">Editar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="modalDelete" class="modal fade" role="dialog">
-    <div class="modal-dialog">                
-        <div class="modal-content" style="border-radius: 10px">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Excluir Registro</h4>
-            </div>
-            <form id="formDel">
-                <div class="modal-body" id="pessoa">       
-                </div>                        
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnExcluir" class="btn btn-success btn-xs">Excluir</button>
+                <button id="btnReativar" class="btn btn-success btn-xs">Reativar</button>
             </div>
         </div>
     </div>

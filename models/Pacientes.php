@@ -70,6 +70,23 @@ class Pacientes extends model {
         return $pacientes;
     }
 
+    public function listaFichaPaciente($id) {
+
+        $sql = $this->db->prepare("SELECT * FROM dados_pacientes dp JOIN pessoas p
+                            ON dp.fk_id_paciente = p.id_pessoa
+                            JOIN unidades_de_saude us ON dp.fk_id_unidade_de_saude = us.id_unidade_de_saude
+                            JOIN telefones t ON p.id_pessoa = t.fk_id_pessoa
+                            JOIN enderecos e ON p.id_pessoa = e.fk_id_pessoa
+                            and p.id_pessoa = :id");
+
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+
+        $dadosPaciente = $sql->fetchObject();
+
+        return $dadosPaciente;
+    }
+
     function getFkIdUnidadeSaude() {
         return $this->fkIdUnidadeSaude;
     }

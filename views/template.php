@@ -2,8 +2,8 @@
 <html lang="pt-br">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta charset="UTF-8" />
-        <meta charset="utf-8">
+        <meta charset="UTF-8" />        
+        <meta name="author" content="Michael Douglas Soares">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">        
         <title>UTP Mais Saudável</title>
@@ -189,24 +189,21 @@
                 </div>
                 <div class="right_col" role="main">
                     <?= $this->loadViewInTemplate($viewName, $viewData); ?>
-                </div>                
-                <footer>
-                    <div class="pull-right">
-                        UTP Mais Saudável - Todos os direitos reservados
-                    </div>
-                    <div class="clearfix"></div>
-                </footer>
+                </div>                               
             </div>
+            <footer>
+                <div class="pull-right">
+                    UTP Mais Saudável - Todos os direitos reservados
+                </div>
+                <div class="clearfix"></div>
+            </footer>
         </div>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/sweetAlert/sweetAlert.js"></script>                
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/custom.min.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/validator/validator.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.inputmask.bundle.min.js"></script>  
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/dataTables.buttons.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/buttons.flash.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/jszip.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/pdfmake.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/dataTables.buttons.min.js"></script>                
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/i18n.js"></script>
     </body>

@@ -58,7 +58,12 @@ class Perfis extends model {
 
     public function buscaPerfis() {
 
-        $sql = $this->db->prepare("SELECT * FROM perfis");
+        if ($_SESSION['usuario']['id_perfil'] != 1) {
+            $sql = $this->db->prepare("SELECT * FROM perfis WHERE nome_perfil != 'Administrador'");
+        } else {
+            $sql = $this->db->prepare("SELECT * FROM perfis");
+        }
+
         $sql->execute();
 
         $retorno = $sql->fetchAll();

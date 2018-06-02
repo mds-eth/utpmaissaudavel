@@ -90,6 +90,7 @@ class Urls extends model {
     public function verificaUrlSessaoUsuario() {
 
         $url = $_SERVER['REQUEST_URI'];
+        
         $idPerfilUsuarioLogado = $_SESSION['usuario']['id_perfil'];
 
         $sql = $this->db->prepare("select nome_url from urls u

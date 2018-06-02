@@ -5,6 +5,7 @@ var pacientes = {
         $('#cep').on('blur', pacientes.buscaCep);
         $('#cpf').on('blur', pacientes.validaCpf);
         $('#limpar').on('click', pacientes.limparCampos);
+        $('.ficha').on('click', pacientes.fichaPaciente);
         $('#gravar').on('click', pacientes.validaCamposForm);
     },
 
@@ -245,6 +246,24 @@ var pacientes = {
                     $('#cpf').css('border', '1px solid red');
                     swal("Atenção!", "Já existe outra pessoa cadastrada com este CPF, favor verificar!", "error");
                     return false;
+                }
+            }
+        });
+    },
+
+    fichaPaciente: function () {
+
+        $.ajax({
+            url: URL + '/pacientes/fichaPaciente',
+            type: 'POST',
+            data: {id: $(this).val()},
+            dataType: 'json',
+            success: function (result) {
+
+                if (result !== null || result !== 'undefined') {                    
+
+                    $('#modalFicha').modal("show");
+
                 }
             }
         });

@@ -34,7 +34,7 @@
                                 <?php $data = $paciente['criado_em'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td style="text-align: center">
-                                    <button id="<?= $paciente['id_pessoa']; ?>" onclick="editar(this.id)"  class="editar btn btn-success btn-xs">Abrir Ficha</button>                                    
+                                    <button id="ficha" value="<?= $paciente['id_pessoa'] ?>" class="ficha btn btn-success btn-xs">Abrir Ficha</button>
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>
@@ -44,12 +44,12 @@
         </div>
     </div>
 </div>
-<div id="modalEdit" class="modal fade" role="dialog" >
+<div id="modalFicha" class="modal fade" role="dialog" >
     <div class="modal-dialog">                
-        <div class="modal-content" style="border-radius: 10px">
+        <div class="modal-content" style="border-radius: 10px; width: 800px">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Editar Registro</h4>
+                <h4 class="modal-title">Ficha Paciente</h4>
             </div>
             <form id="form">
                 <div class="modal-body" id="formularioEdicao">       
@@ -80,5 +80,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo URL; ?>/assets/js/pessoas/pessoas.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/pacientes/pacientes.js"></script>
 <script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.mask.js"></script>
