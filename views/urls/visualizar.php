@@ -6,7 +6,7 @@
         </div>
         <div class="x_content">
             <div class="table-responsive">
-                <table id="datatable" class="table table-striped table-bordered" style="text-align: center">
+                <table class="table table-striped table-bordered" id="datatable" style="text-align: center">
                     <thead>
                         <tr>
                             <th style="text-align: center">URL</th>
@@ -34,5 +34,6 @@
         </div>
     </div>
 </div>
+
 
 

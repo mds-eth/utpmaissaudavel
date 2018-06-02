@@ -184,7 +184,7 @@ class pessoasController extends controller {
             $cpf = $_POST['cpf'];
             $retorno = $this->pessoa->validaCpf($cpf);
 
-            echo json_decode($retorno);
+            echo json_encode($retorno);
         }
     }
 

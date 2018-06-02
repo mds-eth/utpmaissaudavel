@@ -49,7 +49,7 @@
                         <div class="item form-group">
                             <label class="col-md-3 col-sm-3 col-xs-12" for="cpf">CPF<span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" id="cpf" name="cpf" class="form-control" required="required" data-inputmask="'mask' : '999-999-999-99'">
+                                <input type="text" id="cpf" name="cpf" class="form-control" required="required" data-inputmask="'mask' : '999.999.999-99'">
                             </div>
                         </div>
                         <div class="item form-group">

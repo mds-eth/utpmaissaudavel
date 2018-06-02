@@ -103,11 +103,7 @@ class Pessoas extends model {
 
         $retorno = $sql->fetchObject();
 
-        if (empty($retorno)) {
-            return true;
-        } else {
-            return false;
-        }
+        return $retorno != false ? true : false;
     }
 
     public function buscaRegistroPessoaEdicao($id) {

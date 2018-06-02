@@ -20,14 +20,14 @@
                     <tbody>
                         <?php foreach ($inativas as $inativa) : ?>
                             <tr>
-                                <td><?= $inativa['id_pessoa'] ?></td>
-                                <td><?= $inativa['nome_pessoa'] ?></td>
-                                <td><?= $inativa['email'] ?></td>
-                                <td><?= $inativa['nome_perfil'] ?></td>                            
+                                <td style="text-align: center"><?= $inativa['id_pessoa'] ?></td>
+                                <td style="text-align: center"><?= $inativa['nome_pessoa'] ?></td>
+                                <td style="text-align: center"><?= $inativa['email'] ?></td>
+                                <td style="text-align: center"><?= $inativa['nome_perfil'] ?></td>                            
                                 <?php $data = $inativa['criado_em'] ?>
-                                <td><?= date('d/m/Y', strtotime($data)) ?></td>
-                                <td>
-                                    <button id="<?= $inativa['id_pessoa']; ?>" onclick="editar(this.id)"  class="editar btn btn-info btn-xs">Reativar</button>                                    
+                                <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
+                                <td style="text-align: center">
+                                    <button id="<?= $inativa['id_pessoa']; ?>" onclick="editar(this.id)"  class="editar btn btn-success btn-xs">Reativar</button>                                    
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>

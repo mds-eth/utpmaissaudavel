@@ -6,7 +6,7 @@
         </div>
         <div class="x_content">
             <div class="table-responsive">
-                <table id="datatable" class="table table-striped table-bordered" style="text-align: center">
+                <table class="table table-striped table-bordered" id="datatable" style="text-align: center">
                     <thead>
                         <tr>
                             <th style="text-align: center">ID</th>
@@ -23,17 +23,18 @@
                     <tbody>
                         <?php foreach ($pacientes as $paciente) : ?>
                             <tr>
-                                <td><?= $paciente['id_pessoa'] ?></td>
-                                <td><?= $paciente['nome_pessoa'] ?></td>
-                                <td><?= $paciente['email'] ?></td>
-                                <td><?= $paciente['especialidade'] ?></td>                            
-                                <td><?= $paciente['data_nascimento'] ?></td>                            
-                                <td><?= $paciente['convenio'] ?></td>
-                                <td><?= $paciente['nome'] ?></td>
+                                <td style="text-align: center"><?= $paciente['id_pessoa'] ?></td>
+                                <td style="text-align: center"><?= $paciente['nome_pessoa'] ?></td>
+                                <td style="text-align: center"><?= $paciente['email'] ?></td>
+                                <td style="text-align: center"><?= $paciente['especialidade'] ?></td>                            
+                                <?php $nascimento = $paciente['data_nascimento'] ?>
+                                <td style="text-align: center"><?= date('d/m/Y', strtotime($nascimento)) ?></td>                            
+                                <td style="text-align: center"><?= $paciente['convenio'] ?></td>
+                                <td style="text-align: center"><?= $paciente['nome'] ?></td>
                                 <?php $data = $paciente['criado_em'] ?>
-                                <td><?= date('d/m/Y', strtotime($data)) ?></td>
-                                <td>
-                                    <button id="<?= $paciente['id_pessoa']; ?>" onclick="editar(this.id)"  class="editar btn btn-info btn-xs">Abrir Ficha</button>                                    
+                                <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
+                                <td style="text-align: center">
+                                    <button id="<?= $paciente['id_pessoa']; ?>" onclick="editar(this.id)"  class="editar btn btn-success btn-xs">Abrir Ficha</button>                                    
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>

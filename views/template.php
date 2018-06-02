@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">        
         <title>UTP Mais Saudável</title>
         <link href="<?php echo URL; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo URL; ?>/assets/css/dataTables.bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>/assets/css/custom.min.css" rel="stylesheet">
         <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>   
@@ -201,7 +202,12 @@
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/custom.min.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/validator/validator.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.inputmask.bundle.min.js"></script>  
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net/js/i18n.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/buttons.flash.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/jszip.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/pdfmake.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/i18n.js"></script>
     </body>
 </html>

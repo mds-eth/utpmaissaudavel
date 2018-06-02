@@ -165,14 +165,18 @@ var pacientes = {
 
                 if (retorno) {
 
-                    swal({
-                        title: "Cadastrado com Sucesso!",
-                        icon: "success"
-                    });
-
                     setTimeout(function () {
-                        window.location = URL + '/pacientes/visualizar';
-                    }, 2000);
+                        swal({
+                            text: "Cadastro realizado com Sucesso!",
+                            type: "success",
+                            confirmButtonText: "OK"
+                        },
+                                function (isConfirm) {
+                                    if (isConfirm) {
+                                        window.location = URL + '/pacientes/visualizar';
+                                    }
+                                });
+                    }, 1000);
 
                 } else {
                     swal({
@@ -229,16 +233,18 @@ var pacientes = {
         var cpf = $('#cpf').val();
 
         $.ajax({
-            url: 'validaCpf',
+            url: URL + '/pessoas/validaCpf',
             type: 'POST',
             data: {cpf: cpf},
             dataType: 'json',
             success: function (result) {
 
-                if (result === 1) {
-                    $('#cpf').focus();
-                    $('#cpf').html('Já existe outra pessoa com este mesmo CPF, favor verificar');
+                if (result) {
+                    $("#cpf").val("");
+                    $("#cpf").focus();
                     $('#cpf').css('border', '1px solid red');
+                    swal("Atenção!", "Já existe outra pessoa cadastrada com este CPF, favor verificar!", "error");
+                    return false;
                 }
             }
         });

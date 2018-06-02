@@ -165,7 +165,7 @@
             </div>
         </div>   
         <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="x_panel">
+            <div id="div-perfil" style="padding-bottom: 77px;" class="x_panel">
                 <div class="x_title">
                     <h2>Perfil para o Sistema</h2>                
                     <div class="clearfix"></div>

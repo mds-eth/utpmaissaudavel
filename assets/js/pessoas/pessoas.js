@@ -337,10 +337,12 @@ var pessoas = {
             dataType: 'json',
             success: function (result) {
 
-                if (result === 1) {
-                    $('#cpf').focus();
-                    $('#cpf').html('Já existe outra pessoa com este mesmo CPF, favor verificar');
+                if (result) {
+                    $("#cpf").val("");
+                    $("#cpf").focus();
                     $('#cpf').css('border', '1px solid red');
+                    swal("Atenção!", "Já existe outra pessoa cadastrada com este CPF, favor verificar!", "error");
+                    return false;
                 }
             }
         });

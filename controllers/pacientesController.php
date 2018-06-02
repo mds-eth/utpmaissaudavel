@@ -48,8 +48,6 @@ class pacientesController extends controller {
 
                 $fkIdPaciente = $this->pessoa->gravar();
 
-
-
                 $this->paciente->setFkIdPaciente($fkIdPaciente);
                 $this->paciente->setFkIdUnidadeSaude(trim(addslashes($_POST['unidade'])));
                 $this->paciente->setEspecialidades(trim(addslashes($_POST['especialidade'])));
