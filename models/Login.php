@@ -18,7 +18,7 @@ class Login extends model {
 
         $return = $sql->fetchObject();
 
-        if ($return != null) {
+        if ($return != null || !empty($return)) {
             $dados['id_usuario'] = $return->id_usuario;
             $dados['id_pessoa'] = $return->id_pessoa;
             $dados['nome_pessoa'] = $return->nome_pessoa;
@@ -30,6 +30,10 @@ class Login extends model {
         } else {
             return false;
         }
+    }
+
+    public function geraNovaSenhaUsuarioPrimeiroAcesso() {
+        
     }
 
     function getEmail() {

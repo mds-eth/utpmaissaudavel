@@ -1,4 +1,3 @@
-<div class="clearfix"></div>
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
@@ -7,7 +6,7 @@
         </div>
         <div class="x_content">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered" style="text-align: center">
+                <table id="datatable" class="table table-striped table-bordered" style="text-align: center">
                     <thead>
                         <tr>
                             <th style="text-align: center">ID</th>

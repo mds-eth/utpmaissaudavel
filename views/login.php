@@ -33,11 +33,11 @@
             </div>            
         </div>        
         <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery.min.js"></script>    
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap.min.js"></script>        
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.min.js"></script>    
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap/bootstrap.min.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/custom.min.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/login/login.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/validator/validator.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/sweetAlert.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/sweetAlert/sweetAlert.js"></script>
     </body>
 </html>

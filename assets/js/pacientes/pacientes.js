@@ -2,7 +2,10 @@ var pacientes = {
 
     init: function () {
 
-        $('#gravar').on('click', pacientes.gravar);
+        $('#cep').on('blur', pacientes.buscaCep);
+        $('#cpf').on('blur', pacientes.validaCpf);
+        $('#limpar').on('click', pacientes.limparCampos);
+        $('#gravar').on('click', pacientes.validaCamposForm);
     },
 
     validaCamposForm: function () {
@@ -121,6 +124,12 @@ var pacientes = {
             return;
         }
 
+        if ($('#convenio').val() === '') {
+            $('#convenio').focus();
+            $('#convenio').css('border', '1px solid red');
+            return;
+        }
+
         pacientes.gravar();
     },
 
@@ -148,12 +157,11 @@ var pacientes = {
                 numero: $('#numero').val(),
                 complemento: $('#complemento').val(),
                 unidade: $('#unidade').val(),
-                especialidade: $('#especialidade').val()
+                especialidade: $('#especialidade').val(),
+                convenio: $('#convenio').val()
+
             },
             success: function (retorno) {
-
-                console.log(retorno);
-                return;
 
                 if (retorno) {
 
@@ -177,9 +185,65 @@ var pacientes = {
             }
         });
     },
+
+    limparCampos: function () {
+
+        $('#idPessoa').val("");
+        $('#nome').val("");
+        $('#data_nascimento').val("");
+        $('#mae').val("");
+        $('#cpf').val("");
+        $('#rg').val("");
+        $('#email').val("");
+        $('#residencial').val("");
+        $('#celular').val("");
+        $('#contato').val("");
+        $('#cep').val("");
+        $('#rua').val("");
+        $('#bairro').val("");
+        $('#cidade').val("");
+        $('#estado').val("");
+        $('#numero').val("");
+        $('#complemento').val("");
+    },
+
+    buscaCep: function () {
+
+        var cep = $('#cep').val();
+
+        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+            if (!("erro" in dados)) {
+
+                $("#rua").val(dados.logradouro);
+                $("#bairro").val(dados.bairro);
+                $("#cidade").val(dados.localidade);
+                $("#estado").val(dados.uf);
+                $("#numero").focus();
+            }
+        });
+    },
+
+    validaCpf: function () {
+
+        var cpf = $('#cpf').val();
+
+        $.ajax({
+            url: 'validaCpf',
+            type: 'POST',
+            data: {cpf: cpf},
+            dataType: 'json',
+            success: function (result) {
+
+                if (result === 1) {
+                    $('#cpf').focus();
+                    $('#cpf').html('Já existe outra pessoa com este mesmo CPF, favor verificar');
+                    $('#cpf').css('border', '1px solid red');
+                }
+            }
+        });
+    }
 };
-
-
 
 $(document).ready(function () {
 

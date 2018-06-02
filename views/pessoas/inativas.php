@@ -1,7 +1,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Unidades de Saúde</h2>            
+            <h2>Pessoas Inativas</h2>            
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -10,23 +10,24 @@
                     <thead>
                         <tr>
                             <th style="text-align: center">ID</th>
-                            <th style="text-align: center">Unidade de Saúde</th>
-                            <th style="text-align: center">Criado Por</th>
+                            <th style="text-align: center">Nome</th>
+                            <th style="text-align: center">Email</th>
+                            <th style="text-align: center">Perfil</th>                        
                             <th style="text-align: center">Criado Em</th>
                             <th style="text-align: center">Ações</th>                        
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($unidades as $unidade) : ?>
+                        <?php foreach ($inativas as $inativa) : ?>
                             <tr>
-                                <td><?= $unidade['id_unidade_de_saude'] ?></td>
-                                <td><?= $unidade['nome'] ?></td>
-                                <td><?= $unidade['criado_por'] ?></td>
-                                <?php $data = $unidade['criado_em'] ?>
+                                <td><?= $inativa['id_pessoa'] ?></td>
+                                <td><?= $inativa['nome_pessoa'] ?></td>
+                                <td><?= $inativa['email'] ?></td>
+                                <td><?= $inativa['nome_perfil'] ?></td>                            
+                                <?php $data = $inativa['criado_em'] ?>
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td>
-                                    <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="editar(this.id)" class="btn btn-info btn-xs editar">Editar</button>
-                                    <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="excluir(this.id)" class="btn btn-danger btn-xs excluir">Excluir</button>                                
+                                    <button id="<?= $inativa['id_pessoa']; ?>" onclick="editar(this.id)"  class="editar btn btn-info btn-xs">Reativar</button>                                    
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>
@@ -62,7 +63,7 @@
                 <h4 class="modal-title">Excluir Registro</h4>
             </div>
             <form id="formDel">
-                <div class="modal-body" id="formularioExclusao">       
+                <div class="modal-body" id="pessoa">       
                 </div>                        
             </form>
             <div class="modal-footer">
@@ -72,4 +73,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo URL; ?>/assets/js/unidades/unidades.js"></script>        
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/pessoas/pessoas.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.mask.js"></script>

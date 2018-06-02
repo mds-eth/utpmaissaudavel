@@ -2,7 +2,6 @@
 
 class urlsController extends controller {
 
-    private $pessoas;
     private $usuario;
     private $perfil;
     private $url;

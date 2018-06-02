@@ -3,13 +3,13 @@
         <h3>Cadastro de Pacientes</h3>
     </div>
 </div>
-<div data-parsley-validate class="form-horizontal form-label-left">
-    <div class="clearfix"></div>    
+<div class="clearfix"></div>  
+<div data-parsley-validate class="form-horizontal form-label-left">     
     <div class="row">    
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Dados Pessoais</h2>                
+                    <h2>Dados Pessoais</h2> 
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -22,7 +22,7 @@
                             </div>                    
                         </div>
                         <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Data de nascimento
+                            <label class="col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Dt nascimento
                             </label>
                             <div class="col-md-8">
                                 <input class='date form-control' type="date" id="data_nascimento" name="data_nascimento" required='required'>
@@ -73,7 +73,7 @@
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Endereço</h2>                
+                    <h2>Endereço</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">                    
@@ -134,7 +134,7 @@
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Contato</h2>                
+                    <h2>Contato</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">                    
@@ -167,15 +167,15 @@
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Unidade de Saúde e Especialidade</h2>                
+                    <h2>Unidade de Saúde, Especialidade e Convênio</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">                    
                     <div class="x_content">                        
                         <div class="item form-group">
-                            <label class="col-md-2 col-sm-3 col-xs-12" for="unidade">Unidade
+                            <label class="col-md-3 col-sm-3 col-xs-12" for="unidade">Unidade
                             </label>
-                            <div class="col-md-7">
+                            <div class="col-md-8">                                
                                 <select class="form-control" id="unidade" name="unidade">
                                     <?php foreach ($unidades as $unidade) : ?>
                                         <option value="<?= $unidade['id_unidade_de_saude'] ?>"><?= $unidade['id_unidade_de_saude'] . ' - ' . $unidade['nome'] ?></option>
@@ -184,9 +184,9 @@
                             </div>
                         </div>  
                         <div class="item form-group">
-                            <label class="col-md-2 col-sm-3 col-xs-12" for="especialidade">Especialidade
+                            <label class="col-md-3 col-sm-3 col-xs-12" for="especialidade">Especialidade
                             </label>
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <select class="form-control" id="especialidade" name="especialidade">
                                     <?php foreach ($especialidades as $especialidade) : ?>
                                         <option value="<?= $especialidade['id_especialidade'] ?>"><?= $especialidade['id_especialidade'] . ' - ' . $especialidade['especialidade'] ?></option>
@@ -194,11 +194,22 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="item form-group">
+                            <label class="col-md-3 col-sm-3 col-xs-12" for="convenio">Convênio
+                            </label>
+                            <div class="col-md-8">
+                                <select class="form-control" id="convenio" name="convenio">
+                                    <option value="undefined">Selecione</option>
+                                    <option value="Particular">Particular</option>
+                                    <option value="SUS">SUS</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-md-10">         
                             <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-3">
                                     <button id="gravar" class="btn btn-success btn-xs">Gravar</button>
-                                    <button class="btn btn-primary btn-xs" type="reset">Limpar</button>
+                                    <button id="limpar" class="btn btn-primary btn-xs" type="reset">Limpar</button>
                                     <a href="<?php echo URL ?>/home"><button class="btn btn-danger btn-xs" type="button">Cancelar</button></a>
                                 </div>
                             </div>

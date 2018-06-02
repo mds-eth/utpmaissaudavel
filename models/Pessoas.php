@@ -2,12 +2,13 @@
 
 class Pessoas extends model {
 
-    private $rg;
-    private $cpf;
-    private $sexo;
-    private $nome;
-    private $email;
-    private $dataNascimento;
+    public $rg;
+    public $cpf;
+    public $sexo;
+    public $mae;
+    public $nome;
+    public $email;
+    public $dataNascimento;
 
     public function gravar() {
 
@@ -147,13 +148,31 @@ class Pessoas extends model {
         }
     }
 
-    public function listaTodosUsuarios() {
+    public function listaPessoasAtivas() {
 
         $sql = $this->db->prepare("select * from pessoas p join usuarios u on p.id_pessoa = u.fk_id_pessoa
                         join enderecos e on p.id_pessoa = e.fk_id_pessoa
                         join telefones t on p.id_pessoa = t.fk_id_pessoa
                         join perfis pe on u.fk_id_perfil = pe.id_perfil
                         and p.status = 1");
+
+        $sql->execute();
+
+        $return = $sql->fetchAll();
+
+        if ($return != null || !empty($return)) {
+
+            return $return;
+        }
+    }
+
+    public function listaPessoasInativas() {
+
+        $sql = $this->db->prepare("select * from pessoas p join usuarios u on p.id_pessoa = u.fk_id_pessoa
+                        join enderecos e on p.id_pessoa = e.fk_id_pessoa
+                        join telefones t on p.id_pessoa = t.fk_id_pessoa
+                        join perfis pe on u.fk_id_perfil = pe.id_perfil
+                        and p.status = 0");
 
         $sql->execute();
 
@@ -211,6 +230,14 @@ class Pessoas extends model {
 
     function setEmail($email) {
         $this->email = $email;
+    }
+
+    function getMae() {
+        return $this->mae;
+    }
+
+    function setMae($mae) {
+        $this->mae = $mae;
     }
 
 }

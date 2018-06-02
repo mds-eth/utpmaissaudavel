@@ -11,8 +11,8 @@
         <link href="<?php echo URL; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo URL; ?>/assets/css/custom.min.css" rel="stylesheet">
         <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>   
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap/bootstrap.min.js"></script>
     </head>
     <body class="nav-md">
         <div class="container body">
@@ -23,6 +23,7 @@
                             <a href="<?php echo URL; ?>/home" class="site_title"><i class="fa fa-heartbeat"></i> <span>Fisioterapia</span></a>
                         </div>
                         <div class="clearfix"></div>
+
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
                                 <ul class="nav side-menu">
@@ -57,6 +58,7 @@
                                             <ul class="nav child_menu">
                                                 <li><a href="<?php echo URL; ?>/pessoas/cadastrar">Cadastrar</a></li>
                                                 <li><a href="<?php echo URL; ?>/pessoas/visualizar">Visualizar</a></li>
+                                                <li><a href="<?php echo URL; ?>/pessoas/inativas">Inativas</a></li>
                                             </ul>
                                         </li>
                                     <?php endif ?>
@@ -184,11 +186,9 @@
                         </nav>
                     </div>
                 </div>
-                <div class="right_col">
-                    <div class="row">
-                        <?= $this->loadViewInTemplate($viewName, $viewData); ?>
-                    </div>
-                </div>
+                <div class="right_col" role="main">
+                    <?= $this->loadViewInTemplate($viewName, $viewData); ?>
+                </div>                
                 <footer>
                     <div class="pull-right">
                         UTP Mais Saudável - Todos os direitos reservados
@@ -196,23 +196,12 @@
                     <div class="clearfix"></div>
                 </footer>
             </div>
-        </div>           
+        </div>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/sweetAlert/sweetAlert.js"></script>                
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/custom.min.js"></script>        
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/validator/validator.js"></script>        
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.inputmask.bundle.min.js"></script>  
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net/js/i18n.js"></script>
     </body>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/sweetAlert.js"></script>                
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery.dataTable.min.js"></script>    
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/validator/validator.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery.inputmask.bundle.min.js"></script>  
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 </html>

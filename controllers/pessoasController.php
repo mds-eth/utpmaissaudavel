@@ -164,35 +164,17 @@ class pessoasController extends controller {
     public function visualizar() {
 
         $dados = array();
-        $dados['pessoas'] = $this->pessoa->listaTodosUsuarios();
+        $dados['pessoas'] = $this->pessoa->listaPessoasAtivas();
 
 
         $this->loadTemplate('pessoas/visualizar', $dados);
     }
 
-    public function buscaCep() {
+    public function inativas() {
 
-        if ($this->post()) {
+        $dados['inativas'] = $this->pessoa->listaPessoasInativas();
 
-            $cep = $_POST['cep'];
-
-            $dados = array();
-
-            try {
-
-                $endereco = simplexml_load_file("http://cep.republicavirtual.com.br/web_cep.php?formato=xml&cep=" . $cep);
-
-                $dados['sucesso'] = (string) $endereco->resultado;
-                $dados['rua'] = (string) $endereco->tipo_logradouro . ' ' . $endereco->logradouro;
-                $dados['bairro'] = (string) $endereco->bairro;
-                $dados['cidade'] = (string) $endereco->cidade;
-                $dados['estado'] = (string) $endereco->uf;
-
-                echo json_encode($dados);
-            } catch (Exception $exc) {
-                echo $exc->getTraceAsString();
-            }
-        }
+        $this->loadTemplate('pessoas/inativas', $dados);
     }
 
     public function validaCpf() {

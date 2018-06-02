@@ -1,13 +1,12 @@
-<div class="clearfix"></div>
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Pessoas Cadastradas no Sistema</h2>            
+            <h2>Pessoas Ativas</h2>        
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered" style="text-align: center">
+                <table id="datatable" class="table table-striped table-bordered" style="text-align: center">
                     <thead>
                         <tr>
                             <th style="text-align: center">ID</th>
@@ -52,7 +51,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnEditar" class="btn btn-success btn-xs">Editar</button>
+                <button id="editar" class="btn btn-success btn-xs">Editar</button>
             </div>
         </div>
     </div>
@@ -70,7 +69,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnExcluir" class="btn btn-success btn-xs">Excluir</button>
+                <button id="excluir" class="btn btn-success btn-xs">Excluir</button>
             </div>
         </div>
     </div>

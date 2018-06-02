@@ -2,11 +2,12 @@ var pessoas = {
 
     init: function () {
 
-        //$('#cep').on('blur', pessoas.buscaCep);
+        $('#cep').on('blur', pessoas.buscaCep);
         $('#cpf').on('blur', pessoas.validaCpf);
+        $('#limpar').on('click', pessoas.limparCampos);
+        $('#excluir').on('click', pessoas.excluirPessoa);
         $('#gravar').on('click', pessoas.validaCamposForm);
-        $('#btnExcluir').on('click', pessoas.excluirPessoa);
-        $('#btnEditar').on('click', pessoas.validaCamposEditar);
+        $('#editar').on('click', pessoas.validaCamposEditar);
     },
 
     validaCamposForm: function () {
@@ -159,7 +160,6 @@ var pessoas = {
         if ($('#nome').val() === '') {
             $('#nome').focus();
             $('#nome').css('border', '1px solid red');
-            $('#nome').val('Campo nome não pode ficar vazio');
             return;
         }
 
@@ -313,20 +313,15 @@ var pessoas = {
 
         var cep = $('#cep').val();
 
-        $.ajax({
-            url: 'buscaCep',
-            type: 'POST',
-            data: {cep: cep},
-            dataType: 'json',
-            success: function (data) {
-                if (parseInt(data.sucesso) === 1) {
+        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
-                    $('#rua').val(data.rua);
-                    $('#bairro').val(data.bairro);
-                    $('#cidade').val(data.cidade);
-                    $('#estado').val(data.estado);
-                    $('#numero').focus();
-                }
+            if (!("erro" in dados)) {
+
+                $("#rua").val(dados.logradouro);
+                $("#bairro").val(dados.bairro);
+                $("#cidade").val(dados.localidade);
+                $("#estado").val(dados.uf);
+                $("#numero").focus();
             }
         });
     },
@@ -342,14 +337,34 @@ var pessoas = {
             dataType: 'json',
             success: function (result) {
 
-                /*if (result === 1) {
-                 
-                 $('#cpf').focus();
-                 $('#cpf').html('Já existe outra pessoa com este mesmo CPF, favor verificar');
-                 $('#cpf').css('border', '1px solid red');
-                 }*/
+                if (result === 1) {
+                    $('#cpf').focus();
+                    $('#cpf').html('Já existe outra pessoa com este mesmo CPF, favor verificar');
+                    $('#cpf').css('border', '1px solid red');
+                }
             }
         });
+    },
+
+    limparCampos: function () {
+
+        $('#idPessoa').val("");
+        $('#nome').val("");
+        $('#data_nascimento').val("");
+        $('#mae').val("");
+        $('#cpf').val("");
+        $('#rg').val("");
+        $('#email').val("");
+        $('#residencial').val("");
+        $('#celular').val("");
+        $('#contato').val("");
+        $('#cep').val("");
+        $('#rua').val("");
+        $('#bairro').val("");
+        $('#cidade').val("");
+        $('#estado').val("");
+        $('#numero').val("");
+        $('#complemento').val("");
     }
 };
 

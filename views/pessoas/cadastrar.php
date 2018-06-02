@@ -1,11 +1,10 @@
-
 <div class="page-title">
     <div class="title_left">
         <h3>Cadastro de Pessoas</h3>
     </div>
 </div>
-<div data-parsley-validate class="form-horizontal form-label-left">
-    <div class="clearfix"></div>    
+<div class="clearfix"></div>    
+<div data-parsley-validate class="form-horizontal form-label-left">   
     <div class="row">    
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -50,13 +49,13 @@
                         <div class="item form-group">
                             <label class="col-md-3 col-sm-3 col-xs-12" for="cpf">CPF<span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" id="cpf" name="cpf" class="form-control" required="required" data-inputmask="'mask' : '999-999-999-99'">
+                                <input type="text" id="cpf" name="cpf" class="form-control" required="required" data-inputmask="'mask' : '999.999.999-99'">
                             </div>
                         </div>
                         <div class="item form-group">
                             <label class="col-md-3 col-sm-3 col-xs-12" for="rg">RG<span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" id="rg" name="rg" class="form-control" required="required" data-inputmask="'mask' : '99-999-999-9'">
+                                <input type="text" id="rg" name="rg" class="form-control" required="required" data-inputmask="'mask' : '99.999.999-9'">
                             </div>
                         </div>
                         <div class="item form-group">
@@ -186,9 +185,9 @@
                         </div>
                         <div class="col-md-10">         
                             <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3">
                                     <button id="gravar" class="btn btn-success btn-xs">Gravar</button>
-                                    <button class="btn btn-primary btn-xs" type="reset">Limpar</button>
+                                    <button id="limpar" class="btn btn-primary btn-xs" type="reset">Limpar</button>
                                     <a href="<?php echo URL ?>/home"><button class="btn btn-danger btn-xs" type="button">Cancelar</button></a>
                                 </div>
                             </div>

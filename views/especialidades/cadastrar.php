@@ -1,5 +1,4 @@
 <div data-parsley-validate class="form-horizontal form-label-left">
-    <div class="clearfix"></div>
     <div class="col-md-12 col-sm-12 col-xs-12">        
         <div class="x_panel">
             <div class="x_title">
@@ -9,14 +8,14 @@
             <div class="x_content">
                 <br />                
                 <div class="item form-group">
-                    <label class="col-md-1 col-sm-3 col-xs-12" for="especialidade">Nome <span class="required">*</span>
+                    <label class="col-md-1 col-sm-3 col-xs-12" for="especialidade">Nome
                     </label>
                     <div class="col-md-4">
                         <input type="text" id="especialidade" name="especialidade" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-1 col-sm-3 col-xs-12" for="descricao">Descrição <span class="required">*</span>
+                    <label class="col-md-1 col-sm-3 col-xs-12" for="descricao">Descrição
                     </label>
                     <div class="col-md-4">
                         <textarea cols="10" rows="10" id="descricao" style="resize: none" name="descricao" required="required" class="form-control col-md-7 col-xs-12"></textarea>
