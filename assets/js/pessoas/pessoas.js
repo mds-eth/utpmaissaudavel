@@ -4,12 +4,15 @@ var pessoas = {
 
         $('#cep').on('blur', pessoas.buscaCep);
         $('#cpf').on('blur', pessoas.validaCpf);
+        $('.editar').on('click', pessoas.modalEditar);
         $('#limpar').on('click', pessoas.limparCampos);
-        $('#excluir').on('click', pessoas.excluirPessoa);
+        $('.excluir').on('click', pessoas.modalExcluir);
         $('#gravar').on('click', pessoas.validaCamposForm);
-        $('#editar').on('click', pessoas.validaCamposEditar);
         $('#btnReativar').on('click', pessoas.reativarPessoa);
+        $('#btnModalExcluir').on('click', pessoas.excluirPessoa);
         $('.reativar').on('click', pessoas.buscaPessoaParaReativar);
+        $('#btnModalEditar').on('click', pessoas.validaCamposEditar);
+        $('#perfil').on('change', pessoas.montaInputPerfilSelecionado);
     },
 
     validaCamposForm: function () {
@@ -23,6 +26,12 @@ var pessoas = {
         if ($('#data_nascimento').val() === '') {
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
+            return;
+        }
+
+        if ($('#sexo').val() === 'Selecione') {
+            swal("Atenção!", "Selecione uma opção válida!", "error");
+            $('#sexo').css('border', '1px solid red');
             return;
         }
 
@@ -104,6 +113,13 @@ var pessoas = {
             return;
         }
 
+        if ($('#perfil').val() === 'Selecione') {
+            swal("Atenção!", "Selecione uma opção válida!", "error");
+            $('#perfil').css('border', '1px solid red');
+            return;
+        }
+
+
         pessoas.gravar();
 
     },
@@ -133,18 +149,15 @@ var pessoas = {
                 perfil: $('#perfil').val()
             },
             success: function (retorno) {
-
                 if (retorno) {
-
                     swal({
-                        title: "Cadastrado com Sucesso!",
-                        icon: "success"
-                    });
-
-                    setTimeout(function () {
+                        text: "Cadastro realizado com Sucesso!",
+                        type: "success",
+                        confirmButtonText: "OK"
+                    }, function () {
                         window.location = URL + '/pessoas/visualizar';
-                    }, 2000);
 
+                    });
                 } else {
                     swal({
                         type: 'warning',
@@ -307,8 +320,6 @@ var pessoas = {
                 }
             }
         });
-
-
     },
 
     buscaCep: function () {
@@ -405,12 +416,63 @@ var pessoas = {
                 window.location = URL + '/pessoas/visualizar';
             }
         });
-    }
-};
+    },
 
-function editar(id) {
+    montaInputPerfilSelecionado: function () {
 
-    if (id !== null && id !== 'undefined') {
+        var perfil = $('#perfil').val();
+
+        if (perfil == 2) {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+            var label = "RA";
+            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
+
+            $('#nomeLabel').append(label);
+            $('#perfilSelecionado').append(input);
+
+        } else if (perfil == 3) {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+            var label = "CREFFITO";
+            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
+
+            $('#nomeLabel').append(label);
+            $('#perfilSelecionado').append(input);
+
+        } else if (perfil == 5) {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+            var label = "RA";
+            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
+
+            $('#nomeLabel').append(label);
+            $('#perfilSelecionado').append(input);
+
+        } else if (perfil == 7) {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+            var label = "CRM";
+            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
+
+            $('#nomeLabel').append(label);
+            $('#perfilSelecionado').append(input);
+
+        } else {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+
+        }
+    },
+
+    modalEditar() {
+
+        var id = $(this).val();
 
         $.ajax({
             url: 'buscaPessoaParaEdicao',
@@ -462,12 +524,11 @@ function editar(id) {
                 }
             }
         });
-    }
-}
+    },
 
-function excluir(id) {
+    modalExcluir() {
 
-    if (id !== null && id !== 'undefined') {
+        var id = $(this).val();
 
         $("#modalDelete").modal("show");
 
@@ -490,7 +551,7 @@ function excluir(id) {
             }
         });
     }
-}
+};
 
 $(document).ready(function () {
     pessoas.init();

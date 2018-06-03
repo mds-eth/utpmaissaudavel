@@ -23,6 +23,12 @@ var pacientes = {
             return;
         }
 
+        if ($('#sexo').val() === 'Selecione') {
+            swal("Atenção!", "Selecione uma opção válida!", "error");
+            $('#sexo').css('border', '1px solid red');
+            return;
+        }
+
         if ($('#mae').val() === '') {
             $('#mae').focus();
             $('#mae').css('border', '1px solid red');
@@ -113,20 +119,20 @@ var pacientes = {
             return;
         }
 
-        if ($('#unidade').val() === '') {
-            $('#unidade').focus();
+        if ($('#unidade').val() === 'Selecione') {
+            swal("Atenção!", "Selecione uma opção válida!", "error");
             $('#unidade').css('border', '1px solid red');
             return;
         }
 
-        if ($('#especialidade').val() === '') {
-            $('#especialidade').focus();
+        if ($('#especialidade').val() === 'Selecione') {
+            swal("Atenção!", "Selecione uma opção válida!", "error");
             $('#especialidade').css('border', '1px solid red');
             return;
         }
 
-        if ($('#convenio').val() === '') {
-            $('#convenio').focus();
+        if ($('#convenio').val() === 'Selecione') {
+            swal("Atenção!", "Selecione uma opção válida!", "error");
             $('#convenio').css('border', '1px solid red');
             return;
         }
@@ -165,20 +171,14 @@ var pacientes = {
             success: function (retorno) {
 
                 if (retorno) {
+                    swal({
+                        text: "Cadastro realizado com Sucesso!",
+                        type: "success",
+                        confirmButtonText: "OK"
+                    }, function () {
+                        window.location = URL + '/pacientes/visualizar';
 
-                    setTimeout(function () {
-                        swal({
-                            text: "Cadastro realizado com Sucesso!",
-                            type: "success",
-                            confirmButtonText: "OK"
-                        },
-                                function (isConfirm) {
-                                    if (isConfirm) {
-                                        window.location = URL + '/pacientes/visualizar';
-                                    }
-                                });
-                    }, 1000);
-
+                    });
                 } else {
                     swal({
                         type: 'warning',
@@ -260,7 +260,7 @@ var pacientes = {
             dataType: 'json',
             success: function (result) {
 
-                if (result !== null || result !== 'undefined') {                    
+                if (result !== null || result !== 'undefined') {
 
                     $('#modalFicha').modal("show");
 

@@ -12,60 +12,58 @@
                     <h2>Dados Pessoais</h2> 
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
-                    <div class="x_content">
-                        <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12" for="nome">Nome
-                            </label>
-                            <div class="col-md-8">
-                                <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>                    
+                <div class="x_content">                    
+                    <div class="item form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="nome">Nome
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>                    
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Dt nascimento
+                        </label>
+                        <div class="col-md-8">
+                            <input class='date form-control' type="date" id="data_nascimento" name="data_nascimento" required='required'>
                         </div>
-                        <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Dt nascimento
-                            </label>
-                            <div class="col-md-8">
-                                <input class='date form-control' type="date" id="data_nascimento" name="data_nascimento" required='required'>
-                            </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="mae">Nome Mãe
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="mae" name="mae" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>                    
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12">Sexo
+                        </label>
+                        <div class="col-md-8">
+                            <select class="form-control" id="sexo" name="sexo">
+                                <option>Selecione</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
+                            </select>
                         </div>
-                        <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12" for="mae">Nome Mãe
-                            </label>
-                            <div class="col-md-8">
-                                <input type="text" id="mae" name="mae" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>                    
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="cpf">CPF<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" id="cpf" name="cpf" class="form-control" required="required" data-inputmask="'mask' : '999.999.999-99'">
                         </div>
-                        <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12">Sexo
-                            </label>
-                            <div class="col-md-8">
-                                <select class="form-control" id="sexo" name="sexo">
-                                    <option>Selecione</option>
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Feminino</option>
-                                </select>
-                            </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="rg">RG<span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" id="rg" name="rg" class="form-control" required="required" data-inputmask="'mask' : '99.999.999-9'">
                         </div>
-                        <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12" for="cpf">CPF<span class="required">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" id="cpf" name="cpf" class="form-control" required="required" data-inputmask="'mask' : '999.999.999-99'">
-                            </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
-                        <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12" for="rg">RG<span class="required">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" id="rg" name="rg" class="form-control" required="required" data-inputmask="'mask' : '99-999-999-9'">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
-                            </label>
-                            <div class="col-md-8">
-                                <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>                
-                    </div>                
+                    </div>                                                   
                 </div>
             </div>
         </div>
@@ -177,6 +175,7 @@
                             </label>
                             <div class="col-md-8">                                
                                 <select class="form-control" id="unidade" name="unidade">
+                                    <option >Selecione</option>
                                     <?php foreach ($unidades as $unidade) : ?>
                                         <option value="<?= $unidade['id_unidade_de_saude'] ?>"><?= $unidade['id_unidade_de_saude'] . ' - ' . $unidade['nome'] ?></option>
                                     <?php endforeach; ?>
@@ -188,6 +187,7 @@
                             </label>
                             <div class="col-md-8">
                                 <select class="form-control" id="especialidade" name="especialidade">
+                                    <option>Selecione</option>
                                     <?php foreach ($especialidades as $especialidade) : ?>
                                         <option value="<?= $especialidade['id_especialidade'] ?>"><?= $especialidade['id_especialidade'] . ' - ' . $especialidade['especialidade'] ?></option>
                                     <?php endforeach; ?>
@@ -199,7 +199,7 @@
                             </label>
                             <div class="col-md-8">
                                 <select class="form-control" id="convenio" name="convenio">
-                                    <option value="undefined">Selecione</option>
+                                    <option>Selecione</option>
                                     <option value="Particular">Particular</option>
                                     <option value="SUS">SUS</option>
                                 </select>

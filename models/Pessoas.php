@@ -155,6 +155,7 @@ class Pessoas extends model {
         $sql->execute();
 
         $return = $sql->fetchAll();
+   
 
         if ($return != null || !empty($return)) {
 

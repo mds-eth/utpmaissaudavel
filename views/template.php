@@ -114,7 +114,7 @@
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                        <li><a href="javascript:;"> Profile</a></li>
+                                        <li><a href="<?php echo URL; ?>/pessoas/perfil"><i class="fa fa-user pull-right"></i> Meu Perfil</a></li>
                                         <li><a href="<?php echo URL; ?>/login/logout"><i class="fa fa-sign-out pull-right"></i> Sair </a></li>
                                     </ul>
                                 </li>

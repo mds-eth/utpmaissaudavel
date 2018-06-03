@@ -27,8 +27,9 @@
                                 <?php $data = $pessoa['criado_em'] ?>
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td>
-                                    <button id="<?= $pessoa['id_pessoa']; ?>" onclick="editar(this.id)"  class="editar btn btn-info btn-xs">Editar</button>
-                                    <button id="<?= $pessoa['id_pessoa']; ?>" onclick="excluir(this.id)" class="excluir btn btn-danger btn-xs">Excluir</button>
+                                    <button id="visualizar" value="<?= $pessoa['id_pessoa']; ?>" class="visualizar btn btn-info btn-xs">Visualizar</button>
+                                    <button id="editar" value="<?= $pessoa['id_pessoa']; ?>" class="editar btn btn-success btn-xs">Editar</button>
+                                    <button id="excluir" value="<?= $pessoa['id_pessoa']; ?>" class="excluir btn btn-danger btn-xs">Excluir</button>
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>
@@ -51,7 +52,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="editar" class="btn btn-success btn-xs">Editar</button>
+                <button id="btnModalEditar" class="btn btn-success btn-xs">Editar</button>
             </div>
         </div>
     </div>
@@ -69,7 +70,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="excluir" class="btn btn-success btn-xs">Excluir</button>
+                <button id="btnModalExcluir" class="btn btn-success btn-xs">Excluir</button>
             </div>
         </div>
     </div>

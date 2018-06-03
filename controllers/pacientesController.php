@@ -20,9 +20,9 @@ class pacientesController extends controller {
             header('Location: ' . URL . '/login');
         }
 
-        /* if (!$this->url->verificaUrlSessaoUsuario()) {                        
-          header('Location: ' . URL . '/home');
-          } */
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
+        }
 
         $this->pessoa = new Pessoas();
         $this->unidade = new Unidades();
