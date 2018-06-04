@@ -204,6 +204,6 @@ class pessoasController extends controller {
 
             echo json_encode($retorno);
         }
-    }
+    }    
 
 }
