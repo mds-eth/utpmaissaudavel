@@ -11,8 +11,11 @@ class Telefones extends model {
 
         try {
 
-            $sql = "INSERT INTO telefones(fk_id_pessoa, telefone, celular, contato, criado_por, criado_em, atualizado_por, atualizado_em) VALUES(:fk_id_pessoa, 
-                :telefone, :celular, :contato, :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
+            $sql = "INSERT INTO telefones(
+                    fk_id_pessoa, telefone, celular, contato, telefone_criado_por,
+                    telefone_criado_em, telefone_atualizado_por, telefone_atualizado_em) 
+                    VALUES(:fk_id_pessoa, :telefone, :celular, :contato, :telefone_criado_por, 
+                    :telefone_criado_em, :telefone_atualizado_por, :telefone_atualizado_em)";
 
             $pdo = $this->db->prepare($sql);
 
@@ -20,10 +23,10 @@ class Telefones extends model {
             $pdo->bindValue(':telefone', $this->getResidencial(), PDO::PARAM_STR);
             $pdo->bindValue(':celular', $this->getCelular(), PDO::PARAM_STR);
             $pdo->bindValue(':contato', $this->getContato(), PDO::PARAM_STR);
-            $pdo->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-            $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':telefone_criado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':telefone_criado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':telefone_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':telefone_atualizado_em', $this->date, PDO::PARAM_STR);
 
             $pdo->execute();
         } catch (Exception $exc) {
@@ -43,8 +46,8 @@ class Telefones extends model {
             $pdo->bindValue(':residencial', $this->getResidencial(), PDO::PARAM_STR);
             $pdo->bindValue(':celular', $this->getCelular(), PDO::PARAM_STR);
             $pdo->bindValue(':contato', $this->getContato(), PDO::PARAM_STR);
-            $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':telefone_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':telefone_atualizado_em', $this->date, PDO::PARAM_STR);
             $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
 
             $pdo->execute();

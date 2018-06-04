@@ -8,14 +8,14 @@ class Unidades extends model {
 
         try {
 
-            $sql = $this->db->prepare("INSERT INTO unidades_de_saude (nome, criado_por, criado_em, atualizado_por, atualizado_em)
-                VALUES (:nome, :criado_por, :criado_em, :atualizado_por, :atualizado_em)");
+            $sql = $this->db->prepare("INSERT INTO unidades_de_saude (nome, unidade_criado_por, unidade_criado_em, unidade_atualizado_por, unidade_atualizado_em)
+                VALUES (:nome, :unidade_criado_por, :unidade_criado_em, :unidade_atualizado_por, :unidade_atualizado_em)");
 
             $sql->bindValue(':nome', $this->getUnidade(), PDO::PARAM_STR);
-            $sql->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-            $sql->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-            $sql->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_STR);
-            $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $sql->bindValue(':unidade_criado_por', $this->idUsuario, PDO::PARAM_INT);
+            $sql->bindValue(':unidade_criado_em', $this->date, PDO::PARAM_STR);
+            $sql->bindValue(':unidade_atualizado_por', $this->idUsuario, PDO::PARAM_STR);
+            $sql->bindValue(':unidade_atualizado_em', $this->date, PDO::PARAM_STR);
 
             $sql->execute();
 
@@ -29,9 +29,9 @@ class Unidades extends model {
 
         try {
 
-            $sql = $this->db->prepare("UPDATE unidades_de_saude SET nome = :unidade, atualizado_em = :atualizado_em WHERE id_unidade_de_saude = :id");
+            $sql = $this->db->prepare("UPDATE unidades_de_saude SET nome = :unidade, unidade_atualizado_em = :unidade_atualizado_em WHERE id_unidade_de_saude = :id");
             $sql->bindValue(':unidade', $this->getUnidade(), PDO::PARAM_STR);
-            $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $sql->bindValue(':unidade_atualizado_em', $this->date, PDO::PARAM_STR);
             $sql->bindValue(':id', $id, PDO::PARAM_INT);
 
             $sql->execute();

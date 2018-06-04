@@ -21,14 +21,14 @@ class Perfis extends model {
 
             try {
 
-                $sql = $this->db->prepare("INSERT INTO perfis (nome_perfil, criado_por, criado_em, atualizado_por, atualizado_em)
-                VALUES (:nome_perfil, :criado_por, :criado_em, :atualizado_por, :atualizado_em)");
+                $sql = $this->db->prepare("INSERT INTO perfis (nome_perfil, perfil_criado_por, perfil_criado_em, perfil_atualizado_por, perfil_atualizado_em)
+                VALUES (:nome_perfil, :perfil_criado_por, :perfil_criado_em, :perfil_atualizado_por, :perfil_atualizado_em)");
 
                 $sql->bindValue(':nome_perfil', $this->getPerfil(), PDO::PARAM_STR);
-                $sql->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':perfil_criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':perfil_criado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':perfil_atualizado_por', $this->idUsuario, PDO::PARAM_STR);
+                $sql->bindValue(':perfil_atualizado_em', $this->date, PDO::PARAM_STR);
 
                 $sql->execute();
 

@@ -17,9 +17,9 @@ class Pessoas extends model {
         try {
 
             $sql = "INSERT INTO pessoas(nome_pessoa, data_nascimento, sexo, cpf, rg, email,
-                 status, criado_por, criado_em, atualizado_por, atualizado_em) VALUES(:nome_pessoa, 
+                 status, pessoa_criado_por, pessoa_criado_em, pessoa_atualizado_por, pessoa_atualizado_em) VALUES(:nome_pessoa, 
                 :data_nascimento, :sexo, :cpf, :rg, :email,
-                :status, :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
+                :status, :pessoa_criado_por, :pessoa_criado_em, :pessoa_atualizado_por, :pessoa_atualizado_em)";
 
             $pdo = $this->db->prepare($sql);
 
@@ -30,10 +30,10 @@ class Pessoas extends model {
             $pdo->bindValue(':rg', $this->getRg(), PDO::PARAM_STR);
             $pdo->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
             $pdo->bindValue(':status', $status, PDO::PARAM_STR);
-            $pdo->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-            $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':pessoa_criado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':pessoa_criado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':pessoa_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':pessoa_atualizado_em', $this->date, PDO::PARAM_STR);
 
             $pdo->execute();
 
@@ -51,7 +51,7 @@ class Pessoas extends model {
         try {
 
             $sql = "UPDATE pessoas SET nome_pessoa = :nome_pessoa, data_nascimento = :data_nascimento, cpf = :cpf, rg = :rg, email = :email, 
-                    atualizado_por = :atualizado_por, atualizado_em = :atualizado_em WHERE id_pessoa = :id_pessoa";
+                    pessoa_atualizado_por = :pessoa_atualizado_por, pessoa_atualizado_em = :pessoa_atualizado_em WHERE id_pessoa = :id_pessoa";
 
             $pdo = $this->db->prepare($sql);
 
@@ -60,8 +60,8 @@ class Pessoas extends model {
             $pdo->bindValue(':cpf', $this->getCpf(), PDO::PARAM_STR);
             $pdo->bindValue(':rg', $this->getRg(), PDO::PARAM_STR);
             $pdo->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
-            $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':pessoa_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':pessoa_atualizado_em', $this->date, PDO::PARAM_STR);
             $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
 
 
@@ -78,13 +78,13 @@ class Pessoas extends model {
 
         try {
 
-            $sql = "UPDATE pessoas SET status = :status, atualizado_por = :atualizado_por, atualizado_em = :atualizado_em WHERE id_pessoa = :id_pessoa";
+            $sql = "UPDATE pessoas SET status = :status, pessoa_atualizado_por = :pessoa_atualizado_por, pessoa_atualizado_em = :pessoa_atualizado_em WHERE id_pessoa = :id_pessoa";
 
             $pdo = $this->db->prepare($sql);
 
             $pdo->bindValue(':status', $status, PDO::PARAM_BOOL);
-            $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':pessoa_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':pessoa_atualizado_em', $this->date, PDO::PARAM_STR);
             $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
 
             $pdo->execute();
@@ -155,7 +155,7 @@ class Pessoas extends model {
         $sql->execute();
 
         $return = $sql->fetchAll();
-   
+
 
         if ($return != null || !empty($return)) {
 

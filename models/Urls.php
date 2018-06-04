@@ -10,14 +10,14 @@ class Urls extends model {
 
             try {
 
-                $sql = $this->db->prepare("INSERT INTO urls (nome_url, criado_por, criado_em, atualizado_por, atualizado_em)
-                VALUES (:nome_url, :criado_por, :criado_em, :atualizado_por, :atualizado_em)");
+                $sql = $this->db->prepare("INSERT INTO urls (nome_url, url_criado_por, url_criado_em, url_atualizado_por, url_atualizado_em)
+                VALUES (:nome_url, :url_criado_por, :url_criado_em, :url_atualizado_por, :url_atualizado_em)");
 
                 $sql->bindValue(':nome_url', $url, PDO::PARAM_STR);
-                $sql->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':url_criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':url_criado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':url_atualizado_por', $this->idUsuario, PDO::PARAM_STR);
+                $sql->bindValue(':url_atualizado_em', $this->date, PDO::PARAM_STR);
 
                 $sql->execute();
 
@@ -39,15 +39,15 @@ class Urls extends model {
 
             foreach ($perfis as $idPerfil) {
 
-                $sql = $this->db->prepare("INSERT INTO perfis_url (fk_id_url, fk_id_perfil, criado_por, criado_em, atualizado_por, atualizado_em)
-                VALUES (:fk_id_url, :fk_id_perfil, :criado_por, :criado_em, :atualizado_por, :atualizado_em)");
+                $sql = $this->db->prepare("INSERT INTO perfis_url (fk_id_url, fk_id_perfil, p_u_criado_por, p_u_criado_em, p_u_atualizado_por, p_u_atualizado_em)
+                VALUES (:fk_id_url, :fk_id_perfil, :p_u_criado_por, :p_u_criado_em, :p_u_atualizado_por, :p_u_atualizado_em)");
 
                 $sql->bindValue(':fk_id_url', $fkUrl, PDO::PARAM_INT);
                 $sql->bindValue(':fk_id_perfil', $idPerfil, PDO::PARAM_INT);
-                $sql->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-                $sql->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':p_u_criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':p_u_criado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':p_u_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':p_u_atualizado_em', $this->date, PDO::PARAM_STR);
 
                 $sql->execute();
             }
@@ -90,7 +90,7 @@ class Urls extends model {
     public function verificaUrlSessaoUsuario() {
 
         $url = $_SERVER['REQUEST_URI'];
-        
+
         $idPerfilUsuarioLogado = $_SESSION['usuario']['id_perfil'];
 
         $sql = $this->db->prepare("select nome_url from urls u

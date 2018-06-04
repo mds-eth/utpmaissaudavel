@@ -13,15 +13,17 @@ class Especialidades extends model {
 
             try {
 
-                $sql = $this->db->prepare("INSERT INTO especialidades(especialidade, descricao, criado_por, criado_em, atualizado_por, atualizado_em) 
-            VALUES(:especialidade, :descricao, :criado_por, :criado_em, :atualizado_por, :atualizado_em)");
+                $sql = $this->db->prepare("INSERT INTO especialidades(especialidade, descricao, especialidade_criado_por, especialidade_criado_em,
+                    especialidade_atualizado_por, especialidade_atualizado_em) 
+                    VALUES(:especialidade, :descricao, :especialidade_criado_por, :especialidade_criado_em,
+                    :especialidade_atualizado_por, :especialidade_atualizado_em)");
 
                 $sql->bindValue(':especialidade', $this->getEspecialidade(), PDO::PARAM_STR);
                 $sql->bindValue(':descricao', $this->getDescricao(), PDO::PARAM_STR);
-                $sql->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':criado_em', $this->date, PDO::PARAM_INT);
-                $sql->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':atualizado_em', $this->date, PDO::PARAM_INT);
+                $sql->bindValue(':especialidade_criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':especialidade_criado_em', $this->date, PDO::PARAM_INT);
+                $sql->bindValue(':especialidade_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':especialidade_atualizado_em', $this->date, PDO::PARAM_INT);
 
                 $sql->execute();
 

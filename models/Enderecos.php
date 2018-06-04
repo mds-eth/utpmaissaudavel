@@ -16,9 +16,9 @@ class Enderecos extends model {
         try {
 
             $sql = "INSERT INTO enderecos(fk_id_pessoa, cep, rua, bairro, cidade, estado, numero, complemento,
-                 criado_por, criado_em, atualizado_por, atualizado_em) 
+                 endereco_criado_por, endereco_criado_em, endereco_atualizado_por, endereco_atualizado_em) 
                  VALUES(:fk_id_pessoa, :cep, :rua, :bairro, :cidade, :estado, :numero, :complemento,
-                :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
+                :endereco_criado_por, :endereco_criado_em, :endereco_atualizado_por, :endereco_atualizado_em)";
 
             $pdo = $this->db->prepare($sql);
 
@@ -30,10 +30,10 @@ class Enderecos extends model {
             $pdo->bindValue(':estado', $this->getEstado(), PDO::PARAM_STR);
             $pdo->bindValue(':numero', $this->getNumero(), PDO::PARAM_STR);
             $pdo->bindValue(':complemento', $this->getComplemento(), PDO::PARAM_STR);
-            $pdo->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-            $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':endereco_criado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':endereco_criado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':endereco_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':endereco_atualizado_em', $this->date, PDO::PARAM_STR);
 
             $pdo->execute();
         } catch (Exception $exc) {
@@ -58,8 +58,8 @@ class Enderecos extends model {
             $pdo->bindValue(':estado', $this->getEstado(), PDO::PARAM_STR);
             $pdo->bindValue(':numero', $this->getNumero(), PDO::PARAM_STR);
             $pdo->bindValue(':complemento', $this->getComplemento(), PDO::PARAM_STR);
-            $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':endereco_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':endereco_atualizado_em', $this->date, PDO::PARAM_STR);
             $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
 
             $pdo->execute();

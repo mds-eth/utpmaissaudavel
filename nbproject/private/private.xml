@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/utpmaissaudavel/views/pessoas/inativas.php</file>
-            <file>file:/var/www/utpmaissaudavel/views/template.php</file>
             <file>file:/var/www/utpmaissaudavel/controllers/pacientesController.php</file>
-            <file>file:/var/www/utpmaissaudavel/controllers/pessoasController.php</file>
-            <file>file:/var/www/utpmaissaudavel/models/Pessoas.php</file>
-            <file>file:/var/www/utpmaissaudavel/views/pessoas/visualizar.php</file>
+            <file>file:/var/www/utpmaissaudavel/views/pacientes/visualizar.php</file>
             <file>file:/var/www/utpmaissaudavel/assets/js/pessoas/pessoas.js</file>
-            <file>file:/var/www/utpmaissaudavel/views/pessoas/cadastrar.php</file>
-            <file>file:/var/www/utpmaissaudavel/assets/js/pacientes/pacientes.js</file>
-            <file>file:/var/www/utpmaissaudavel/views/pacientes/cadastrar.php</file>
+            <file>file:/var/www/utpmaissaudavel/views/pacientes/paciente.php</file>
         </group>
     </open-files>
 </project-private>

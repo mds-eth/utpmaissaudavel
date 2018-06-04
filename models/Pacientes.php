@@ -11,18 +11,20 @@ class Pacientes extends model {
 
         try {
 
-            $sql = "INSERT INTO dados_pacientes(fk_id_unidade_de_saude, fk_id_paciente, convenio, criado_por, criado_em, atualizado_por, atualizado_em)
-                VALUES(:fk_id_unidade_de_saude, :fk_id_paciente, :convenio, :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
+            $sql = "INSERT INTO dados_pacientes(fk_id_unidade_de_saude, fk_id_paciente, convenio, dado_paciente_criado_por, dado_paciente_criado_em,
+                dado_paciente_atualizado_por, dado_paciente_atualizado_em)
+                VALUES(:fk_id_unidade_de_saude, :fk_id_paciente, :convenio, :dado_paciente_criado_por, :dado_paciente_criado_em, 
+                :dado_paciente_atualizado_por, :dado_paciente_atualizado_em)";
 
             $pdo = $this->db->prepare($sql);
 
             $pdo->bindValue(':fk_id_unidade_de_saude', $this->getFkIdUnidadeSaude(), PDO::PARAM_INT);
             $pdo->bindValue(':fk_id_paciente', $this->getFkIdPaciente(), PDO::PARAM_INT);
             $pdo->bindValue(':convenio', $this->getConvenio(), PDO::PARAM_STR);
-            $pdo->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-            $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-            $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':dado_paciente_criado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':dado_paciente_criado_em', $this->date, PDO::PARAM_STR);
+            $pdo->bindValue(':dado_paciente_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $pdo->bindValue(':dado_paciente_atualizado_em', $this->date, PDO::PARAM_STR);
 
             $pdo->execute();
             $this->gravaTabelaPacientesEspecialidades();
@@ -38,17 +40,19 @@ class Pacientes extends model {
 
             foreach ($this->getEspecialidades() as $fkIdEspecialidade) {
 
-                $sql = "INSERT INTO paciente_especialidades(fk_id_especialidade, fk_id_paciente, criado_por, criado_em, atualizado_por, atualizado_em)
-                VALUES(:fk_id_especialidade, :fk_id_paciente, :criado_por, :criado_em, :atualizado_por, :atualizado_em)";
+                $sql = "INSERT INTO paciente_especialidades(fk_id_especialidade, fk_id_paciente, p_especialidade_criado_por, p_especialidade_criado_em, 
+                    p_especialidade_atualizado_por, p_especialidade_atualizado_em)
+                VALUES(:fk_id_especialidade, :fk_id_paciente, :p_especialidade_criado_por, :p_especialidade_criado_em, 
+                :p_especialidade_atualizado_por, :p_especialidade_atualizado_em)";
 
                 $pdo = $this->db->prepare($sql);
 
                 $pdo->bindValue(':fk_id_especialidade', $fkIdEspecialidade, PDO::PARAM_INT);
                 $pdo->bindValue(':fk_id_paciente', $this->getFkIdPaciente(), PDO::PARAM_INT);
-                $pdo->bindValue(':criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $pdo->bindValue(':criado_em', $this->date, PDO::PARAM_STR);
-                $pdo->bindValue(':atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $pdo->bindValue(':atualizado_em', $this->date, PDO::PARAM_STR);
+                $pdo->bindValue(':p_especialidade_criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $pdo->bindValue(':p_especialidade_criado_em', $this->date, PDO::PARAM_STR);
+                $pdo->bindValue(':p_especialidade_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+                $pdo->bindValue(':p_especialidade_atualizado_em', $this->date, PDO::PARAM_STR);
 
                 $pdo->execute();
             }
