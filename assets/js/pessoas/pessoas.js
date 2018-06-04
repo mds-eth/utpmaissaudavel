@@ -18,12 +18,14 @@ var pessoas = {
     validaCamposForm: function () {
 
         if ($('#nome').val() === '') {
+            swal("Atenção!", "Campo nome não pode ficar vazio!", "error");
             $('#nome').focus();
             $('#nome').css('border', '1px solid red');
             return;
         }
 
         if ($('#data_nascimento').val() === '') {
+            swal("Atenção!", "Data de Nascimento não pode ficar vazio!", "error");
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
             return;
@@ -36,6 +38,7 @@ var pessoas = {
         }
 
         if ($('#cpf').val() === '') {
+            swal("Atenção!", "CPF não pode ficar vazio!", "error");
             $('#cpf').focus();
             $('#cpf').css('border', '1px solid red');
             return;
@@ -48,6 +51,7 @@ var pessoas = {
         }
 
         if ($('#email').val() === '') {
+            swal("Atenção!", "Email  não pode ficar vazio!", "error");
             $('#email').focus();
             $('#email').css('border', '1px solid red');
             return;
@@ -422,7 +426,7 @@ var pessoas = {
 
         var perfil = $('#perfil').val();
 
-        if (perfil == 2) {
+        if (parseInt(perfil) === 2) {
 
             $('#nomeLabel').html("");
             $('#perfilSelecionado').html("");
@@ -432,7 +436,7 @@ var pessoas = {
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
 
-        } else if (perfil == 3) {
+        } else if (parseInt(perfil) === 3) {
 
             $('#nomeLabel').html("");
             $('#perfilSelecionado').html("");
@@ -442,7 +446,7 @@ var pessoas = {
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
 
-        } else if (perfil == 5) {
+        } else if (parseInt(perfil) === 5) {
 
             $('#nomeLabel').html("");
             $('#perfilSelecionado').html("");
@@ -452,7 +456,7 @@ var pessoas = {
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
 
-        } else if (perfil == 7) {
+        } else if (parseInt(perfil) === 7) {
 
             $('#nomeLabel').html("");
             $('#perfilSelecionado').html("");
