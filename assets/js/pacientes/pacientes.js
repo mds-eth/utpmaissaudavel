@@ -257,13 +257,10 @@ var pacientes = {
             url: URL + '/pacientes/fichaPaciente',
             type: 'POST',
             data: {id: $(this).val()},
-            dataType: 'json',
             success: function (result) {
 
-                if (result !== null || result !== 'undefined') {
-
-                    $('#modalFicha').modal("show");
-
+                if (result) {
+                    window.location = URL + "/pacientes/paciente";
                 }
             }
         });

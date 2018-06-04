@@ -19,11 +19,7 @@ class pacientesController extends controller {
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
-
-        if (!$this->url->verificaUrlSessaoUsuario()) {
-            header('Location: ' . URL . '/home');
-        }
-
+        
         $this->pessoa = new Pessoas();
         $this->unidade = new Unidades();
         $this->paciente = new Pacientes();
@@ -96,12 +92,19 @@ class pacientesController extends controller {
 
         if ($this->post()) {
 
-            $ficha = $this->paciente->listaFichaPaciente($_POST['id']);
+            $dados['ficha'] = $this->paciente->listaFichaPaciente($_POST['id']);
 
-            if (!empty($ficha)) {
-                echo json_encode($ficha);
-            }
+            $this->loadTemplate('pacientes/paciente', $dados);
+
+            echo true;
         }
+    }
+
+    public function paciente($id) {
+
+        $dados['ficha'] = $this->paciente->listaFichaPaciente($id);
+
+        $this->loadTemplate('pacientes/paciente', $dados);
     }
 
 }

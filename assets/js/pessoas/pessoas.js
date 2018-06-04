@@ -155,7 +155,7 @@ var pessoas = {
                         type: "success",
                         confirmButtonText: "OK"
                     }, function () {
-                        window.location = URL + '/pessoas/visualizar';
+                        window.location.href = URL + '/pessoas/visualizar';
 
                     });
                 } else {
@@ -490,11 +490,11 @@ var pessoas = {
                             "<label for='nome'>Nome <span class='required'></label>" +
                             "<input value='" + result.nome_pessoa + "' type='text' id='nome' name='nome' class='form-control col-md-7 col-xs-12'>" +
                             "<label class='col-md-1 col-sm-3 col-xs-12' for='data_nascimento'>Data Nascimento <span class='required'></label>" +
-                            "<input value='" + result.data_nascimento + "' type='text' id='data_nascimento' name='data_nascimento' class='form-control col-md-7 col-xs-12'>" +
+                            "<input value='" + result.data_nascimento + "' type='text' id='data_nascimento' name='data_nascimento' class='form-control col-md-7 col-xs-12' readonly='true'>" +
                             "<label class='col-md-1 col-sm-3 col-xs-12' for='cpf'>CPF <span class='required'></label>" +
-                            "<input value='" + result.cpf + "' type='text' id='cpf' name='cpf' class='form-control col-md-7 col-xs-12'>" +
+                            "<input value='" + result.cpf + "' type='text' id='cpf' name='cpf' class='form-control col-md-7 col-xs-12' readonly='true'>" +
                             "<label class='col-md-1 col-sm-3 col-xs-12' for='rg'>RG <span class='required'></label>" +
-                            "<input value='" + result.rg + "' type='text' id='rg' name='rg' class='form-control col-md-7 col-xs-12'>" +
+                            "<input value='" + result.rg + "' type='text' id='rg' name='rg' class='form-control col-md-7 col-xs-12' readonly='true'>" +
                             "<label class='col-md-1 col-sm-3 col-xs-12' for='email'>Email <span class='required'></label>" +
                             "<input value='" + result.email + "' type='text' id='email' name='email' class='form-control col-md-7 col-xs-12'>" +
                             "<label class='col-md-1 col-sm-3 col-xs-12' for='residencial'>Residencial <span class='required'></label>" +

@@ -34,7 +34,7 @@
                                 <?php $data = $paciente['criado_em'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td style="text-align: center">
-                                    <button id="ficha" value="<?= $paciente['id_pessoa'] ?>" class="ficha btn btn-success btn-xs">Abrir Ficha</button>
+                                    <a href="<?php echo URL; ?>/pacientes/paciente/<?= $paciente['id_pessoa'] ?>" class="btn btn-success btn-xs">Abrir Ficha</a>
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>
