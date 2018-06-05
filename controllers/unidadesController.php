@@ -25,13 +25,12 @@ class unidadesController extends controller {
 
         if ($this->post()) {
 
-            $unidade = $_POST['unidade'];
-
-            $this->unidade->setUnidade($unidade);
+            $this->unidade->setUnidade(trim(addslashes($_POST['unidade'])));
+            $this->unidade->setFkIdRegional(trim(addslashes($_POST['idRegional'])));
             echo $this->unidade->gravar();
         } else {
 
-            $dados = array();
+            $dados['regionais'] = $this->unidade->listaRegionais();
 
             $this->loadTemplate('unidades/cadastrar', $dados);
         }
@@ -90,6 +89,30 @@ class unidadesController extends controller {
         $dados['unidades'] = $this->unidade->listaTodasUnidades();
 
         $this->loadTemplate('unidades/visualizar', $dados);
+    }
+
+    public function regional() {
+
+        $dados = array();
+
+        $this->loadTemplate('unidades/regional', $dados);
+    }
+
+    public function cadastrarRegional() {
+
+        if ($this->post()) {
+
+            $this->unidade->setRegional(trim(addslashes($_POST['regional'])));
+            $this->unidade->setResponsavel(trim(addslashes($_POST['responsavel'])));
+            echo $this->unidade->cadastrarRegional();
+        }
+    }
+
+    public function regionais() {
+
+        $dados['regionais'] = $this->unidade->listaRegionais();
+
+        $this->loadTemplate('unidades/regionais', $dados);
     }
 
 }

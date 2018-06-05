@@ -81,6 +81,7 @@ class Pacientes extends model {
                             JOIN unidades_de_saude us ON dp.fk_id_unidade_de_saude = us.id_unidade_de_saude
                             JOIN telefones t ON p.id_pessoa = t.fk_id_pessoa
                             JOIN enderecos e ON p.id_pessoa = e.fk_id_pessoa
+                            JOIN regionais r ON us.fk_id_regional = r.id_regional
                             and p.id_pessoa = :id");
 
         $sql->bindValue(':id', $id, PDO::PARAM_INT);

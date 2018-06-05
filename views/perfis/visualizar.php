@@ -20,8 +20,8 @@
                             <tr>
                                 <td><?= $perfil['id_perfil'] ?></td>
                                 <td><?= $perfil['nome_perfil'] ?></td>
-                                <td><?= $perfil['criado_por'] ?></td>
-                                <?php $data = $perfil['criado_em'] ?>
+                                <td><?= $perfil['perfil_criado_por'] ?></td>
+                                <?php $data = $perfil['perfil_criado_em'] ?>
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>                                
                             </tr>                    
                         <?php endforeach; ?>

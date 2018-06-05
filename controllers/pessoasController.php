@@ -204,6 +204,13 @@ class pessoasController extends controller {
 
             echo json_encode($retorno);
         }
-    }    
+    }
+
+    public function perfil() {
+
+        $dados['perfil'] = $this->pessoa->listaPerfilPessoa($_SESSION['usuario']['id_pessoa']);
+
+        $this->loadTemplate('pessoas/perfil', $dados);
+    }
 
 }

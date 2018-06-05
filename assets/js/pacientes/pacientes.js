@@ -5,10 +5,65 @@ var pacientes = {
         $('#cep').on('blur', pacientes.buscaCep);
         $('#cpf').on('blur', pacientes.validaCpf);
         $('#limpar').on('click', pacientes.limparCampos);
-        $('.ficha').on('click', pacientes.fichaPaciente);
         $('#gravar').on('click', pacientes.validaCamposForm);
     },
+    buscaCep: function () {
 
+        var cep = $('#cep').val();
+
+        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+            if (!("erro" in dados)) {
+
+                $("#rua").val(dados.logradouro);
+                $("#bairro").val(dados.bairro);
+                $("#cidade").val(dados.localidade);
+                $("#estado").val(dados.uf);
+                $("#numero").focus();
+            }
+        });
+    },
+    validaCpf: function () {
+
+        var cpf = $('#cpf').val();
+
+        $.ajax({
+            url: URL + '/pessoas/validaCpf',
+            type: 'POST',
+            data: {cpf: cpf},
+            dataType: 'json',
+            success: function (result) {
+
+                if (result) {
+                    $("#cpf").val("");
+                    $("#cpf").focus();
+                    $('#cpf').css('border', '1px solid red');
+                    swal("Atenção!", "Já existe outra pessoa cadastrada com este CPF, favor verificar!", "error");
+                    return;
+                }
+            }
+        });
+    },
+    limparCampos: function () {
+
+        $('#idPessoa').val("");
+        $('#nome').val("");
+        $('#data_nascimento').val("");
+        $('#mae').val("");
+        $('#cpf').val("");
+        $('#rg').val("");
+        $('#email').val("");
+        $('#residencial').val("");
+        $('#celular').val("");
+        $('#contato').val("");
+        $('#cep').val("");
+        $('#rua').val("");
+        $('#bairro').val("");
+        $('#cidade').val("");
+        $('#estado').val("");
+        $('#numero').val("");
+        $('#complemento').val("");
+    },
     validaCamposForm: function () {
 
         if ($('#nome').val() === '') {
@@ -139,7 +194,6 @@ var pacientes = {
 
         pacientes.gravar();
     },
-
     gravar: function () {
 
         $.ajax({
@@ -189,86 +243,8 @@ var pacientes = {
                 }
             }
         });
-    },
-
-    limparCampos: function () {
-
-        $('#idPessoa').val("");
-        $('#nome').val("");
-        $('#data_nascimento').val("");
-        $('#mae').val("");
-        $('#cpf').val("");
-        $('#rg').val("");
-        $('#email').val("");
-        $('#residencial').val("");
-        $('#celular').val("");
-        $('#contato').val("");
-        $('#cep').val("");
-        $('#rua').val("");
-        $('#bairro').val("");
-        $('#cidade').val("");
-        $('#estado').val("");
-        $('#numero').val("");
-        $('#complemento').val("");
-    },
-
-    buscaCep: function () {
-
-        var cep = $('#cep').val();
-
-        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
-
-            if (!("erro" in dados)) {
-
-                $("#rua").val(dados.logradouro);
-                $("#bairro").val(dados.bairro);
-                $("#cidade").val(dados.localidade);
-                $("#estado").val(dados.uf);
-                $("#numero").focus();
-            }
-        });
-    },
-
-    validaCpf: function () {
-
-        var cpf = $('#cpf').val();
-
-        $.ajax({
-            url: URL + '/pessoas/validaCpf',
-            type: 'POST',
-            data: {cpf: cpf},
-            dataType: 'json',
-            success: function (result) {
-
-                if (result) {
-                    $("#cpf").val("");
-                    $("#cpf").focus();
-                    $('#cpf').css('border', '1px solid red');
-                    swal("Atenção!", "Já existe outra pessoa cadastrada com este CPF, favor verificar!", "error");
-                    return false;
-                }
-            }
-        });
-    },
-
-    fichaPaciente: function () {
-
-        $.ajax({
-            url: URL + '/pacientes/fichaPaciente',
-            type: 'POST',
-            data: {id: $(this).val()},
-            success: function (result) {
-
-                if (result) {
-                    window.location = URL + "/pacientes/paciente";
-                }
-            }
-        });
     }
 };
-
 $(document).ready(function () {
-
     pacientes.init();
-
 });

@@ -1,35 +1,34 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Pessoas Ativas</h2>        
+            <h2>Regionais</h2>            
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered" id="datatable" style="text-align: center">
+                <table id="datatable" class="table table-striped table-bordered" style="text-align: center">
                     <thead>
                         <tr>
                             <th style="text-align: center">ID</th>
-                            <th style="text-align: center">Nome</th>
-                            <th style="text-align: center">Email</th>
-                            <th style="text-align: center">Perfil</th>                        
+                            <th style="text-align: center">Regional</th>
+                            <th style="text-align: center">Responsável</th>
+                            <th style="text-align: center">Criado Por</th>
                             <th style="text-align: center">Criado Em</th>
                             <th style="text-align: center">Ações</th>                        
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($pessoas as $pessoa) : ?>
+                        <?php foreach ($regionais as $regional) : ?>
                             <tr>
-                                <td><?= $pessoa['id_pessoa'] ?></td>
-                                <td><?= $pessoa['nome_pessoa'] ?></td>
-                                <td><?= $pessoa['email'] ?></td>
-                                <td><?= $pessoa['nome_perfil'] ?></td>                            
-                                <?php $data = $pessoa['pessoa_criado_em'] ?>
+                                <td><?= $regional['id_regional'] ?></td>                                
+                                <td><?= $regional['nome_regional'] ?></td>
+                                <td><?= $regional['responsavel_regional'] ?></td>
+                                <td><?= $regional['regional_criado_por'] ?></td>
+                                <?php $data = $regional['regional_criado_em'] ?>
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td>
-                                    <button id="visualizar" value="<?= $pessoa['id_pessoa']; ?>" class="visualizar btn btn-info btn-xs">Visualizar</button>
-                                    <button id="editar" value="<?= $pessoa['id_pessoa']; ?>" class="editar btn btn-success btn-xs">Editar</button>
-                                    <button id="excluir" value="<?= $pessoa['id_pessoa']; ?>" class="excluir btn btn-danger btn-xs">Excluir</button>
+                                    <button id="<?= $regional['id_unidade_de_saude'] ?>" onclick="editar(this.id)" class="btn btn-info btn-xs editar">Editar</button>
+                                    <button id="<?= $regional['id_unidade_de_saude'] ?>" onclick="excluir(this.id)" class="btn btn-danger btn-xs excluir">Excluir</button>                                
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>
@@ -52,7 +51,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnModalEditar" class="btn btn-success btn-xs">Editar</button>
+                <button id="btnEditar" class="btn btn-success btn-xs">Editar</button>
             </div>
         </div>
     </div>
@@ -65,15 +64,14 @@
                 <h4 class="modal-title">Excluir Registro</h4>
             </div>
             <form id="formDel">
-                <div class="modal-body" id="pessoa">       
+                <div class="modal-body" id="formularioExclusao">       
                 </div>                        
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnModalExcluir" class="btn btn-success btn-xs">Excluir</button>
+                <button id="btnExcluir" class="btn btn-success btn-xs">Excluir</button>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo URL; ?>/assets/js/pessoas/pessoas.js"></script>
-<script type="text/javascript" src="<?php echo URL; ?>/assets/js/jquery.mask.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/unidades/unidades.js"></script>        

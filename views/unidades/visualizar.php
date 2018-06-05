@@ -11,6 +11,8 @@
                         <tr>
                             <th style="text-align: center">ID</th>
                             <th style="text-align: center">Unidade de Saúde</th>
+                            <th style="text-align: center">Regional</th>
+                            <th style="text-align: center">Responsável Regional</th>
                             <th style="text-align: center">Criado Por</th>
                             <th style="text-align: center">Criado Em</th>
                             <th style="text-align: center">Ações</th>                        
@@ -20,13 +22,15 @@
                         <?php foreach ($unidades as $unidade) : ?>
                             <tr>
                                 <td><?= $unidade['id_unidade_de_saude'] ?></td>
-                                <td><?= $unidade['nome'] ?></td>
-                                <td><?= $unidade['criado_por'] ?></td>
-                                <?php $data = $unidade['criado_em'] ?>
+                                <td><?= $unidade['nome_unidade'] ?></td>
+                                <td><?= $unidade['nome_regional'] ?></td>
+                                <td><?= $unidade['responsavel_regional'] ?></td>
+                                <td><?= $unidade['unidade_criado_por'] ?></td>
+                                <?php $data = $unidade['unidade_criado_em'] ?>
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td>
-                                    <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="editar(this.id)" class="btn btn-info btn-xs editar">Editar</button>
-                                    <button id="<?= $unidade['id_unidade_de_saude'] ?>" onclick="excluir(this.id)" class="btn btn-danger btn-xs excluir">Excluir</button>                                
+                                    <button value="<?= $unidade['id_unidade_de_saude'] ?>" class="editar btn btn-info btn-xs editar">Editar</button>
+                                    <button value="<?= $unidade['id_unidade_de_saude'] ?>" class="excluir btn btn-danger btn-xs excluir">Excluir</button>                                
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>

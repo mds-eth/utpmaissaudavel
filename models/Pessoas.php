@@ -207,6 +207,22 @@ class Pessoas extends model {
         }
     }
 
+    public function listaPerfilPessoa($id) {
+
+        $sql = $this->db->prepare("SELECT * FROM pessoas p 
+                        JOIN enderecos e ON p.id_pessoa = e.fk_id_pessoa 
+                        JOIN telefones t ON p.id_pessoa = t.fk_id_pessoa 
+                        JOIN usuarios as u ON p.id_pessoa = u.fk_id_pessoa
+                        JOIN perfis pe ON u.fk_id_perfil = pe.id_perfil
+                        AND p.id_pessoa = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+
+        $pessoa = $sql->fetchObject();
+
+        return $pessoa;
+    }
+
     function getNome() {
         return $this->nome;
     }

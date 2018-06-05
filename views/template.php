@@ -92,8 +92,15 @@
                                     </li>
                                     <li><a><i class="fa fa-hospital-o"></i> Unidades de Saúde <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/unidades/cadastrar">Cadastrar</a></li>
-                                            <li><a href="<?php echo URL; ?>/unidades/visualizar">Visualizar</a></li>
+                                            <li><a href="<?php echo URL; ?>/unidades/cadastrar">Cadastrar Unidade</a></li>
+                                            <li><a href="<?php echo URL; ?>/unidades/visualizar">Visualizar Unidades</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-plus-square"></i> Regionais <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo URL; ?>/unidades/regional">Cadastrar Regional</a></li>
+                                            <li><a href="<?php echo URL; ?>/unidades/regionais">Visualizar Regionais</a></li>                                            
                                         </ul>
                                     </li>
                                 </ul>

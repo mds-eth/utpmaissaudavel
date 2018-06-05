@@ -20,7 +20,7 @@
                             <tr>
                                 <td><?= $url['nome_url'] ?></td>
                                 <td><?= $url['nome_perfil'] ?></td>                            
-                                <?php $data = $url['criado_em'] ?>
+                                <?php $data = $url['url_criado_em'] ?>
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td>
                                     <button class="btn btn-info btn-xs">Editar</button>

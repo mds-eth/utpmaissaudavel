@@ -11,8 +11,7 @@
                         <tr>
                             <th style="text-align: center">ID</th>
                             <th style="text-align: center">Nome</th>
-                            <th style="text-align: center">Email</th>
-                            <th style="text-align: center">Especialidade</th>
+                            <th style="text-align: center">Email</th>                            
                             <th style="text-align: center">Data Nascimento</th>                            
                             <th style="text-align: center">Convenio</th>    
                             <th style="text-align: center">Unidade de Saúde</th>
@@ -25,13 +24,12 @@
                             <tr>
                                 <td style="text-align: center"><?= $paciente['id_pessoa'] ?></td>
                                 <td style="text-align: center"><?= $paciente['nome_pessoa'] ?></td>
-                                <td style="text-align: center"><?= $paciente['email'] ?></td>
-                                <td style="text-align: center"><?= $paciente['especialidade'] ?></td>                            
+                                <td style="text-align: center"><?= $paciente['email'] ?></td>                                                            
                                 <?php $nascimento = $paciente['data_nascimento'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($nascimento)) ?></td>                            
                                 <td style="text-align: center"><?= $paciente['convenio'] ?></td>
                                 <td style="text-align: center"><?= $paciente['nome'] ?></td>
-                                <?php $data = $paciente['criado_em'] ?>
+                                <?php $data = $paciente['pessoa_criado_em'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td style="text-align: center">
                                     <a href="<?php echo URL; ?>/pacientes/paciente/<?= $paciente['id_pessoa'] ?>" class="btn btn-success btn-xs">Abrir Ficha</a>

@@ -14,318 +14,6 @@ var pessoas = {
         $('#btnModalEditar').on('click', pessoas.validaCamposEditar);
         $('#perfil').on('change', pessoas.montaInputPerfilSelecionado);
     },
-
-    validaCamposForm: function () {
-
-        if ($('#nome').val() === '') {
-            swal("Atenção!", "Campo nome não pode ficar vazio!", "error");
-            $('#nome').focus();
-            $('#nome').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#data_nascimento').val() === '') {
-            swal("Atenção!", "Data de Nascimento não pode ficar vazio!", "error");
-            $('#data_nascimento').focus();
-            $('#data_nascimento').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#sexo').val() === 'Selecione') {
-            swal("Atenção!", "Selecione uma opção válida!", "error");
-            $('#sexo').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#cpf').val() === '') {
-            swal("Atenção!", "CPF não pode ficar vazio!", "error");
-            $('#cpf').focus();
-            $('#cpf').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#rg').val() === '') {
-            $('#rg').focus();
-            $('#rg').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#email').val() === '') {
-            swal("Atenção!", "Email  não pode ficar vazio!", "error");
-            $('#email').focus();
-            $('#email').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#residencial').val() === '') {
-            $('#residencial').focus();
-            $('#residencial').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#celular').val() === '') {
-            $('#celular').focus();
-            $('#celular').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#contato').val() === '') {
-            $('#contato').focus();
-            $('#contato').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#cep').val() === '') {
-            $('#cep').focus();
-            $('#cep').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#rua').val() === '') {
-            $('#rua').focus();
-            $('#rua').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#bairro').val() === '') {
-            $('#bairro').focus();
-            $('#bairro').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#cidade').val() === '') {
-            $('#cidade').focus();
-            $('#cidade').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#estado').val() === '') {
-            $('#estado').focus();
-            $('#estado').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#numero').val() === '') {
-            $('#numero').focus();
-            $('#numero').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#complemento').val() === '') {
-            $('#complemento').focus();
-            $('#complemento').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#perfil').val() === 'Selecione') {
-            swal("Atenção!", "Selecione uma opção válida!", "error");
-            $('#perfil').css('border', '1px solid red');
-            return;
-        }
-
-
-        pessoas.gravar();
-
-    },
-
-    gravar: function () {
-
-        $.ajax({
-            type: 'POST',
-            url: 'cadastrar',
-            data: {
-                nome: $('#nome').val(),
-                dataNascimento: $('#data_nascimento').val(),
-                sexo: $('#sexo').val(),
-                cpf: $('#cpf').val(),
-                rg: $('#rg').val(),
-                email: $('#email').val(),
-                residencial: $('#residencial').val(),
-                celular: $('#celular').val(),
-                contato: $('#contato').val(),
-                cep: $('#cep').val(),
-                rua: $('#rua').val(),
-                bairro: $('#bairro').val(),
-                cidade: $('#cidade').val(),
-                estado: $('#estado').val(),
-                numero: $('#numero').val(),
-                complemento: $('#complemento').val(),
-                perfil: $('#perfil').val()
-            },
-            success: function (retorno) {
-                if (retorno) {
-                    swal({
-                        text: "Cadastro realizado com Sucesso!",
-                        type: "success",
-                        confirmButtonText: "OK"
-                    }, function () {
-                        window.location.href = URL + '/pessoas/visualizar';
-
-                    });
-                } else {
-                    swal({
-                        type: 'warning',
-                        title: 'Ocorreu algum erro ao realizar o cadastro, revise todos os dados informados',
-                        confirmButtonText: 'OK'
-                    });
-                    return;
-                }
-            }
-        });
-    },
-
-    validaCamposEditar: function () {
-
-        if ($('#nome').val() === '') {
-            $('#nome').focus();
-            $('#nome').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#data_nascimento').val() === '') {
-            $('#data_nascimento').focus();
-            $('#data_nascimento').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#cpf').val() === '') {
-            $('#cpf').focus();
-            $('#cpf').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#rg').val() === '') {
-            $('#rg').focus();
-            $('#rg').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#email').val() === '') {
-            $('#email').focus();
-            $('#email').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#residencial').val() === '') {
-            $('#residencial').focus();
-            $('#residencial').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#celular').val() === '') {
-            $('#celular').focus();
-            $('#celular').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#contato').val() === '') {
-            $('#contato').focus();
-            $('#contato').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#cep').val() === '') {
-            $('#cep').focus();
-            $('#cep').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#rua').val() === '') {
-            $('#rua').focus();
-            $('#rua').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#bairro').val() === '') {
-            $('#bairro').focus();
-            $('#bairro').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#cidade').val() === '') {
-            $('#cidade').focus();
-            $('#cidade').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#estado').val() === '') {
-            $('#estado').focus();
-            $('#estado').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#numero').val() === '') {
-            $('#numero').focus();
-            $('#numero').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#complemento').val() === '') {
-            $('#complemento').focus();
-            $('#complemento').css('border', '1px solid red');
-            return;
-        }
-
-        pessoas.editarRegistro();
-
-    },
-
-    editarRegistro: function () {
-
-        $.ajax({
-            url: 'editar',
-            type: 'POST',
-            data: {
-                idPessoa: $('#idPessoa').val(),
-                nome: $('#nome').val(),
-                dataNascimento: $('#data_nascimento').val(),
-                cpf: $('#cpf').val(),
-                rg: $('#rg').val(),
-                email: $('#email').val(),
-                residencial: $('#residencial').val(),
-                celular: $('#celular').val(),
-                contato: $('#contato').val(),
-                cep: $('#cep').val(),
-                rua: $('#rua').val(),
-                bairro: $('#bairro').val(),
-                cidade: $('#cidade').val(),
-                estado: $('#estado').val(),
-                numero: $('#numero').val(),
-                complemento: $('#complemento').val()
-            },
-            success: function (result) {
-
-                if (result) {
-
-                    swal({
-                        title: "Atualizado com Sucesso!",
-                        icon: "success"
-                    });
-
-                    setTimeout(function () {
-                        window.location = URL + '/pessoas/visualizar';
-                    }, 1000);
-                }
-            }
-        });
-    },
-
-    excluirPessoa: function () {
-
-        $.ajax({
-            url: 'excluir',
-            type: 'POST',
-            dataType: 'json',
-            data: {idPessoa: $('#idPessoa').val()},
-            success: function (result) {
-
-                if (result) {
-                    window.location = URL + '/pessoas/visualizar';
-                }
-            }
-        });
-    },
-
     buscaCep: function () {
 
         var cep = $('#cep').val();
@@ -342,7 +30,6 @@ var pessoas = {
             }
         });
     },
-
     validaCpf: function () {
 
         var cpf = $('#cpf').val();
@@ -359,122 +46,12 @@ var pessoas = {
                     $("#cpf").focus();
                     $('#cpf').css('border', '1px solid red');
                     swal("Atenção!", "Já existe outra pessoa cadastrada com este CPF, favor verificar!", "error");
-                    return false;
+                    return;
                 }
             }
         });
     },
-
-    limparCampos: function () {
-
-        $('#idPessoa').val("");
-        $('#nome').val("");
-        $('#data_nascimento').val("");
-        $('#mae').val("");
-        $('#cpf').val("");
-        $('#rg').val("");
-        $('#email').val("");
-        $('#residencial').val("");
-        $('#celular').val("");
-        $('#contato').val("");
-        $('#cep').val("");
-        $('#rua').val("");
-        $('#bairro').val("");
-        $('#cidade').val("");
-        $('#estado').val("");
-        $('#numero').val("");
-        $('#complemento').val("");
-    },
-
-    buscaPessoaParaReativar: function () {
-
-        $.ajax({
-            url: URL + '/pessoas/buscaPessoaParaReativar',
-            data: {id: $(this).val()},
-            type: 'POST',
-            dataType: 'json',
-            success: function (result) {
-
-                $('#bodyReativar').html("");
-
-                var text = "<p>Deseja realmente reativar " + result.nome_pessoa + "?</p>" +
-                        "<input type='hidden' id='pessoa' name='pessoa' value='" + result.id_pessoa + "'>";
-                $('#bodyReativar').append(text);
-                $('#modalReativar').modal('show');
-            }
-        });
-    },
-
-    reativarPessoa: function () {
-
-        var id = $('#pessoa').val();
-        $.ajax({
-            url: URL + '/pessoas/reativarPessoa',
-            type: 'POST',
-            data: {id: id},
-            success: function (result) {
-
-                if (result) {
-                    swal("Pessoa reativada com sucesso", "success");
-                }
-                window.location = URL + '/pessoas/visualizar';
-            }
-        });
-    },
-
-    montaInputPerfilSelecionado: function () {
-
-        var perfil = $('#perfil').val();
-
-        if (parseInt(perfil) === 2) {
-
-            $('#nomeLabel').html("");
-            $('#perfilSelecionado').html("");
-            var label = "RA";
-            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
-
-            $('#nomeLabel').append(label);
-            $('#perfilSelecionado').append(input);
-
-        } else if (parseInt(perfil) === 3) {
-
-            $('#nomeLabel').html("");
-            $('#perfilSelecionado').html("");
-            var label = "CREFFITO";
-            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
-
-            $('#nomeLabel').append(label);
-            $('#perfilSelecionado').append(input);
-
-        } else if (parseInt(perfil) === 5) {
-
-            $('#nomeLabel').html("");
-            $('#perfilSelecionado').html("");
-            var label = "RA";
-            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
-
-            $('#nomeLabel').append(label);
-            $('#perfilSelecionado').append(input);
-
-        } else if (parseInt(perfil) === 7) {
-
-            $('#nomeLabel').html("");
-            $('#perfilSelecionado').html("");
-            var label = "CRM";
-            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
-
-            $('#nomeLabel').append(label);
-            $('#perfilSelecionado').append(input);
-
-        } else {
-
-            $('#nomeLabel').html("");
-            $('#perfilSelecionado').html("");
-
-        }
-    },
-
-    modalEditar() {
+    modalEditar: function () {
 
         var id = $(this).val();
 
@@ -529,8 +106,27 @@ var pessoas = {
             }
         });
     },
+    limparCampos: function () {
 
-    modalExcluir() {
+        $('#idPessoa').val("");
+        $('#nome').val("");
+        $('#data_nascimento').val("");
+        $('#mae').val("");
+        $('#cpf').val("");
+        $('#rg').val("");
+        $('#email').val("");
+        $('#residencial').val("");
+        $('#celular').val("");
+        $('#contato').val("");
+        $('#cep').val("");
+        $('#rua').val("");
+        $('#bairro').val("");
+        $('#cidade').val("");
+        $('#estado').val("");
+        $('#numero').val("");
+        $('#complemento').val("");
+    },
+    modalExcluir: function () {
 
         var id = $(this).val();
 
@@ -554,12 +150,351 @@ var pessoas = {
                 }
             }
         });
+    },
+    validaCamposForm: function () {
+
+        if ($('#nome').val() === '') {
+            swal("Atenção!", "Campo nome não pode ficar vazio!", "error");
+            $('#nome').focus();
+            $('#nome').css('border', '1px solid red');
+            return;
+        }
+        if ($('#data_nascimento').val() === '') {
+            swal("Atenção!", "Data de Nascimento não pode ficar vazio!", "error");
+            $('#data_nascimento').focus();
+            $('#data_nascimento').css('border', '1px solid red');
+            return;
+        }
+        if ($('#sexo').val() === 'Selecione') {
+            swal("Atenção!", "Selecione uma opção válida!", "error");
+            $('#sexo').css('border', '1px solid red');
+            return;
+        }
+        if ($('#cpf').val() === '') {
+            swal("Atenção!", "CPF não pode ficar vazio!", "error");
+            $('#cpf').focus();
+            $('#cpf').css('border', '1px solid red');
+            return;
+        }
+        if ($('#rg').val() === '') {
+            $('#rg').focus();
+            $('#rg').css('border', '1px solid red');
+            return;
+        }
+        if ($('#email').val() === '') {
+            swal("Atenção!", "Email  não pode ficar vazio!", "error");
+            $('#email').focus();
+            $('#email').css('border', '1px solid red');
+            return;
+        }
+        if ($('#residencial').val() === '') {
+            $('#residencial').focus();
+            $('#residencial').css('border', '1px solid red');
+            return;
+        }
+        if ($('#celular').val() === '') {
+            $('#celular').focus();
+            $('#celular').css('border', '1px solid red');
+            return;
+        }
+        if ($('#contato').val() === '') {
+            $('#contato').focus();
+            $('#contato').css('border', '1px solid red');
+            return;
+        }
+        if ($('#cep').val() === '') {
+            $('#cep').focus();
+            $('#cep').css('border', '1px solid red');
+            return;
+        }
+        if ($('#rua').val() === '') {
+            $('#rua').focus();
+            $('#rua').css('border', '1px solid red');
+            return;
+        }
+        if ($('#bairro').val() === '') {
+            $('#bairro').focus();
+            $('#bairro').css('border', '1px solid red');
+            return;
+        }
+        if ($('#cidade').val() === '') {
+            $('#cidade').focus();
+            $('#cidade').css('border', '1px solid red');
+            return;
+        }
+        if ($('#estado').val() === '') {
+            $('#estado').focus();
+            $('#estado').css('border', '1px solid red');
+            return;
+        }
+        if ($('#numero').val() === '') {
+            $('#numero').focus();
+            $('#numero').css('border', '1px solid red');
+            return;
+        }
+        if ($('#complemento').val() === '') {
+            $('#complemento').focus();
+            $('#complemento').css('border', '1px solid red');
+            return;
+        }
+        if ($('#perfil').val() === 'Selecione') {
+            swal("Atenção!", "Selecione uma opção válida!", "error");
+            $('#perfil').css('border', '1px solid red');
+            return;
+        }
+        pessoas.gravar();
+    },
+    reativarPessoa: function () {
+
+        $.ajax({
+            url: URL + '/pessoas/reativarPessoa',
+            type: 'POST',
+            data: {id: $('#pessoa').val()},
+            success: function (result) {
+
+                if (result) {
+                    swal("Pessoa reativada com sucesso", "success");
+                }
+                window.location = URL + '/pessoas/visualizar';
+            }
+        });
+    },
+    excluirPessoa: function () {
+
+        $.ajax({
+            url: 'excluir',
+            type: 'POST',
+            dataType: 'json',
+            data: {idPessoa: $('#idPessoa').val()},
+            success: function (result) {
+
+                if (result) {
+                    window.location = URL + '/pessoas/visualizar';
+                }
+            }
+        });
+    },
+    buscaPessoaParaReativar: function () {
+
+        $.ajax({
+            url: URL + '/pessoas/buscaPessoaParaReativar',
+            data: {id: $(this).val()},
+            type: 'POST',
+            dataType: 'json',
+            success: function (result) {
+
+                $('#bodyReativar').html("");
+
+                var text = "<p>Deseja realmente reativar " + result.nome_pessoa + "?</p>" +
+                        "<input type='hidden' id='pessoa' name='pessoa' value='" + result.id_pessoa + "'>";
+                $('#bodyReativar').append(text);
+                $('#modalReativar').modal('show');
+            }
+        });
+    },
+    validaCamposEditar: function () {
+
+        if ($('#nome').val() === '') {
+            $('#nome').focus();
+            $('#nome').css('border', '1px solid red');
+            return;
+        }
+        if ($('#data_nascimento').val() === '') {
+            $('#data_nascimento').focus();
+            $('#data_nascimento').css('border', '1px solid red');
+            return;
+        }
+        if ($('#cpf').val() === '') {
+            $('#cpf').focus();
+            $('#cpf').css('border', '1px solid red');
+            return;
+        }
+        if ($('#rg').val() === '') {
+            $('#rg').focus();
+            $('#rg').css('border', '1px solid red');
+            return;
+        }
+        if ($('#email').val() === '') {
+            $('#email').focus();
+            $('#email').css('border', '1px solid red');
+            return;
+        }
+        if ($('#residencial').val() === '') {
+            $('#residencial').focus();
+            $('#residencial').css('border', '1px solid red');
+            return;
+        }
+        if ($('#celular').val() === '') {
+            $('#celular').focus();
+            $('#celular').css('border', '1px solid red');
+            return;
+        }
+        if ($('#contato').val() === '') {
+            $('#contato').focus();
+            $('#contato').css('border', '1px solid red');
+            return;
+        }
+        if ($('#cep').val() === '') {
+            $('#cep').focus();
+            $('#cep').css('border', '1px solid red');
+            return;
+        }
+        if ($('#rua').val() === '') {
+            $('#rua').focus();
+            $('#rua').css('border', '1px solid red');
+            return;
+        }
+        if ($('#bairro').val() === '') {
+            $('#bairro').focus();
+            $('#bairro').css('border', '1px solid red');
+            return;
+        }
+        if ($('#cidade').val() === '') {
+            $('#cidade').focus();
+            $('#cidade').css('border', '1px solid red');
+            return;
+        }
+        if ($('#estado').val() === '') {
+            $('#estado').focus();
+            $('#estado').css('border', '1px solid red');
+            return;
+        }
+        if ($('#numero').val() === '') {
+            $('#numero').focus();
+            $('#numero').css('border', '1px solid red');
+            return;
+        }
+        if ($('#complemento').val() === '') {
+            $('#complemento').focus();
+            $('#complemento').css('border', '1px solid red');
+            return;
+        }
+        pessoas.editarRegistro();
+    },
+    montaInputPerfilSelecionado: function () {
+
+        var perfil = $('#perfil').val();
+
+        if (parseInt(perfil) === 3) {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+            var label = "CREFFITO";
+            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
+
+            $('#nomeLabel').append(label);
+            $('#perfilSelecionado').append(input);
+
+        } else if (parseInt(perfil) === 5) {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+            var label = "RA";
+            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
+
+            $('#nomeLabel').append(label);
+            $('#perfilSelecionado').append(input);
+
+        } else if (parseInt(perfil) === 7) {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+            var label = "CRM";
+            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
+
+            $('#nomeLabel').append(label);
+            $('#perfilSelecionado').append(input);
+
+        } else {
+
+            $('#nomeLabel').html("");
+            $('#perfilSelecionado').html("");
+        }
+    },
+    gravar: function () {
+
+        $.ajax({
+            type: 'POST',
+            url: 'cadastrar',
+            data: {
+                nome: $('#nome').val(),
+                dataNascimento: $('#data_nascimento').val(),
+                sexo: $('#sexo').val(),
+                cpf: $('#cpf').val(),
+                rg: $('#rg').val(),
+                email: $('#email').val(),
+                residencial: $('#residencial').val(),
+                celular: $('#celular').val(),
+                contato: $('#contato').val(),
+                cep: $('#cep').val(),
+                rua: $('#rua').val(),
+                bairro: $('#bairro').val(),
+                cidade: $('#cidade').val(),
+                estado: $('#estado').val(),
+                numero: $('#numero').val(),
+                complemento: $('#complemento').val(),
+                perfil: $('#perfil').val()
+            },
+            success: function (retorno) {
+                if (retorno) {
+                    swal({
+                        text: "Cadastro realizado com Sucesso!",
+                        type: "success"
+                    });
+                    setTimeout(function () {
+                        window.location.href = URL + '/pessoas/visualizar';
+                    }, 1000);
+                } else {
+                    swal({
+                        type: 'warning',
+                        title: 'Ocorreu algum erro ao realizar o cadastro, revise todos os dados informados',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
+            }
+        });
+    },
+    editarRegistro: function () {
+
+        $.ajax({
+            url: 'editar',
+            type: 'POST',
+            data: {
+                idPessoa: $('#idPessoa').val(),
+                nome: $('#nome').val(),
+                dataNascimento: $('#data_nascimento').val(),
+                cpf: $('#cpf').val(),
+                rg: $('#rg').val(),
+                email: $('#email').val(),
+                residencial: $('#residencial').val(),
+                celular: $('#celular').val(),
+                contato: $('#contato').val(),
+                cep: $('#cep').val(),
+                rua: $('#rua').val(),
+                bairro: $('#bairro').val(),
+                cidade: $('#cidade').val(),
+                estado: $('#estado').val(),
+                numero: $('#numero').val(),
+                complemento: $('#complemento').val()
+            },
+            success: function (result) {
+
+                if (result) {
+                    swal({
+                        title: "Atualizado com Sucesso!",
+                        icon: "success"
+                    });
+                    setTimeout(function () {
+                        window.location = URL + '/pessoas/visualizar';
+                    }, 1000);
+                }
+            }
+        });
     }
 };
-
 $(document).ready(function () {
     pessoas.init();
-
 });
 
 

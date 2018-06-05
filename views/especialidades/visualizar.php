@@ -23,8 +23,8 @@
                                 <td><?= $especialidade['id_especialidade'] ?></td>
                                 <td><?= $especialidade['especialidade'] ?></td>
                                 <td><?= $especialidade['descricao'] ?></td>
-                                <td><?= $especialidade['criado_por'] ?></td>
-                                <?php $data = $especialidade['criado_em'] ?>
+                                <td><?= $especialidade['especialidade_criado_por'] ?></td>
+                                <?php $data = $especialidade['especialidade_criado_em'] ?>
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td>
                                     <button class="btn btn-info btn-xs">Editar</button>
