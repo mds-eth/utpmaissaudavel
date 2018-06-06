@@ -2,6 +2,12 @@
 
 class loginController extends controller {
 
+    private $login;
+
+    public function __construct() {
+        $this->login = new Login;
+    }
+
     public function index() {
 
         $dados = array();
@@ -12,10 +18,17 @@ class loginController extends controller {
 
         if ($this->post()) {
 
-            $login = new Login();
-            $login->setEmail(trim(addslashes($_POST['email'])));
-            $login->setSenha(trim(addslashes(md5($_POST['senha']))));
-            echo $login->validaLogin();
+            if ($_POST['email'] == $_POST['senha']) {
+                $this->login->setEmail(trim(addslashes($_POST['email'])));
+                $this->login->setSenha(trim(addslashes($_POST['senha'])));
+            } else {
+                $this->login->setEmail(trim(addslashes($_POST['email'])));
+                $this->login->setSenha(trim(addslashes(md5($_POST['senha']))));
+            }
+
+            $retorno = $this->login->validaLogin();
+
+            echo json_encode($retorno);
         }
     }
 
@@ -24,6 +37,22 @@ class loginController extends controller {
         unset($_SESSION['usuario']);
         session_destroy();
         header('Location: ' . URL . '/login');
+    }
+
+    public function novo() {
+
+        $this->loadViewNovaSenha();
+    }
+
+    public function novaSenha() {
+
+        if ($this->post()) {
+
+            $this->login->setId(trim(addslashes($_POST['id'])));
+            $this->login->setSenha(trim(addslashes(md5($_POST['senha']))));
+
+            echo $this->login->gravaSenhaPrimeiroAcessoUsuario();
+        }
     }
 
 }

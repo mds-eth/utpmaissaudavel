@@ -8,6 +8,7 @@ var pessoas = {
         $('#limpar').on('click', pessoas.limparCampos);
         $('.excluir').on('click', pessoas.modalExcluir);
         $('#gravar').on('click', pessoas.validaCamposForm);
+        $('#notificacao').on('click', pessoas.notificacoes);
         $('#btnReativar').on('click', pessoas.reativarPessoa);
         $('#btnModalExcluir').on('click', pessoas.excluirPessoa);
         $('.reativar').on('click', pessoas.buscaPessoaParaReativar);
@@ -244,6 +245,10 @@ var pessoas = {
         }
         pessoas.gravar();
     },
+    notificacoes: function () {
+
+        alert('cheguei aqui');
+    },
     reativarPessoa: function () {
 
         $.ajax({
@@ -253,9 +258,14 @@ var pessoas = {
             success: function (result) {
 
                 if (result) {
-                    swal("Pessoa reativada com sucesso", "success");
+                    swal({
+                        text: "Pessoa reativada com Sucesso!",
+                        type: "success"
+                    });
+                    setTimeout(function () {
+                        window.location.href = URL + '/pessoas/visualizar';
+                    }, 1000);
                 }
-                window.location = URL + '/pessoas/visualizar';
             }
         });
     },
@@ -269,7 +279,10 @@ var pessoas = {
             success: function (result) {
 
                 if (result) {
-                    window.location = URL + '/pessoas/visualizar';
+                    swal({text: "Pessoa excluída com Sucesso!", type: "success"});
+                    setTimeout(function () {
+                        window.location.href = URL + '/pessoas/visualizar';
+                    }, 1000);
                 }
             }
         });

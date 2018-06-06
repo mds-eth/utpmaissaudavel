@@ -42,6 +42,8 @@ class Pessoas extends model {
             return $fkIdPessoa;
         } catch (Exception $exc) {
 
+
+
             echo $exc->getTraceAsString();
         }
     }

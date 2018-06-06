@@ -192,7 +192,7 @@ var pacientes = {
             return;
         }
 
-        pacientes.gravar();
+        pacientes.gravar;
     },
     gravar: function () {
 

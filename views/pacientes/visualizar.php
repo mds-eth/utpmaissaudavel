@@ -28,7 +28,7 @@
                                 <?php $nascimento = $paciente['data_nascimento'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($nascimento)) ?></td>                            
                                 <td style="text-align: center"><?= $paciente['convenio'] ?></td>
-                                <td style="text-align: center"><?= $paciente['nome'] ?></td>
+                                <td style="text-align: center"><?= $paciente['nome_unidade'] ?></td>
                                 <?php $data = $paciente['pessoa_criado_em'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td style="text-align: center">

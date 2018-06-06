@@ -19,11 +19,11 @@
                             <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
                         </div>                    
                     </div>
-                    <div class="item form-group">
+                    <div class="form-group">
                         <label class="col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Data de nascimento
                         </label>
                         <div class="col-md-8">
-                            <input class='date form-control' type="date" id="data_nascimento" name="data_nascimento" required='required'>
+                            <input class='form-control' type="date" id="data_nascimento" name="data_nascimento" required='required'>
                         </div>
                     </div>
                     <div class="item form-group">

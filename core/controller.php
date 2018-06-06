@@ -19,6 +19,11 @@ class controller {
         include 'views/template.php';
     }
 
+    public function loadViewNovaSenha() {
+
+        include 'views/senha.php';
+    }
+
     public function loadViewInTemplate($viewName, $viewData = array()) {
 
         extract($viewData); // Transforma a chave do array em variavel.

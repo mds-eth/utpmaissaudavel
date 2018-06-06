@@ -28,10 +28,9 @@
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="mae">Nome Mãe
-                        </label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="responsavel">Nome Responsável</label>
                         <div class="col-md-8">
-                            <input type="text" id="mae" name="mae" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="responsavel" name="responsavel" required="required" class="form-control col-md-7 col-xs-12">
                         </div>                    
                     </div>
                     <div class="item form-group">
@@ -177,7 +176,7 @@
                                 <select class="form-control" id="unidade" name="unidade">
                                     <option >Selecione</option>
                                     <?php foreach ($unidades as $unidade) : ?>
-                                        <option value="<?= $unidade['id_unidade_de_saude'] ?>"><?= $unidade['id_unidade_de_saude'] . ' - ' . $unidade['nome'] ?></option>
+                                        <option value="<?= $unidade['id_unidade_de_saude'] ?>"><?= $unidade['nome_unidade'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

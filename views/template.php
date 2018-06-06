@@ -7,10 +7,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">        
         <title>UTP Mais Saudável</title>
-        <link href="<?php echo URL; ?>/assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="<?php echo URL; ?>/assets/css/dataTables.bootstrap.min.css" rel="stylesheet">
-        <link href="<?php echo URL; ?>/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="<?php echo URL; ?>/assets/css/custom.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo URL; ?>/assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/fullcalendar.css">
+        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/custom.min.css">
         <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>   
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap/bootstrap.min.js"></script>
@@ -97,12 +98,14 @@
 
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-plus-square"></i> Regionais <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/unidades/regional">Cadastrar Regional</a></li>
-                                            <li><a href="<?php echo URL; ?>/unidades/regionais">Visualizar Regionais</a></li>                                            
-                                        </ul>
-                                    </li>
+                                    <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>
+                                        <li><a><i class="fa fa-plus-square"></i> Regionais <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="<?php echo URL; ?>/unidades/regional">Cadastrar Regional</a></li>
+                                                <li><a href="<?php echo URL; ?>/unidades/regionais">Visualizar Regionais</a></li>                                            
+                                            </ul>
+                                        </li>
+                                    <?php endif ?>
                                 </ul>
                             </div>
                         </div>
@@ -127,9 +130,9 @@
                                 </li>
 
                                 <li role="presentation" class="dropdown">
-                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <a id="notificacao" href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fa fa-envelope-o"></i>
-                                        <span class="badge bg-green">6</span>
+                                        <span class="badge bg-green">5</span>
                                     </a>
                                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                         <li>
@@ -213,5 +216,9 @@
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/dataTables.buttons.min.js"></script>                
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/i18n.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/moment.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/fullcalendar.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/pt-br.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/agendas/agendas.js"></script>
     </body>
 </html>
