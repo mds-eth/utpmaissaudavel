@@ -1,7 +1,18 @@
 var perfil = {
 
     init: function () {
-        $('#gravar').on('click', perfil.cadastrar);
+        $('#gravar').on('click', perfil.validaCampoPerfil);
+    },
+
+    validaCampoPerfil: function () {
+
+        if ($('#perfil').val() === '') {
+            $('#perfil').focus();
+            $('#perfil').css('border', '1px solid red');
+            swal("Atenção!", "Campo nome não pode ficar vazio!", "error");
+        }
+
+        perfil.cadastrar;
     },
 
     cadastrar: function () {

@@ -81,31 +81,29 @@
 
                                     <li><a><i class="fa fa fa-wheelchair"></i> Pacientes <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/pacientes/cadastrar">Cadastrar</a></li>
+                                            <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA) : ?>                            
+                                                <li><a href="<?php echo URL; ?>/pacientes/cadastrar">Cadastrar</a></li>
+                                            <?php endif ?>
                                             <li><a href="<?php echo URL; ?>/pacientes/visualizar">Visualizar</a></li>
                                         </ul>
-                                    </li>
-                                    <li><a><i class="fa fa-stethoscope"></i> Triagem <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/triagem/cadastrar">Cadastrar</a></li>
-                                            <li><a href="<?php echo URL; ?>/triagem/visualizar">Visualizar</a></li>
-                                        </ul>
-                                    </li>
+                                    </li>                                    
                                     <li><a><i class="fa fa-hospital-o"></i> Unidades de Saúde <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/unidades/cadastrar">Cadastrar Unidade</a></li>
+                                            <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>                            
+                                                <li><a href="<?php echo URL; ?>/unidades/cadastrar">Cadastrar Unidade</a></li>
+                                            <?php endif; ?>
                                             <li><a href="<?php echo URL; ?>/unidades/visualizar">Visualizar Unidades</a></li>
 
                                         </ul>
                                     </li>
-                                    <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>
-                                        <li><a><i class="fa fa-plus-square"></i> Regionais <span class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu">
+                                    <li><a><i class="fa fa-plus-square"></i> Regionais <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>                            
                                                 <li><a href="<?php echo URL; ?>/unidades/regional">Cadastrar Regional</a></li>
-                                                <li><a href="<?php echo URL; ?>/unidades/regionais">Visualizar Regionais</a></li>                                            
-                                            </ul>
-                                        </li>
-                                    <?php endif ?>
+                                            <?php endif; ?>
+                                            <li><a href="<?php echo URL; ?>/unidades/regionais">Visualizar Regionais</a></li>                                            
+                                        </ul>
+                                    </li>                                    
                                 </ul>
                             </div>
                         </div>
@@ -136,61 +134,16 @@
                                     </a>
                                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                         <li>
-                                            <a>
-                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <a>                                                
                                                 <span>
                                                     <span>MICHAEL DOUGLAS</span>
-                                                    <span class="time">3 mins ago</span>
+                                                    <span class="time">10 minutos atrás</span>
                                                 </span>
                                                 <span class="message">
-                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    Um novo paciente foi vinculado à sua agenda.
                                                 </span>
                                             </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                                <span>
-                                                    <span>John Smith</span>
-                                                    <span class="time">3 mins ago</span>
-                                                </span>
-                                                <span class="message">
-                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                                <span>
-                                                    <span>John Smith</span>
-                                                    <span class="time">3 mins ago</span>
-                                                </span>
-                                                <span class="message">
-                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                                <span>
-                                                    <span>John Smith</span>
-                                                    <span class="time">3 mins ago</span>
-                                                </span>
-                                                <span class="message">
-                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="text-center">
-                                                <a>
-                                                    <strong>See All Alerts</strong>
-                                                    <i class="fa fa-angle-right"></i>
-                                                </a>
-                                            </div>
-                                        </li>
+                                        </li>                                        
                                     </ul>
                                 </li>
                             </ul>
@@ -220,5 +173,6 @@
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/fullcalendar.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/pt-br.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/agendas/agendas.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/Chart.min.js"></script>
     </body>
 </html>

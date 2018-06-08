@@ -16,10 +16,10 @@ class pacientesController extends controller {
         $this->url = new Urls();
         $this->usuario = new Usuarios();
 
-        if (!$this->usuario->logado()) {
-            header('Location: ' . URL . '/login');
-        }
-        
+        /* if (!$this->usuario->logado()) {
+          header('Location: ' . URL . '/login');
+          } */
+
         $this->pessoa = new Pessoas();
         $this->unidade = new Unidades();
         $this->paciente = new Pacientes();

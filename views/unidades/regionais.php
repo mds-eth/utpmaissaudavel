@@ -14,7 +14,9 @@
                             <th style="text-align: center">Responsável</th>
                             <th style="text-align: center">Criado Por</th>
                             <th style="text-align: center">Criado Em</th>
-                            <th style="text-align: center">Ações</th>                        
+                            <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>                            
+                                <th style="text-align: center">Ações</th>                        
+                            <?php endif; ?>                    
                         </tr>
                     </thead>
                     <tbody>
@@ -26,10 +28,11 @@
                                 <td><?= $regional['regional_criado_por'] ?></td>
                                 <?php $data = $regional['regional_criado_em'] ?>
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>
-                                <td>
-                                    <button id="<?= $regional['id_unidade_de_saude'] ?>" onclick="editar(this.id)" class="btn btn-info btn-xs editar">Editar</button>
-                                    <button id="<?= $regional['id_unidade_de_saude'] ?>" onclick="excluir(this.id)" class="btn btn-danger btn-xs excluir">Excluir</button>                                
-                                </td>                            
+                                <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>                            
+                                    <td>
+                                        <button id="editarRegional" value="<?= $regional['id_regional'] ?>" class="editarRegional btn btn-info btn-xs">Editar</button>                                    
+                                    </td>  
+                                <?php endif; ?>      
                             </tr>                    
                         <?php endforeach; ?>
                     </tbody>
@@ -38,7 +41,7 @@
         </div>
     </div>
 </div>
-<div id="modalEdit" class="modal fade" role="dialog" >
+<div id="modalEditRegional" class="modal fade" role="dialog" >
     <div class="modal-dialog">                
         <div class="modal-content" style="border-radius: 10px">
             <div class="modal-header">
@@ -51,25 +54,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnEditar" class="btn btn-success btn-xs">Editar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="modalDelete" class="modal fade" role="dialog">
-    <div class="modal-dialog">                
-        <div class="modal-content" style="border-radius: 10px">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Excluir Registro</h4>
-            </div>
-            <form id="formDel">
-                <div class="modal-body" id="formularioExclusao">       
-                </div>                        
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnExcluir" class="btn btn-success btn-xs">Excluir</button>
+                <button id="btnModalEditarRegional" class="btn btn-success btn-xs">Editar</button>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@ class Usuarios extends model {
     private $fkIdPerfil;
     private $fkIdPessoa;
 
-    public function gravar() {
+    public function gravar($email) {
 
         try {
 
@@ -17,7 +17,7 @@ class Usuarios extends model {
 
             $pdo->bindValue(':fk_id_perfil', $this->getFkIdPerfil(), PDO::PARAM_INT);
             $pdo->bindValue(':fk_id_pessoa', $this->getFkIdPessoa(), PDO::PARAM_INT);
-            $pdo->bindValue(':senha', null, PDO::PARAM_STR);
+            $pdo->bindValue(':senha', $email, PDO::PARAM_STR);
             $pdo->bindValue(':usuario_criado_por', $this->idUsuario, PDO::PARAM_STR);
             $pdo->bindValue(':usuario_criado_em', $this->date, PDO::PARAM_STR);
             $pdo->bindValue(':usuario_atualizado_por', $this->idUsuario, PDO::PARAM_STR);

@@ -92,8 +92,8 @@ class Login extends model {
             $dados['perfil'] = $pessoa->nome_perfil;
             $dados['id_perfil'] = $pessoa->id_perfil;
             $_SESSION['usuario'] = $dados;
+            $this->destroiSessaoTemporaria();
         }
-        $this->destroiSessaoTemporaria();
     }
 
     public function destroiSessaoTemporaria() {

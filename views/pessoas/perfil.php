@@ -26,13 +26,7 @@
                             <span><?= $perfil->data_nascimento ?></span>                                                        
                         </div>
                     </div>
-                    <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="mae">Nome Responsável
-                        </label>
-                        <div class="col-md-8">
-                            <span><?= $perfil->data_nascimento ?></span>                                                                                    
-                        </div>                    
-                    </div>
+
                     <div class="item form-group">
                         <label class="col-md-3 col-sm-3 col-xs-12">Sexo
                         </label>
@@ -43,7 +37,7 @@
                     <div class="item form-group">
                         <label class="col-md-3 col-sm-3 col-xs-12" for="cpf">CPF</label>
                         <div class="col-md-8">
-                            <span><?= $perfil->cpf ?></span>                             
+                            <span><?= is_null($perfil->cpf) ? '---' : $perfil->cpf ?></span>                             
                         </div>
                     </div>
                     <div class="item form-group">
@@ -58,8 +52,10 @@
                             <span><?= $perfil->email ?></span>                                
                         </div>
                     </div>                                                    
+                    <br/>
+                    <br/>
                 </div>
-            </div>
+            </div>            
         </div>
 
         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -126,7 +122,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12" for="residencial">Telefone Residencial</label>
                         <div class="col-md-5">
-                            <span><?= $perfil->telefone ?></span>                               
+                            <span><?= is_null($perfil->telefone) ? '---' : $perfil->telefone ?></span>                               
                         </div>
                     </div>
                     <div class="item form-group">
@@ -157,6 +153,14 @@
                             <span><?= $perfil->nome_perfil ?></span>                               
                         </div>
                     </div> 
+                    <?php if ($perfil->id_perfil == Perfis::FISIOTERAPEUTA || $perfil->id_perfil == Perfis::ALUNO) : ?>
+                        <div class="item form-group">
+                            <label class="col-md-4 col-sm-3 col-xs-12" for="data-criacao"><?= $perfil->id_perfil == 3 ? 'CREFFITO' : 'RA' ?></label>
+                            <div class="col-md-5">                                
+                                <span><?= $perfil->codigo ?></span>                               
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12" for="data-criacao">Data cadastro</label>
                         <div class="col-md-5">

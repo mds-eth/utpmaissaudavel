@@ -24,10 +24,11 @@
                                 <td style="text-align: center"><?= $inativa['nome_pessoa'] ?></td>
                                 <td style="text-align: center"><?= $inativa['email'] ?></td>
                                 <td style="text-align: center"><?= $inativa['nome_perfil'] ?></td>                            
-                                <?php $data = $inativa['criado_em'] ?>
+                                <?php $data = $inativa['pessoa_criado_em'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td style="text-align: center">
                                     <button id="reativar" value="<?= $inativa['id_pessoa'] ?>" class="reativar btn btn-success btn-xs">Reativar</button>                                    
+                                    <button id="excluirPessoa" value="<?= $inativa['id_pessoa'] ?>" class="excluirPessoa btn btn-danger btn-xs">Excluir</button>                                    
                                 </td>                            
                             </tr>                    
                         <?php endforeach; ?>

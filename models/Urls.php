@@ -111,4 +111,13 @@ class Urls extends model {
         }
     }
 
+    public function validaSessaoTemporaria() {
+
+        if (isset($_SESSION['usuario']) || isset($_SESSION['temp'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

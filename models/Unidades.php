@@ -130,6 +130,46 @@ class Unidades extends model {
         }
     }
 
+    public function buscaRegionalParaEdicao($id) {
+
+
+        $sql = $this->db->prepare("SELECT * FROM regionais r WHERE r.id_regional = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+
+        $regional = $sql->fetchObject();
+
+        if (!empty($regional)) {
+            return $regional;
+        }
+    }
+
+    public function editarRegional() {
+
+        try {
+
+            $sql = $this->db->prepare("UPDATE regionais SET nome_regional = :nome_regional, 
+                    responsavel_regional = :responsavel_regional,
+                    regional_atualizado_por = :regional_atualizado_por, regional_atualizado_em = :regional_atualizado_em
+                    WHERE id_regional = :id");
+
+            $sql->bindValue(':nome_regional', $this->getRegional(), PDO::PARAM_STR);
+            $sql->bindValue(':responsavel_regional', $this->getResponsavel());
+            $sql->bindValue(':regional_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+            $sql->bindValue(':regional_atualizado_em', $this->date, PDO::PARAM_STR);
+            $sql->bindValue(':id', $this->getFkIdRegional());
+            $retorno = $sql->execute();
+
+            if ($retorno) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
     function getUnidade() {
         return $this->unidade;
     }

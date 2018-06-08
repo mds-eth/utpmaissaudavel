@@ -11,14 +11,25 @@ var pessoas = {
         $('#notificacao').on('click', pessoas.notificacoes);
         $('#btnReativar').on('click', pessoas.reativarPessoa);
         $('#btnModalExcluir').on('click', pessoas.excluirPessoa);
+        $('#data_nascimento').on('blur', pessoas.validaCampoData);
         $('.reativar').on('click', pessoas.buscaPessoaParaReativar);
         $('#btnModalEditar').on('click', pessoas.validaCamposEditar);
         $('#perfil').on('change', pessoas.montaInputPerfilSelecionado);
+
     },
+    validaCampoData: function () {
+
+        if ($('#data_nascimento').val().length < 10) {
+            $('#data_nascimento').focus();
+            $('#data_nascimento').css('border', '1px solid red');
+            swal("Atenção!", "Informe uma data válida!", "error");
+            return false;
+        }
+    },
+
     buscaCep: function () {
 
         var cep = $('#cep').val();
-
         $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
             if (!("erro" in dados)) {
@@ -33,12 +44,10 @@ var pessoas = {
     },
     validaCpf: function () {
 
-        var cpf = $('#cpf').val();
-
         $.ajax({
             url: 'validaCpf',
             type: 'POST',
-            data: {cpf: cpf},
+            data: {cpf: $('#cpf').val()},
             dataType: 'json',
             success: function (result) {
 
@@ -54,19 +63,16 @@ var pessoas = {
     },
     modalEditar: function () {
 
-        var id = $(this).val();
-
         $.ajax({
             url: 'buscaPessoaParaEdicao',
             type: 'POST',
             dataType: 'json',
-            data: {id: id},
+            data: {id: $(this).val()},
             success: function (result) {
 
                 if (result !== null) {
 
                     $('#formularioEdicao').html("");
-
                     var formulario = "<div data-parsley-validate class='form-horizontal form-label-left'>" +
                             "<input type='hidden' id='idPessoa' name='idPessoa' value='" + result.id_pessoa + "'>" +
                             "<label for='nome'>Nome <span class='required'></label>" +
@@ -100,7 +106,6 @@ var pessoas = {
                             "<label class='col-md-1 col-sm-3 col-xs-12' for='complemento'>Complemento<span class='required'></label>" +
                             "<input value='" + result.complemento + "' type='text' id='complemento' name='complemento' class='form-control col-md-7 col-xs-12'>" +
                             "</div>";
-
                     $('#formularioEdicao').append(formulario);
                     $("#modalEdit").modal("show");
                 }
@@ -109,16 +114,12 @@ var pessoas = {
     },
     limparCampos: function () {
 
-        $('#idPessoa').val("");
         $('#nome').val("");
         $('#data_nascimento').val("");
-        $('#mae').val("");
+        $('#sexo').val("");
         $('#cpf').val("");
         $('#rg').val("");
         $('#email').val("");
-        $('#residencial').val("");
-        $('#celular').val("");
-        $('#contato').val("");
         $('#cep').val("");
         $('#rua').val("");
         $('#bairro').val("");
@@ -126,27 +127,25 @@ var pessoas = {
         $('#estado').val("");
         $('#numero').val("");
         $('#complemento').val("");
+        $('#residencial').val("");
+        $('#celular').val("");
+        $('#contato').val("");
     },
     modalExcluir: function () {
 
-        var id = $(this).val();
-
         $("#modalDelete").modal("show");
-
         $.ajax({
             url: 'buscaPessoaParaExclusao',
             type: 'POST',
             dataType: 'json',
-            data: {id: id},
+            data: {id: $(this).val()},
             success: function (result) {
 
                 if (result !== null) {
 
                     $('#pessoa').html("");
-
                     var pessoa = "<p>Deseja realmente excluir " + result.nome_pessoa + " e todos os seus registros?</p>" +
                             "<input type='hidden' id='idPessoa' name='idPessoa' value='" + result.id_pessoa + "'>";
-
                     $('#pessoa').append(pessoa);
                 }
             }
@@ -155,52 +154,41 @@ var pessoas = {
     validaCamposForm: function () {
 
         if ($('#nome').val() === '') {
-            swal("Atenção!", "Campo nome não pode ficar vazio!", "error");
             $('#nome').focus();
             $('#nome').css('border', '1px solid red');
+            swal("Atenção!", "Campo nome não pode ficar vazio!", "error");
             return;
         }
         if ($('#data_nascimento').val() === '') {
-            swal("Atenção!", "Data de Nascimento não pode ficar vazio!", "error");
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
+            swal("Atenção!", "Campo Data de Nascimento não pode ficar vazio!", "error");
             return;
         }
+
+        if ($('#data_nascimento').val().length < 10) {
+            $('#data_nascimento').focus();
+            $('#data_nascimento').css('border', '1px solid red');
+            swal("Atenção!", "Informe uma data válida!", "error");
+            return false;
+        }
+
         if ($('#sexo').val() === 'Selecione') {
-            swal("Atenção!", "Selecione uma opção válida!", "error");
+            $('#data_nascimento').focus();
             $('#sexo').css('border', '1px solid red');
-            return;
-        }
-        if ($('#cpf').val() === '') {
-            swal("Atenção!", "CPF não pode ficar vazio!", "error");
-            $('#cpf').focus();
-            $('#cpf').css('border', '1px solid red');
+            swal("Atenção!", "Selecione uma opção válida!", "error");
             return;
         }
         if ($('#rg').val() === '') {
             $('#rg').focus();
             $('#rg').css('border', '1px solid red');
+            swal("Atenção!", "Campo RG não pode ficar vazio!", "error");
             return;
         }
         if ($('#email').val() === '') {
-            swal("Atenção!", "Email  não pode ficar vazio!", "error");
             $('#email').focus();
             $('#email').css('border', '1px solid red');
-            return;
-        }
-        if ($('#residencial').val() === '') {
-            $('#residencial').focus();
-            $('#residencial').css('border', '1px solid red');
-            return;
-        }
-        if ($('#celular').val() === '') {
-            $('#celular').focus();
-            $('#celular').css('border', '1px solid red');
-            return;
-        }
-        if ($('#contato').val() === '') {
-            $('#contato').focus();
-            $('#contato').css('border', '1px solid red');
+            swal("Atenção!", "Campo Email  não pode ficar vazio!", "error");
             return;
         }
         if ($('#cep').val() === '') {
@@ -238,11 +226,30 @@ var pessoas = {
             $('#complemento').css('border', '1px solid red');
             return;
         }
+        if ($('#celular').val() === '') {
+            $('#celular').focus();
+            $('#celular').css('border', '1px solid red');
+            swal("Atenção!", "Campo Telefone Celular não pode ficar vazio!", "error");
+            return;
+        }
+        if ($('#contato').val() === '') {
+            $('#contato').focus();
+            $('#contato').css('border', '1px solid red');
+            swal("Atenção!", "Campo Telefone Para Contato não pode ficar vazio!", "error");
+            return;
+        }
         if ($('#perfil').val() === 'Selecione') {
             swal("Atenção!", "Selecione uma opção válida!", "error");
             $('#perfil').css('border', '1px solid red');
             return;
         }
+        if ($('#codigo').val() === '') {
+            $('#codigo').focus();
+            $('#codigo').css('border', '1px solid red');
+            swal("Atenção!", "Informe uma valor para o campo em destaque!", "error");
+            return;
+        }
+
         pessoas.gravar();
     },
     notificacoes: function () {
@@ -297,7 +304,6 @@ var pessoas = {
             success: function (result) {
 
                 $('#bodyReativar').html("");
-
                 var text = "<p>Deseja realmente reativar " + result.nome_pessoa + "?</p>" +
                         "<input type='hidden' id='pessoa' name='pessoa' value='" + result.id_pessoa + "'>";
                 $('#bodyReativar').append(text);
@@ -387,37 +393,30 @@ var pessoas = {
     montaInputPerfilSelecionado: function () {
 
         var perfil = $('#perfil').val();
-
         if (parseInt(perfil) === 3) {
 
             $('#nomeLabel').html("");
             $('#perfilSelecionado').html("");
             var label = "CREFFITO";
             var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
-
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
-
         } else if (parseInt(perfil) === 5) {
 
             $('#nomeLabel').html("");
             $('#perfilSelecionado').html("");
             var label = "RA";
             var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
-
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
-
         } else if (parseInt(perfil) === 7) {
 
             $('#nomeLabel').html("");
             $('#perfilSelecionado').html("");
             var label = "CRM";
             var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
-
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
-
         } else {
 
             $('#nomeLabel').html("");
@@ -446,9 +445,12 @@ var pessoas = {
                 estado: $('#estado').val(),
                 numero: $('#numero').val(),
                 complemento: $('#complemento').val(),
-                perfil: $('#perfil').val()
+                perfil: $('#perfil').val(),
+                codigo: $('#codigo').val()
+
             },
             success: function (retorno) {
+
                 if (retorno) {
                     swal({
                         text: "Cadastro realizado com Sucesso!",

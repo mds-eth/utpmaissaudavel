@@ -1,7 +1,19 @@
 var urls = {
 
     init: function () {
-        $('#gravar').on('click', urls.cadastrar);
+        $('#gravar').on('click', urls.validaCamposFormUrl);
+    },
+
+    validaCamposFormUrl: function () {
+
+        if ($('#url').val() === '') {
+            $('#url').focus();
+            $('#url').css('border', '1px solid red');
+            swal("Atenção!", "Informe a URL!", "error");
+            return;
+        }
+
+        urls.cadastrar();
     },
 
     cadastrar: function () {

@@ -36,12 +36,14 @@ class pessoasController extends controller {
                 $this->pessoa->setNome(trim(addslashes($_POST['nome'])));
                 $this->pessoa->setDataNascimento(trim(addslashes($_POST['dataNascimento'])));
                 $this->pessoa->setSexo(trim(addslashes($_POST['sexo'])));
-                $this->pessoa->setCpf(trim(addslashes($_POST['cpf'])));
+                $this->pessoa->setCpf(!empty($_POST['cpf']) ? trim(addslashes($_POST['cpf'])) : null);
                 $this->pessoa->setRg(trim(addslashes($_POST['rg'])));
                 $this->pessoa->setEmail(trim(addslashes($_POST['email'])));
+                $this->pessoa->setCodigo(isset($_POST['codigo']) ? trim(addslashes($_POST['codigo'])) : null);
+
                 $fkIdPessoa = $this->pessoa->gravar();
 
-                $this->telefone->setResidencial(trim(addslashes($_POST['residencial'])));
+                $this->telefone->setResidencial(!empty($_POST['residencial']) ? trim(addslashes($_POST['residencial'])) : null);
                 $this->telefone->setCelular(trim(addslashes($_POST['celular'])));
                 $this->telefone->setContato(trim(addslashes($_POST['contato'])));
                 $this->telefone->setFkIdPessoa($fkIdPessoa);
@@ -59,7 +61,7 @@ class pessoasController extends controller {
 
                 $this->usuario->setFkIdPerfil(trim(addslashes($_POST['perfil'])));
                 $this->usuario->setFkIdPessoa($fkIdPessoa);
-                $this->usuario->gravar();
+                $this->usuario->gravar($_POST['email']);
 
                 echo true;
             } else {

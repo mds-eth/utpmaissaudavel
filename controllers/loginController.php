@@ -3,9 +3,15 @@
 class loginController extends controller {
 
     private $login;
+    private $url;
 
     public function __construct() {
+        $this->url = new Urls();
         $this->login = new Login;
+
+       /* if (!$this->url->validaSessaoTemporaria()) {
+            header('Location: ' . URL . '/login');
+        }*/
     }
 
     public function index() {

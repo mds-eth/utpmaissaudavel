@@ -6,12 +6,12 @@ var pacientes = {
         $('#cpf').on('blur', pacientes.validaCpf);
         $('#limpar').on('click', pacientes.limparCampos);
         $('#gravar').on('click', pacientes.validaCamposForm);
+        $('#data_nascimento').on('blur', pacientes.validarIdadePessoa);
     },
+
     buscaCep: function () {
 
-        var cep = $('#cep').val();
-
-        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+        $.getJSON("https://viacep.com.br/ws/" + $('#cep').val() + "/json/?callback=?", function (dados) {
 
             if (!("erro" in dados)) {
 
@@ -23,14 +23,13 @@ var pacientes = {
             }
         });
     },
-    validaCpf: function () {
 
-        var cpf = $('#cpf').val();
+    validaCpf: function () {
 
         $.ajax({
             url: URL + '/pessoas/validaCpf',
             type: 'POST',
-            data: {cpf: cpf},
+            data: {cpf: $('#cpf').val()},
             dataType: 'json',
             success: function (result) {
 
@@ -44,9 +43,9 @@ var pacientes = {
             }
         });
     },
+
     limparCampos: function () {
 
-        $('#idPessoa').val("");
         $('#nome').val("");
         $('#data_nascimento').val("");
         $('#mae').val("");
@@ -64,6 +63,7 @@ var pacientes = {
         $('#numero').val("");
         $('#complemento').val("");
     },
+
     validaCamposForm: function () {
 
         if ($('#nome').val() === '') {
@@ -84,9 +84,10 @@ var pacientes = {
             return;
         }
 
-        if ($('#mae').val() === '') {
-            $('#mae').focus();
-            $('#mae').css('border', '1px solid red');
+        if ($('#responsavel').val() === '') {
+            $('#responsavel').focus();
+            $('#responsavel').css('border', '1px solid red');
+            swal("Atenção!", "Campo Nome Responsável obrigatório!", "error");
             return;
         }
 
@@ -192,8 +193,9 @@ var pacientes = {
             return;
         }
 
-        pacientes.gravar;
+        pacientes.gravar();
     },
+
     gravar: function () {
 
         $.ajax({
@@ -202,7 +204,7 @@ var pacientes = {
             data: {
                 nome: $('#nome').val(),
                 dataNascimento: $('#data_nascimento').val(),
-                mae: $('#mae').val(),
+                responsavel: $('#responsavel').val(),
                 sexo: $('#sexo').val(),
                 cpf: $('#cpf').val(),
                 rg: $('#rg').val(),
@@ -229,10 +231,9 @@ var pacientes = {
                         text: "Cadastro realizado com Sucesso!",
                         type: "success",
                         confirmButtonText: "OK"
-                    }, function () {
-                        window.location = URL + '/pacientes/visualizar';
-
                     });
+
+                    window.location = URL + '/pacientes/visualizar';
                 } else {
                     swal({
                         type: 'warning',
@@ -243,6 +244,34 @@ var pacientes = {
                 }
             }
         });
+    },
+
+    validarIdadePessoa: function () {
+
+        var valorInput = $('#data_nascimento').val();
+
+        var anoNascimento = valorInput.slice(6);
+
+        var date = new Date();
+        var anoAtual = date.getFullYear();
+
+        var idade = anoAtual - anoNascimento;
+
+        if (idade <= 12) {
+
+            $('#labelResponsavel').html("");
+            $('#inputResponsavel').html("");
+
+            var labelResponsavel = "Nome Responsavel";
+            var inputResponsavel = "<input type='text' id='responsavel' name='responsavel' required='required' class='form-control col-md-7 col-xs-12'>";
+
+            $('#labelResponsavel').append(labelResponsavel);
+            $('#inputResponsavel').append(inputResponsavel);
+        } else {
+
+            $('#labelResponsavel').html("");
+            $('#inputResponsavel').html("");
+        }
     }
 };
 $(document).ready(function () {

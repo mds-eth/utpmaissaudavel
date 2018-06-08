@@ -19,7 +19,6 @@
                         <input type="text" id="url" name="url" required="required" class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
-
                 <div class="item form-group">
                     <label class="col-md-1 col-sm-3 col-xs-12" for="url">Perfil<span class="required">*</span>
                     </label>

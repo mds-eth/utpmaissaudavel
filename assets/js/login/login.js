@@ -20,7 +20,7 @@ var login = {
                 } else if (parseInt(result) === 1) {
                     window.location = URL + '/login/novo';
                 } else if (parseInt(result) === 0) {
-                    swal({type: 'warning', title: 'Usuário invativo no Sistema', confirmButtonText: 'OK'});
+                    swal({type: 'error', title: 'Usuário inativo no Sistema', confirmButtonText: 'OK'});
                     return;
                 } else if (result === 'false') {
                     swal({type: 'warning', title: 'Email ou senha incorretos', confirmButtonText: 'OK'});
@@ -38,6 +38,12 @@ var login = {
             swal({type: 'error', title: 'Senhas não são iguais, favor verificar', confirmButtonText: 'OK'});
             return false;
         }
+
+        if ($('#senha').val().length < 5 && $('#confirmar').val() < 5) {
+            swal({type: 'error', title: 'Senha deverá conter no minímo 5 caracteres', confirmButtonText: 'OK'});
+            return false;
+        }
+
         login.cadastrar();
     },
 
@@ -52,7 +58,7 @@ var login = {
             },
             success: function (result) {
 
-                if (result) {
+                if (parseInt(result) === 1) {
                     window.location = URL + '/home';
                 }
             }

@@ -11,7 +11,6 @@ class homeController extends controller {
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
-
         $dados = array();
 
         $this->url = new Urls();

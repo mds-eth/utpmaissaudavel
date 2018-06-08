@@ -66,7 +66,8 @@ class unidadesController extends controller {
 
             $id = $_POST['id'];
 
-            $unidade = $this->unidade->buscaUnidadeParaEdicao($id);
+            $unidade['unidade'] = $this->unidade->buscaUnidadeParaEdicao($id);
+            $unidade['regionais'] = $this->unidade->listaRegionais();           
 
             echo json_encode($unidade);
         }
@@ -113,6 +114,27 @@ class unidadesController extends controller {
         $dados['regionais'] = $this->unidade->listaRegionais();
 
         $this->loadTemplate('unidades/regionais', $dados);
+    }
+
+    public function buscaRegionalParaEdicao() {
+
+        if ($this->post()) {
+
+            $regional = $this->unidade->buscaRegionalParaEdicao($_POST['id']);
+
+            echo json_encode($regional);
+        }
+    }
+
+    public function editarRegional() {
+
+        if ($this->post()) {
+
+            $this->unidade->setFkIdRegional($_POST['id']);
+            $this->unidade->setRegional(trim(addslashes($_POST['nomeRegional'])));
+            $this->unidade->setResponsavel(trim(addslashes($_POST['responsavel'])));
+            echo $this->unidade->editarRegional();
+        }
     }
 
 }

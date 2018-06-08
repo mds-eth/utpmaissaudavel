@@ -8,18 +8,23 @@ class Pessoas extends model {
     public $mae;
     public $nome;
     public $email;
+    public $codigo;
     public $dataNascimento;
 
     public function gravar() {
 
         $status = 1;
 
+        if (is_null($this->getCodigo())) {
+            $this->setCodigo(rand(1, 250000));
+        }
+
         try {
 
             $sql = "INSERT INTO pessoas(nome_pessoa, data_nascimento, sexo, cpf, rg, email,
-                 status, pessoa_criado_por, pessoa_criado_em, pessoa_atualizado_por, pessoa_atualizado_em) VALUES(:nome_pessoa, 
+                 status, codigo, pessoa_criado_por, pessoa_criado_em, pessoa_atualizado_por, pessoa_atualizado_em) VALUES(:nome_pessoa, 
                 :data_nascimento, :sexo, :cpf, :rg, :email,
-                :status, :pessoa_criado_por, :pessoa_criado_em, :pessoa_atualizado_por, :pessoa_atualizado_em)";
+                :status, :codigo, :pessoa_criado_por, :pessoa_criado_em, :pessoa_atualizado_por, :pessoa_atualizado_em)";
 
             $pdo = $this->db->prepare($sql);
 
@@ -30,6 +35,7 @@ class Pessoas extends model {
             $pdo->bindValue(':rg', $this->getRg(), PDO::PARAM_STR);
             $pdo->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
             $pdo->bindValue(':status', $status, PDO::PARAM_STR);
+            $pdo->bindValue(':codigo', $this->getCodigo(), PDO::PARAM_STR);
             $pdo->bindValue(':pessoa_criado_por', $this->idUsuario, PDO::PARAM_INT);
             $pdo->bindValue(':pessoa_criado_em', $this->date, PDO::PARAM_STR);
             $pdo->bindValue(':pessoa_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
@@ -38,11 +44,8 @@ class Pessoas extends model {
             $pdo->execute();
 
             $fkIdPessoa = $this->db->lastInsertId();
-
             return $fkIdPessoa;
         } catch (Exception $exc) {
-
-
 
             echo $exc->getTraceAsString();
         }
@@ -148,19 +151,26 @@ class Pessoas extends model {
 
     public function listaPessoasAtivas() {
 
-        $sql = $this->db->prepare("select * from pessoas p join usuarios u on p.id_pessoa = u.fk_id_pessoa
+        if ($_SESSION['usuario']['id_perfil'] == 1) {
+            $sql = $this->db->prepare("select * from pessoas p join usuarios u on p.id_pessoa = u.fk_id_pessoa
                         join enderecos e on p.id_pessoa = e.fk_id_pessoa
                         join telefones t on p.id_pessoa = t.fk_id_pessoa
                         join perfis pe on u.fk_id_perfil = pe.id_perfil
                         and p.status = 1");
+        } else {
+            $sql = $this->db->prepare("select * from pessoas p join usuarios u on p.id_pessoa = u.fk_id_pessoa
+                        join enderecos e on p.id_pessoa = e.fk_id_pessoa
+                        join telefones t on p.id_pessoa = t.fk_id_pessoa
+                        join perfis pe on u.fk_id_perfil = pe.id_perfil
+                        and p.id_pessoa != 1
+                        and p.status = 1");
+        }
 
         $sql->execute();
 
         $return = $sql->fetchAll();
 
-
         if ($return != null || !empty($return)) {
-
             return $return;
         }
     }
@@ -279,6 +289,14 @@ class Pessoas extends model {
 
     function setMae($mae) {
         $this->mae = $mae;
+    }
+
+    function getCodigo() {
+        return $this->codigo;
+    }
+
+    function setCodigo($codigo) {
+        $this->codigo = $codigo;
     }
 
 }

@@ -16,7 +16,9 @@
                             <th style="text-align: center">Convenio</th>    
                             <th style="text-align: center">Unidade de Saúde</th>
                             <th style="text-align: center">Data Entrada</th>
-                            <th style="text-align: center">Ações</th>                        
+                            <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA) : ?>                            
+                                <th style="text-align: center">Ações</th>   
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,9 +33,11 @@
                                 <td style="text-align: center"><?= $paciente['nome_unidade'] ?></td>
                                 <?php $data = $paciente['pessoa_criado_em'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
-                                <td style="text-align: center">
-                                    <a href="<?php echo URL; ?>/pacientes/paciente/<?= $paciente['id_pessoa'] ?>" class="btn btn-success btn-xs">Abrir Ficha</a>
-                                </td>                            
+                                <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA) : ?>                            
+                                    <td style="text-align: center">
+                                        <a href="<?php echo URL; ?>/pacientes/paciente/<?= $paciente['id_pessoa'] ?>" class="btn btn-success btn-xs">Abrir Ficha</a>
+                                    </td>  
+                                <?php endif; ?>
                             </tr>                    
                         <?php endforeach; ?>
                     </tbody>
