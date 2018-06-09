@@ -3,6 +3,7 @@
 class Pacientes extends model {
 
     private $convenio;
+    private $responsavel;
     private $fkIdPaciente;
     private $especialidades;
     private $fkIdUnidadeSaude;
@@ -11,9 +12,9 @@ class Pacientes extends model {
 
         try {
 
-            $sql = "INSERT INTO dados_pacientes(fk_id_unidade_de_saude, fk_id_paciente, convenio, dado_paciente_criado_por, dado_paciente_criado_em,
+            $sql = "INSERT INTO dados_pacientes(fk_id_unidade_de_saude, fk_id_paciente, convenio, responsavel, dado_paciente_criado_por, dado_paciente_criado_em,
                 dado_paciente_atualizado_por, dado_paciente_atualizado_em)
-                VALUES(:fk_id_unidade_de_saude, :fk_id_paciente, :convenio, :dado_paciente_criado_por, :dado_paciente_criado_em, 
+                VALUES(:fk_id_unidade_de_saude, :fk_id_paciente, :convenio, :responsavel, :dado_paciente_criado_por, :dado_paciente_criado_em, 
                 :dado_paciente_atualizado_por, :dado_paciente_atualizado_em)";
 
             $pdo = $this->db->prepare($sql);
@@ -21,6 +22,7 @@ class Pacientes extends model {
             $pdo->bindValue(':fk_id_unidade_de_saude', $this->getFkIdUnidadeSaude(), PDO::PARAM_INT);
             $pdo->bindValue(':fk_id_paciente', $this->getFkIdPaciente(), PDO::PARAM_INT);
             $pdo->bindValue(':convenio', $this->getConvenio(), PDO::PARAM_STR);
+            $pdo->bindValue(':responsavel', $this->getResponsavel(), PDO::PARAM_STR);
             $pdo->bindValue(':dado_paciente_criado_por', $this->idUsuario, PDO::PARAM_INT);
             $pdo->bindValue(':dado_paciente_criado_em', $this->date, PDO::PARAM_STR);
             $pdo->bindValue(':dado_paciente_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
@@ -122,6 +124,14 @@ class Pacientes extends model {
 
     function setFkIdPaciente($fkIdPaciente) {
         $this->fkIdPaciente = $fkIdPaciente;
+    }
+
+    function getResponsavel() {
+        return $this->responsavel;
+    }
+
+    function setResponsavel($responsavel) {
+        $this->responsavel = $responsavel;
     }
 
 }

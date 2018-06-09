@@ -4,17 +4,17 @@ var pessoas = {
 
         $('#cep').on('blur', pessoas.buscaCep);
         $('#cpf').on('blur', pessoas.validaCpf);
-        $('.editar').on('click', pessoas.modalEditar);
         $('#limpar').on('click', pessoas.limparCampos);
-        $('.excluir').on('click', pessoas.modalExcluir);
+        $('.inativar').on('click', pessoas.modalInativar);
         $('#gravar').on('click', pessoas.validaCamposForm);
         $('#notificacao').on('click', pessoas.notificacoes);
         $('#btnReativar').on('click', pessoas.reativarPessoa);
-        $('#btnModalExcluir').on('click', pessoas.excluirPessoa);
         $('#data_nascimento').on('blur', pessoas.validaCampoData);
+        $('#btnModalInativar').on('click', pessoas.inativarPessoa);
         $('.reativar').on('click', pessoas.buscaPessoaParaReativar);
-        $('#btnModalEditar').on('click', pessoas.validaCamposEditar);
+        $('#btnEditarPessoa').on('click', pessoas.validaCamposEditar);
         $('#perfil').on('change', pessoas.montaInputPerfilSelecionado);
+        $('#editarPessoa').on('click', pessoas.abrirCamposPessoaEdicao);
 
     },
     validaCampoData: function () {
@@ -61,57 +61,7 @@ var pessoas = {
             }
         });
     },
-    modalEditar: function () {
 
-        $.ajax({
-            url: 'buscaPessoaParaEdicao',
-            type: 'POST',
-            dataType: 'json',
-            data: {id: $(this).val()},
-            success: function (result) {
-
-                if (result !== null) {
-
-                    $('#formularioEdicao').html("");
-                    var formulario = "<div data-parsley-validate class='form-horizontal form-label-left'>" +
-                            "<input type='hidden' id='idPessoa' name='idPessoa' value='" + result.id_pessoa + "'>" +
-                            "<label for='nome'>Nome <span class='required'></label>" +
-                            "<input value='" + result.nome_pessoa + "' type='text' id='nome' name='nome' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='data_nascimento'>Data Nascimento <span class='required'></label>" +
-                            "<input value='" + result.data_nascimento + "' type='text' id='data_nascimento' name='data_nascimento' class='form-control col-md-7 col-xs-12' readonly='true'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='cpf'>CPF <span class='required'></label>" +
-                            "<input value='" + result.cpf + "' type='text' id='cpf' name='cpf' class='form-control col-md-7 col-xs-12' readonly='true'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='rg'>RG <span class='required'></label>" +
-                            "<input value='" + result.rg + "' type='text' id='rg' name='rg' class='form-control col-md-7 col-xs-12' readonly='true'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='email'>Email <span class='required'></label>" +
-                            "<input value='" + result.email + "' type='text' id='email' name='email' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='residencial'>Residencial <span class='required'></label>" +
-                            "<input value='" + result.telefone + "' type='text' id='residencial' name='residencial' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='celular'>Celular <span class='required'></label>" +
-                            "<input value='" + result.celular + "' type='text' id='celular' name='celular' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='contato'>Recado<span class='required'></label>" +
-                            "<input value='" + result.contato + "' type='text' id='contato' name='contato' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='cep'>CEP <span class='required'></label>" +
-                            "<input value='" + result.cep + "' type='text' id='cep' name='cep' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='rua'>Rua <span class='required'></label>" +
-                            "<input value='" + result.rua + "' type='text' id='rua' name='rua' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='bairro'>Bairro<span class='required'></label>" +
-                            "<input value='" + result.bairro + "' type='text' id='bairro' name='bairro' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='cidade'>Cidade<span class='required'></label>" +
-                            "<input value='" + result.cidade + "' type='text' id='cidade' name='cidade' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='estado'>Estado <span class='required'></label>" +
-                            "<input value='" + result.estado + "' type='text' id='estado' name='estado' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='numero'>Número <span class='required'></label>" +
-                            "<input value='" + result.numero + "' type='text' id='numero' name='numero' class='form-control col-md-7 col-xs-12'>" +
-                            "<label class='col-md-1 col-sm-3 col-xs-12' for='complemento'>Complemento<span class='required'></label>" +
-                            "<input value='" + result.complemento + "' type='text' id='complemento' name='complemento' class='form-control col-md-7 col-xs-12'>" +
-                            "</div>";
-                    $('#formularioEdicao').append(formulario);
-                    $("#modalEdit").modal("show");
-                }
-            }
-        });
-    },
     limparCampos: function () {
 
         $('#nome').val("");
@@ -131,23 +81,23 @@ var pessoas = {
         $('#celular').val("");
         $('#contato').val("");
     },
-    modalExcluir: function () {
+    modalInativar: function () {
 
-        $("#modalDelete").modal("show");
         $.ajax({
-            url: 'buscaPessoaParaExclusao',
+            url: URL + '/pessoas/buscaPessoaParaInativar',
             type: 'POST',
             dataType: 'json',
             data: {id: $(this).val()},
             success: function (result) {
 
-                if (result !== null) {
+                $('#pessoa').html("");
 
-                    $('#pessoa').html("");
-                    var pessoa = "<p>Deseja realmente excluir " + result.nome_pessoa + " e todos os seus registros?</p>" +
-                            "<input type='hidden' id='idPessoa' name='idPessoa' value='" + result.id_pessoa + "'>";
-                    $('#pessoa').append(pessoa);
-                }
+                var pessoa = "<p>Deseja realmente inativar " + result.nome_pessoa + "?</p>" +
+                        "<input type='hidden' id='idPessoa' name='idPessoa' value='" + result.id_pessoa + "'>";
+
+                $('#pessoa').append(pessoa);
+                $("#modalInativar").modal("show");
+
             }
         });
     },
@@ -194,36 +144,43 @@ var pessoas = {
         if ($('#cep').val() === '') {
             $('#cep').focus();
             $('#cep').css('border', '1px solid red');
+            swal("Atenção!", "Campo CEP  não pode ficar vazio!", "error");
             return;
         }
         if ($('#rua').val() === '') {
             $('#rua').focus();
             $('#rua').css('border', '1px solid red');
+            swal("Atenção!", "Campo Rua  não pode ficar vazio!", "error");
             return;
         }
         if ($('#bairro').val() === '') {
             $('#bairro').focus();
             $('#bairro').css('border', '1px solid red');
+            swal("Atenção!", "Campo Bairro  não pode ficar vazio!", "error");
             return;
         }
         if ($('#cidade').val() === '') {
             $('#cidade').focus();
             $('#cidade').css('border', '1px solid red');
+            swal("Atenção!", "Campo Cidade  não pode ficar vazio!", "error");
             return;
         }
         if ($('#estado').val() === '') {
             $('#estado').focus();
             $('#estado').css('border', '1px solid red');
+            swal("Atenção!", "Campo Estado  não pode ficar vazio!", "error");
             return;
         }
         if ($('#numero').val() === '') {
             $('#numero').focus();
             $('#numero').css('border', '1px solid red');
+            swal("Atenção!", "Campo Número  não pode ficar vazio!", "error");
             return;
         }
         if ($('#complemento').val() === '') {
             $('#complemento').focus();
             $('#complemento').css('border', '1px solid red');
+            swal("Atenção!", "Campo Complemento  não pode ficar vazio!", "error");
             return;
         }
         if ($('#celular').val() === '') {
@@ -270,25 +227,25 @@ var pessoas = {
                         type: "success"
                     });
                     setTimeout(function () {
-                        window.location.href = URL + '/pessoas/visualizar';
+                        window.location.href = URL + '/pessoas/listagem';
                     }, 1000);
                 }
             }
         });
     },
-    excluirPessoa: function () {
+    inativarPessoa: function () {
 
         $.ajax({
-            url: 'excluir',
+            url: URL + '/pessoas/inativarPessoa',
             type: 'POST',
             dataType: 'json',
             data: {idPessoa: $('#idPessoa').val()},
             success: function (result) {
 
                 if (result) {
-                    swal({text: "Pessoa excluída com Sucesso!", type: "success"});
+                    swal({text: "Pessoa inativada com Sucesso!", type: "success"});
                     setTimeout(function () {
-                        window.location.href = URL + '/pessoas/visualizar';
+                        window.location.href = URL + '/pessoas/listagem';
                     }, 1000);
                 }
             }
@@ -316,107 +273,115 @@ var pessoas = {
         if ($('#nome').val() === '') {
             $('#nome').focus();
             $('#nome').css('border', '1px solid red');
+            swal("Atenção!", "Campo nome não pode ficar vazio!", "error");
             return;
         }
         if ($('#data_nascimento').val() === '') {
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
+            swal("Atenção!", "Campo Data de Nascimento não pode ficar vazio!", "error");
             return;
         }
-        if ($('#cpf').val() === '') {
-            $('#cpf').focus();
-            $('#cpf').css('border', '1px solid red');
-            return;
+
+        if ($('#data_nascimento').val().length < 10) {
+            $('#data_nascimento').focus();
+            $('#data_nascimento').css('border', '1px solid red');
+            swal("Atenção!", "Informe uma data válida!", "error");
+            return false;
         }
         if ($('#rg').val() === '') {
             $('#rg').focus();
             $('#rg').css('border', '1px solid red');
+            swal("Atenção!", "Campo RG não pode ficar vazio!", "error");
             return;
         }
         if ($('#email').val() === '') {
             $('#email').focus();
             $('#email').css('border', '1px solid red');
-            return;
-        }
-        if ($('#residencial').val() === '') {
-            $('#residencial').focus();
-            $('#residencial').css('border', '1px solid red');
-            return;
-        }
-        if ($('#celular').val() === '') {
-            $('#celular').focus();
-            $('#celular').css('border', '1px solid red');
-            return;
-        }
-        if ($('#contato').val() === '') {
-            $('#contato').focus();
-            $('#contato').css('border', '1px solid red');
+            swal("Atenção!", "Campo Email  não pode ficar vazio!", "error");
             return;
         }
         if ($('#cep').val() === '') {
             $('#cep').focus();
             $('#cep').css('border', '1px solid red');
+            swal("Atenção!", "Campo CEP  não pode ficar vazio!", "error");
             return;
         }
         if ($('#rua').val() === '') {
             $('#rua').focus();
             $('#rua').css('border', '1px solid red');
+            swal("Atenção!", "Campo Rua  não pode ficar vazio!", "error");
             return;
         }
         if ($('#bairro').val() === '') {
             $('#bairro').focus();
             $('#bairro').css('border', '1px solid red');
+            swal("Atenção!", "Campo Bairro  não pode ficar vazio!", "error");
             return;
         }
         if ($('#cidade').val() === '') {
             $('#cidade').focus();
             $('#cidade').css('border', '1px solid red');
+            swal("Atenção!", "Campo Cidade  não pode ficar vazio!", "error");
             return;
         }
         if ($('#estado').val() === '') {
             $('#estado').focus();
             $('#estado').css('border', '1px solid red');
+            swal("Atenção!", "Campo Estado  não pode ficar vazio!", "error");
             return;
         }
         if ($('#numero').val() === '') {
             $('#numero').focus();
             $('#numero').css('border', '1px solid red');
+            swal("Atenção!", "Campo Número  não pode ficar vazio!", "error");
             return;
         }
         if ($('#complemento').val() === '') {
             $('#complemento').focus();
             $('#complemento').css('border', '1px solid red');
+            swal("Atenção!", "Campo Complemento  não pode ficar vazio!", "error");
+            return;
+        }
+        if ($('#celular').val() === '') {
+            $('#celular').focus();
+            $('#celular').css('border', '1px solid red');
+            swal("Atenção!", "Campo Telefone Celular não pode ficar vazio!", "error");
+            return;
+        }
+        if ($('#contato').val() === '') {
+            $('#contato').focus();
+            $('#contato').css('border', '1px solid red');
+            swal("Atenção!", "Campo Telefone Para Contato não pode ficar vazio!", "error");
             return;
         }
         pessoas.editarRegistro();
     },
     montaInputPerfilSelecionado: function () {
 
+        $('#nomeLabel').html("");
         var perfil = $('#perfil').val();
+        $('#perfilSelecionado').html("");
+        var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
+
         if (parseInt(perfil) === 3) {
 
-            $('#nomeLabel').html("");
-            $('#perfilSelecionado').html("");
             var label = "CREFFITO";
-            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
+
         } else if (parseInt(perfil) === 5) {
 
-            $('#nomeLabel').html("");
-            $('#perfilSelecionado').html("");
             var label = "RA";
-            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
+
         } else if (parseInt(perfil) === 7) {
 
-            $('#nomeLabel').html("");
-            $('#perfilSelecionado').html("");
             var label = "CRM";
-            var input = "<input id='codigo' name='codigo' class='form-control' type='text'/>";
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
+
         } else {
 
             $('#nomeLabel').html("");
@@ -457,7 +422,7 @@ var pessoas = {
                         type: "success"
                     });
                     setTimeout(function () {
-                        window.location.href = URL + '/pessoas/visualizar';
+                        window.location.href = URL + '/pessoas/listagem';
                     }, 1000);
                 } else {
                     swal({
@@ -473,7 +438,7 @@ var pessoas = {
     editarRegistro: function () {
 
         $.ajax({
-            url: 'editar',
+            url: URL + '/pessoas/editar',
             type: 'POST',
             data: {
                 idPessoa: $('#idPessoa').val(),
@@ -496,16 +461,38 @@ var pessoas = {
             success: function (result) {
 
                 if (result) {
-                    swal({
-                        title: "Atualizado com Sucesso!",
-                        icon: "success"
-                    });
+                    swal({text: "Registro atualizado com Sucesso!", type: "success"});
                     setTimeout(function () {
-                        window.location = URL + '/pessoas/visualizar';
+                        window.location = URL + '/pessoas/listagem';
                     }, 1000);
                 }
             }
         });
+    },
+
+    abrirCamposPessoaEdicao: function () {
+
+        $('#nome').prop('readonly', false);
+        $('#nome').prop('readonly', false);
+        $('#data_nascimento').prop('readonly', false);
+        $('#sexo').prop('readonly', false);
+        $('#cpf').prop('readonly', false);
+        $('#rg').prop('readonly', false);
+        $('#email').prop('readonly', false);
+        $('#cep').prop('readonly', false);
+        $('#rua').prop('readonly', false);
+        $('#bairro').prop('readonly', false);
+        $('#cidade').prop('readonly', false);
+        $('#estado').prop('readonly', false);
+        $('#numero').prop('readonly', false);
+        $('#complemento').prop('readonly', false);
+        $('#residencial').prop('readonly', false);
+        $('#celular').prop('readonly', false);
+        $('#contato').prop('readonly', false);
+
+        $('#btnEditarPessoa').html("");
+        var btn = "<button id='editPessoa' name='editPessoa' class='editPessoa btn btn-success btn-xs'>Salvar Alterações</button>";
+        $('#btnEditarPessoa').append(btn);
     }
 };
 $(document).ready(function () {

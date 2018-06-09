@@ -38,9 +38,6 @@ var unidades = {
             data: {id: $(this).val()},
             success: function (result) {
 
-
-                var regionais = result.regionais;
-
                 $("#formularioEdicao").html("");
 
                 var input = "<div class='form-horizontal'>" +
@@ -48,13 +45,6 @@ var unidades = {
                         "<label for='nome'>Unidade de Saúde <span class='required'></label><br/>" +
                         "<input value='" + result.unidade.nome_unidade + "' type='text' id='unidade' name='unidade' class='form-control col-md-7 col-xs-12'><br/>";
 
-
-                for (var i in regionais) {
-
-                    var regional = regionais[i];
-                    input += "<option id='" + regional.id_regional + "' class='form-control'>" + regional.nome_regional + "</option>";
-                }
-                
                 $('#formularioEdicao').append(input);
                 $("#modalEdit").modal();
             }

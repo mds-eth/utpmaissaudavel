@@ -38,7 +38,7 @@ class pacientesController extends controller {
                 $this->pessoa->setNome(trim(addslashes($_POST['nome'])));
                 $this->pessoa->setDataNascimento(trim(addslashes($_POST['dataNascimento'])));
                 $this->pessoa->setSexo(trim(addslashes($_POST['sexo'])));
-                $this->pessoa->setCpf(trim(addslashes($_POST['cpf'])));
+                $this->pessoa->setCpf(!empty($_POST['cpf']) ? trim(addslashes($_POST['cpf'])) : null);
                 $this->pessoa->setRg(trim(addslashes($_POST['rg'])));
                 $this->pessoa->setEmail(trim(addslashes($_POST['email'])));
 
@@ -48,9 +48,10 @@ class pacientesController extends controller {
                 $this->paciente->setFkIdUnidadeSaude(trim(addslashes($_POST['unidade'])));
                 $this->paciente->setEspecialidades(trim(addslashes($_POST['especialidade'])));
                 $this->paciente->setConvenio(trim(addslashes($_POST['convenio'])));
+                $this->paciente->setResponsavel(!empty($_POST['responsavel']) ? trim(addslashes($_POST['responsavel'])) : null);
                 $this->paciente->gravaTabelaDadosPacientes();
 
-                $this->telefone->setResidencial(trim(addslashes($_POST['residencial'])));
+                $this->telefone->setResidencial(!empty($_POST['residencial']) ? trim(addslashes($_POST['residencial'])) : null);
                 $this->telefone->setCelular(trim(addslashes($_POST['celular'])));
                 $this->telefone->setContato(trim(addslashes($_POST['contato'])));
                 $this->telefone->setFkIdPessoa($fkIdPaciente);
@@ -81,11 +82,11 @@ class pacientesController extends controller {
         }
     }
 
-    public function visualizar() {
+    public function listagem() {
 
         $dados['pacientes'] = $this->paciente->listaTodosPacientes();
 
-        $this->loadTemplate('pacientes/visualizar', $dados);
+        $this->loadTemplate('pacientes/listagem', $dados);
     }
 
     public function fichaPaciente() {
@@ -104,7 +105,11 @@ class pacientesController extends controller {
 
         $dados['ficha'] = $this->paciente->listaFichaPaciente($id);
 
-        $this->loadTemplate('pacientes/paciente', $dados);
+        if ($dados['ficha'] == false) {
+            header('Location: ' . URL . '/pacientes/listagem');
+        } else {
+            $this->loadTemplate('pacientes/paciente', $dados);
+        }
     }
 
 }

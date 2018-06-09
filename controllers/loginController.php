@@ -9,9 +9,9 @@ class loginController extends controller {
         $this->url = new Urls();
         $this->login = new Login;
 
-       /* if (!$this->url->validaSessaoTemporaria()) {
-            header('Location: ' . URL . '/login');
-        }*/
+        if ($this->url->validaSessaoTemporaria()) {
+            header('Location: ' . URL . '/home');
+        }
     }
 
     public function index() {

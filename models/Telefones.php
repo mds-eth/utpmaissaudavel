@@ -35,11 +35,12 @@ class Telefones extends model {
         }
     }
 
-    public function atualizar($idPessoa) {
+    public function atualizar() {
 
         try {
 
-            $sql = "UPDATE telefones SET telefone = :residencial, celular = :celular, contato = :contato WHERE fk_id_pessoa = :id_pessoa";
+            $sql = "UPDATE telefones SET telefone = :residencial, celular = :celular, contato = :contato, telefone_atualizado_por = :telefone_atualizado_por,
+                telefone_atualizado_em = :telefone_atualizado_em WHERE fk_id_pessoa = :id_pessoa";
 
             $pdo = $this->db->prepare($sql);
 
@@ -48,7 +49,7 @@ class Telefones extends model {
             $pdo->bindValue(':contato', $this->getContato(), PDO::PARAM_STR);
             $pdo->bindValue(':telefone_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
             $pdo->bindValue(':telefone_atualizado_em', $this->date, PDO::PARAM_STR);
-            $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
+            $pdo->bindValue(':id_pessoa', $this->getFkIdPessoa(), PDO::PARAM_INT);
 
             $pdo->execute();
         } catch (Exception $exc) {

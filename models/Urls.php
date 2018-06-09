@@ -113,7 +113,7 @@ class Urls extends model {
 
     public function validaSessaoTemporaria() {
 
-        if (isset($_SESSION['usuario']) || isset($_SESSION['temp'])) {
+        if (isset($_SESSION['usuario'])) {
             return true;
         } else {
             return false;

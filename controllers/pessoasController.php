@@ -20,9 +20,9 @@ class pessoasController extends controller {
             header('Location: ' . URL . '/login');
         }
 
-        if (!$this->url->verificaUrlSessaoUsuario()) {
-            header('Location: ' . URL . '/home');
-        }
+        /* if (!$this->url->verificaUrlSessaoUsuario()) {
+          header('Location: ' . URL . '/home');
+          } */
     }
 
     public function cadastrar() {
@@ -98,6 +98,7 @@ class pessoasController extends controller {
                 $this->telefone->setFkIdPessoa($idPessoa);
                 $this->telefone->atualizar();
 
+
                 $this->endereco->setCep(trim(addslashes($_POST['cep'])));
                 $this->endereco->setRua(trim(addslashes($_POST['rua'])));
                 $this->endereco->setBairro(trim(addslashes($_POST['bairro'])));
@@ -115,14 +116,14 @@ class pessoasController extends controller {
         }
     }
 
-    public function excluir() {
+    public function inativarPessoa() {
 
         try {
 
             if ($this->post()) {
 
                 $idPessoa = $_POST['idPessoa'];
-                $this->pessoa->excluir($idPessoa);
+                $this->pessoa->inativarPessoa($idPessoa);
 
                 echo true;
             }
@@ -147,14 +148,14 @@ class pessoasController extends controller {
         }
     }
 
-    public function buscaPessoaParaExclusao() {
+    public function buscaPessoaParaInativar() {
 
         try {
 
             if ($this->post()) {
 
                 $id = $_POST['id'];
-                $pessoaExclusao = $this->pessoa->buscaRegistroPessoaExclusao($id);
+                $pessoaExclusao = $this->pessoa->buscaPessoaParaInativar($id);
 
                 echo json_encode($pessoaExclusao[0]);
             }
@@ -163,13 +164,13 @@ class pessoasController extends controller {
         }
     }
 
-    public function visualizar() {
+    public function listagem() {
 
         $dados = array();
         $dados['pessoas'] = $this->pessoa->listaPessoasAtivas();
 
 
-        $this->loadTemplate('pessoas/visualizar', $dados);
+        $this->loadTemplate('pessoas/listagem', $dados);
     }
 
     public function inativas() {
@@ -213,6 +214,17 @@ class pessoasController extends controller {
         $dados['perfil'] = $this->pessoa->listaPerfilPessoa($_SESSION['usuario']['id_pessoa']);
 
         $this->loadTemplate('pessoas/perfil', $dados);
+    }
+
+    public function pessoa($id) {
+
+        $dados['pessoa'] = $this->pessoa->listaPerfilPessoa($id);
+
+        if ($dados['pessoa'] == false) {
+            header('Location: ' . URL . '/pessoas/listagem');
+        } else {
+            $this->loadTemplate('pessoas/pessoa', $dados);
+        }
     }
 
 }

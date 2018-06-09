@@ -36,18 +36,20 @@ class Enderecos extends model {
             $pdo->bindValue(':endereco_atualizado_em', $this->date, PDO::PARAM_STR);
 
             $pdo->execute();
+
+            return true;
         } catch (Exception $exc) {
 
             echo $exc->getTraceAsString();
         }
     }
 
-    public function atualizar($idPessoa) {
+    public function atualizar() {
 
         try {
 
-            $sql = "UPDATE enderecos SET cep = :cep, rua = :rua, bairro = :bairro, cidade = :cidade, estado = :estado, numero = :numero, complemento = :complemento
-                    WHERE fk_id_pessoa = :id_pessoa";
+            $sql = "UPDATE enderecos SET cep = :cep, rua = :rua, bairro = :bairro, cidade = :cidade, estado = :estado, numero = :numero, complemento = :complemento,
+                    endereco_atualizado_por = :endereco_atualizado_por, endereco_atualizado_em = :endereco_atualizado_em WHERE fk_id_pessoa = :id_pessoa";
 
             $pdo = $this->db->prepare($sql);
 
@@ -60,7 +62,7 @@ class Enderecos extends model {
             $pdo->bindValue(':complemento', $this->getComplemento(), PDO::PARAM_STR);
             $pdo->bindValue(':endereco_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
             $pdo->bindValue(':endereco_atualizado_em', $this->date, PDO::PARAM_STR);
-            $pdo->bindValue(':id_pessoa', $idPessoa, PDO::PARAM_INT);
+            $pdo->bindValue(':id_pessoa', $this->getFkIdPessoa(), PDO::PARAM_INT);
 
             $pdo->execute();
         } catch (Exception $exc) {

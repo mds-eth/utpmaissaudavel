@@ -35,7 +35,7 @@
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA) : ?>                            
                                     <td style="text-align: center">
-                                        <a href="<?php echo URL; ?>/pacientes/paciente/<?= $paciente['id_pessoa'] ?>" class="btn btn-success btn-xs">Abrir Ficha</a>
+                                        <a href="<?php echo URL; ?>/pacientes/paciente/<?= $paciente['id_pessoa'] ?>" class="btn btn-success btn-xs">Prontuário</a>
                                     </td>  
                                 <?php endif; ?>
                             </tr>                    

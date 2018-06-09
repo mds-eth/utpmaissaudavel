@@ -77,7 +77,7 @@ class Pessoas extends model {
         }
     }
 
-    public function excluir($idPessoa) {
+    public function inativarPessoa($idPessoa) {
 
         $status = 0;
 
@@ -130,14 +130,9 @@ class Pessoas extends model {
         }
     }
 
-    public function buscaRegistroPessoaExclusao($id) {
+    public function buscaPessoaParaInativar($id) {
 
-        $sql = $this->db->prepare("select id_pessoa, nome_pessoa, data_nascimento, sexo, 
-                        cpf, rg, email, id_telefone, telefone, celular, contato, id_endereco, 
-                        cep, rua, bairro, cidade, estado, numero, complemento
-                        from pessoas p join enderecos e on p.id_pessoa = e.fk_id_pessoa
-                        join telefones t on p.id_pessoa = t.fk_id_pessoa
-                        and id_pessoa = :id");
+        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa FROM pessoas p WHERE p.id_pessoa = :id");
         $sql->bindValue(':id', $id, PDO::PARAM_INT);
 
         $sql->execute();

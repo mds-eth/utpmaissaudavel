@@ -59,7 +59,7 @@
                                         <li><a><i class="fa fa-users"></i> Pessoas <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="<?php echo URL; ?>/pessoas/cadastrar">Cadastrar</a></li>
-                                                <li><a href="<?php echo URL; ?>/pessoas/visualizar">Visualizar</a></li>
+                                                <li><a href="<?php echo URL; ?>/pessoas/listagem">Visualizar</a></li>
                                                 <li><a href="<?php echo URL; ?>/pessoas/inativas">Inativas</a></li>
                                             </ul>
                                         </li>
@@ -84,7 +84,7 @@
                                             <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA) : ?>                            
                                                 <li><a href="<?php echo URL; ?>/pacientes/cadastrar">Cadastrar</a></li>
                                             <?php endif ?>
-                                            <li><a href="<?php echo URL; ?>/pacientes/visualizar">Visualizar</a></li>
+                                            <li><a href="<?php echo URL; ?>/pacientes/listagem">Visualizar</a></li>
                                         </ul>
                                     </li>                                    
                                     <li><a><i class="fa fa-hospital-o"></i> Unidades de Saúde <span class="fa fa-chevron-down"></span></a>

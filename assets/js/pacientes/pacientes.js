@@ -69,109 +69,100 @@ var pacientes = {
         if ($('#nome').val() === '') {
             $('#nome').focus();
             $('#nome').css('border', '1px solid red');
+            swal("Atenção!", "Campo nome não pode ficar vazio!", "error");
             return;
         }
-
         if ($('#data_nascimento').val() === '') {
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
+            swal("Atenção!", "Campo Data de Nascimento não pode ficar vazio!", "error");
             return;
         }
 
-        if ($('#sexo').val() === 'Selecione') {
-            swal("Atenção!", "Selecione uma opção válida!", "error");
-            $('#sexo').css('border', '1px solid red');
-            return;
+        if ($('#data_nascimento').val().length < 10) {
+            $('#data_nascimento').focus();
+            $('#data_nascimento').css('border', '1px solid red');
+            swal("Atenção!", "Informe uma data válida!", "error");
+            return false;
         }
 
         if ($('#responsavel').val() === '') {
             $('#responsavel').focus();
             $('#responsavel').css('border', '1px solid red');
-            swal("Atenção!", "Campo Nome Responsável obrigatório!", "error");
+            swal("Atenção!", "Campo Responsável não pode ficar vazio!", "error");
             return;
         }
 
-        if ($('#sexo').val() === '') {
-            $('#sexo').focus();
+        if ($('#sexo').val() === 'Selecione') {
+            $('#data_nascimento').focus();
             $('#sexo').css('border', '1px solid red');
+            swal("Atenção!", "Selecione uma opção válida!", "error");
             return;
         }
-
-        if ($('#cpf').val() === '') {
-            $('#cpf').focus();
-            $('#cpf').css('border', '1px solid red');
-            return;
-        }
-
         if ($('#rg').val() === '') {
             $('#rg').focus();
             $('#rg').css('border', '1px solid red');
+            swal("Atenção!", "Campo RG não pode ficar vazio!", "error");
             return;
         }
-
         if ($('#email').val() === '') {
             $('#email').focus();
             $('#email').css('border', '1px solid red');
+            swal("Atenção!", "Campo Email  não pode ficar vazio!", "error");
             return;
         }
-
-        if ($('#residencial').val() === '') {
-            $('#residencial').focus();
-            $('#residencial').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#celular').val() === '') {
-            $('#celular').focus();
-            $('#celular').css('border', '1px solid red');
-            return;
-        }
-
-        if ($('#contato').val() === '') {
-            $('#contato').focus();
-            $('#contato').css('border', '1px solid red');
-            return;
-        }
-
         if ($('#cep').val() === '') {
             $('#cep').focus();
             $('#cep').css('border', '1px solid red');
+            swal("Atenção!", "Campo CEP  não pode ficar vazio!", "error");
             return;
         }
-
         if ($('#rua').val() === '') {
             $('#rua').focus();
             $('#rua').css('border', '1px solid red');
+            swal("Atenção!", "Campo Rua  não pode ficar vazio!", "error");
             return;
         }
-
         if ($('#bairro').val() === '') {
             $('#bairro').focus();
             $('#bairro').css('border', '1px solid red');
+            swal("Atenção!", "Campo Bairro  não pode ficar vazio!", "error");
             return;
         }
-
         if ($('#cidade').val() === '') {
             $('#cidade').focus();
             $('#cidade').css('border', '1px solid red');
+            swal("Atenção!", "Campo Cidade  não pode ficar vazio!", "error");
             return;
         }
-
         if ($('#estado').val() === '') {
             $('#estado').focus();
             $('#estado').css('border', '1px solid red');
+            swal("Atenção!", "Campo Estado  não pode ficar vazio!", "error");
             return;
         }
-
         if ($('#numero').val() === '') {
             $('#numero').focus();
             $('#numero').css('border', '1px solid red');
+            swal("Atenção!", "Campo Número  não pode ficar vazio!", "error");
             return;
         }
-
         if ($('#complemento').val() === '') {
             $('#complemento').focus();
             $('#complemento').css('border', '1px solid red');
+            swal("Atenção!", "Campo Complemento  não pode ficar vazio!", "error");
+            return;
+        }
+        if ($('#celular').val() === '') {
+            $('#celular').focus();
+            $('#celular').css('border', '1px solid red');
+            swal("Atenção!", "Campo Telefone Celular não pode ficar vazio!", "error");
+            return;
+        }
+        if ($('#contato').val() === '') {
+            $('#contato').focus();
+            $('#contato').css('border', '1px solid red');
+            swal("Atenção!", "Campo Telefone Para Contato não pode ficar vazio!", "error");
             return;
         }
 
@@ -233,7 +224,7 @@ var pacientes = {
                         confirmButtonText: "OK"
                     });
 
-                    window.location = URL + '/pacientes/visualizar';
+                    window.location = URL + '/pacientes/listagem';
                 } else {
                     swal({
                         type: 'warning',
