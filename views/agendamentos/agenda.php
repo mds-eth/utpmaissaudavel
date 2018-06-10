@@ -16,14 +16,14 @@
                         <th style="text-align: center">Sexta</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tabela">
                     <?php foreach ($especialidades as $especialidade) : ?>
                         <tr>
-                            <td><input type="checkbox"> <?= $especialidade['especialidade'] ?></td>
-                            <td><input type="checkbox"> <?= $especialidade['especialidade'] ?></td>
-                            <td><input type="checkbox"> <?= $especialidade['especialidade'] ?></td>
-                            <td><input type="checkbox"> <?= $especialidade['especialidade'] ?></td>
-                            <td><input type="checkbox"> <?= $especialidade['especialidade'] ?></td>
+                            <td><input type="checkbox" class="segunda" value="<?= $especialidade['id_especialidade'] ?>"> <?= $especialidade['especialidade'] ?></td>
+                            <td><input type="checkbox" class="terca" value="<?= $especialidade['id_especialidade'] ?>"> <?= $especialidade['especialidade'] ?></td>
+                            <td><input type="checkbox" class="quarta" value="<?= $especialidade['id_especialidade'] ?>"> <?= $especialidade['especialidade'] ?></td>
+                            <td><input type="checkbox" class="quinta" value="<?= $especialidade['id_especialidade'] ?>"> <?= $especialidade['especialidade'] ?></td>
+                            <td><input type="checkbox" class="sexta" value="<?= $especialidade['id_especialidade'] ?>"> <?= $especialidade['especialidade'] ?></td>
                         </tr>
                     <?php endforeach; ?>                        
                 </tbody>

@@ -2,43 +2,48 @@ var agendas = {
 
     init: function () {
 
-        $('#segunda').on('click', agendas.montaAgendaSegunda);
-        $('#terca').on('click', agendas.montaAgendaTerca);
-        $('#quarta').on('click', agendas.montaAgendaQuarta);
-        $('#quinta').on('click', agendas.montaAgendaQuinta);
-        $('#sexta').on('click', agendas.montaAgendaSexta);
+        $('.segunda').on('click', agendas.montarAgendaSegunda);
+        $('.terca').on('click', agendas.montarAgendaTerca);
+        $('.quarta').on('click', agendas.montarAgendaQuarta);
+        $('.quinta').on('click', agendas.montarAgendaQuinta);
+        $('.sexta').on('click', agendas.montarAgendaSexta);
     },
 
-    montaAgendaSegunda: function () {
+    montarAgendaSegunda: function () {
 
-        var segunda = $('#segunda').val();
-
-        $('#especialidadeSegunda').append(segunda);
-
+        var especialidades = [$(this).val()];
+        alert(especialidades);
+        return;
     },
 
-    montaAgendaTerca: function () {
+    montarAgendaTerca: function () {
 
-        alert($('#segunda').val());
-
+        var especialidades = [$(this).val()];
+        alert(especialidades);
+        return;
     },
 
-    montaAgendaQuarta: function () {
+    montarAgendaQuarta: function () {
 
-        alert($('#segunda').val());
-
+        var especialidades = [$(this).val()];
+        alert(especialidades);
+        return;
     },
 
-    montaAgendaQuinta: function () {
+    montarAgendaQuinta: function () {
 
-        alert($('#segunda').val());
-
+        var especialidades = [$(this).val()];
+        alert(especialidades);
+        return;
     },
 
-    montaAgendaSexta: function () {
+    montarAgendaSexta: function () {
 
-        alert($('#segunda').val());
-    }
+        var especialidades = [$(this).val()];
+        alert(especialidades);
+        return;
+    },
+
 };
 
 
