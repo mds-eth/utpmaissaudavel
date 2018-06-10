@@ -31,7 +31,7 @@
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-calendar"></i> Agendamentos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/agendamentos/cadastrar">Cadastrar</a></li>
+                                            <li><a href="<?php echo URL; ?>/agendamentos/agenda">Cadastrar Agenda</a></li>
                                             <li><a href="<?php echo URL; ?>/agendamentos/visualizar">Visualizar</a></li>
                                         </ul>
                                     </li>

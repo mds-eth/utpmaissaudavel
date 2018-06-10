@@ -4,6 +4,7 @@ class agendamentosController extends controller {
 
     private $url;
     private $usuario;
+    private $especialidade;
 
     public function __construct() {
 
@@ -13,10 +14,18 @@ class agendamentosController extends controller {
         }
 
         $this->url = new Urls();
+        $this->especialidade = new Especialidades();
 
         if (!$this->url->verificaUrlSessaoUsuario()) {
             header('Location: ' . URL . '/home');
         }
+    }
+
+    public function agenda() {
+
+        $dados['especialidades'] = $this->especialidade->listaTodasEspecialidades();
+
+        $this->loadTemplate('agendamentos/agenda', $dados);
     }
 
 }
