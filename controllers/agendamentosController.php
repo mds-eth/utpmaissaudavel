@@ -28,4 +28,12 @@ class agendamentosController extends controller {
         $this->loadTemplate('agendamentos/agenda', $dados);
     }
 
+    public function cadastrarAgendaPorEspecialidade() {
+
+        if ($this->post()) {
+            var_dump($_POST);
+            die("aqui");
+        }
+    }
+
 }

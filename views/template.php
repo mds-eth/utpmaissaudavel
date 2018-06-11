@@ -12,9 +12,10 @@
         <link rel="stylesheet" href="<?php echo URL; ?>/assets/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/fullcalendar.css">
         <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/custom.min.css">
+        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/bootstrap-datepicker.css">
         <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>   
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap/bootstrap.min.js"></script>        
     </head>
     <body class="nav-md">
         <div class="container body">
@@ -171,8 +172,9 @@
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datatable/i18n.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/moment.min.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/fullcalendar.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/pt-br.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/agendas/agendas.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/pt-br.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/Chart.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datepicker/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datepicker/bootstrap-datepicker.pt-BR.min.js"></script>
     </body>
 </html>
