@@ -39,7 +39,7 @@ var login = {
             return false;
         }
 
-        if ($('#senha').val().length < 5 && $('#confirmar').val() < 5) {
+        if ($('#senha').val().length < 5 && $('#confirmar').val().length < 5) {
             swal({type: 'error', title: 'Senha deverá conter no minímo 5 caracteres', confirmButtonText: 'OK'});
             return false;
         }

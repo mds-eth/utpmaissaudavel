@@ -4,6 +4,7 @@ class agendamentosController extends controller {
 
     private $url;
     private $usuario;
+    private $agendamentos;
     private $especialidade;
 
     public function __construct() {
@@ -14,6 +15,7 @@ class agendamentosController extends controller {
         }
 
         $this->url = new Urls();
+        $this->agendamentos = new Agendamentos();
         $this->especialidade = new Especialidades();
 
         if (!$this->url->verificaUrlSessaoUsuario()) {
@@ -31,8 +33,15 @@ class agendamentosController extends controller {
     public function cadastrarAgendaPorEspecialidade() {
 
         if ($this->post()) {
-            var_dump($_POST);
-            die("aqui");
+
+            $this->agendamentos->setDataInicial(!empty($_POST['dataInicial']) ? $_POST['dataInicial'] : null);
+            $this->agendamentos->setDataFinal(!empty($_POST['dataFinal']) ? $_POST['dataFinal'] : null);
+            $this->agendamentos->setSegunda(!empty($_POST['segunda']) ? $_POST['segunda'] : null);
+            $this->agendamentos->setTerca(!empty($_POST['terca']) ? $_POST['terca'] : null);
+            $this->agendamentos->setQuarta(!empty($_POST['quarta']) ? $_POST['quarta'] : null);
+            $this->agendamentos->setQuinta(!empty($_POST['quinta']) ? $_POST['quinta'] : null);
+            $this->agendamentos->setSexta(!empty($_POST['sexta']) ? $_POST['sexta'] : null);
+            $this->agendamentos->gravaAgendaSegunda();
         }
     }
 

@@ -32,8 +32,8 @@
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-calendar"></i> Agendamentos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/agendamentos/agenda">Cadastrar Agenda</a></li>
-                                            <li><a href="<?php echo URL; ?>/agendamentos/visualizar">Visualizar</a></li>
+                                            <li><a href="<?php echo URL; ?>/agendamentos/agenda">Agenda por Especialidade</a></li>
+                                            <li><a href="<?php echo URL; ?>/agendamentos/visualizar">Visualizar Agendas</a></li>
                                         </ul>
                                     </li>
                                     <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>

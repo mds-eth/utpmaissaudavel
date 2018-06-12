@@ -3,92 +3,101 @@ var agendas = {
     init: function () {
 
         segunda = [];
+        segundaEspecialidades = [];
         terca = [];
+        tercaEspecialidades = [];
         quarta = [];
+        quartaEspecialidades = [];
         quinta = [];
+        quintaEspecialidades = [];
         sexta = [];
+        sextaEspecialidades = [];
 
         $('.segunda').unbind('click');
-        $('.segunda').on('click', agendas.montaAgendaSegunda);
+        $('.segunda').on('click', agendas.montarAgendaSegunda);
         $('.terca').unbind('click');
-        $('.terca').on('click', agendas.montaAgendaTerca);
+        $('.terca').on('click', agendas.montarAgendaTerca);
         $('.quarta').unbind('click');
-        $('.quarta').on('click', agendas.montaAgendaQuarta);
+        $('.quarta').on('click', agendas.montarAgendaQuarta);
         $('.quinta').unbind('click');
-        $('.quinta').on('click', agendas.montaAgendaQuinta);
+        $('.quinta').on('click', agendas.montarAgendaQuinta);
         $('.sexta').unbind('click');
-        $('.sexta').on('click', agendas.montaAgendaSexta);
-        $('#dataInicial').on('click', agendas.montaAgendaInicial);
-        $('#dataFinal').on('click', agendas.montaAgendaFinal);
-        $('#gravar').unbind('click');
-        $('#gravar').on('click', agendas.validaAgendaSemanal);
+        $('.sexta').on('click', agendas.montarAgendaSexta);
+        $('#visualizar').unbind('click');
+        $('#visualizar').on('click', agendas.validarAgendaSemanal);
+        $('#btnSalvarAgendaEspecialidade').on('click', agendas.gravarAgenda);
     },
 
-    montaAgendaSegunda: function () {
+    montarAgendaSegunda: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
             segunda.push($(this).val());
+            segundaEspecialidades.push(this.id);
         } else {
             var id = segunda.indexOf($(this).val());
             segunda.splice(id, 1);
+            var especialidade = segundaEspecialidades.indexOf(this.id);
+            segundaEspecialidades.splice(especialidade, 1);
         }
     },
-    montaAgendaTerca: function () {
+    montarAgendaTerca: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
             terca.push($(this).val());
+            tercaEspecialidades.push(this.id);
         } else {
             var id = terca.indexOf($(this).val());
             terca.splice(id, 1);
+            var especialidade = tercaEspecialidades.indexOf(this.id);
+            tercaEspecialidades.splice(especialidade, 1);
         }
     },
-    montaAgendaQuarta: function () {
+    montarAgendaQuarta: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
             quarta.push($(this).val());
+            quartaEspecialidades.push(this.id);
         } else {
             var id = quarta.indexOf($(this).val());
             quarta.splice(id, 1);
+            var especialidade = quartaEspecialidades.indexOf(this.id);
+            quartaEspecialidades.splice(especialidade, 1);
         }
     },
-    montaAgendaQuinta: function () {
+    montarAgendaQuinta: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
             quinta.push($(this).val());
+            quintaEspecialidades.push(this.id);
         } else {
             var id = quinta.indexOf($(this).val());
             quinta.splice(id, 1);
+            var especialidade = quintaEspecialidades.indexOf(this.id);
+            quintaEspecialidades.splice(especialidade, 1);
         }
     },
-    montaAgendaSexta: function () {
+    montarAgendaSexta: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
             sexta.push($(this).val());
+            sextaEspecialidades.push(this.id);
         } else {
             var id = sexta.indexOf($(this).val());
             sexta.splice(id, 1);
+            var especialidade = sextaEspecialidades.indexOf(this.id);
+            sextaEspecialidades.splice(especialidade, 1);
         }
     },
-    montaAgendaInicial: function () {
-        $('#dataInicial').datepicker({
-            format: 'dd/mm/yyyy',
-            language: 'pt-BR'
-        });
-    },
-    montaAgendaFinal: function () {
-        $('#dataFinal').datepicker({
-            format: 'dd/mm/yyyy',
-            language: 'pt-BR'
-        });
-    },
 
-    validaAgendaSemanal: function () {
+    validarAgendaSemanal: function () {
 
-        if ($('#dataInicial').val() > $('#dataFinal').val()) {
-            $('#dataInicial').css('border', '1px solid red');
-            $('#dataFinal').css('border', '1px solid red');
-            swal("Atenção!", "Data inicial não pode ser maior que a data final!", "error");
-            return;
+        if ($('#dataInicial').val() !== '' && $('#dataFinal').val() !== '') {
+            if ($('#dataInicial').val() > $('#dataFinal').val()) {
+                $('#dataInicial').css('border', '1px solid red');
+                $('#dataFinal').css('border', '1px solid red');
+                swal("Atenção!", "Data inicial não pode ser maior que a data final!", "error");
+                return;
+            }
         }
 
         if ($('#dataInicial').val() === '') {
@@ -133,16 +142,25 @@ var agendas = {
 
     chamaModalConfirmarAgenda: function () {
 
-        agendas.gravaAgenda();
+        $('#bodyModalAgendaEspecialidade').html("");
+        var pergunta = "Deseja definir agenda semestral iniciando em <b>" + $("#dataInicial").val() + "</b> e finalizando em <b>" + $('#dataFinal').val() + "</b>?<br/><br/>";
+        var dias = "<b>Segunda</b>: " + segundaEspecialidades + "<br/>" +
+                "<b>Terça</b>: " + tercaEspecialidades + "<br/>" +
+                "<b>Quarta</b>: " + quartaEspecialidades + "<br/>" +
+                "<b>Quinta</b>: " + quintaEspecialidades + "<br/>" +
+                "<b>Sexta</b>: " + sextaEspecialidades + "<br/>";
+
+        $('#bodyModalAgendaEspecialidade').append(pergunta, dias);
+        $('#modalAgendaEspecialidade').modal("show");
     },
 
-    gravaAgenda: function () {
+    gravarAgenda: function () {
 
-        $.post({
+        $.ajax({
             url: URL + '/agendamentos/cadastrarAgendaPorEspecialidade',
             type: 'POST',
             data: {
-                dataInicio: $("#dataInicial").val(),
+                dataInicial: $("#dataInicial").val(),
                 dataFinal: $('#dataFinal').val(),
                 segunda: segunda,
                 terca: terca,
@@ -151,8 +169,7 @@ var agendas = {
                 sexta: sexta
             },
             sucess: function (result) {
-                console.log(result);
-                return false;
+                
             }
         });
     }

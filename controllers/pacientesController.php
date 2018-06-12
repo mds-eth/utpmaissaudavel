@@ -76,9 +76,7 @@ class pacientesController extends controller {
                 $this->loadTemplate('pacientes/cadastrar', $dados);
             }
         } catch (Exception $ex) {
-
-            var_dump($ex);
-            die("error");
+            
         }
     }
 
