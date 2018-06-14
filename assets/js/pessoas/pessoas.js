@@ -493,6 +493,7 @@ var pessoas = {
         $('#btnEditarPessoa').html("");
         var btn = "<button id='editPessoa' name='editPessoa' class='editPessoa btn btn-success btn-xs'>Salvar Alterações</button>";
         $('#btnEditarPessoa').append(btn);
+        $('#editarPessoa').hide();
     }
 };
 $(document).ready(function () {

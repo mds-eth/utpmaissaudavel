@@ -2,6 +2,8 @@ var pacientes = {
 
     init: function () {
 
+        especialidades = [];
+
         $('#cep').on('blur', pacientes.buscaCep);
         $('#cpf').on('blur', pacientes.validaCpf);
         $('#limpar').on('click', pacientes.limparCampos);
@@ -172,9 +174,12 @@ var pacientes = {
             return;
         }
 
-        if ($('#especialidade').val() === 'Selecione') {
-            swal("Atenção!", "Selecione uma opção válida!", "error");
-            $('#especialidade').css('border', '1px solid red');
+        $(':checkbox:checked').each(function (i) {
+            especialidades[i] = $(this).val();
+        });
+
+        if (especialidades.length === 0) {
+            swal("Atenção!", "Selecione pelo menos uma especialidade para o paciente!", "error");
             return;
         }
 
@@ -211,12 +216,12 @@ var pacientes = {
                 numero: $('#numero').val(),
                 complemento: $('#complemento').val(),
                 unidade: $('#unidade').val(),
-                especialidade: $('#especialidade').val(),
+                especialidades: especialidades,
                 convenio: $('#convenio').val()
 
             },
             success: function (retorno) {
-
+                
                 if (retorno) {
                     swal({
                         text: "Cadastro realizado com Sucesso!",

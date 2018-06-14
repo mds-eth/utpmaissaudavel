@@ -161,7 +161,11 @@
                             <label class="col-md-3 col-sm-3 col-xs-12" for="especialidade">Especialidade
                             </label>
                             <div class="col-md-8">
-                                <input class="form-control" value="<?= $ficha->especialidade ?>" readonly="true" />
+                                <?php $nomes = null; ?>
+                                <?php foreach ($especialidades as $especialidade) : ?>
+                                    <?php $nomes .= $especialidade['especialidade'] . ' ,' ?>
+                                <?php endforeach; ?>
+                                <input class="form-control" value="<?= $nomes ?>" readonly="true" />
                             </div>
                         </div>
                         <div class="item form-group">

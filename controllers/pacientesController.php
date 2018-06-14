@@ -44,13 +44,6 @@ class pacientesController extends controller {
 
                 $fkIdPaciente = $this->pessoa->gravar();
 
-                $this->paciente->setFkIdPaciente($fkIdPaciente);
-                $this->paciente->setFkIdUnidadeSaude(trim(addslashes($_POST['unidade'])));
-                $this->paciente->setEspecialidades(trim(addslashes($_POST['especialidade'])));
-                $this->paciente->setConvenio(trim(addslashes($_POST['convenio'])));
-                $this->paciente->setResponsavel(!empty($_POST['responsavel']) ? trim(addslashes($_POST['responsavel'])) : null);
-                $this->paciente->gravaTabelaDadosPacientes();
-
                 $this->telefone->setResidencial(!empty($_POST['residencial']) ? trim(addslashes($_POST['residencial'])) : null);
                 $this->telefone->setCelular(trim(addslashes($_POST['celular'])));
                 $this->telefone->setContato(trim(addslashes($_POST['contato'])));
@@ -66,6 +59,13 @@ class pacientesController extends controller {
                 $this->endereco->setComplemento(trim(addslashes($_POST['complemento'])));
                 $this->endereco->setFkIdPessoa($fkIdPaciente);
                 $this->endereco->gravar();
+
+                $this->paciente->setFkIdPaciente($fkIdPaciente);
+                $this->paciente->setFkIdUnidadeSaude(trim(addslashes($_POST['unidade'])));
+                $this->paciente->setEspecialidades($_POST['especialidades']);
+                $this->paciente->setConvenio(trim(addslashes($_POST['convenio'])));
+                $this->paciente->setResponsavel(isset($_POST['responsavel']) ? trim(addslashes($_POST['responsavel'])) : null);
+                $this->paciente->gravaTabelaDadosPacientes();
 
                 echo true;
             } else {
@@ -102,6 +102,7 @@ class pacientesController extends controller {
     public function paciente($id) {
 
         $dados['ficha'] = $this->paciente->listaFichaPaciente($id);
+        $dados['especialidades'] = $this->paciente->buscaTodasEspecialidadesPaciente($id);
 
         if ($dados['ficha'] == false) {
             header('Location: ' . URL . '/pacientes/listagem');

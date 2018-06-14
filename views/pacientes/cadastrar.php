@@ -152,11 +152,21 @@
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Unidade de Saúde, Especialidade e Convênio</h2>
+                    <h2>Especialidade, Unidade de Saúde e Convênio</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">                    
-                    <div class="x_content">                        
+                    <div class="x_content">
+                        <div class="item form-group">
+                            <label class="col-md-3 col-sm-3 col-xs-12" for="especialidade">Especialidade
+                            </label>
+                            <div class="col-md-8">
+                                <?php foreach ($especialidades as $especialidade) : ?>                                   
+                                    <input id="especialidade" name="especialidade" type="checkbox" value="<?= $especialidade['id_especialidade'] ?>" class="especialidade"><?= $especialidade['especialidade'] ?><br>                                    
+                                <?php endforeach; ?>
+
+                            </div>
+                        </div>
                         <div class="item form-group">
                             <label class="col-md-3 col-sm-3 col-xs-12" for="unidade">Unidade
                             </label>
@@ -169,18 +179,7 @@
                                 </select>
                             </div>
                         </div>  
-                        <div class="item form-group">
-                            <label class="col-md-3 col-sm-3 col-xs-12" for="especialidade">Especialidade
-                            </label>
-                            <div class="col-md-8">
-                                <select class="form-control" id="especialidade" name="especialidade">
-                                    <option>Selecione</option>
-                                    <?php foreach ($especialidades as $especialidade) : ?>
-                                        <option value="<?= $especialidade['id_especialidade'] ?>"><?= $especialidade['id_especialidade'] . ' - ' . $especialidade['especialidade'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="item form-group">
                             <label class="col-md-3 col-sm-3 col-xs-12" for="convenio">Convênio
                             </label>

@@ -36,12 +36,24 @@ class agendamentosController extends controller {
 
             $this->agendamentos->setDataInicial(!empty($_POST['dataInicial']) ? $_POST['dataInicial'] : null);
             $this->agendamentos->setDataFinal(!empty($_POST['dataFinal']) ? $_POST['dataFinal'] : null);
-            $this->agendamentos->setSegunda(!empty($_POST['segunda']) ? $_POST['segunda'] : null);
-            $this->agendamentos->setTerca(!empty($_POST['terca']) ? $_POST['terca'] : null);
-            $this->agendamentos->setQuarta(!empty($_POST['quarta']) ? $_POST['quarta'] : null);
-            $this->agendamentos->setQuinta(!empty($_POST['quinta']) ? $_POST['quinta'] : null);
-            $this->agendamentos->setSexta(!empty($_POST['sexta']) ? $_POST['sexta'] : null);
-            $this->agendamentos->gravaAgendaSegunda();
+
+            $dias = array(
+                'segunda' => !empty($_POST['segunda']) ? $_POST['segunda'] : null,
+                'terca' => !empty($_POST['terca']) ? $_POST['terca'] : null,
+                'quarta' => !empty($_POST['quarta']) ? $_POST['quarta'] : null,
+                'quinta' => !empty($_POST['quinta']) ? $_POST['quinta'] : null,
+                'sexta' => !empty($_POST['sexta']) ? $_POST['sexta'] : null);
+
+            echo $this->agendamentos->gravaAgendaPorEspecialidades($dias);
+        }
+    }
+
+    public function validaSeExisteOutraAgendaAtiva() {
+
+        if ($this->post()) {
+
+            $status = $_POST['status'];
+            echo $this->agendamentos->validaSeExisteOutraAgendaAtiva($status);
         }
     }
 

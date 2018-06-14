@@ -2,191 +2,80 @@
 
 class Agendamentos extends model {
 
-    private $segunda;
-    private $terca;
-    private $quarta;
-    private $quinta;
-    private $sexta;
+    private $fk = 1;
     private $dataInicial;
     private $dataFinal;
 
-    public function gravaAgendaSegunda() {
+    public function gravaAgendaPorEspecialidades($dias) {
 
-        try {
+        $validaDatas = $this->validaDatasAgendaEspecialidade();
 
-            foreach ($this->getSegunda() as $segunda) {
+        if ($validaDatas) {
 
-                $sql = $this->db->prepare("INSERT INTO agenda_dias_especialidades(fk_id_especialidade, fk_id_agenda_dias, data_inicio_agenda, data_fim_agenda,
-                status, agenda_dias_especialidades_criado_por, agenda_dias_especialidades_criado_em, agenda_dias_especialidades_atualizado_por, 
-                agenda_dias_especialidades_atualizado_em) 
-                VALUES(:fk_id_especialidade, :fk_id_agenda_dias, :data_inicio_agenda, :data_fim_agenda,
-                :status, :agenda_dias_especialidades_criado_por, :agenda_dias_especialidades_criado_em, :agenda_dias_especialidades_atualizado_por, 
-                :agenda_dias_especialidades_atualizado_em)");
+            try {
 
-                $sql->bindValue(':fk_id_especialidade', $segunda, PDO::PARAM_INT);
-                $sql->bindValue(':fk_id_agenda_dias', 1, PDO::PARAM_INT);
-                $sql->bindValue(':data_inicio_agenda', $this->getDataInicial(), PDO::PARAM_STR);
-                $sql->bindValue(':data_fim_agenda', $this->getDataFinal(), PDO::PARAM_STR);
-                $sql->bindValue(':status', 1, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_em', $this->date, PDO::PARAM_STR);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_em', $this->date, PDO::PARAM_STR);
+                foreach ($dias as $dia) {
 
-                $sql->execute();
+                    foreach ($dia as $unico) {
+
+                        $sql = $this->db->prepare("INSERT INTO agenda_dias_especialidades(fk_id_especialidade, 
+                                    fk_id_agenda_dias, data_inicio_agenda, data_fim_agenda,
+                                    status, agenda_dias_especialidades_criado_por, agenda_dias_especialidades_criado_em, 
+                                    agenda_dias_especialidades_atualizado_por, 
+                                    agenda_dias_especialidades_atualizado_em) 
+                                    VALUES(:fk_id_especialidade, :fk_id_agenda_dias, :data_inicio_agenda, :data_fim_agenda,
+                                    :status, :agenda_dias_especialidades_criado_por, :agenda_dias_especialidades_criado_em, :agenda_dias_especialidades_atualizado_por, 
+                                    :agenda_dias_especialidades_atualizado_em)");
+
+                        $sql->bindValue(':fk_id_especialidade', $unico, PDO::PARAM_INT);
+                        $sql->bindValue(':fk_id_agenda_dias', $this->fk, PDO::PARAM_INT);
+                        $sql->bindValue(':data_inicio_agenda', $this->getDataInicial(), PDO::PARAM_STR);
+                        $sql->bindValue(':data_fim_agenda', $this->getDataFinal(), PDO::PARAM_STR);
+                        $sql->bindValue(':status', 1, PDO::PARAM_INT);
+                        $sql->bindValue(':agenda_dias_especialidades_criado_por', $this->idUsuario, PDO::PARAM_INT);
+                        $sql->bindValue(':agenda_dias_especialidades_criado_em', $this->date, PDO::PARAM_STR);
+                        $sql->bindValue(':agenda_dias_especialidades_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+                        $sql->bindValue(':agenda_dias_especialidades_atualizado_em', $this->date, PDO::PARAM_STR);
+
+                        $sql->execute();
+                    }
+
+                    $this->fk = $this->fk + 1;
+                }
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
             }
-            $this->gravaAgendaTerca();
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-    }
-
-    public function gravaAgendaTerca() {
-
-        try {
-
-            foreach ($this->getTerca() as $terca) {
-
-                $sql = $this->db->prepare("INSERT INTO agenda_dias_especialidades(fk_id_especialidade, fk_id_agenda_dias, data_inicio_agenda, data_fim_agenda,
-                status, agenda_dias_especialidades_criado_por, agenda_dias_especialidades_criado_em, agenda_dias_especialidades_atualizado_por, 
-                agenda_dias_especialidades_atualizado_em) 
-                VALUES(:fk_id_especialidade, :fk_id_agenda_dias, :data_inicio_agenda, :data_fim_agenda,
-                :status, :agenda_dias_especialidades_criado_por, :agenda_dias_especialidades_criado_em, :agenda_dias_especialidades_atualizado_por, 
-                :agenda_dias_especialidades_atualizado_em)");
-
-                $sql->bindValue(':fk_id_especialidade', $terca, PDO::PARAM_INT);
-                $sql->bindValue(':fk_id_agenda_dias', 2, PDO::PARAM_INT);
-                $sql->bindValue(':data_inicio_agenda', $this->getDataInicial(), PDO::PARAM_STR);
-                $sql->bindValue(':data_fim_agenda', $this->getDataFinal(), PDO::PARAM_STR);
-                $sql->bindValue(':status', 1, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_em', $this->date, PDO::PARAM_STR);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_em', $this->date, PDO::PARAM_STR);
-
-                $sql->execute();
-            }
-
-            $this->gravaAgendaQuarta();
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-    }
-
-    public function gravaAgendaQuarta() {
-
-        try {
-
-            foreach ($this->getQuarta() as $quarta) {
-
-                $sql = $this->db->prepare("INSERT INTO agenda_dias_especialidades(fk_id_especialidade, fk_id_agenda_dias, data_inicio_agenda, data_fim_agenda,
-                status, agenda_dias_especialidades_criado_por, agenda_dias_especialidades_criado_em, agenda_dias_especialidades_atualizado_por, 
-                agenda_dias_especialidades_atualizado_em) 
-                VALUES(:fk_id_especialidade, :fk_id_agenda_dias, :data_inicio_agenda, :data_fim_agenda,
-                :status, :agenda_dias_especialidades_criado_por, :agenda_dias_especialidades_criado_em, :agenda_dias_especialidades_atualizado_por, 
-                :agenda_dias_especialidades_atualizado_em)");
-
-                $sql->bindValue(':fk_id_especialidade', $quarta, PDO::PARAM_INT);
-                $sql->bindValue(':fk_id_agenda_dias', 3, PDO::PARAM_INT);
-                $sql->bindValue(':data_inicio_agenda', $this->getDataInicial(), PDO::PARAM_STR);
-                $sql->bindValue(':data_fim_agenda', $this->getDataFinal(), PDO::PARAM_STR);
-                $sql->bindValue(':status', 1, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_em', $this->date, PDO::PARAM_STR);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_em', $this->date, PDO::PARAM_STR);
-
-                $sql->execute();
-            }
-
-            $this->gravaAgendaQuinta();
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-    }
-
-    public function gravaAgendaQuinta() {
-
-        try {
-
-            foreach ($this->getQuinta() as $quinta) {
-
-                $sql = $this->db->prepare("INSERT INTO agenda_dias_especialidades(fk_id_especialidade, fk_id_agenda_dias, data_inicio_agenda, data_fim_agenda,
-                status, agenda_dias_especialidades_criado_por, agenda_dias_especialidades_criado_em, agenda_dias_especialidades_atualizado_por, 
-                agenda_dias_especialidades_atualizado_em) 
-                VALUES(:fk_id_especialidade, :fk_id_agenda_dias, :data_inicio_agenda, :data_fim_agenda,
-                :status, :agenda_dias_especialidades_criado_por, :agenda_dias_especialidades_criado_em, :agenda_dias_especialidades_atualizado_por, 
-                :agenda_dias_especialidades_atualizado_em)");
-
-                $sql->bindValue(':fk_id_especialidade', $quinta, PDO::PARAM_INT);
-                $sql->bindValue(':fk_id_agenda_dias', 4, PDO::PARAM_INT);
-                $sql->bindValue(':data_inicio_agenda', $this->getDataInicial(), PDO::PARAM_STR);
-                $sql->bindValue(':data_fim_agenda', $this->getDataFinal(), PDO::PARAM_STR);
-                $sql->bindValue(':status', 1, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_em', $this->date, PDO::PARAM_STR);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_em', $this->date, PDO::PARAM_STR);
-
-                $sql->execute();
-            }
-
-            $this->gravaAgendaSexta();
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-    }
-
-    public function gravaAgendaSexta() {
-
-        try {
-
-            foreach ($this->getSexta() as $sexta) {
-
-                $sql = $this->db->prepare("INSERT INTO agenda_dias_especialidades(fk_id_especialidade, fk_id_agenda_dias, data_inicio_agenda, data_fim_agenda,
-                status, agenda_dias_especialidades_criado_por, agenda_dias_especialidades_criado_em, agenda_dias_especialidades_atualizado_por, 
-                agenda_dias_especialidades_atualizado_em) 
-                VALUES(:fk_id_especialidade, :fk_id_agenda_dias, :data_inicio_agenda, :data_fim_agenda,
-                :status, :agenda_dias_especialidades_criado_por, :agenda_dias_especialidades_criado_em, :agenda_dias_especialidades_atualizado_por, 
-                :agenda_dias_especialidades_atualizado_em)");
-
-                $sql->bindValue(':fk_id_especialidade', $sexta, PDO::PARAM_INT);
-                $sql->bindValue(':fk_id_agenda_dias', 5, PDO::PARAM_INT);
-                $sql->bindValue(':data_inicio_agenda', $this->getDataInicial(), PDO::PARAM_STR);
-                $sql->bindValue(':data_fim_agenda', $this->getDataFinal(), PDO::PARAM_STR);
-                $sql->bindValue(':status', 1, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_criado_em', $this->date, PDO::PARAM_STR);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $sql->bindValue(':agenda_dias_especialidades_atualizado_em', $this->date, PDO::PARAM_STR);
-
-                $sql->execute();
-            }
-
             return true;
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+        } else {
+            return false;
         }
     }
 
-    function getSegunda() {
-        return $this->segunda;
+    public function validaDatasAgendaEspecialidade() {
+
+        $sql = $this->db->prepare("SELECT data_inicio_agenda, data_fim_agenda 
+                    FROM agenda_dias_especialidades ad 
+                    WHERE ad.data_inicio_agenda = :inicio
+                    AND ad.data_fim_agenda = :fim LIMIT 1");
+
+        $sql->bindValue(':inicio', $this->getDataInicial(), PDO::PARAM_STR);
+        $sql->bindValue(':fim', $this->getDataFinal(), PDO::PARAM_STR);
+        $sql->execute();
+
+        $retorno = $sql->fetchAll();
+
+        return empty($retorno) ? true : false;
     }
 
-    function getTerca() {
-        return $this->terca;
-    }
+    public function validaSeExisteOutraAgendaAtiva($status) {
 
-    function getQuarta() {
-        return $this->quarta;
-    }
+        $sql = $this->db->prepare("SELECT status FROM agenda_dias_especialidades ad WHERE status = :status LIMIT 1");
+        $sql->bindValue(':status', $status, PDO::PARAM_INT);
+        $sql->execute();
 
-    function getQuinta() {
-        return $this->quinta;
-    }
+        $retorno = $sql->fetchAll();
 
-    function getSexta() {
-        return $this->sexta;
+        return empty($retorno) ? true : false;
     }
 
     function getDataInicial() {
@@ -195,26 +84,6 @@ class Agendamentos extends model {
 
     function getDataFinal() {
         return $this->dataFinal;
-    }
-
-    function setSegunda($segunda) {
-        $this->segunda = $segunda;
-    }
-
-    function setTerca($terca) {
-        $this->terca = $terca;
-    }
-
-    function setQuarta($quarta) {
-        $this->quarta = $quarta;
-    }
-
-    function setQuinta($quinta) {
-        $this->quinta = $quinta;
-    }
-
-    function setSexta($sexta) {
-        $this->sexta = $sexta;
     }
 
     function setDataInicial($dataInicial) {

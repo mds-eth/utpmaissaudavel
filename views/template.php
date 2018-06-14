@@ -32,7 +32,9 @@
                                 <ul class="nav side-menu">
                                     <li><a><i class="fa fa-calendar"></i> Agendamentos <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/agendamentos/agenda">Agenda por Especialidade</a></li>
+                                            <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>                            
+                                                <li><a href="<?php echo URL; ?>/agendamentos/agenda">Agenda por Especialidade</a></li>
+                                            <?php endif ?>                                            
                                             <li><a href="<?php echo URL; ?>/agendamentos/visualizar">Visualizar Agendas</a></li>
                                         </ul>
                                     </li>
@@ -44,12 +46,14 @@
                                             </ul>
                                         </li>
                                     <?php endif ?>
-                                    <li><a><i class="fa fa-file-text-o"></i> Formulários <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?php echo URL; ?>/formularios/cadastrar">Cadastrar</a></li>
-                                            <li><a href="<?php echo URL; ?>/formularios/visualizar">Visualizar</a></li>
-                                        </ul>
-                                    </li>
+                                    <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>                            
+                                        <li><a><i class="fa fa-file-text-o"></i> Formulários <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="<?php echo URL; ?>/formularios/cadastrar">Cadastrar</a></li>
+                                                <li><a href="<?php echo URL; ?>/formularios/visualizar">Visualizar</a></li>
+                                            </ul>
+                                        </li>
+                                    <?php endif ?>
                                     <li><a><i class="fa fa-bar-chart"></i> Relatórios <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="<?php echo URL; ?>/relatorios/cadastrar">Cadastrar</a></li>
@@ -174,7 +178,5 @@
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/fullcalendar.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/pt-br.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/Chart.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datepicker/bootstrap-datepicker.min.js"></script>
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/datepicker/bootstrap-datepicker.pt-BR.min.js"></script>
     </body>
 </html>

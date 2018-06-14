@@ -42,21 +42,19 @@ class Pacientes extends model {
 
             foreach ($this->getEspecialidades() as $fkIdEspecialidade) {
 
-                $sql = "INSERT INTO paciente_especialidades(fk_id_especialidade, fk_id_paciente, p_especialidade_criado_por, p_especialidade_criado_em, 
+                $sql = $this->db->prepare("INSERT INTO paciente_especialidades(fk_id_especialidade, fk_id_paciente, p_especialidade_criado_por, p_especialidade_criado_em, 
                     p_especialidade_atualizado_por, p_especialidade_atualizado_em)
                 VALUES(:fk_id_especialidade, :fk_id_paciente, :p_especialidade_criado_por, :p_especialidade_criado_em, 
-                :p_especialidade_atualizado_por, :p_especialidade_atualizado_em)";
+                :p_especialidade_atualizado_por, :p_especialidade_atualizado_em)");
 
-                $pdo = $this->db->prepare($sql);
+                $sql->bindValue(':fk_id_especialidade', $fkIdEspecialidade, PDO::PARAM_INT);
+                $sql->bindValue(':fk_id_paciente', $this->getFkIdPaciente(), PDO::PARAM_INT);
+                $sql->bindValue(':p_especialidade_criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':p_especialidade_criado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':p_especialidade_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':p_especialidade_atualizado_em', $this->date, PDO::PARAM_STR);
 
-                $pdo->bindValue(':fk_id_especialidade', $fkIdEspecialidade, PDO::PARAM_INT);
-                $pdo->bindValue(':fk_id_paciente', $this->getFkIdPaciente(), PDO::PARAM_INT);
-                $pdo->bindValue(':p_especialidade_criado_por', $this->idUsuario, PDO::PARAM_INT);
-                $pdo->bindValue(':p_especialidade_criado_em', $this->date, PDO::PARAM_STR);
-                $pdo->bindValue(':p_especialidade_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
-                $pdo->bindValue(':p_especialidade_atualizado_em', $this->date, PDO::PARAM_STR);
-
-                $pdo->execute();
+                $sql->execute();
             }
         } catch (Exception $exc) {
 
@@ -73,7 +71,7 @@ class Pacientes extends model {
 
         $pacientes = $sql->fetchAll();
 
-        return $pacientes;
+        return !empty($pacientes) ? $pacientes : null;
     }
 
     public function listaFichaPaciente($id) {
@@ -89,9 +87,24 @@ class Pacientes extends model {
         $sql->bindValue(':id', $id, PDO::PARAM_INT);
         $sql->execute();
 
-        $dadosPaciente = $sql->fetchObject();
+        $paciente = $sql->fetchObject();
 
-        return $dadosPaciente;
+        return !empty($paciente) ? $paciente : null;
+    }
+
+    public function buscaTodasEspecialidadesPaciente($id) {
+
+        $sql = $this->db->prepare("SELECT id_paciente_especialidade, fk_id_especialidade , fk_id_paciente, id_especialidade, especialidade
+                    FROM paciente_especialidades pe 
+                    JOIN especialidades e 
+                    ON pe.fk_id_especialidade = e.id_especialidade
+                    AND pe.fk_id_paciente = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+
+        $especialidades = $sql->fetchAll();
+
+        return !empty($especialidades) ? $especialidades : null;
     }
 
     function getFkIdUnidadeSaude() {

@@ -23,8 +23,8 @@ var agendas = {
         $('.quinta').on('click', agendas.montarAgendaQuinta);
         $('.sexta').unbind('click');
         $('.sexta').on('click', agendas.montarAgendaSexta);
-        $('#visualizar').unbind('click');
-        $('#visualizar').on('click', agendas.validarAgendaSemanal);
+        $('#validar').unbind('click');
+        $('#validar').on('click', agendas.validarAgendaSemanal);
         $('#btnSalvarAgendaEspecialidade').on('click', agendas.gravarAgenda);
     },
 
@@ -102,7 +102,7 @@ var agendas = {
 
         if ($('#dataInicial').val() === '') {
             $('#dataInicial').css('border', '1px solid red');
-            swal("Atenção!", "Informe a data de inicio da agenda!", "error");
+            swal("Atenção!", "Informe a data de início da agenda!", "error");
             return;
         }
 
@@ -137,7 +137,25 @@ var agendas = {
             return;
         }
 
-        agendas.chamaModalConfirmarAgenda();
+        agendas.validaSeExisteOutraAgendaAtiva();
+    },
+
+    validaSeExisteOutraAgendaAtiva: function () {
+
+        $.ajax({
+            url: URL + '/agendamentos/validaSeExisteOutraAgendaAtiva',
+            type: 'POST',
+            data: {status: 1},
+            success: function (result) {
+
+                if (result) {
+                    agendas.chamaModalConfirmarAgenda();
+                } else {
+                    swal("Atenção!", "No momento já existe outra agenda ativa para este semestre, favor verificar!", "error");
+                    return;
+                }
+            }
+        }, 'json');
     },
 
     chamaModalConfirmarAgenda: function () {
@@ -169,9 +187,18 @@ var agendas = {
                 sexta: sexta
             },
             sucess: function (result) {
-                
+
+                if (result) {
+                    swal("Agenda cadastrada com Sucesso", "success");
+                    window.location = URL + '/agendamentos/listagem';
+                } else {
+
+                    var erro = "Já existe outra agenda com as mesmas datas de início e fim, favor verificar!";
+                    $('#bodyModalAgendaEspecialidade').append(erro);
+                    return;
+                }
             }
-        });
+        }, 'json');
     }
 };
 

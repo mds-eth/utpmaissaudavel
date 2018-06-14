@@ -87,3 +87,4 @@
         </div>
     </div>
 <?php endif; ?>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/home/home.js"></script>

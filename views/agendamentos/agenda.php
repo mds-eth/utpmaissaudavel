@@ -5,7 +5,7 @@
         <div class="x_title">  
             <div class="clearfix"></div>
             <div class="item form-group">
-                <label class="col-md-1 col-sm-3 col-xs-12" for="dataInicial">Data Ínicio</label>
+                <label class="col-md-1 col-sm-3 col-xs-12" for="dataInicial">Data início</label>
                 <div class="col-md-2">
                     <input id="dataInicial" name="dataInicial" class="form-control" data-inputmask="'mask' : '99/99/9999'" />
                 </div>   
@@ -41,7 +41,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-8">
-                <button id="visualizar" class="btn btn-success btn-xs">Visualizar</button>                    
+                <button id="validar" class="btn btn-success btn-xs">Validar Agenda</button>                    
                 <a href="<?php echo URL ?>/home"><button class="btn btn-danger btn-xs" type="button">Cancelar</button></a>
             </div>
         </div>             
