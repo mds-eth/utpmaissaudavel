@@ -2,17 +2,6 @@ var agendas = {
 
     init: function () {
 
-        segunda = [];
-        segundaEspecialidades = [];
-        terca = [];
-        tercaEspecialidades = [];
-        quarta = [];
-        quartaEspecialidades = [];
-        quinta = [];
-        quintaEspecialidades = [];
-        sexta = [];
-        sextaEspecialidades = [];
-
         $('.segunda').unbind('click');
         $('.segunda').on('click', agendas.montarAgendaSegunda);
         $('.terca').unbind('click');
@@ -26,6 +15,17 @@ var agendas = {
         $('#validar').unbind('click');
         $('#validar').on('click', agendas.validarAgendaSemanal);
         $('#btnSalvarAgendaEspecialidade').on('click', agendas.gravarAgenda);
+
+        segunda = [];
+        segundaEspecialidades = [];
+        terca = [];
+        tercaEspecialidades = [];
+        quarta = [];
+        quartaEspecialidades = [];
+        quinta = [];
+        quintaEspecialidades = [];
+        sexta = [];
+        sextaEspecialidades = [];
     },
 
     montarAgendaSegunda: function () {
@@ -189,19 +189,50 @@ var agendas = {
             sucess: function (result) {
 
                 if (result) {
-                    swal("Agenda cadastrada com Sucesso", "success");
+                    alert(result);
+                    swal({
+                        text: "Cadastro realizado com Sucesso!",
+                        type: "success",
+                        confirmButtonText: "OK"
+                    });
                     window.location = URL + '/agendamentos/listagem';
                 } else {
-
-                    var erro = "Já existe outra agenda com as mesmas datas de início e fim, favor verificar!";
-                    $('#bodyModalAgendaEspecialidade').append(erro);
+                    swal("Atenção!", "Já há outra agenda com estas mesmas datas, favor verificar!", "error");
                     return;
+
                 }
             }
         }, 'json');
+    },
+
+    montaCalendario: function () {
+
+        $('#vincularPacienteAgenda').fullCalendar({
+            header: {
+                left: 'prev, next, today',
+                center: 'title',
+                right: 'month, agendaWeek, agendaDay'
+            },
+            navLinks: true,
+            editable: true,
+            
+            events: [
+                $.ajax({
+                    url: URL + '/agendamentos/buscaPacientesAgendados',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (result) {
+
+                    }
+                })
+            ]
+        });
+
+
     }
 };
 
 $(document).ready(function () {
     agendas.init();
+    agendas.montaCalendario();
 });

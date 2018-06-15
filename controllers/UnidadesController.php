@@ -1,6 +1,6 @@
 <?php
 
-class unidadesController extends controller {
+class UnidadesController extends controller {
 
     private $url;
     private $usuario;

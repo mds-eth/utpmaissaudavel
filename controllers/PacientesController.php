@@ -1,6 +1,6 @@
 <?php
 
-class pacientesController extends controller {
+class PacientesController extends controller {
 
     private $url;
     private $pessoa;

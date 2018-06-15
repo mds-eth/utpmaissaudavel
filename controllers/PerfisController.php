@@ -1,9 +1,9 @@
 <?php
 
-class urlsController extends controller {
+class PerfisController extends controller {
 
-    private $usuario;
     private $perfil;
+    private $usuario;
     private $url;
 
     public function __construct() {
@@ -12,8 +12,6 @@ class urlsController extends controller {
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
-
-        $this->url = new Urls();
         $this->perfil = new Perfis();
 
         $this->url = new Urls();
@@ -22,24 +20,27 @@ class urlsController extends controller {
         }
     }
 
+    public function index() {
+
+        $dados = array();
+
+        $this->loadTemplate('perfis/cadastrar', $dados);
+    }
+
     public function cadastrar() {
 
         try {
 
-            if ($this->post()) {
+            $dados = array();
 
-                $url = $_POST['url'];
-                $perfis = $_POST['perfis'];
-
-                $retorno = $this->url->cadastrar($url, $perfis);
+            if (isset($_POST['perfil']) && !empty($_POST['perfil'])) {
+                $perfil = trim($_POST['perfil']);
+                $this->perfil->setPerfil($perfil);
+                $retorno = $this->perfil->gravaPerfil();
 
                 echo $retorno;
             } else {
-
-                $dados = array();
-                $dados['perfil'] = $this->perfil->buscaPerfis();
-
-                $this->loadTemplate('urls/cadastrar', $dados);
+                $this->loadTemplate('perfis/cadastrar', $dados);
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -52,9 +53,9 @@ class urlsController extends controller {
 
         try {
 
-            $dados['urls'] = $this->url->listaTodasUrls();
+            $dados['perfis'] = $this->perfil->buscaPerfis();
 
-            $this->loadTemplate('urls/visualizar', $dados);
+            $this->loadTemplate('perfis/visualizar', $dados);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

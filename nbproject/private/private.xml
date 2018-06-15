@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/utpmaissaudavel/views/agendamentos/agenda.php</file>
+            <file>file:/var/www/utpmaissaudavel/assets/js/agendas/agendas.js</file>
+            <file>file:/var/www/utpmaissaudavel/models/Agendamentos.php</file>
+            <file>file:/var/www/utpmaissaudavel/views/agendamentos/vincularPaciente.php</file>
             <file>file:/var/www/utpmaissaudavel/assets/js/pacientes/pacientes.js</file>
-            <file>file:/var/www/utpmaissaudavel/views/pacientes/cadastrar.php</file>
+            <file>file:/var/www/utpmaissaudavel/controllers/agendamentosController.php</file>
         </group>
     </open-files>
 </project-private>

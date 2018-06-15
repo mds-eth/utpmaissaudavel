@@ -221,15 +221,14 @@ var pacientes = {
 
             },
             success: function (retorno) {
-                
+
                 if (retorno) {
                     swal({
                         text: "Cadastro realizado com Sucesso!",
                         type: "success",
                         confirmButtonText: "OK"
                     });
-
-                    window.location = URL + '/pacientes/listagem';
+                    window.location = URL + '/agendamentos/vincularPaciente';
                 } else {
                     swal({
                         type: 'warning',

@@ -1,6 +1,6 @@
 <?php
 
-class pessoasController extends controller {
+class PessoasController extends controller {
 
     private $url;
     private $pessoa;

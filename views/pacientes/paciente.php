@@ -160,13 +160,15 @@
                         <div class="item form-group">
                             <label class="col-md-3 col-sm-3 col-xs-12" for="especialidade">Especialidade
                             </label>
-                            <div class="col-md-8">
-                                <?php $nomes = null; ?>
-                                <?php foreach ($especialidades as $especialidade) : ?>
-                                    <?php $nomes .= $especialidade['especialidade'] . ' ,' ?>
-                                <?php endforeach; ?>
-                                <input class="form-control" value="<?= $nomes ?>" readonly="true" />
-                            </div>
+                            <?php if (!is_null($especialidades)): ?>
+                                <div class="col-md-8">
+                                    <?php $nomes = null; ?>
+                                    <?php foreach ($especialidades as $especialidade) : ?>
+                                        <?php $nomes .= $especialidade['especialidade'] . ' ,' ?>
+                                    <?php endforeach; ?>
+                                    <input class="form-control" value="<?= $nomes ?>" readonly="true" />
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <div class="item form-group">
                             <label class="col-md-3 col-sm-3 col-xs-12" for="convenio">Convênio

@@ -1,6 +1,6 @@
 <?php
 
-class homeController extends controller {
+class HomeController extends controller {
 
     private $url;
     private $usuario;

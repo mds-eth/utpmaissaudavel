@@ -1,6 +1,6 @@
 <?php
 
-class agendamentosController extends controller {
+class AgendamentosController extends controller {
 
     private $url;
     private $usuario;
@@ -55,6 +55,20 @@ class agendamentosController extends controller {
             $status = $_POST['status'];
             echo $this->agendamentos->validaSeExisteOutraAgendaAtiva($status);
         }
+    }
+
+    public function listagem() {
+
+        $dados['agendasEspecialidades'] = $this->agendamentos->buscaTodasAgendasPorEspecialidades();
+        $this->loadTemplate('agendamentos/listagem', $dados);
+    }
+
+    public function vincularPaciente() {
+
+        $dados['paciente'] = $this->agendamentos->buscaUltimoPacienteSalvo();
+        $dados['agendaEspecialidades'] = $this->agendamentos->buscaAgendaAtiva();
+
+        $this->loadTemplate('agendamentos/vincularPaciente', $dados);
     }
 
 }

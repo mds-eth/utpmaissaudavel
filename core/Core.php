@@ -1,6 +1,6 @@
 <?php
 
-class core {
+class Core {
 
     public function run() {
         
@@ -22,8 +22,9 @@ class core {
 
             $url = explode('/', $url);
             array_shift($url);
-            $currentController = $url[0] . 'Controller';
-            if (!class_exists($currentController)) {
+            $currentController = $url[0] . 'Controller';            
+            
+            if (!class_exists(ucfirst($currentController))) {
                 exit("<b>ERRO:</b> $currentController não encontrada.");
             }
 
