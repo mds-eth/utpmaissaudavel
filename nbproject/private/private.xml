@@ -6,8 +6,7 @@
             <file>file:/var/www/utpmaissaudavel/assets/js/agendas/agendas.js</file>
             <file>file:/var/www/utpmaissaudavel/models/Agendamentos.php</file>
             <file>file:/var/www/utpmaissaudavel/views/agendamentos/vincularPaciente.php</file>
-            <file>file:/var/www/utpmaissaudavel/assets/js/pacientes/pacientes.js</file>
-            <file>file:/var/www/utpmaissaudavel/controllers/agendamentosController.php</file>
+            <file>file:/var/www/utpmaissaudavel/controllers/AgendamentosController.php</file>
         </group>
     </open-files>
 </project-private>

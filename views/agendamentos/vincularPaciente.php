@@ -1,62 +1,52 @@
-<div class="clearfix"></div>    
 <div class="form-horizontal">   
     <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Basta arrastar paciente para o dia desejado</h2>                
+                    <h2>Arraste o paciente para o dia desejado</h2>                
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="x_content" id="paciente">                    
-                        <button value="<?= $paciente[0]['id_pessoa'] ?>" class="btn btn-success btn-xs"><?= $paciente[0]['nome_pessoa'] ?></button>
+                    <div class="x_content" id="pacientes">                        
                     </div>
-                </div>
-                <div class="x_content">
-                    <div class="x_content">                    
-
-                    </div>
-                </div>
+                </div>                
             </div>
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Agenda Semestral</h2>                
+                    <h2>Agenda semestral por especialidade</h2>                
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="x_content">                    
-                        <span><?= '<b>Início</b> ' . $agendaEspecialidades[0]['data_inicio_agenda'] . ' <b>Fim</b> ' . $agendaEspecialidades[0]['data_fim_agenda'] ?></span><br><br>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered" style="text-align: center">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center">Segunda</th>
-                                        <th style="text-align: center">Terça</th>
-                                        <th style="text-align: center">Quarta</th>
-                                        <th style="text-align: center">Quinta</th>                            
-                                        <th style="text-align: center">Sexta</th>                                                                    
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($agendaEspecialidades as $agenda) : ?>                                        
-                                        <tr>
-                                            <td><?= $agenda['fk_id_agenda_dias'] == $agenda['id_agenda_dias'] && $agenda['id_agenda_dias'] == 1 ? $agenda['especialidade'] : '---' ?></td>                                
-                                            <td><?= $agenda['fk_id_agenda_dias'] == $agenda['id_agenda_dias'] && $agenda['id_agenda_dias'] == 2 ? $agenda['especialidade'] : '---' ?></td>
-                                            <td><?= $agenda['fk_id_agenda_dias'] == $agenda['id_agenda_dias'] && $agenda['id_agenda_dias'] == 3 ? $agenda['especialidade'] : '---' ?></td>
-                                            <td><?= $agenda['fk_id_agenda_dias'] == $agenda['id_agenda_dias'] && $agenda['id_agenda_dias'] == 4 ? $agenda['especialidade'] : '---' ?></td>
-                                            <td><?= $agenda['fk_id_agenda_dias'] == $agenda['id_agenda_dias'] && $agenda['id_agenda_dias'] == 5 ? $agenda['especialidade'] : '---' ?></td>                                
-                                        </tr>                    
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="x_content">
+                        <?php if (isset($segunda)): ?>
+                            <span><?= '<b>Início: </b> ' . $segunda[0]['data_inicio_agenda'] . '<br> <b>Fim: </b> ' . $segunda[0]['data_fim_agenda'] . '<br><b>Semestre: </b>' . $segunda[0]['semestre'] . '/' . date('Y'); ?></span><br><br><br>
+                            <div class="table-responsive">
+                                <span><b>Segunda</b>: </span>
+                                <?php foreach ($segunda as $seg): ?>
+                                    <span><?= $seg['especialidade'] . ' |' ?></span>
+                                <?php endforeach; ?><br>
+                                <span><b>Terça</b>: </span>
+                                <?php foreach ($terca as $ter): ?>
+                                    <span><?= $ter['especialidade'] . ' |' ?></span>
+                                <?php endforeach; ?><br>
+                                <span><b>Quarta</b>: </span>
+                                <?php foreach ($quarta as $qua): ?>
+                                    <span><?= $qua['especialidade'] . ' |' ?></span>
+                                <?php endforeach; ?><br>
+                                <span><b>Quinta</b>: </span>
+                                <?php foreach ($quinta as $qui): ?>
+                                    <span><?= $qui['especialidade'] . ' |' ?></span>
+                                <?php endforeach; ?><br>
+                                <span><b>Sexta</b>: </span>
+                                <?php foreach ($sexta as $sex): ?>
+                                    <span><?= $sex['especialidade'] . ' |' ?></span>
+                                <?php endforeach; ?><br>
+                            </div>
+                        <?php else: ?>
+                            <h4>Agenda semestral ainda não definida!</h4>
+                        <?php endif; ?>
                     </div>
-                </div>
-                <div class="x_content">
-                    <div class="x_content">                    
-
-                    </div>
-                </div>
+                </div>                
             </div>
         </div>
         <div class="col-md-6 col-sm-12 col-xs-12">

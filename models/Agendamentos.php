@@ -92,10 +92,10 @@ class Agendamentos extends model {
         return $agendas;
     }
 
-    public function buscaUltimoPacienteSalvo() {
+    public function buscaPacientesCadastradosSemAgendamento() {
 
         $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, fk_id_paciente, convenio FROM pessoas p 
-                                JOIN dados_pacientes dp ON p.id_pessoa = dp.fk_id_paciente ORDER BY id_pessoa DESC LIMIT 1");
+                                JOIN dados_pacientes dp ON p.id_pessoa = dp.fk_id_paciente ORDER BY id_pessoa DESC LIMIT 3");
         $sql->execute();
 
         $paciente = $sql->fetchAll();

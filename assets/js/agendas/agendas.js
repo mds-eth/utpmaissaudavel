@@ -188,13 +188,8 @@ var agendas = {
             },
             sucess: function (result) {
 
-                if (result) {
-                    alert(result);
-                    swal({
-                        text: "Cadastro realizado com Sucesso!",
-                        type: "success",
-                        confirmButtonText: "OK"
-                    });
+                if (parseInt(result) === 1) {
+                    swal({text: "Cadastro realizado com Sucesso!", type: "success", confirmButtonText: "OK"});
                     window.location = URL + '/agendamentos/listagem';
                 } else {
                     swal("Atenção!", "Já há outra agenda com estas mesmas datas, favor verificar!", "error");
@@ -202,7 +197,7 @@ var agendas = {
 
                 }
             }
-        }, 'json');
+        });
     },
 
     montaCalendario: function () {
@@ -215,7 +210,7 @@ var agendas = {
             },
             navLinks: true,
             editable: true,
-            
+
             events: [
                 $.ajax({
                     url: URL + '/agendamentos/buscaPacientesAgendados',
@@ -227,12 +222,32 @@ var agendas = {
                 })
             ]
         });
+    },
 
+    buscaPacientesCadastradosSemAgendamento: function () {
 
+        $.ajax({
+            url: URL + '/agendamentos/buscaPacientesCadastradosSemAgendamento',
+            type: 'POST',
+            dataType: 'json',
+            success: function (result) {
+
+                $('#paciente').html("");
+
+                for (var i in result) {
+
+                    var paciente = result[i];
+                    var btn = "<div class='paciente btn btn-info btn-xs'>" + paciente.nome_pessoa + "</div><br>";
+                    $('#pacientes').append(btn);
+                }
+            }
+        });
     }
 };
 
 $(document).ready(function () {
+
     agendas.init();
     agendas.montaCalendario();
+    agendas.buscaPacientesCadastradosSemAgendamento();
 });

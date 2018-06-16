@@ -11,10 +11,10 @@
         <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/dataTables.bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>/assets/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/fullcalendar.css">
-        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/custom.min.css">
-        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/bootstrap-datepicker.css">
-        <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>   
-        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.min.js"></script>
+        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/custom.min.css">        
+        <link rel="stylesheet" href="<?php echo URL; ?>/assets/css/jquery-ui.css">        
+        <script type="text/javascript">var URL = '<?php echo URL; ?>';</script>                           
+        <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/jquery/jquery.min.js"></script>        
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/bootstrap/bootstrap.min.js"></script>        
     </head>
     <body class="nav-md">
