@@ -16,26 +16,29 @@ var agendas = {
         $('#validar').on('click', agendas.validarAgendaSemanal);
         $('#btnSalvarAgendaEspecialidade').on('click', agendas.gravarAgenda);
 
-        segunda = [];
+        agendas.montarCalendario();
+        agendas.buscarPacientesCadastradosSemAgendamento();
+
+        segundaIds = [];
         segundaEspecialidades = [];
-        terca = [];
+        tercaIds = [];
         tercaEspecialidades = [];
-        quarta = [];
+        quartaIds = [];
         quartaEspecialidades = [];
-        quinta = [];
+        quintaIds = [];
         quintaEspecialidades = [];
-        sexta = [];
+        sextaIds = [];
         sextaEspecialidades = [];
     },
 
     montarAgendaSegunda: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
-            segunda.push($(this).val());
+            segundaIds.push($(this).val());
             segundaEspecialidades.push(this.id);
         } else {
-            var id = segunda.indexOf($(this).val());
-            segunda.splice(id, 1);
+            var id = segundaIds.indexOf($(this).val());
+            segundaIds.splice(id, 1);
             var especialidade = segundaEspecialidades.indexOf(this.id);
             segundaEspecialidades.splice(especialidade, 1);
         }
@@ -43,11 +46,11 @@ var agendas = {
     montarAgendaTerca: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
-            terca.push($(this).val());
+            tercaIds.push($(this).val());
             tercaEspecialidades.push(this.id);
         } else {
-            var id = terca.indexOf($(this).val());
-            terca.splice(id, 1);
+            var id = tercaIds.indexOf($(this).val());
+            tercaIds.splice(id, 1);
             var especialidade = tercaEspecialidades.indexOf(this.id);
             tercaEspecialidades.splice(especialidade, 1);
         }
@@ -55,11 +58,11 @@ var agendas = {
     montarAgendaQuarta: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
-            quarta.push($(this).val());
+            quartaIds.push($(this).val());
             quartaEspecialidades.push(this.id);
         } else {
-            var id = quarta.indexOf($(this).val());
-            quarta.splice(id, 1);
+            var id = quartaIds.indexOf($(this).val());
+            quartaIds.splice(id, 1);
             var especialidade = quartaEspecialidades.indexOf(this.id);
             quartaEspecialidades.splice(especialidade, 1);
         }
@@ -67,11 +70,11 @@ var agendas = {
     montarAgendaQuinta: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
-            quinta.push($(this).val());
+            quintaIds.push($(this).val());
             quintaEspecialidades.push(this.id);
         } else {
-            var id = quinta.indexOf($(this).val());
-            quinta.splice(id, 1);
+            var id = quintaIds.indexOf($(this).val());
+            quintaIds.splice(id, 1);
             var especialidade = quintaEspecialidades.indexOf(this.id);
             quintaEspecialidades.splice(especialidade, 1);
         }
@@ -79,11 +82,11 @@ var agendas = {
     montarAgendaSexta: function () {
 
         if ($(this).parent().find('input').is(':checked')) {
-            sexta.push($(this).val());
+            sextaIds.push($(this).val());
             sextaEspecialidades.push(this.id);
         } else {
-            var id = sexta.indexOf($(this).val());
-            sexta.splice(id, 1);
+            var id = sextaIds.indexOf($(this).val());
+            sextaIds.splice(id, 1);
             var especialidade = sextaEspecialidades.indexOf(this.id);
             sextaEspecialidades.splice(especialidade, 1);
         }
@@ -112,27 +115,27 @@ var agendas = {
             return;
         }
 
-        if (segunda.length === 0) {
+        if (segundaIds.length === 0) {
             swal("Atenção!", "Segunda não possui nenhuma especialidade selecionada!", "error");
             return;
         }
 
-        if (terca.length === 0) {
+        if (tercaIds.length === 0) {
             swal("Atenção!", "Terça não possui nenhuma especialidade selecionada!", "error");
             return;
         }
 
-        if (quarta.length === 0) {
+        if (quartaIds.length === 0) {
             swal("Atenção!", "Quarta não possui nenhuma especialidade selecionada!", "error");
             return;
         }
 
-        if (quinta.length === 0) {
+        if (quintaIds.length === 0) {
             swal("Atenção!", "Quinta não possui nenhuma especialidade selecionada!", "error");
             return;
         }
 
-        if (sexta.length === 0) {
+        if (sextaIds.length === 0) {
             swal("Atenção!", "Sexta não possui nenhuma especialidade selecionada!", "error");
             return;
         }
@@ -161,7 +164,8 @@ var agendas = {
     chamaModalConfirmarAgenda: function () {
 
         $('#bodyModalAgendaEspecialidade').html("");
-        var pergunta = "Deseja definir agenda semestral iniciando em <b>" + $("#dataInicial").val() + "</b> e finalizando em <b>" + $('#dataFinal').val() + "</b>?<br/><br/>";
+        var pergunta = "Deseja definir agenda semestral iniciando em <b>" + $("#dataInicial").val() + "</b> e finalizando em <b>"
+                + $('#dataFinal').val() + "</b>?<br/><br/>";
         var dias = "<b>Segunda</b>: " + segundaEspecialidades + "<br/>" +
                 "<b>Terça</b>: " + tercaEspecialidades + "<br/>" +
                 "<b>Quarta</b>: " + quartaEspecialidades + "<br/>" +
@@ -180,11 +184,11 @@ var agendas = {
             data: {
                 dataInicial: $("#dataInicial").val(),
                 dataFinal: $('#dataFinal').val(),
-                segunda: segunda,
-                terca: terca,
-                quarta: quarta,
-                quinta: quinta,
-                sexta: sexta
+                segunda: segundaIds,
+                terca: tercaIds,
+                quarta: quartaIds,
+                quinta: quintaIds,
+                sexta: sextaIds
             },
             sucess: function (result) {
 
@@ -200,54 +204,68 @@ var agendas = {
         });
     },
 
-    montaCalendario: function () {
+    montarCalendario: function () {
 
         $('#vincularPacienteAgenda').fullCalendar({
             header: {
-                left: 'prev, next, today',
+                left: 'prev, next',
                 center: 'title',
-                right: 'month, agendaWeek, agendaDay'
+                right: 'agendaWeek, agendaDay'
             },
+            defaultView: 'agendaWeek',
+            hiddenDays: [0, 6],
             navLinks: true,
             editable: true,
+            droppable: true,
+            minTime: "08:00:00",
+            maxTime: "19:00:00",
+            selectable: true,
+            selectHelper: true,
+            events: function () {
 
-            events: [
                 $.ajax({
-                    url: URL + '/agendamentos/buscaPacientesAgendados',
+                    url: URL + '/usuarios/buscarAlunosParaRenderizarAgenda',
                     type: 'POST',
                     dataType: 'json',
                     success: function (result) {
 
+                        for (var i in result) {
+
+                            var aluno = result[i];
+
+                        }
                     }
-                })
-            ]
+                });
+            }
         });
     },
 
-    buscaPacientesCadastradosSemAgendamento: function () {
+    buscarPacientesCadastradosSemAgendamento: function () {
 
         $.ajax({
-            url: URL + '/agendamentos/buscaPacientesCadastradosSemAgendamento',
+            url: URL + '/agendamentos/buscarPacientesCadastradosSemAgendamento',
             type: 'POST',
             dataType: 'json',
             success: function (result) {
+                
+                $('#pacientes').html("");
 
-                $('#paciente').html("");
+                if (result) {
 
-                for (var i in result) {
+                    for (var i in result) {
 
-                    var paciente = result[i];
-                    var btn = "<div class='paciente btn btn-info btn-xs'>" + paciente.nome_pessoa + "</div><br>";
-                    $('#pacientes').append(btn);
+                        var paciente = result[i];
+                        var btn = "<span class='paciente btn-warning btn-xs'><b>" + paciente.nome_pessoa + "</b></span><br>";
+                        $('#pacientes').append(btn);
+                    }
+                } else {
+                    var pacienteVazio = "<p>No momento não há novos pacientes sem agendamento!</p>";
+                    $('#pacientes').append(pacienteVazio);
                 }
             }
         });
     }
 };
-
 $(document).ready(function () {
-
     agendas.init();
-    agendas.montaCalendario();
-    agendas.buscaPacientesCadastradosSemAgendamento();
 });

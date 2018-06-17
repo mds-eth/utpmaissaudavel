@@ -1,16 +1,17 @@
 <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA || $_SESSION['usuario']['id_perfil'] == Perfis::ALUNO) : ?>
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Agenda Pacientes</h2>            
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <br />
-                <div id="calendario"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Agenda pacientes</h2>                
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">                    
+                    <div id="calendario"></div>                                                   
+                </div>
             </div>
         </div>
-    </div>
+    </div>    
 <?php endif; ?>
 <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA): ?>
     <div class="row">
@@ -25,7 +26,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -37,7 +37,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -49,7 +48,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -61,7 +59,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -73,7 +70,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">

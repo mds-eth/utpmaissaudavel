@@ -2,8 +2,8 @@
 
 class UsuariosController extends controller {
 
-    private $usuario;
     private $url;
+    private $usuario;
 
     public function __construct() {
         $this->usuario = new Usuarios();
@@ -14,6 +14,14 @@ class UsuariosController extends controller {
         $this->url = new Urls();
         if (!$this->url->verificaUrlSessaoUsuario()) {
             header('Location: ' . URL . '/home');
+        }
+    }
+
+    public function buscarAlunosParaRenderizarAgenda() {
+
+        if ($this->post()) {
+
+            echo json_encode($this->usuario->buscarAlunosParaRenderizarAgenda());
         }
     }
 

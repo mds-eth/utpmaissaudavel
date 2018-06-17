@@ -66,9 +66,7 @@ class Agendamentos extends model {
         $sql->bindValue(':fim', $this->getDataFinal(), PDO::PARAM_STR);
         $sql->execute();
 
-        $retorno = $sql->fetchAll();
-
-        return empty($retorno) ? true : false;
+        return empty($retorno = $sql->fetchAll()) ? true : false;
     }
 
     public function validaSeExisteOutraAgendaAtiva($status) {
@@ -77,9 +75,7 @@ class Agendamentos extends model {
         $sql->bindValue(':status', $status, PDO::PARAM_INT);
         $sql->execute();
 
-        $retorno = $sql->fetchAll();
-
-        return empty($retorno) ? true : false;
+        return empty($retorno = $sql->fetchAll()) ? true : false;
     }
 
     public function buscaTodasAgendasPorEspecialidades() {
@@ -92,7 +88,7 @@ class Agendamentos extends model {
         return $agendas;
     }
 
-    public function buscaPacientesCadastradosSemAgendamento() {
+    public function buscarPacientesCadastradosSemAgendamento() {
 
         $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, fk_id_paciente, convenio FROM pessoas p 
                                 JOIN dados_pacientes dp ON p.id_pessoa = dp.fk_id_paciente ORDER BY id_pessoa DESC LIMIT 3");

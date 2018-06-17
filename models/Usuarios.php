@@ -30,13 +30,22 @@ class Usuarios extends model {
         }
     }
 
+    public function buscarAlunosParaRenderizarAgenda() {
+
+        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, codigo, nome_perfil FROM pessoas p JOIN usuarios u
+                            ON p.id_pessoa = u.fk_id_pessoa
+                            JOIN perfis pe
+                            ON u.fk_id_perfil = pe.id_perfil
+                            AND p.status = 1
+                            AND pe.id_perfil = 5");
+        $sql->execute();
+
+        return !empty($alunos = $sql->fetchAll()) ? $alunos : null;
+    }
+
     public function logado() {
 
-        if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
-            return true;
-        } else {
-            return false;
-        }
+        return isset($_SESSION['usuario']) && !empty($_SESSION['usuario']) ? true : false;
     }
 
     function getFkIdPerfil() {

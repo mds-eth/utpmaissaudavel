@@ -44,9 +44,7 @@ class AgendamentosController extends controller {
                 'quinta' => !empty($_POST['quinta']) ? $_POST['quinta'] : null,
                 'sexta' => !empty($_POST['sexta']) ? $_POST['sexta'] : null);
 
-            $this->agendamentos->gravaAgendaPorEspecialidades($dias);
-
-            echo true;
+            echo $this->agendamentos->gravaAgendaPorEspecialidades($dias);
         }
     }
 
@@ -65,9 +63,10 @@ class AgendamentosController extends controller {
         $this->loadTemplate('agendamentos/listagem', $dados);
     }
 
-    public function vincularPaciente() {
+    public function vinculacao() {
 
         $agendaEspecialidades = $this->agendamentos->buscaAgendaAtiva();
+        $dados['cores'] = $this->especialidade->buscaEspecialidadesPorCores();
 
         if (!empty($agendaEspecialidades)) {
             foreach ($agendaEspecialidades as $agenda) {
@@ -93,14 +92,14 @@ class AgendamentosController extends controller {
             $dados = array();
         }
 
-        $this->loadTemplate('agendamentos/vincularPaciente', $dados);
+        $this->loadTemplate('agendamentos/vinculacao', $dados);
     }
 
-    public function buscaPacientesCadastradosSemAgendamento() {
+    public function buscarPacientesCadastradosSemAgendamento() {
 
         if ($this->post()) {
 
-            echo json_encode($this->agendamentos->buscaPacientesCadastradosSemAgendamento());
+            echo json_encode($this->agendamentos->buscarPacientesCadastradosSemAgendamento());
         }
     }
 
