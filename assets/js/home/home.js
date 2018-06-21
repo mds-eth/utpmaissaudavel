@@ -1,6 +1,7 @@
 var home = {
 
-    init: function () {
+    buscaMeusPacientes: function () {
+
 
         $('#calendario').fullCalendar({
             header: {
@@ -16,8 +17,9 @@ var home = {
             minTime: "08:00:00",
             maxTime: "19:00:00"
         });
+
     }
 };
 $(document).ready(function () {
-    home.init();
+    home.buscaMeusPacientes();
 });

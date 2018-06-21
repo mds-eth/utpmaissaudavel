@@ -67,6 +67,7 @@ class AgendamentosController extends controller {
 
         $agendaEspecialidades = $this->agendamentos->buscaAgendaAtiva();
         $dados['cores'] = $this->especialidade->buscaEspecialidadesPorCores();
+        $dados['alunos'] = $this->usuario->buscarAlunosParaRenderizarAgenda();
 
         if (!empty($agendaEspecialidades)) {
             foreach ($agendaEspecialidades as $agenda) {
@@ -99,7 +100,30 @@ class AgendamentosController extends controller {
 
         if ($this->post()) {
 
-            echo json_encode($this->agendamentos->buscarPacientesCadastradosSemAgendamento());
+            $dadosPaciente = $this->agendamentos->buscarPacientesCadastradosSemAgendamento();
+
+            if (count($dadosPaciente) > 1) {
+
+                foreach ($dadosPaciente as $paciente) {
+
+                    $especialidades[] = $paciente['especialidade'] . ' | ';
+                }
+
+                $dadosPaciente[0]['especialidade'] = $especialidades[0] . $especialidades[1];
+            }
+
+            echo json_encode($dadosPaciente[0]);
+        }
+    }
+
+    public function buscaPacientesAlunoSelecionado() {
+
+        if ($this->post()) {
+            
+            var_dump($_POST);
+            die('no controller');
+
+            echo json_encode($this->agendamentos->buscaPacientesAlunoSelecionado($_POST['id']));
         }
     }
 

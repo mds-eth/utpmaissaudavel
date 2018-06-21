@@ -228,7 +228,7 @@ var pacientes = {
                         type: "success",
                         confirmButtonText: "OK"
                     });
-                    window.location = URL + '/agendamentos/vincularPaciente';
+                    window.location = URL + '/agendamentos/vinculacao';
                 } else {
                     swal({
                         type: 'warning',

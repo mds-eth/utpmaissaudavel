@@ -2,6 +2,10 @@ var agendas = {
 
     init: function () {
 
+        $(".aluno option[value='Selecione']").each(function () {
+            $(this).remove();
+        });
+
         $('.segunda').unbind('click');
         $('.segunda').on('click', agendas.montarAgendaSegunda);
         $('.terca').unbind('click');
@@ -12,8 +16,10 @@ var agendas = {
         $('.quinta').on('click', agendas.montarAgendaQuinta);
         $('.sexta').unbind('click');
         $('.sexta').on('click', agendas.montarAgendaSexta);
+        $('#aluno').on('change', agendas.buscaAgendaAlunoSelecionado);
         $('#validar').unbind('click');
         $('#validar').on('click', agendas.validarAgendaSemanal);
+        $('#botaoGravar').on('click', agendas.confirmarAgendaPaciente);
         $('#btnSalvarAgendaEspecialidade').on('click', agendas.gravarAgenda);
 
         agendas.montarCalendario();
@@ -204,7 +210,33 @@ var agendas = {
         });
     },
 
+    buscaAgendaAlunoSelecionado: function () {
+
+        $.ajax({
+            url: URL + '/agendamentos/buscaPacientesAlunoSelecionado',
+            type: 'POST',
+            data: {id: $('#aluno').val()},
+            dataType: 'json',
+            success: function (result) {
+
+                try {
+
+                    if (result !== undefined) {
+
+                    }
+
+                } catch (e) {
+
+                }
+
+
+            }
+        });
+    },
+
     montarCalendario: function () {
+
+        var auto = 'auto';
 
         $('#vincularPacienteAgenda').fullCalendar({
             header: {
@@ -212,30 +244,30 @@ var agendas = {
                 center: 'title',
                 right: 'agendaWeek, agendaDay'
             },
-            defaultView: 'agendaWeek',
-            hiddenDays: [0, 6],
+            height: auto,
             navLinks: true,
-            editable: true,
-            droppable: true,
-            minTime: "08:00:00",
-            maxTime: "19:00:00",
             selectable: true,
             selectHelper: true,
-            events: function () {
+            hiddenDays: [0, 6],
+            minTime: "08:00:00",
+            maxTime: "19:00:00",
+            defaultView: 'agendaWeek',
+            select: function (startEnd, endDate) {
 
-                $.ajax({
-                    url: URL + '/usuarios/buscarAlunosParaRenderizarAgenda',
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (result) {
+                $('#botaoGravar').html("");
 
-                        for (var i in result) {
+                if ($('#aluno').val() === 'Selecione') {
+                    swal("Atenção!", "Favor selecionar primeiro o aluno, para ver sua agenda completa!", "error");
+                    return;
+                }
 
-                            var aluno = result[i];
+                $('#dataInicio').val($.fullCalendar.formatDate(startEnd, "DD-MM-YYYY HH:mm"));
+                $('#dataFim').val($.fullCalendar.formatDate(endDate, "DD-MM-YYYY HH:mm"));
 
-                        }
-                    }
-                });
+                if ($('#dataInicio').val() !== '' && $('#dataFim').val() !== '') {
+                    var confirma = "<button id='confirmar' name='confirmar' class='btn btn-success btn-xs'>Visualizar</button>";
+                    $('#botaoGravar').append(confirma);
+                }
             }
         });
     },
@@ -247,23 +279,16 @@ var agendas = {
             type: 'POST',
             dataType: 'json',
             success: function (result) {
-                
-                $('#pacientes').html("");
 
-                if (result) {
-
-                    for (var i in result) {
-
-                        var paciente = result[i];
-                        var btn = "<span class='paciente btn-warning btn-xs'><b>" + paciente.nome_pessoa + "</b></span><br>";
-                        $('#pacientes').append(btn);
-                    }
-                } else {
-                    var pacienteVazio = "<p>No momento não há novos pacientes sem agendamento!</p>";
-                    $('#pacientes').append(pacienteVazio);
-                }
+                $('#idPaciente').val(result.id_pessoa);
+                $('#paciente').val(result.nome_pessoa);
+                $('#especialidade').val(result.especialidade);
             }
         });
+    },
+
+    confirmarAgendaPaciente: function () {
+
     }
 };
 $(document).ready(function () {

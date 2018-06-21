@@ -90,13 +90,20 @@ class Agendamentos extends model {
 
     public function buscarPacientesCadastradosSemAgendamento() {
 
-        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, fk_id_paciente, convenio FROM pessoas p 
-                                JOIN dados_pacientes dp ON p.id_pessoa = dp.fk_id_paciente ORDER BY id_pessoa DESC LIMIT 3");
+        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, convenio, responsavel, nome_unidade, especialidade
+                                FROM pessoas p 
+                                JOIN dados_pacientes dp 
+                                ON p.id_pessoa = dp.fk_id_paciente 
+                                JOIN unidades_de_saude us
+                                ON dp.fk_id_unidade_de_saude = us.id_unidade_de_saude  
+                                JOIN paciente_especialidades pe
+                                JOIN especialidades e
+                                ON pe.fk_id_especialidade = e.id_especialidade
+                                AND pe.fk_id_paciente = p.id_pessoa
+                                ORDER BY p.id_pessoa DESC LIMIT 2");
         $sql->execute();
 
-        $paciente = $sql->fetchAll();
-
-        return $paciente;
+        return !empty($pacientes = $sql->fetchAll()) ? $pacientes : null;
     }
 
     public function buscaAgendaAtiva() {
@@ -113,6 +120,10 @@ class Agendamentos extends model {
         $agenda = $sql->fetchAll();
 
         return $agenda;
+    }
+
+    public function buscaPacientesAlunoSelecionado($id) {
+        
     }
 
     function getDataInicial() {
