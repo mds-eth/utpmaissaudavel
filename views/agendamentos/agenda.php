@@ -60,7 +60,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnSalvarAgendaEspecialidade" class="btn btn-success btn-xs">Salvar</button>
+                <button id="btn-salvar-agenda-especialidade" class="btn btn-success btn-xs">Salvar</button>
             </div>
         </div>
     </div>

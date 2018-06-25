@@ -100,7 +100,7 @@ class Agendamentos extends model {
                                 JOIN especialidades e
                                 ON pe.fk_id_especialidade = e.id_especialidade
                                 AND pe.fk_id_paciente = p.id_pessoa
-                                ORDER BY p.id_pessoa DESC LIMIT 2");
+                                ORDER BY p.id_pessoa DESC LIMIT 1");
         $sql->execute();
 
         return !empty($pacientes = $sql->fetchAll()) ? $pacientes : null;
@@ -123,7 +123,43 @@ class Agendamentos extends model {
     }
 
     public function buscaPacientesAlunoSelecionado($id) {
-        
+
+        $sql = $this->db->prepare("SELECT * FROM alunos_pacientes ap WHERE ap.fk_id_aluno = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+
+        return !empty($return = $sql->fetchAll()) ? $return : null;
+    }
+
+    public function gravaAgendaInicialPaciente($sessoes) {
+
+        try {
+
+            foreach ($sessoes as $sessao) {
+                
+                var_dump($sessao, $sessoes);
+                die('no foreach');
+
+                $sql = $this->db->prepare("INSERT INTO agendamentos(fk_id_aluno, fk_id_paciente, data_sessao, hora_inicio, hora_fim, agendamento_criado_por, 
+                                    agendamento_criado_em, agendamento_atualizado_por, agendamento_atualizado_em) 
+                                    VALUES(:fk_id_aluno, :fk_id_paciente, :data_sessao, :hora_inicio, :hora_fim, :agendamento_criado_por, :agendamento_criado_em, 
+                                    :agendamento_atualizado_por, :agendamento_atualizado_em)");
+
+                $sql->bindValue(':fk_id_aluno', $unico, PDO::PARAM_INT);
+                $sql->bindValue(':fk_id_paciente', $this->fk, PDO::PARAM_INT);
+                $sql->bindValue(':data_sessao', $this->getDataInicial(), PDO::PARAM_STR);
+                $sql->bindValue(':hora_inicio', $this->getDataFinal(), PDO::PARAM_STR);
+                $sql->bindValue(':hora_fim', 1, PDO::PARAM_INT);
+                $sql->bindValue(':agendamento_criado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':agendamento_criado_em', $this->date, PDO::PARAM_STR);
+                $sql->bindValue(':agendamento_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
+                $sql->bindValue(':agendamento_atualizado_em', $this->date, PDO::PARAM_STR);
+
+                $sql->execute();
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
     function getDataInicial() {

@@ -119,11 +119,52 @@ class AgendamentosController extends controller {
     public function buscaPacientesAlunoSelecionado() {
 
         if ($this->post()) {
-            
-            var_dump($_POST);
-            die('no controller');
 
             echo json_encode($this->agendamentos->buscaPacientesAlunoSelecionado($_POST['id']));
+        }
+    }
+
+    public function gravaAgendaInicialPaciente() {
+
+
+        if ($this->post()) {
+
+            $sessoes = array(
+                'idAluno' => !empty($_POST['idAluno']) ? trim($_POST['idAluno']) : '',
+                'idPaciente' => !empty($_POST['idPaciente']) ? trim($_POST['idPaciente']) : '',
+                'dataPrimeiraSessao' => !empty($_POST['dataPrimeiraSessao']) ? trim($_POST['dataPrimeiraSessao']) : '',
+                'horaInicioPrimeiraSessao' => !empty($_POST['horaInicioPrimeiraSessao']) ? trim($_POST['horaInicioPrimeiraSessao']) : '',
+                'horaFimPrimeiraSessao' => !empty($_POST['horaFimPrimeiraSessao']) ? trim($_POST['horaFimPrimeiraSessao']) : '',
+                'dataSegundaSessao' => !empty($_POST['dataSegundaSessao']) ? trim($_POST['dataSegundaSessao']) : '',
+                'horaInicioSegundaSessao' => !empty($_POST['horaInicioSegundaSessao']) ? trim($_POST['horaInicioSegundaSessao']) : '',
+                'horaFimSegundaSessao' => !empty($_POST['horaFimSegundaSessao']) ? trim($_POST['horaFimSegundaSessao']) : '',
+                'dataTerceiraSessao' => !empty($_POST['dataTerceiraSessao']) ? trim($_POST['dataTerceiraSessao']) : '',
+                'horaInicioTerceiraSessao' => !empty($_POST['horaInicioTerceiraSessao']) ? trim($_POST['horaInicioTerceiraSessao']) : '',
+                'horaFimTerceiraSessao' => !empty($_POST['horaFimTerceiraSessao']) ? trim($_POST['horaFimTerceiraSessao']) : '',
+                'dataQuartaSessao' => !empty($_POST['dataQuartaSessao']) ? trim($_POST['dataQuartaSessao']) : '',
+                'horaInicioQuartaSessao' => !empty($_POST['horaInicioQuartaSessao']) ? trim($_POST['horaInicioQuartaSessao']) : '',
+                'horaFimQuartaSessao' => !empty($_POST['horaFimQuartaSessao']) ? trim($_POST['horaFimQuartaSessao']) : '',
+                'dataQuintaSessao' => !empty($_POST['dataQuintaSessao']) ? trim($_POST['dataQuintaSessao']) : '',
+                'horaInicioQuintaSessao' => !empty($_POST['horaInicioQuintaSessao']) ? trim($_POST['horaInicioQuintaSessao']) : '',
+                'horaFimQuintaSessao' => !empty($_POST['horaFimQuintaSessao']) ? trim($_POST['horaFimQuintaSessao']) : '',
+                'dataSextaSessao' => !empty($_POST['dataSextaSessao']) ? trim($_POST['dataSextaSessao']) : '',
+                'horaInicioSextaSessao' => !empty($_POST['horaInicioSextaSessao']) ? trim($_POST['horaInicioSextaSessao']) : '',
+                'horaFimSextaSessao' => !empty($_POST['horaFimSextaSessao']) ? trim($_POST['horaFimSextaSessao']) : '',
+                'dataSetimaSessao' => !empty($_POST['dataSetimaSessao']) ? trim($_POST['dataSetimaSessao']) : '',
+                'horaInicioSetimaSessao' => !empty($_POST['horaInicioSetimaSessao']) ? trim($_POST['horaInicioSetimaSessao']) : '',
+                'horaFimSetimaSessao' => !empty($_POST['horaFimSetimaSessao']) ? trim($_POST['horaFimSetimaSessao']) : '',
+                'dataOitavaSessao' => !empty($_POST['dataOitavaSessao']) ? trim($_POST['dataOitavaSessao']) : '',
+                'horaInicioOitavaSessao' => !empty($_POST['horaInicioOitavaSessao']) ? trim($_POST['horaInicioOitavaSessao']) : '',
+                'horaFimOitavaSessao' => !empty($_POST['horaFimOitavaSessao']) ? trim($_POST['horaFimOitavaSessao']) : '',
+                'dataNonaSessao' => !empty($_POST['dataNonaSessao']) ? trim($_POST['dataNonaSessao']) : '',
+                'horaInicioNonaSessao' => !empty($_POST['horaInicioNonaSessao']) ? trim($_POST['horaInicioNonaSessao']) : '',
+                'horaFimNonaSessao' => !empty($_POST['horaFimNonaSessao']) ? trim($_POST['horaFimNonaSessao']) : '',
+                'dataDecimaSessao' => !empty($_POST['dataDecimaSessao']) ? trim($_POST['dataDecimaSessao']) : '',
+                'horaInicioDecimaSessao' => !empty($_POST['horaInicioDecimaSessao']) ? trim($_POST['horaInicioDecimaSessao']) : '',
+                'horaFimDecimaSessao' => !empty($_POST['horaFimDecimaSessao']) ? trim($_POST['horaFimDecimaSessao']) : ''
+            );
+
+            $this->agendamentos->gravaAgendaInicialPaciente($sessoes);
         }
     }
 

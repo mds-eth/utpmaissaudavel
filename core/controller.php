@@ -1,7 +1,7 @@
 <?php
 
 class controller {
-    
+
     public function loadView($viewName, $viewData = array()) {
 
         extract($viewData);
@@ -26,7 +26,7 @@ class controller {
 
     public function loadViewInTemplate($viewName, $viewData = array()) {
 
-        extract($viewData); // Transforma a chave do array em variavel.
+        extract($viewData);
         $file = 'views/' . $viewName . '.php';
         if (file_exists($file)) {
             include 'views/' . $viewName . '.php';
