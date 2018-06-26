@@ -7,6 +7,8 @@
             <file>file:/var/www/utpmaissaudavel/models/Agendamentos.php</file>
             <file>file:/var/www/utpmaissaudavel/views/agendamentos/vinculacao.php</file>
             <file>file:/var/www/utpmaissaudavel/controllers/AgendamentosController.php</file>
+            <file>file:/var/www/utpmaissaudavel/assets/js/home/home.js</file>
+            <file>file:/var/www/utpmaissaudavel/views/home.php</file>
         </group>
     </open-files>
 </project-private>

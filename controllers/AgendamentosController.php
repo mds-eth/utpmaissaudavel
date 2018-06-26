@@ -125,6 +125,14 @@ class AgendamentosController extends controller {
         }
     }
 
+    public function buscaMeusPacientes() {
+
+        if ($this->post()) {
+
+            echo json_encode($this->agendamentos->buscaPacientesAlunoSelecionado($_SESSION['usuario']['id_pessoa']));
+        }
+    }
+
     public function gravaAgendaInicialPaciente() {
 
 
