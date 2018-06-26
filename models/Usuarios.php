@@ -40,7 +40,27 @@ class Usuarios extends model {
                             AND pe.id_perfil = 5");
         $sql->execute();
 
-        return !empty($alunos = $sql->fetchAll()) ? $alunos : null;
+        $result = $sql->fetchAll();
+
+        $alunos = $this->buscaQuantidadePacientesPorAluno($result);
+
+        return !empty($alunos) ? $alunos : null;
+    }
+
+    public function buscaQuantidadePacientesPorAluno($alunos) {
+
+        foreach ($alunos as &$aluno) {
+
+            $sql = $this->db->prepare("SELECT count(fk_id_aluno) as quant FROM alunos_pacientes ap WHERE ap.fk_id_aluno = :id AND ap.status = 1");
+            $sql->bindValue(':id', $aluno['id_pessoa'], PDO::PARAM_INT);
+            $sql->execute();
+
+            $quant = $sql->fetchObject();
+
+            $aluno['quant_paciente'] = $quant->quant;
+        }
+
+        return $alunos;
     }
 
     public function logado() {

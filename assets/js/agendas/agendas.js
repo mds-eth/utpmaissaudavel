@@ -359,7 +359,7 @@ var agendas = {
             },
             sucess: function (result) {
 
-                if (parseInt(result) === 1) {
+                if (result === true) {
                     swal({text: "Cadastro realizado com Sucesso!", type: "success", confirmButtonText: "OK"});
                     window.location = URL + '/agendamentos/listagem';
                 } else {
@@ -380,7 +380,20 @@ var agendas = {
             dataType: 'json',
             success: function (result) {
 
+                for (var i in result) {
 
+                    var paciente = result[i];
+
+                    var horario = {
+
+                        id: paciente.id_pessoa,
+                        title: paciente.nome_pessoa,
+                        start: agendas.convertData(paciente.data_sessao) + " " + paciente.hora_inicio,
+                        end: agendas.convertData(paciente.data_sessao) + " " + paciente.hora_fim,
+                        color: 'red'
+                    };
+                    $('#vincular-paciente-agenda').fullCalendar('renderEvent', horario, true);
+                }
             }
         });
     },
@@ -420,215 +433,213 @@ var agendas = {
 
     validaCamposAgendaPaciente: function () {
 
-        var error = swal("Atenção!", "Verifique os campos em vermelho!", "error");
-
         if ($('#data-primeira-sessao').val() === '') {
             $('#data-primeira-sessao').focus();
             $('#data-primeira-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 1º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-primeira-sessao').val() === '') {
             $('#hora-inicio-primeira-sessao').focus();
             $('#hora-inicio-primeira-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 1º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-primeira-sessao').val() === '') {
             $('#hora-fim-primeira-sessao').focus();
             $('#hora-fim-primeira-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 1º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-segunda-sessao').val() === '') {
             $('#data-segunda-sessao').focus();
             $('#data-segunda-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 2º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-segunda-sessao').val() === '') {
             $('#hora-inicio-segunda-sessao').focus();
             $('#hora-inicio-segunda-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 2º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-segunda-sessao').val() === '') {
             $('#hora-fim-segunda-sessao').focus();
             $('#hora-fim-segunda-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 2º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-terceira-sessao').val() === '') {
             $('#data-terceira-sessao').focus();
             $('#data-terceira-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 3º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-terceira-sessao').val() === '') {
             $('#hora-inicio-terceira-sessao').focus();
             $('#hora-inicio-terceira-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 3º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-terceira-sessao').val() === '') {
             $('#hora-fim-terceira-sessao').focus();
             $('#hora-fim-terceira-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 3º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-quarta-sessao').val() === '') {
             $('#data-quarta-sessao').focus();
             $('#data-quarta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 4º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-quarta-sessao').val() === '') {
             $('#hora-inicio-quarta-sessao').focus();
             $('#hora-inicio-quarta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 4º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-quarta-sessao').val() === '') {
             $('#hora-fim-quarta-sessao').focus();
             $('#hora-fim-quarta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 4º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-quinta-sessao').val() === '') {
             $('#data-quinta-sessao').focus();
             $('#data-quinta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 5º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-quinta-sessao').val() === '') {
             $('#hora-inicio-quinta-sessao').focus();
             $('#hora-inicio-quinta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 5º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-quinta-sessao').val() === '') {
             $('#hora-fim-quinta-sessao').focus();
             $('#hora-fim-quinta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 5º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-sexta-sessao').val() === '') {
             $('#data-sexta-sessao').focus();
             $('#data-sexta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data sexta 6º não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-sexta-sessao').val() === '') {
             $('#hora-inicio-sexta-sessao').focus();
             $('#hora-inicio-sexta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 6º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-sexta-sessao').val() === '') {
             $('#hora-fim-sexta-sessao').focus();
             $('#hora-fim-sexta-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 6º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-setima-sessao').val() === '') {
             $('#data-setima-sessao').focus();
             $('#data-setima-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 7º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-setima-sessao').val() === '') {
             $('#hora-inicio-setima-sessao').focus();
             $('#hora-inicio-setima-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 7º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-setima-sessao').val() === '') {
             $('#hora-fim-setima-sessao').focus();
             $('#hora-fim-setima-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 7º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-oitava-sessao').val() === '') {
             $('#data-oitava-sessao').focus();
             $('#data-oitava-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 8º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-oitava-sessao').val() === '') {
             $('#hora-inicio-oitava-sessao').focus();
             $('#hora-inicio-oitava-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 8º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-oitava-sessao').val() === '') {
             $('#hora-fim-oitava-sessao').focus();
             $('#hora-fim-oitava-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 8º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-nona-sessao').val() === '') {
             $('#data-nona-sessao').focus();
             $('#data-nona-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 9º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-nona-sessao').val() === '') {
             $('#hora-inicio-nona-sessao').focus();
             $('#hora-inicio-nona-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 9º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-nona-sessao').val() === '') {
             $('#hora-fim-nona-sessao').focus();
             $('#hora-fim-nona-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 9º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#data-decima-sessao').val() === '') {
             $('#data-decima-sessao').focus();
             $('#data-decima-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Data 10º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-inicio-decima-sessao').val() === '') {
             $('#hora-inicio-decima-sessao').focus();
             $('#hora-inicio-decima-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora início 10º sessão não pode ficar vazio!", "error");
             return;
         }
 
         if ($('#hora-fim-decima-sessao').val() === '') {
             $('#hora-fim-decima-sessao').focus();
             $('#hora-fim-decima-sessao').css('border', '1px solid red');
-            error;
+            swal("Atenção!", "Hora fim 10º sessão não pode ficar vazio!", "error");
             return;
         }
 
@@ -698,9 +709,22 @@ var agendas = {
             dataType: 'json',
             success: function (result) {
 
-                console.log(result);
-                return;
-
+                if (result === true) {
+                    swal({
+                        text: "Agenda paciente cadastrada com sucesso!",
+                        type: "success"
+                    });
+                    setTimeout(function () {
+                        window.location.href = URL + '/pacientes/cadastrar';
+                    }, 1000);
+                } else {
+                    swal({
+                        type: 'warning',
+                        title: 'Ocorreu algum erro ao realizar o cadastro da agenda, revise todos os dados informados',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
             }
         });
     }

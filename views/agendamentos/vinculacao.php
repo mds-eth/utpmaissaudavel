@@ -26,7 +26,7 @@
                             <select class="aluno form-control" id="aluno" name="aluno">
                                 <option >Selecione</option>
                                 <?php foreach ($alunos as $aluno) : ?>
-                                    <option value="<?= $aluno['id_pessoa'] ?>"><?= $aluno['nome_pessoa'] . ' - Quantidade pacientes -> ' . 2 ?></option>
+                                    <option value="<?= $aluno['id_pessoa'] ?>"><?= $aluno['nome_pessoa'] . ' - Quantidade pacientes -> ' . $aluno['quant_paciente'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
