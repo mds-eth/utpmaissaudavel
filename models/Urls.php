@@ -2,6 +2,13 @@
 
 class Urls extends model {
 
+    private $log;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
+
     public function cadastrar($url, $perfis) {
 
         $retornoValidaUrl = $this->validaUrl($url);
@@ -26,7 +33,7 @@ class Urls extends model {
 
                 return true;
             } catch (Exception $exc) {
-                echo $exc->getTraceAsString();
+                $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
             }
         } else {
             return false;
@@ -54,8 +61,7 @@ class Urls extends model {
 
             return true;
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

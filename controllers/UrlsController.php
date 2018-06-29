@@ -13,7 +13,6 @@ class UrlsController extends controller {
             header('Location: ' . URL . '/login');
         }
 
-        $this->url = new Urls();
         $this->perfil = new Perfis();
 
         $this->url = new Urls();

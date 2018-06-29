@@ -2,10 +2,16 @@
 
 class Telefones extends model {
 
+    private $log;
     private $residencial;
     private $celular;
     private $contato;
     private $fkIdPessoa;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravar() {
 
@@ -30,8 +36,7 @@ class Telefones extends model {
 
             $pdo->execute();
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -53,8 +58,7 @@ class Telefones extends model {
 
             $pdo->execute();
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

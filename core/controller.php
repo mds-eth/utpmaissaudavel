@@ -37,19 +37,7 @@ class controller {
 
     public function post() {
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    protected function mandaEmailAdmErroAplicacao($erro) {
-
-        $para = "michaeldouglas.10.94@gmail.com";
-        $mensagem = "Erro Aplicação UTP - Mais Saudavel";
-
-        mail($mensagem, $para, $message, $erro);
+        return $_SERVER["REQUEST_METHOD"] == "POST" ? true : false;
     }
 
 }

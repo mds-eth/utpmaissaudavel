@@ -32,7 +32,8 @@
                                 <?php $data = $paciente['pessoa_criado_em'] ?>
                                 <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <td style="text-align: center">
-                                    <a href="<?php echo URL; ?>/pacientes/paciente/<?= $paciente['id_pessoa'] ?>" class="btn btn-success btn-xs">Prontuário</a>
+                                    <a href="<?php echo URL; ?>/pacientes/paciente/<?= $paciente['id_pessoa'] ?>" class="btn btn-info btn-xs">Visualizar</a>
+                                    <a href="<?php echo URL; ?>/pacientes/agenda/<?= $paciente['id_pessoa'] ?>" class="btn btn-warning btn-xs">Agenda</a>
                                 </td>  
                             </tr>                    
                         <?php endforeach; ?>

@@ -16,9 +16,9 @@ class PacientesController extends controller {
         $this->url = new Urls();
         $this->usuario = new Usuarios();
 
-        /* if (!$this->usuario->logado()) {
-          header('Location: ' . URL . '/login');
-          } */
+        if (!$this->usuario->logado()) {
+            header('Location: ' . URL . '/login');
+        }
 
         $this->pessoa = new Pessoas();
         $this->unidade = new Unidades();
@@ -76,7 +76,7 @@ class PacientesController extends controller {
                 $this->loadTemplate('pacientes/cadastrar', $dados);
             }
         } catch (Exception $ex) {
-            
+            $this->logError(__CLASS__, __FUNCTION__, $ex->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 
@@ -108,6 +108,17 @@ class PacientesController extends controller {
             header('Location: ' . URL . '/pacientes/listagem');
         } else {
             $this->loadTemplate('pacientes/paciente', $dados);
+        }
+    }
+
+    public function agenda($id) {
+
+        $dados['agenda'] = $this->paciente->buscaAgendaPaciente($id);
+
+        if (!is_null($dados['agenda'])) {
+            $this->loadTemplate('pacientes/agenda', $dados);
+        } else {
+            header('Location: ' . URL . '/pacientes/listagem');
         }
     }
 

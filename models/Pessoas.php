@@ -2,14 +2,20 @@
 
 class Pessoas extends model {
 
-    public $rg;
-    public $cpf;
-    public $sexo;
-    public $mae;
-    public $nome;
-    public $email;
-    public $codigo;
-    public $dataNascimento;
+    private $log;
+    private $rg;
+    private $cpf;
+    private $sexo;
+    private $mae;
+    private $nome;
+    private $email;
+    private $codigo;
+    private $dataNascimento;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravar() {
 
@@ -46,8 +52,7 @@ class Pessoas extends model {
             $fkIdPessoa = $this->db->lastInsertId();
             return $fkIdPessoa;
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -72,8 +77,7 @@ class Pessoas extends model {
 
             $pdo->execute();
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -94,8 +98,7 @@ class Pessoas extends model {
 
             $pdo->execute();
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -210,7 +213,7 @@ class Pessoas extends model {
             $sql->execute();
             return true;
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

@@ -2,8 +2,14 @@
 
 class Usuarios extends model {
 
+    private $log;
     private $fkIdPerfil;
     private $fkIdPessoa;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravar($email) {
 
@@ -25,8 +31,7 @@ class Usuarios extends model {
 
             $pdo->execute();
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

@@ -2,11 +2,17 @@
 
 class Pacientes extends model {
 
+    private $log;
     private $convenio;
     private $responsavel;
     private $fkIdPaciente;
     private $especialidades;
     private $fkIdUnidadeSaude;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravaTabelaDadosPacientes() {
 
@@ -31,8 +37,7 @@ class Pacientes extends model {
             $pdo->execute();
             $this->gravaTabelaPacientesEspecialidades();
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -57,8 +62,7 @@ class Pacientes extends model {
                 $sql->execute();
             }
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -105,6 +109,17 @@ class Pacientes extends model {
         $especialidades = $sql->fetchAll();
 
         return !empty($especialidades) ? $especialidades : null;
+    }
+
+    public function buscaAgendaPaciente($id) {
+
+        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, email, data_sessao, hora_inicio, hora_fim 
+                    FROM pessoas p JOIN agendamentos a ON p.id_pessoa = a.fk_id_paciente
+                    AND p.id_pessoa = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_STR);
+        $sql->execute();
+
+        return !empty($agenda = $sql->fetchAll()) ? $agenda : null;
     }
 
     function getFkIdUnidadeSaude() {

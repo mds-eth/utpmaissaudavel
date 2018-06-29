@@ -3,6 +3,7 @@
 class AgendamentosController extends controller {
 
     private $url;
+    private $log;
     private $usuario;
     private $agendamentos;
     private $especialidade;
@@ -15,6 +16,7 @@ class AgendamentosController extends controller {
         }
 
         $this->url = new Urls();
+        $this->log = new Logs();
         $this->agendamentos = new Agendamentos();
         $this->especialidade = new Especialidades();
 
@@ -32,20 +34,25 @@ class AgendamentosController extends controller {
 
     public function cadastrarAgendaPorEspecialidade() {
 
-        if ($this->post()) {
+        try {
 
-            $this->agendamentos->setDataInicial(!empty($_POST['dataInicial']) ? $_POST['dataInicial'] : null);
-            $this->agendamentos->setDataFinal(!empty($_POST['dataFinal']) ? $_POST['dataFinal'] : null);
+            if ($this->post()) {
 
-            $dias = array(
-                'segunda' => !empty($_POST['segunda']) ? $_POST['segunda'] : null,
-                'terca' => !empty($_POST['terca']) ? $_POST['terca'] : null,
-                'quarta' => !empty($_POST['quarta']) ? $_POST['quarta'] : null,
-                'quinta' => !empty($_POST['quinta']) ? $_POST['quinta'] : null,
-                'sexta' => !empty($_POST['sexta']) ? $_POST['sexta'] : null);
+                $this->agendamentos->setDataInicial(!empty($_POST['dataInicial']) ? $_POST['dataInicial'] : null);
+                $this->agendamentos->setDataFinal(!empty($_POST['dataFinal']) ? $_POST['dataFinal'] : null);
 
-            $retorno = $this->agendamentos->gravaAgendaPorEspecialidades($dias);
-            echo json_encode($retorno);
+                $dias = array(
+                    'segunda' => !empty($_POST['segunda']) ? $_POST['segunda'] : null,
+                    'terca' => !empty($_POST['terca']) ? $_POST['terca'] : null,
+                    'quarta' => !empty($_POST['quarta']) ? $_POST['quarta'] : null,
+                    'quinta' => !empty($_POST['quinta']) ? $_POST['quinta'] : null,
+                    'sexta' => !empty($_POST['sexta']) ? $_POST['sexta'] : null);
+
+                $retorno = $this->agendamentos->gravaAgendaPorEspecialidades($dias);
+                echo json_encode($retorno);
+            }
+        } catch (Exception $exc) {
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 
@@ -97,23 +104,30 @@ class AgendamentosController extends controller {
         $this->loadTemplate('agendamentos/vinculacao', $dados);
     }
 
-    public function buscarPacientesCadastradosSemAgendamento() {
+    public function buscaUltimoPacienteCadastrado() {
 
-        if ($this->post()) {
+        try {
 
-            $dadosPaciente = $this->agendamentos->buscarPacientesCadastradosSemAgendamento();
+            if ($this->post()) {
 
-            if (count($dadosPaciente) > 1) {
+                $dadosPaciente = $this->agendamentos->buscarDadosPacienteSemAgendamento();
 
-                foreach ($dadosPaciente as $paciente) {
+                if (is_null($dadosPaciente)) {
+                    echo $dadosPaciente;
+                } else if (count($dadosPaciente) > 1) {
 
-                    $especialidades[] = $paciente['especialidade'] . ' | ';
+                    foreach ($dadosPaciente as $paciente) {
+
+                        $especialidades[] = $paciente['especialidade'] . ' | ';
+                    }
+
+                    $dadosPaciente[0]['especialidade'] = $especialidades[0] . $especialidades[1];
                 }
 
-                $dadosPaciente[0]['especialidade'] = $especialidades[0] . $especialidades[1];
+                echo json_encode($dadosPaciente[0]);
             }
-
-            echo json_encode($dadosPaciente[0]);
+        } catch (Exception $exc) {
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 
@@ -135,66 +149,70 @@ class AgendamentosController extends controller {
 
     public function gravaAgendaInicialPaciente() {
 
+        try {
 
-        if ($this->post()) {
+            if ($this->post()) {
 
-            $idAluno = trim($_POST['idAluno']);
-            $idPaciente = trim($_POST['idPaciente']);
-            $sessoes = [
-                'primeiraSessao' => [
-                    'data' => trim($_POST['dataPrimeiraSessao']),
-                    'horaInicio' => trim($_POST['horaInicioPrimeiraSessao']),
-                    'horaFim' => trim($_POST['horaFimPrimeiraSessao'])
-                ],
-                'segundaSessao' => [
-                    'data' => trim($_POST['dataSegundaSessao']),
-                    'horaInicio' => trim($_POST['horaInicioSegundaSessao']),
-                    'horaFim' => trim($_POST['horaFimSegundaSessao'])
-                ],
-                'terceiraSessao' => [
-                    'data' => trim($_POST['dataTerceiraSessao']),
-                    'horaInicio' => trim($_POST['horaInicioTerceiraSessao']),
-                    'horaFim' => trim($_POST['horaFimTerceiraSessao'])
-                ],
-                'quartaSessao' => [
-                    'data' => trim($_POST['dataQuartaSessao']),
-                    'horaInicio' => trim($_POST['horaInicioQuartaSessao']),
-                    'horaFim' => trim($_POST['horaFimQuartaSessao'])
-                ],
-                'quintaSessao' => [
-                    'data' => trim($_POST['dataQuintaSessao']),
-                    'horaInicio' => trim($_POST['horaInicioQuintaSessao']),
-                    'horaFim' => trim($_POST['horaFimQuintaSessao'])
-                ],
-                'sextaSessao' => [
-                    'data' => trim($_POST['dataSextaSessao']),
-                    'horaInicio' => trim($_POST['horaInicioSextaSessao']),
-                    'horaFim' => trim($_POST['horaFimSextaSessao'])
-                ],
-                'setimaSessao' => [
-                    'data' => trim($_POST['dataSetimaSessao']),
-                    'horaInicio' => trim($_POST['horaInicioSetimaSessao']),
-                    'horaFim' => trim($_POST['horaFimSetimaSessao'])
-                ],
-                'oitavaSessao' => [
-                    'data' => trim($_POST['dataOitavaSessao']),
-                    'horaInicio' => trim($_POST['horaInicioOitavaSessao']),
-                    'horaFim' => trim($_POST['horaFimOitavaSessao'])
-                ],
-                'nonaSessao' => [
-                    'data' => trim($_POST['dataNonaSessao']),
-                    'horaInicio' => trim($_POST['horaInicioNonaSessao']),
-                    'horaFim' => trim($_POST['horaFimNonaSessao'])
-                ],
-                'decimaSessao' => [
-                    'data' => trim($_POST['dataDecimaSessao']),
-                    'horaInicio' => trim($_POST['horaInicioDecimaSessao']),
-                    'horaFim' => trim($_POST['horaFimDecimaSessao'])
-                ]
-            ];
+                $idAluno = trim($_POST['idAluno']);
+                $idPaciente = trim($_POST['idPaciente']);
+                $sessoes = [
+                    'primeiraSessao' => [
+                        'data' => trim($_POST['dataPrimeiraSessao']),
+                        'horaInicio' => trim($_POST['horaInicioPrimeiraSessao']),
+                        'horaFim' => trim($_POST['horaFimPrimeiraSessao'])
+                    ],
+                    'segundaSessao' => [
+                        'data' => trim($_POST['dataSegundaSessao']),
+                        'horaInicio' => trim($_POST['horaInicioSegundaSessao']),
+                        'horaFim' => trim($_POST['horaFimSegundaSessao'])
+                    ],
+                    'terceiraSessao' => [
+                        'data' => trim($_POST['dataTerceiraSessao']),
+                        'horaInicio' => trim($_POST['horaInicioTerceiraSessao']),
+                        'horaFim' => trim($_POST['horaFimTerceiraSessao'])
+                    ],
+                    'quartaSessao' => [
+                        'data' => trim($_POST['dataQuartaSessao']),
+                        'horaInicio' => trim($_POST['horaInicioQuartaSessao']),
+                        'horaFim' => trim($_POST['horaFimQuartaSessao'])
+                    ],
+                    'quintaSessao' => [
+                        'data' => trim($_POST['dataQuintaSessao']),
+                        'horaInicio' => trim($_POST['horaInicioQuintaSessao']),
+                        'horaFim' => trim($_POST['horaFimQuintaSessao'])
+                    ],
+                    'sextaSessao' => [
+                        'data' => trim($_POST['dataSextaSessao']),
+                        'horaInicio' => trim($_POST['horaInicioSextaSessao']),
+                        'horaFim' => trim($_POST['horaFimSextaSessao'])
+                    ],
+                    'setimaSessao' => [
+                        'data' => trim($_POST['dataSetimaSessao']),
+                        'horaInicio' => trim($_POST['horaInicioSetimaSessao']),
+                        'horaFim' => trim($_POST['horaFimSetimaSessao'])
+                    ],
+                    'oitavaSessao' => [
+                        'data' => trim($_POST['dataOitavaSessao']),
+                        'horaInicio' => trim($_POST['horaInicioOitavaSessao']),
+                        'horaFim' => trim($_POST['horaFimOitavaSessao'])
+                    ],
+                    'nonaSessao' => [
+                        'data' => trim($_POST['dataNonaSessao']),
+                        'horaInicio' => trim($_POST['horaInicioNonaSessao']),
+                        'horaFim' => trim($_POST['horaFimNonaSessao'])
+                    ],
+                    'decimaSessao' => [
+                        'data' => trim($_POST['dataDecimaSessao']),
+                        'horaInicio' => trim($_POST['horaInicioDecimaSessao']),
+                        'horaFim' => trim($_POST['horaFimDecimaSessao'])
+                    ]
+                ];
 
-            $retorno = $this->agendamentos->gravaAgendaInicialPaciente($sessoes, $idAluno, $idPaciente);
-            echo json_encode($retorno);
+                $retorno = $this->agendamentos->gravaAgendaInicialPaciente($sessoes, $idAluno, $idPaciente);
+                echo json_encode($retorno);
+            }
+        } catch (Exception $exc) {
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 

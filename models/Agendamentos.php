@@ -3,8 +3,14 @@
 class Agendamentos extends model {
 
     private $fk = 1;
+    private $log;
     private $dataInicial;
     private $dataFinal;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravaAgendaPorEspecialidades($dias) {
 
@@ -47,7 +53,7 @@ class Agendamentos extends model {
                     $this->fk = $this->fk + 1;
                 }
             } catch (Exception $exc) {
-                echo $exc->getTraceAsString();
+                $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
             }
             return true;
         } else {
@@ -88,22 +94,56 @@ class Agendamentos extends model {
         return $agendas;
     }
 
-    public function buscarPacientesCadastradosSemAgendamento() {
+    public function buscaIdUltimoPaciente() {
 
-        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, convenio, responsavel, nome_unidade, especialidade
-                                FROM pessoas p 
-                                JOIN dados_pacientes dp 
-                                ON p.id_pessoa = dp.fk_id_paciente 
-                                JOIN unidades_de_saude us
-                                ON dp.fk_id_unidade_de_saude = us.id_unidade_de_saude  
-                                JOIN paciente_especialidades pe
-                                JOIN especialidades e
-                                ON pe.fk_id_especialidade = e.id_especialidade
-                                AND pe.fk_id_paciente = p.id_pessoa
-                                ORDER BY p.id_pessoa DESC LIMIT 1");
+        $sql = $this->db->prepare("SELECT id_pessoa FROM pessoas ORDER BY id_pessoa DESC LIMIT 1");
         $sql->execute();
 
-        return !empty($pacientes = $sql->fetchAll()) ? $pacientes : null;
+        $id = $sql->fetchObject();
+
+        return $id;
+    }
+
+    public function verificaSePacientePossuiAgenda($id) {
+
+        $sql = $this->db->prepare("SELECT fk_id_paciente FROM alunos_pacientes ap WHERE ap.fk_id_paciente = :id");
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $sql->execute();
+
+        $retorno = $sql->fetchObject();
+
+        return empty($retorno) || $retorno == false ? true : false;
+    }
+
+    public function buscarDadosPacienteSemAgendamento() {
+
+        $id = $this->buscaIdUltimoPaciente();
+        $return = $this->verificaSePacientePossuiAgenda($id->id_pessoa);
+
+        try {
+
+            if ($return) {
+
+                $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, responsavel, especialidade
+                            FROM pessoas p
+                            JOIN dados_pacientes dp
+                            ON p.id_pessoa = dp.fk_id_paciente
+                            JOIN paciente_especialidades pe
+                            ON p.id_pessoa = pe.fk_id_paciente
+                            JOIN especialidades e
+                            ON pe.fk_id_especialidade = e.id_especialidade
+                            AND p.id_pessoa = :id");
+                $sql->bindValue(':id', $id->id_pessoa, PDO::PARAM_INT);
+                $sql->execute();
+
+                $paciente = $sql->fetchAll();
+                return $paciente;
+            } else {
+                return null;
+            }
+        } catch (Exception $exc) {
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
+        }
     }
 
     public function buscaAgendaAtiva() {
@@ -125,8 +165,12 @@ class Agendamentos extends model {
     public function buscaPacientesAlunoSelecionado($id) {
 
         $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, data_sessao, hora_inicio, hora_fim FROM pessoas p
-                        JOIN agendamentos a ON p.id_pessoa = a.fk_id_paciente
-                        AND a.fk_id_aluno = :id");
+                                    JOIN agendamentos a ON p.id_pessoa = a.fk_id_paciente
+                                    AND DATE_FORMAT(STR_TO_DATE(data_sessao, '%d/%m/%Y'), '%Y-%m-%d')  >=  current_date()
+                                    AND a.fk_id_aluno = :id
+                                    JOIN alunos_pacientes ap
+                                    ON ap.fk_id_aluno = :id
+                                    AND ap.status = 1");
         $sql->bindValue(':id', $id, PDO::PARAM_INT);
         $sql->execute();
 
@@ -159,7 +203,7 @@ class Agendamentos extends model {
 
             $this->gravaTabelaAlunosPacientes($fkIdAluno, $fkIdPaciente);
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
 
         return true;
@@ -184,7 +228,7 @@ class Agendamentos extends model {
 
             $sql->execute();
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

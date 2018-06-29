@@ -4,12 +4,18 @@ class Enderecos extends model {
 
     private $cep;
     private $rua;
+    private $log;
     private $bairro;
     private $cidade;
     private $estado;
     private $numero;
     private $complemento;
     private $fkIdPessoa;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravar() {
 
@@ -39,8 +45,7 @@ class Enderecos extends model {
 
             return true;
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -66,8 +71,7 @@ class Enderecos extends model {
 
             $pdo->execute();
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

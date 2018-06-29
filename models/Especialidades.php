@@ -3,8 +3,14 @@
 class Especialidades extends model {
 
     private $cor;
+    private $log;
     private $descricao;
     private $especialidade;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravar() {
 
@@ -31,8 +37,7 @@ class Especialidades extends model {
 
                 return true;
             } catch (Exception $exc) {
-
-                echo $exc->getTraceAsString();
+                $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
             }
         } else {
             return false;
@@ -83,7 +88,7 @@ class Especialidades extends model {
 
             return $edit ? true : false;
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

@@ -34,7 +34,7 @@
                                         <li><a><i class="fa fa-calendar"></i> Agendamentos <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>
-                                                    <li><a href="<?php echo URL; ?>/agendamentos/agenda">Agenda por Especialidade</a></li>
+                                                    <li><a href="<?php echo URL; ?>/agendamentos/agenda">Agenda Semestral</a></li>
                                                 <?php endif ?>
                                                 <li><a href="<?php echo URL; ?>/agendamentos/listagem">Visualizar Agendas</a></li>
                                                 <li><a href="<?php echo URL; ?>/agendamentos/vinculacao">Vincular Pacientes</a></li>
@@ -85,8 +85,12 @@
                                                 <li><a href="<?php echo URL; ?>/urls/visualizar">Visualizar</a></li>
                                             </ul>
                                         </li>
+                                        <li><a><i class="fa fa-bomb"></i> Log de Erros <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="<?php echo URL; ?>/logs/listagem">Visualizar</a></li>                                                
+                                            </ul>
+                                        </li>
                                     <?php endif ?>
-
                                     <li><a><i class="fa fa fa-wheelchair"></i> Pacientes <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA) : ?>

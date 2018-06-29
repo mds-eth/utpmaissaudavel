@@ -3,46 +3,57 @@
 class Login extends model {
 
     private $id;
+    private $log;
     private $email;
     private $senha;
 
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
+
     public function validaLogin() {
 
-        $sql = $this->db->prepare("SELECT id_usuario, fk_id_perfil, fk_id_pessoa, senha, id_pessoa, nome_pessoa, email, status, id_perfil, nome_perfil
+        try {
+
+            $sql = $this->db->prepare("SELECT id_usuario, fk_id_perfil, fk_id_pessoa, senha, id_pessoa, nome_pessoa, email, status, id_perfil, nome_perfil
                             FROM usuarios u JOIN pessoas p ON u.fk_id_pessoa = p.id_pessoa
                             JOIN perfis pe ON u.fk_id_perfil = pe.id_perfil
                             AND p.email = :email
                             AND u.senha = :senha");
 
-        $sql->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
-        $sql->bindValue(':senha', $this->getSenha(), PDO::PARAM_STR);
-        $sql->execute();
+            $sql->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
+            $sql->bindValue(':senha', $this->getSenha(), PDO::PARAM_STR);
+            $sql->execute();
 
-        $pessoa = $sql->fetchObject();
+            $pessoa = $sql->fetchObject();
 
-        if ($pessoa != null || !empty($pessoa)) {
+            if ($pessoa != null || !empty($pessoa)) {
 
-            if ($pessoa->status == 0) {
-                return 0;
-            } else if ($pessoa->senha == $this->getEmail()) {
-                $dados['id_pessoa'] = $pessoa->id_usuario;
-                $dados['email'] = $pessoa->email;
-                $dados['nome_pessoa'] = $pessoa->nome_pessoa;
-                $_SESSION['temp'] = $dados;
-                return 1;
+                if ($pessoa->status == 0) {
+                    return 0;
+                } else if ($pessoa->senha == $this->getEmail()) {
+                    $dados['id_pessoa'] = $pessoa->id_usuario;
+                    $dados['email'] = $pessoa->email;
+                    $dados['nome_pessoa'] = $pessoa->nome_pessoa;
+                    $_SESSION['temp'] = $dados;
+                    return 1;
+                } else {
+                    $dados['id_usuario'] = $pessoa->id_usuario;
+                    $dados['id_pessoa'] = $pessoa->id_pessoa;
+                    $dados['nome_pessoa'] = $pessoa->nome_pessoa;
+                    $dados['email'] = $pessoa->email;
+                    $dados['status'] = $pessoa->status;
+                    $dados['perfil'] = $pessoa->nome_perfil;
+                    $dados['id_perfil'] = $pessoa->id_perfil;
+                    $_SESSION['usuario'] = $dados;
+                    return true;
+                }
             } else {
-                $dados['id_usuario'] = $pessoa->id_usuario;
-                $dados['id_pessoa'] = $pessoa->id_pessoa;
-                $dados['nome_pessoa'] = $pessoa->nome_pessoa;
-                $dados['email'] = $pessoa->email;
-                $dados['status'] = $pessoa->status;
-                $dados['perfil'] = $pessoa->nome_perfil;
-                $dados['id_perfil'] = $pessoa->id_perfil;
-                $_SESSION['usuario'] = $dados;
-                return true;
+                return false;
             }
-        } else {
-            return false;
+        } catch (Exception $exc) {
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -61,38 +72,42 @@ class Login extends model {
                 return true;
             }
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
     public function criaSessaoUsuarioNovo() {
 
-        $this->setEmail($_SESSION['temp']['email']);
+        try {
 
-        $sql = $this->db->prepare("SELECT id_usuario, fk_id_perfil, fk_id_pessoa, senha, id_pessoa, nome_pessoa, email, status, id_perfil, nome_perfil
+            $this->setEmail($_SESSION['temp']['email']);
+
+            $sql = $this->db->prepare("SELECT id_usuario, fk_id_perfil, fk_id_pessoa, senha, id_pessoa, nome_pessoa, email, status, id_perfil, nome_perfil
                             FROM usuarios u JOIN pessoas p ON u.fk_id_pessoa = p.id_pessoa
                             JOIN perfis pe ON u.fk_id_perfil = pe.id_perfil
                             AND p.email = :email
                             AND u.senha = :senha");
 
-        $sql->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
-        $sql->bindValue(':senha', $this->getSenha(), PDO::PARAM_STR);
-        $sql->execute();
+            $sql->bindValue(':email', $this->getEmail(), PDO::PARAM_STR);
+            $sql->bindValue(':senha', $this->getSenha(), PDO::PARAM_STR);
+            $sql->execute();
 
-        $pessoa = $sql->fetchObject();
+            $pessoa = $sql->fetchObject();
 
-        if ($pessoa != null || !empty($pessoa)) {
+            if ($pessoa != null || !empty($pessoa)) {
 
-            $dados['id_usuario'] = $pessoa->id_usuario;
-            $dados['id_pessoa'] = $pessoa->id_pessoa;
-            $dados['nome_pessoa'] = $pessoa->nome_pessoa;
-            $dados['email'] = $pessoa->email;
-            $dados['status'] = $pessoa->status;
-            $dados['perfil'] = $pessoa->nome_perfil;
-            $dados['id_perfil'] = $pessoa->id_perfil;
-            $_SESSION['usuario'] = $dados;
-            $this->destroiSessaoTemporaria();
+                $dados['id_usuario'] = $pessoa->id_usuario;
+                $dados['id_pessoa'] = $pessoa->id_pessoa;
+                $dados['nome_pessoa'] = $pessoa->nome_pessoa;
+                $dados['email'] = $pessoa->email;
+                $dados['status'] = $pessoa->status;
+                $dados['perfil'] = $pessoa->nome_perfil;
+                $dados['id_perfil'] = $pessoa->id_perfil;
+                $_SESSION['usuario'] = $dados;
+                $this->destroiSessaoTemporaria();
+            }
+        } catch (Exception $exc) {
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

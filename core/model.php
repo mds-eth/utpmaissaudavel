@@ -5,6 +5,7 @@ class Model {
     protected $db;
     protected $date;
     protected $idUsuario;
+    protected $controller;
 
     public function __construct() {
 

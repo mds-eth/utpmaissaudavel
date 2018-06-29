@@ -9,6 +9,7 @@ var pacientes = {
         $('#limpar').on('click', pacientes.limparCampos);
         $('#gravar').on('click', pacientes.validaCamposForm);
         $('#data_nascimento').on('blur', pacientes.validarIdadePessoa);
+        $('#btn-editar-agenda-paciente').on('click', pacientes.abreCamposEdicao);
     },
 
     buscaCep: function () {
@@ -267,6 +268,46 @@ var pacientes = {
             $('#labelResponsavel').html("");
             $('#inputResponsavel').html("");
         }
+    },
+
+    abreCamposEdicao: function () {
+
+        $('#data-primeira-sessao').prop('readonly', false);
+        $('#hora-inicio-primeira-sessao').prop('readonly', false);
+        $('#hora-fim-primeira-sessao').prop('readonly', false);
+        $('#data-segunda-sessao').prop('readonly', false);
+        $('#hora-inicio-segunda-sessao').prop('readonly', false);
+        $('#hora-fim-segunda-sessao').prop('readonly', false);
+        $('#data-terceira-sessao').prop('readonly', false);
+        $('#hora-inicio-terceira-sessao').prop('readonly', false);
+        $('#hora-fim-terceira-sessao').prop('readonly', false);
+        $('#data-quarta-sessao').prop('readonly', false);
+        $('#hora-inicio-quarta-sessao').prop('readonly', false);
+        $('#hora-fim-quarta-sessao').prop('readonly', false);
+        $('#data-quinta-sessao').prop('readonly', false);
+        $('#hora-inicio-quinta-sessao').prop('readonly', false);
+        $('#hora-fim-quinta-sessao').prop('readonly', false);
+        $('#data-sexta-sessao').prop('readonly', false);
+        $('#hora-inicio-sexta-sessao').prop('readonly', false);
+        $('#hora-fim-sexta-sessao').prop('readonly', false);
+        $('#data-setima-sessao').prop('readonly', false);
+        $('#hora-inicio-setima-sessao').prop('readonly', false);
+        $('#hora-fim-setima-sessao').prop('readonly', false);
+        $('#data-oitava-sessao').prop('readonly', false);
+        $('#hora-inicio-oitava-sessao').prop('readonly', false);
+        $('#hora-fim-oitava-sessao').prop('readonly', false);
+        $('#data-nona-sessao').prop('readonly', false);
+        $('#hora-inicio-nona-sessao').prop('readonly', false);
+        $('#hora-fim-nona-sessao').prop('readonly', false);
+        $('#data-decima-sessao').prop('readonly', false);
+        $('#hora-inicio-decima-sessao').prop('readonly', false);
+        $('#hora-fim-decima-sessao').prop('readonly', false);
+
+        $('#btn-salvar-alteracoes-agenda-paciente').html("");
+        var btn = "<button id='edit-agenda' name='edit-agenda' class='edit-agenda btn btn-success btn-xs'>Salvar Alterações</button>";
+        $('#btn-salvar-alteracoes-agenda-paciente').append(btn);
+
+        $('.edit').hide();
     }
 };
 $(document).ready(function () {

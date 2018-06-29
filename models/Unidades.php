@@ -2,10 +2,16 @@
 
 class Unidades extends model {
 
+    private $log;
     private $unidade;
     private $regional;
     private $responsavel;
     private $fkIdRegional;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravar() {
 
@@ -25,7 +31,7 @@ class Unidades extends model {
 
             return true;
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -40,7 +46,7 @@ class Unidades extends model {
 
             $sql->execute();
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -52,8 +58,7 @@ class Unidades extends model {
             $sql->bindValue(':id', $id, PDO::PARAM_INT);
             $sql->execute();
         } catch (Exception $exc) {
-
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -114,7 +119,7 @@ class Unidades extends model {
 
             return true;
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 
@@ -166,7 +171,7 @@ class Unidades extends model {
                 return false;
             }
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
         }
     }
 

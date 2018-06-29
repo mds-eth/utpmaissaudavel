@@ -10,8 +10,14 @@ class Perfis extends model {
     CONST PACIENTE = 6;
     CONST MEDICO = 7;
 
+    private $log;
     private $url;
     private $perfil;
+
+    public function __construct() {
+        parent::__construct();
+        $this->log = new Logs();
+    }
 
     public function gravaPerfil() {
 
@@ -34,7 +40,7 @@ class Perfis extends model {
 
                 return true;
             } catch (Exception $exc) {
-                echo $exc->getTraceAsString();
+                $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);
             }
         } else {
             return false;
