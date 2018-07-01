@@ -1,6 +1,6 @@
 <?php
 
-class Agendamentos extends model {
+class Agendamentos extends Model {
 
     private $fk = 1;
     private $log;
@@ -167,10 +167,7 @@ class Agendamentos extends model {
         $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, data_sessao, hora_inicio, hora_fim FROM pessoas p
                                     JOIN agendamentos a ON p.id_pessoa = a.fk_id_paciente
                                     AND DATE_FORMAT(STR_TO_DATE(data_sessao, '%d/%m/%Y'), '%Y-%m-%d')  >=  current_date()
-                                    AND a.fk_id_aluno = :id
-                                    JOIN alunos_pacientes ap
-                                    ON ap.fk_id_aluno = :id
-                                    AND ap.status = 1");
+                                    AND a.fk_id_aluno = :id");
         $sql->bindValue(':id', $id, PDO::PARAM_INT);
         $sql->execute();
 

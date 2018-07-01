@@ -1,6 +1,6 @@
 <?php
 
-class Telefones extends model {
+class Telefones extends Model {
 
     private $log;
     private $residencial;

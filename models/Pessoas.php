@@ -1,6 +1,6 @@
 <?php
 
-class Pessoas extends model {
+class Pessoas extends Model {
 
     private $log;
     private $rg;

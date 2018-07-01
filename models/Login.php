@@ -1,6 +1,6 @@
 <?php
 
-class Login extends model {
+class Login extends Model {
 
     private $id;
     private $log;

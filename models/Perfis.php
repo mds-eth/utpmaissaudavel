@@ -1,6 +1,6 @@
 <?php
 
-class Perfis extends model {
+class Perfis extends Model {
 
     CONST ADMINISTRADOR = 1;
     CONST COORDENADOR = 2;

@@ -1,6 +1,6 @@
 <?php
 
-class Enderecos extends model {
+class Enderecos extends Model {
 
     private $cep;
     private $rua;

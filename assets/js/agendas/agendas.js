@@ -2,9 +2,10 @@ var agendas = {
 
     init: function () {
 
-        date = new Date();
+        date = new Date;
         months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
-        currentDate = date.getDate() + '/' + months[date.getMonth()] + '/' + date.getFullYear();
+        currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+        finaisDeSemana = {0: 'Domingo', 6: 'Sábado'};
 
         segundaIds = [];
         segundaEspecialidades = [];
@@ -170,8 +171,11 @@ var agendas = {
 
     renderizaAgendaPrimeiraSessao: function () {
 
-        if ($('#data-primeira-sessao').val() < currentDate) {
+        if ($('#data-primeira-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-primeira-sessao').val("");
+            $('#hora-inicio-primeira-sessao').val("");
+            $('#hora-fim-primeira-sessao').val("");
             return;
         }
 
@@ -189,8 +193,11 @@ var agendas = {
 
     renderizaAgendaSegundaSessao: function () {
 
-        if ($('#data-segunda-sessao').val() < currentDate) {
+        if ($('#data-segunda-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-segunda-sessao').val("");
+            $('#hora-inicio-segunda-sessao').val("");
+            $('#hora-fim-segunda-sessao').val("");
             return;
         }
 
@@ -208,8 +215,11 @@ var agendas = {
 
     renderizaAgendaTerceiraSessao: function () {
 
-        if ($('#data-terceira-sessao').val() < currentDate) {
+        if ($('#data-terceira-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-terceira-sessao').val("");
+            $('#hora-inicio-terceira-sessao').val("");
+            $('#hora-fim-terceira-sessao').val("");
             return;
         }
 
@@ -227,8 +237,11 @@ var agendas = {
 
     renderizaAgendaQuartaSessao: function () {
 
-        if ($('#data-quarta-sessao').val() < currentDate) {
+        if ($('#data-quarta-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-quarta-sessao').val("");
+            $('#hora-inicio-quarta-sessao').val("");
+            $('#hora-fim-quarta-sessao').val("");
             return;
         }
 
@@ -246,8 +259,11 @@ var agendas = {
 
     renderizaAgendaQuintaSessao: function () {
 
-        if ($('#data-quinta-sessao').val() < currentDate) {
+        if ($('#data-quinta-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-quinta-sessao').val("");
+            $('#hora-inicio-quinta-sessao').val("");
+            $('#hora-fim-quinta-sessao').val("");
             return;
         }
 
@@ -265,8 +281,11 @@ var agendas = {
 
     renderizaAgendaSextaSessao: function () {
 
-        if ($('#data-sexta-sessao').val() < currentDate) {
+        if ($('#data-sexta-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-sexta-sessao').val("");
+            $('#hora-inicio-sexta-sessao').val("");
+            $('#hora-fim-sexta-sessao').val("");
             return;
         }
 
@@ -284,8 +303,11 @@ var agendas = {
 
     renderizaAgendaSetimaSessao: function () {
 
-        if ($('#data-setima-sessao').val() < currentDate) {
+        if ($('#data-setima-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-setima-sessao').val("");
+            $('#hora-inicio-setima-sessao').val("");
+            $('#hora-fim-setima-sessao').val("");
             return;
         }
 
@@ -303,8 +325,11 @@ var agendas = {
 
     renderizaAgendaOitavaSessao: function () {
 
-        if ($('#data-oitava-sessao').val() < currentDate) {
+        if ($('#data-oitava-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-oitava-sessao').val("");
+            $('#hora-inicio-oitava-sessao').val("");
+            $('#hora-fim-oitava-sessao').val("");
             return;
         }
 
@@ -322,8 +347,11 @@ var agendas = {
 
     renderizaAgendaNonaSessao: function () {
 
-        if ($('#data-nona-sessao').val() < currentDate) {
+        if ($('#data-nona-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-nona-sessao').val("");
+            $('#hora-inicio-nona-sessao').val("");
+            $('#hora-fim-nona-sessao').val("");
             return;
         }
 
@@ -341,8 +369,11 @@ var agendas = {
 
     renderizaAgendaDecimaSessao: function () {
 
-        if ($('#data-decima-sessao').val() < currentDate) {
+        if ($('#data-decima-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-decima-sessao').val("");
+            $('#hora-inicio-decima-sessao').val("");
+            $('#hora-fim-decima-sessao').val("");
             return;
         }
 
@@ -451,12 +482,22 @@ var agendas = {
                         color: 'red'
                     };
 
+                    agendas.limpaAgendaNovoAluno(horario.id);
                     $('#vincular-paciente-agenda').fullCalendar('renderEvent', horario, true);
 
                 }
-                //  $('.div-agenda').html('');
+
             }
         });
+    },
+
+    limpaAgendaNovoAluno: function (id) {
+
+        alert('to aqui');
+
+
+        $('#vincular-paciente-agenda').fullCalendar('removeEvents', id);
+
     },
 
     montarCalendario: function () {

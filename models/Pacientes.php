@@ -1,6 +1,6 @@
 <?php
 
-class Pacientes extends model {
+class Pacientes extends Model {
 
     private $log;
     private $convenio;

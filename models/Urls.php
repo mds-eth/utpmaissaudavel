@@ -1,6 +1,6 @@
 <?php
 
-class Urls extends model {
+class Urls extends Model {
 
     private $log;
 

@@ -1,6 +1,6 @@
 <?php
 
-class Especialidades extends model {
+class Especialidades extends Model {
 
     private $cor;
     private $log;

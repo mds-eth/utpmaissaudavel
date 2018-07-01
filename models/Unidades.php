@@ -1,6 +1,6 @@
 <?php
 
-class Unidades extends model {
+class Unidades extends Model {
 
     private $log;
     private $unidade;

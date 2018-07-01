@@ -24,8 +24,8 @@ var home = {
 
                 $('#body-modal-paciente-selecionado').html("");
                 var paciente = "Nome paciente:  <b>" + event.title + "</b><br>" +
-                        "Hora início: <b>" + event.start + "</b><br>" +
-                        "Hora fim: <b>" + event.end + "</b>";
+                        "Data/Hora início: <b>" + $.fullCalendar.formatDate(event.start, 'DD-MM-YYYY hh:mm') + "</b><br>" +
+                        "Data/Hora fim: <b>" + $.fullCalendar.formatDate(event.end, 'DD-MM-YYYY hh:mm') + "</b>";
 
                 $('#body-modal-paciente-selecionado').append(paciente);
                 $('#modal-paciente-selecionado').modal("show");

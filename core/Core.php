@@ -48,7 +48,7 @@ class Core {
                 $params = $url;
             }
         } else {
-            $currentController = 'homeController';
+            $currentController = 'HomeController';
             $currentAction = 'index';
         }
         $c = new $currentController();

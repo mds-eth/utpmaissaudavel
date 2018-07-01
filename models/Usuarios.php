@@ -1,6 +1,6 @@
 <?php
 
-class Usuarios extends model {
+class Usuarios extends Model {
 
     private $log;
     private $fkIdPerfil;

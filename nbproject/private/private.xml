@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/utpmaissaudavel/assets/js/agendas/agendas.js</file>
-            <file>file:/var/www/utpmaissaudavel/views/pacientes/agenda.php</file>
-            <file>file:/var/www/utpmaissaudavel/assets/js/pacientes/pacientes.js</file>
-            <file>file:/var/www/utpmaissaudavel/views/agendamentos/vinculacao.php</file>
+            <file>file:/var/www/utpmaissaudavel/models/Usuarios.php</file>
+            <file>file:/var/www/utpmaissaudavel/controllers/FormulariosController.php</file>
+            <file>file:/var/www/utpmaissaudavel/views/formularios/cadastrar.php</file>
         </group>
     </open-files>
 </project-private>
