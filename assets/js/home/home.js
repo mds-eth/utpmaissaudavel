@@ -2,8 +2,15 @@ var home = {
 
     init: function () {
 
+        $('#btn-modal-iniciar-sessao-paciente').on('click', home.iniciarSessao);
+
         home.buscaMeusPacientes();
         home.renderizaCalendario();
+    },
+
+    iniciarSessao: function () {
+
+
     },
 
     renderizaCalendario: function () {
@@ -52,7 +59,7 @@ var home = {
                         title: paciente.nome_pessoa,
                         start: home.convertData(paciente.data_sessao) + " " + paciente.hora_inicio,
                         end: home.convertData(paciente.data_sessao) + " " + paciente.hora_fim,
-                        color: 'red'
+                        color: 'black'
                     };
                     $('#calendario').fullCalendar('renderEvent', horario, true);
                 }

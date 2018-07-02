@@ -54,6 +54,7 @@
                                             <ul class="nav child_menu">
                                                 <li><a href="<?php echo URL; ?>/formularios/cadastrar">Cadastrar</a></li>
                                                 <li><a href="<?php echo URL; ?>/formularios/visualizar">Visualizar</a></li>
+                                                <li><a href="<?php echo URL; ?>/formularios/pilares">Pilares</a></li>
                                             </ul>
                                         </li>
                                     <?php endif ?>

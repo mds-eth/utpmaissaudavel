@@ -5,6 +5,7 @@ class FormulariosController extends controller {
     private $log;
     private $url;
     private $usuario;
+    private $especialidade;
 
     public function __construct() {
 
@@ -16,6 +17,7 @@ class FormulariosController extends controller {
 
         $this->log = new Logs();
         $this->url = new Urls();
+        $this->especialidade = new Especialidades();
 
         if (!$this->url->verificaUrlSessaoUsuario()) {
             header('Location: ' . URL . '/home');
@@ -24,13 +26,20 @@ class FormulariosController extends controller {
 
     public function cadastrar() {
 
-        $dados = [];
+        $dados['especialidades'] = $this->especialidade->listaTodasEspecialidades();
 
         if ($this->post()) {
             
         } else {
             $this->loadTemplate('formularios/cadastrar', $dados);
         }
+    }
+
+    public function pilares() {
+
+        $dados = [];
+
+        $this->loadTemplate('formularios/pilares', $dados);
     }
 
 }

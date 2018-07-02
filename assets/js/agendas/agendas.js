@@ -2,10 +2,14 @@ var agendas = {
 
     init: function () {
 
+        horarios = [];
+        checkAgenda = false;
+
         date = new Date;
         months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
         currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
         finaisDeSemana = {0: 'Domingo', 6: 'Sábado'};
+
 
         segundaIds = [];
         segundaEspecialidades = [];
@@ -469,35 +473,37 @@ var agendas = {
             dataType: 'json',
             success: function (result) {
 
+                if (checkAgenda) {
+                    agendas.limpaAgendaNovoAluno();
+                }
+
                 for (var i in result) {
 
                     var paciente = result[i];
-
                     var horario = {
 
                         id: paciente.id_pessoa,
                         title: paciente.nome_pessoa,
                         start: agendas.convertData(paciente.data_sessao) + " " + paciente.hora_inicio,
                         end: agendas.convertData(paciente.data_sessao) + " " + paciente.hora_fim,
-                        color: 'red'
+                        color: 'black'
                     };
 
-                    agendas.limpaAgendaNovoAluno(horario.id);
+                    horarios.push(horario.id);
                     $('#vincular-paciente-agenda').fullCalendar('renderEvent', horario, true);
-
                 }
-
+                checkAgenda = true;
             }
         });
     },
 
-    limpaAgendaNovoAluno: function (id) {
+    limpaAgendaNovoAluno: function () {
 
-        alert('to aqui');
+        for (var i in horarios) {
 
-
-        $('#vincular-paciente-agenda').fullCalendar('removeEvents', id);
-
+            horario = horarios[i];
+            $('#vincular-paciente-agenda').fullCalendar('removeEvents', horario);
+        }
     },
 
     montarCalendario: function () {
@@ -552,10 +558,7 @@ var agendas = {
                         $('#label-responsavel').append(label);
                         $('#input-responsavel').append(responsavel);
                     }
-
                 }
-
-
             }
         });
     },
