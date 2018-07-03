@@ -4,12 +4,9 @@ var agendas = {
 
         horarios = [];
         checkAgenda = false;
-
         date = new Date;
         months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
         currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
-        finaisDeSemana = {0: 'Domingo', 6: 'Sábado'};
-
 
         segundaIds = [];
         segundaEspecialidades = [];
@@ -57,8 +54,12 @@ var agendas = {
 
     errorDataMenor: function () {
 
-        var errorDataMenor = swal("Atenção!", "Data informada menor que data atual, favor marcar sessões para dias futuros!", "error");
-        return errorDataMenor;
+        return swal("Atenção!", "Data informada menor que data atual, favor marcar sessões para dias futuros!", "error");
+    },
+
+    errorFinalDeSemana: function () {
+
+        return swal("Atenção!", "Favor marcar sessões somente para dias de semana!", "error");
     },
 
     montarAgendaSegunda: function () {
@@ -173,10 +174,31 @@ var agendas = {
         agendas.validaSeExisteOutraAgendaAtiva();
     },
 
+    validaDiaSemanal: function (data) {
+
+        var semana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+
+        var arr = data.split("/").reverse();
+        var teste = new Date(arr[0], arr[1] - 1, arr[2]);
+        var dia = teste.getDay();
+
+        return semana[dia];
+
+    },
+
     renderizaAgendaPrimeiraSessao: function () {
 
         if ($('#data-primeira-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-primeira-sessao').val("");
+            $('#hora-inicio-primeira-sessao').val("");
+            $('#hora-fim-primeira-sessao').val("");
+            return;
+        }
+
+        var dia = agendas.validaDiaSemanal($('#data-primeira-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
             $('#data-primeira-sessao').val("");
             $('#hora-inicio-primeira-sessao').val("");
             $('#hora-fim-primeira-sessao').val("");
@@ -205,6 +227,15 @@ var agendas = {
             return;
         }
 
+        var dia = agendas.validaDiaSemanal($('#data-segunda-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
+            $('#data-segunda-sessao').val("");
+            $('#hora-inicio-segunda-sessao').val("");
+            $('#hora-fim-segunda-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -221,6 +252,15 @@ var agendas = {
 
         if ($('#data-terceira-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-terceira-sessao').val("");
+            $('#hora-inicio-terceira-sessao').val("");
+            $('#hora-fim-terceira-sessao').val("");
+            return;
+        }
+
+        var dia = agendas.validaDiaSemanal($('#data-terceira-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
             $('#data-terceira-sessao').val("");
             $('#hora-inicio-terceira-sessao').val("");
             $('#hora-fim-terceira-sessao').val("");
@@ -249,6 +289,15 @@ var agendas = {
             return;
         }
 
+        var dia = agendas.validaDiaSemanal($('#data-quarta-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
+            $('#data-quarta-sessao').val("");
+            $('#hora-inicio-quarta-sessao').val("");
+            $('#hora-fim-quarta-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -265,6 +314,15 @@ var agendas = {
 
         if ($('#data-quinta-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-quinta-sessao').val("");
+            $('#hora-inicio-quinta-sessao').val("");
+            $('#hora-fim-quinta-sessao').val("");
+            return;
+        }
+
+        var dia = agendas.validaDiaSemanal($('#data-quinta-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
             $('#data-quinta-sessao').val("");
             $('#hora-inicio-quinta-sessao').val("");
             $('#hora-fim-quinta-sessao').val("");
@@ -293,6 +351,15 @@ var agendas = {
             return;
         }
 
+        var dia = agendas.validaDiaSemanal($('#data-sexta-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
+            $('#data-sexta-sessao').val("");
+            $('#hora-inicio-sexta-sessao').val("");
+            $('#hora-fim-sexta-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -309,6 +376,15 @@ var agendas = {
 
         if ($('#data-setima-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-setima-sessao').val("");
+            $('#hora-inicio-setima-sessao').val("");
+            $('#hora-fim-setima-sessao').val("");
+            return;
+        }
+
+        var dia = agendas.validaDiaSemanal($('#data-setima-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
             $('#data-setima-sessao').val("");
             $('#hora-inicio-setima-sessao').val("");
             $('#hora-fim-setima-sessao').val("");
@@ -337,6 +413,15 @@ var agendas = {
             return;
         }
 
+        var dia = agendas.validaDiaSemanal($('#data-oitava-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
+            $('#data-oitava-sessao').val("");
+            $('#hora-inicio-oitava-sessao').val("");
+            $('#hora-fim-oitava-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -359,6 +444,15 @@ var agendas = {
             return;
         }
 
+        var dia = agendas.validaDiaSemanal($('#data-nona-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
+            $('#data-nona-sessao').val("");
+            $('#hora-inicio-nona-sessao').val("");
+            $('#hora-fim-nona-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -375,6 +469,15 @@ var agendas = {
 
         if ($('#data-decima-sessao').val().replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3') < currentDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')) {
             agendas.errorDataMenor();
+            $('#data-decima-sessao').val("");
+            $('#hora-inicio-decima-sessao').val("");
+            $('#hora-fim-decima-sessao').val("");
+            return;
+        }
+
+        var dia = agendas.validaDiaSemanal($('#data-decima-sessao').val());
+        if (dia === 'Sábado' || dia === "Domingo") {
+            agendas.errorFinalDeSemana();
             $('#data-decima-sessao').val("");
             $('#hora-inicio-decima-sessao').val("");
             $('#hora-fim-decima-sessao').val("");
@@ -503,7 +606,11 @@ var agendas = {
 
             horario = horarios[i];
             $('#vincular-paciente-agenda').fullCalendar('removeEvents', horario);
+            //horarios.splice(i, horario);
         }
+
+        console.log(horarios);
+
     },
 
     montarCalendario: function () {
