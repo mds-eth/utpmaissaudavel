@@ -2,15 +2,40 @@ var home = {
 
     init: function () {
 
-        $('#btn-modal-iniciar-sessao-paciente').on('click', home.iniciarSessao);
+        pacientes = [];
 
         home.buscaMeusPacientes();
         home.renderizaCalendario();
+
+        $('.home-agendar-paciente').on('click', home.buscaPacienteSemAgenda);
+        $('#btn-modal-iniciar-sessao-paciente').on('click', home.iniciarSessao);
     },
 
-    iniciarSessao: function () {
+    buscaMeusPacientes: function () {
 
+        $.ajax({
+            url: URL + '/agendamentos/buscaMeusPacientes',
+            type: 'POST',
+            dataType: 'json',
+            success: function (result) {
 
+                for (var i in result) {
+
+                    var paciente = result[i];
+
+                    var horario = {
+
+                        id: paciente.id_pessoa,
+                        title: paciente.nome_pessoa,
+                        start: home.convertData(paciente.data_sessao) + " " + paciente.hora_inicio,
+                        end: home.convertData(paciente.data_sessao) + " " + paciente.hora_fim,
+                        color: 'black'
+                    };
+                    $('#calendario').fullCalendar('renderEvent', horario, true);
+                }
+
+            }
+        });
     },
 
     renderizaCalendario: function () {
@@ -41,31 +66,8 @@ var home = {
 
     },
 
-    buscaMeusPacientes: function () {
+    buscaPacienteSemAgenda: function () {
 
-        $.ajax({
-            url: URL + '/agendamentos/buscaMeusPacientes',
-            type: 'POST',
-            dataType: 'json',
-            success: function (result) {
-
-                for (var i in result) {
-
-                    var paciente = result[i];
-
-                    var horario = {
-
-                        id: paciente.id_pessoa,
-                        title: paciente.nome_pessoa,
-                        start: home.convertData(paciente.data_sessao) + " " + paciente.hora_inicio,
-                        end: home.convertData(paciente.data_sessao) + " " + paciente.hora_fim,
-                        color: 'black'
-                    };
-                    $('#calendario').fullCalendar('renderEvent', horario, true);
-                }
-
-            }
-        });
     },
 
     convertData: function (data) {

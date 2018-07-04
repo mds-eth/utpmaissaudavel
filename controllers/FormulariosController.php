@@ -42,4 +42,12 @@ class FormulariosController extends controller {
         $this->loadTemplate('formularios/pilares', $dados);
     }
 
+    public function pneumologia() {
+
+
+        $dados = [];
+
+        $this->loadTemplate('formularios/pneumologia', $dados);
+    }
+
 }

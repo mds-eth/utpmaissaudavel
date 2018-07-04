@@ -143,17 +143,15 @@
                                 <li role="presentation" class="dropdown">
                                     <a id="notificacao" href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fa fa-envelope-o"></i>
-                                        <span class="badge bg-red">5</span>
+                                        <span id="timer" class="badge bg-red"></span>
                                     </a>
                                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                         <li>
                                             <a>
                                                 <span>
-                                                    <span>MICHAEL DOUGLAS</span>
-                                                    <span class="time">10 minutos atrás</span>
+                                                    <span><b>Atenção</b></span>                                                    
                                                 </span>
-                                                <span class="message">
-                                                    Um novo paciente foi vinculado à sua agenda.
+                                                <span class="message">                                                    
                                                 </span>
                                             </a>
                                         </li>
@@ -186,5 +184,6 @@
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/fullcalendar.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/fullcalendar/pt-br.js"></script>
         <script type="text/javascript" src="<?php echo URL; ?>/assets/js/libs/Chart.min.js"></script>
+
     </body>
 </html>

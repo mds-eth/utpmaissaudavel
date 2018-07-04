@@ -2,8 +2,8 @@
 
 class HomeController extends controller {
 
-    private $url;
     private $usuario;
+    private $paciente;
 
     public function __construct() {
 
@@ -11,17 +11,13 @@ class HomeController extends controller {
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
-        $dados = array();
 
-        $this->url = new Urls();
-        if (!$this->url->verificaUrlSessaoUsuario()) {
-            $this->loadTemplate('acessonegado', $dados);
-        }
+        $this->paciente = new Pacientes();
     }
 
     public function index() {
 
-        $dados = array();
+        $dados['pacientes'] = $this->paciente->verificaPacientesSemAgendamento();
         $this->loadTemplate('home', $dados);
     }
 

@@ -29,7 +29,7 @@
                                     <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                     <td style="text-align: center">
                                         <button id="reativar" value="<?= $inativa['id_pessoa'] ?>" class="reativar btn btn-success btn-xs">Reativar</button>                                    
-                                        <button id="excluirPessoa" value="<?= $inativa['id_pessoa'] ?>" class="excluirPessoa btn btn-danger btn-xs">Excluir</button>                                    
+                                        <button id="excluir-pessoa" value="<?= $inativa['id_pessoa'] ?>" class="btn btn-danger btn-xs">Excluir</button>                                    
                                     </td>                            
                                 </tr>                    
                             <?php endforeach; ?>
@@ -40,7 +40,7 @@
         </div>
     </div>
 </div>
-<div id="modalReativar" tabindex="-1" class="modal fade" role="dialog">
+<div id="modal-reativar" tabindex="-1" class="modal fade" role="dialog">
     <div class="modal-dialog">                
         <div class="modal-content" style="border-radius: 10px">
             <div class="modal-header">
@@ -48,12 +48,12 @@
                 <h4 class="modal-title">Reativar Pessoa</h4>
             </div>
             <form id="form">
-                <div class="modal-body" id="bodyReativar">       
+                <div class="modal-body" id="body-modal-reativar">       
                 </div>                        
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnReativar" class="btn btn-success btn-xs">Reativar</button>
+                <button id="btn-reativar-pessoa" class="btn btn-success btn-xs">Reativar</button>
             </div>
         </div>
     </div>

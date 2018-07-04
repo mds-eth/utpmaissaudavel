@@ -160,7 +160,7 @@
                         </div>
                     </div> 
                     <div class="form-group">
-                        <span id="btnEditarPessoa"></span>     
+                        <span id="btn-editar-pessoa"></span>     
                         <button id="editarPessoa" class="btn btn-primary btn-xs">Editar</button>                            
                         <button id="inativar" value="<?= $pessoa->id_pessoa ?>" class="inativar btn btn-warning btn-xs">Inativar</button>                            
                         <a href="<?php echo URL ?>/home"><button class="btn btn-danger btn-xs" type="button">Cancelar</button></a>
@@ -170,7 +170,7 @@
         </div>
     </div>
 </div>
-<div id="modalInativar" class="modal fade" role="dialog">
+<div id="modal-inativar-pessoa" class="modal fade" role="dialog">
     <div class="modal-dialog">                
         <div class="modal-content" style="border-radius: 10px">
             <div class="modal-header">
@@ -182,7 +182,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btnModalInativar" class="btn btn-success btn-xs">Inativar</button>
+                <button id="btn-modal-inativar" class="btn btn-success btn-xs">Inativar</button>
             </div>
         </div>
     </div>

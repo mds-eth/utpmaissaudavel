@@ -122,6 +122,23 @@ class Pacientes extends Model {
         return !empty($agenda = $sql->fetchAll()) ? $agenda : null;
     }
 
+    public function verificaPacientesSemAgendamento() {
+
+        $sql = $this->db->prepare("SELECT * FROM pessoas p
+                                inner join dados_pacientes pa
+                                on pa.fk_id_paciente = p.id_pessoa
+                                inner join unidades_de_saude us
+                                on pa.fk_id_unidade_de_saude = us.id_unidade_de_saude        
+                                where not exists(select a.fk_id_paciente
+                                                        from agendamentos a
+                                                        where a.fk_id_paciente = pa.fk_id_paciente)");
+        $sql->execute();
+
+        $pacientes = $sql->fetchAll();
+
+        return $pacientes;
+    }
+
     function getFkIdUnidadeSaude() {
         return $this->fkIdUnidadeSaude;
     }

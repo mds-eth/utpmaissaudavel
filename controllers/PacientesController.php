@@ -120,6 +120,6 @@ class PacientesController extends controller {
         } else {
             header('Location: ' . URL . '/pacientes/listagem');
         }
-    }
+    }    
 
 }

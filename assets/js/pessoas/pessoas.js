@@ -2,24 +2,28 @@ var pessoas = {
 
     init: function () {
 
+        date = new Date();
+        months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
+        currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+
         $('#cep').on('blur', pessoas.buscaCep);
         $('#cpf').on('blur', pessoas.validaCpf);
         $('#limpar').on('click', pessoas.limparCampos);
         $('.inativar').on('click', pessoas.modalInativar);
         $('#gravar').on('click', pessoas.validaCamposForm);
         $('#notificacao').on('click', pessoas.notificacoes);
-        $('#btnReativar').on('click', pessoas.reativarPessoa);
         $('#data_nascimento').on('blur', pessoas.validaCampoData);
-        $('#btnModalInativar').on('click', pessoas.inativarPessoa);
         $('.reativar').on('click', pessoas.buscaPessoaParaReativar);
-        $('#btnEditarPessoa').on('click', pessoas.validaCamposEditar);
+        $('#btn-modal-inativar').on('click', pessoas.inativarPessoa);
+        $('#btn-reativar-pessoa').on('click', pessoas.reativarPessoa);
         $('#perfil').on('change', pessoas.montaInputPerfilSelecionado);
+        $('#btn-editar-pessoa').on('click', pessoas.validaCamposEditar);
         $('#editarPessoa').on('click', pessoas.abrirCamposPessoaEdicao);
 
     },
     validaCampoData: function () {
 
-        if ($('#data_nascimento').val().length < 10) {
+        if ($('#data_nascimento').val() > currentDate) {
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
             swal("Atenção!", "Informe uma data válida!", "error");
@@ -96,7 +100,7 @@ var pessoas = {
                         "<input type='hidden' id='idPessoa' name='idPessoa' value='" + result.id_pessoa + "'>";
 
                 $('#pessoa').append(pessoa);
-                $("#modalInativar").modal("show");
+                $("#modal-inativar-pessoa").modal("show");
 
             }
         });
@@ -260,11 +264,11 @@ var pessoas = {
             dataType: 'json',
             success: function (result) {
 
-                $('#bodyReativar').html("");
+                $('#body-modal-reativar').html("");
                 var text = "<p>Deseja realmente reativar " + result.nome_pessoa + "?</p>" +
                         "<input type='hidden' id='pessoa' name='pessoa' value='" + result.id_pessoa + "'>";
-                $('#bodyReativar').append(text);
-                $('#modalReativar').modal('show');
+                $('#body-modal-reativar').append(text);
+                $('#modal-reativar').modal('show');
             }
         });
     },
@@ -490,9 +494,9 @@ var pessoas = {
         $('#celular').prop('readonly', false);
         $('#contato').prop('readonly', false);
 
-        $('#btnEditarPessoa').html("");
+        $('#btn-editar-pessoa').html("");
         var btn = "<button id='editPessoa' name='editPessoa' class='editPessoa btn btn-success btn-xs'>Salvar Alterações</button>";
-        $('#btnEditarPessoa').append(btn);
+        $('#btn-editar-pessoa').append(btn);
         $('#editarPessoa').hide();
     }
 };

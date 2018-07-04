@@ -26,9 +26,9 @@
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="responsavel"><span id="labelResponsavel"></span></label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="responsavel"><span id="label-responsavel-paciente"></span></label>
                         <div class="col-md-8">
-                            <div id="inputResponsavel"></div>
+                            <div id="input-responsavel-paciente"></div>
                         </div>                    
                     </div>
                     <div class="item form-group">

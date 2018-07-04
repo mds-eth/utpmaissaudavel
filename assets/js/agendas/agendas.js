@@ -4,7 +4,7 @@ var agendas = {
 
         horarios = [];
         checkAgenda = false;
-        date = new Date;
+        date = new Date();
         months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
         currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
 
@@ -59,7 +59,7 @@ var agendas = {
 
     errorFinalDeSemana: function () {
 
-        return swal("Atenção!", "Favor marcar sessões somente para dias de semana!", "error");
+        return swal("Atenção!", "Favor marcar sessões somente de Segunda a Sexta!", "error");
     },
 
     montarAgendaSegunda: function () {
@@ -606,11 +606,7 @@ var agendas = {
 
             horario = horarios[i];
             $('#vincular-paciente-agenda').fullCalendar('removeEvents', horario);
-            //horarios.splice(i, horario);
         }
-
-        console.log(horarios);
-
     },
 
     montarCalendario: function () {

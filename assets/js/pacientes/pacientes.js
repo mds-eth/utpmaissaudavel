@@ -4,6 +4,10 @@ var pacientes = {
 
         especialidades = [];
 
+        date = new Date();
+        months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
+        currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+
         $('#cep').on('blur', pacientes.buscaCep);
         $('#cpf').on('blur', pacientes.validaCpf);
         $('#limpar').on('click', pacientes.limparCampos);
@@ -244,6 +248,13 @@ var pacientes = {
 
     validarIdadePessoa: function () {
 
+        if ($('#data_nascimento').val() > currentDate) {
+            $('#data_nascimento').focus();
+            $('#data_nascimento').css('border', '1px solid red');
+            swal("Atenção!", "Informe uma data válida!", "error");
+            return false;
+        }
+
         var valorInput = $('#data_nascimento').val();
 
         var anoNascimento = valorInput.slice(6);
@@ -255,18 +266,18 @@ var pacientes = {
 
         if (idade <= 12) {
 
-            $('#labelResponsavel').html("");
-            $('#inputResponsavel').html("");
+            $('#label-responsavel-paciente').html("");
+            $('#input-responsavel-paciente').html("");
 
             var labelResponsavel = "Nome Responsavel";
             var inputResponsavel = "<input type='text' id='responsavel' name='responsavel' required='required' class='form-control col-md-7 col-xs-12'>";
 
-            $('#labelResponsavel').append(labelResponsavel);
-            $('#inputResponsavel').append(inputResponsavel);
+            $('#label-responsavel-paciente').append(labelResponsavel);
+            $('#input-responsavel-paciente').append(inputResponsavel);
         } else {
 
-            $('#labelResponsavel').html("");
-            $('#inputResponsavel').html("");
+            $('#label-responsavel-paciente').html("");
+            $('#input-responsavel-paciente').html("");
         }
     },
 
