@@ -910,46 +910,6 @@ var agendas = {
 
     gravaAgendaPaciente: function () {
 
-        alert('aqui');
-
-        var data = {
-            idAluno: $('#aluno').val(),
-            idPaciente: $('#id-paciente').val(),
-            dataPrimeiraSessao: $('#data-primeira-sessao').val(),
-            horaInicioPrimeiraSessao: $('#hora-inicio-primeira-sessao').val(),
-            horaFimPrimeiraSessao: $('#hora-fim-primeira-sessao').val(),
-            dataSegundaSessao: $('#data-segunda-sessao').val(),
-            horaInicioSegundaSessao: $('#hora-inicio-segunda-sessao').val(),
-            horaFimSegundaSessao: $('#hora-fim-segunda-sessao').val(),
-            dataTerceiraSessao: $('#data-terceira-sessao').val(),
-            horaInicioTerceiraSessao: $('#hora-inicio-terceira-sessao').val(),
-            horaFimTerceiraSessao: $('#hora-fim-terceira-sessao').val(),
-            dataQuartaSessao: $('#data-quarta-sessao').val(),
-            horaInicioQuartaSessao: $('#hora-inicio-quarta-sessao').val(),
-            horaFimQuartaSessao: $('#hora-fim-quarta-sessao').val(),
-            dataQuintaSessao: $('#data-quinta-sessao').val(),
-            horaInicioQuintaSessao: $('#hora-inicio-quinta-sessao').val(),
-            horaFimQuintaSessao: $('#hora-fim-quinta-sessao').val(),
-            dataSextaSessao: $('#data-sexta-sessao').val(),
-            horaInicioSextaSessao: $('#hora-inicio-sexta-sessao').val(),
-            horaFimSextaSessao: $('#hora-fim-sexta-sessao').val(),
-            dataSetimaSessao: $('#data-setima-sessao').val(),
-            horaInicioSetimaSessao: $('#hora-inicio-setima-sessao').val(),
-            horaFimSetimaSessao: $('#hora-fim-setima-sessao').val(),
-            dataOitavaSessao: $('#data-oitava-sessao').val(),
-            horaInicioOitavaSessao: $('#hora-inicio-oitava-sessao').val(),
-            horaFimOitavaSessao: $('#hora-fim-oitava-sessao').val(),
-            dataNonaSessao: $('#data-nona-sessao').val(),
-            horaInicioNonaSessao: $('#hora-inicio-nona-sessao').val(),
-            horaFimNonaSessao: $('#hora-fim-nona-sessao').val(),
-            dataDecimaSessao: $('#data-decima-sessao').val(),
-            horaInicioDecimaSessao: $('#hora-inicio-decima-sessao').val(),
-            horaFimDecimaSessao: $('#hora-fim-decima-sessao').val()
-        };
-
-        console.log(data);
-        return false;
-
         $.ajax({
             url: URL + '/agendamentos/gravaAgendaInicialPaciente',
             type: 'POST',
