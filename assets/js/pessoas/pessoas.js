@@ -3,8 +3,14 @@ var pessoas = {
     init: function () {
 
         date = new Date();
+        days = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09'};
         months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
-        currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+
+        if (date.getDate() <= 9) {
+            currentDate = days[date.getDate()] + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+        } else {
+            currentDate = date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+        }
 
         $('#cep').on('blur', pessoas.buscaCep);
         $('#cpf').on('blur', pessoas.validaCpf);
@@ -21,13 +27,15 @@ var pessoas = {
         $('#editarPessoa').on('click', pessoas.abrirCamposPessoaEdicao);
 
     },
+
     validaCampoData: function () {
 
-        if ($('#data_nascimento').val() > currentDate) {
+        if (pessoas.convertData($('#data_nascimento').val()) > pessoas.convertData(currentDate)) {
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
             swal("Atenção!", "Informe uma data válida!", "error");
-            return false;
+            $('#data_nascimento').val("");
+            return;
         }
     },
 
@@ -370,19 +378,19 @@ var pessoas = {
 
         if (parseInt(perfil) === 3) {
 
-            var label = "CREFFITO";
+            var label = "CREFFITO *";
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
 
         } else if (parseInt(perfil) === 5) {
 
-            var label = "RA";
+            var label = "RA *";
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
 
         } else if (parseInt(perfil) === 7) {
 
-            var label = "CRM";
+            var label = "CRM *";
             $('#nomeLabel').append(label);
             $('#perfilSelecionado').append(input);
 
@@ -498,6 +506,16 @@ var pessoas = {
         var btn = "<button id='editPessoa' name='editPessoa' class='editPessoa btn btn-success btn-xs'>Salvar Alterações</button>";
         $('#btn-editar-pessoa').append(btn);
         $('#editarPessoa').hide();
+    },
+
+    convertData: function (data) {
+
+        var dia = data.split("/")[0];
+        var mes = data.split("/")[1];
+        var ano = data.split("/")[2];
+
+        return ano + '-' + ("0" + mes).slice(-2) + '-' + ("0" + dia).slice(-2);
+
     }
 };
 $(document).ready(function () {

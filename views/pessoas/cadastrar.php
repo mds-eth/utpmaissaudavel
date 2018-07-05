@@ -14,19 +14,19 @@
                 </div>
                 <div class="x_content">                    
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="nome">Nome</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="nome">Nome *</label>
                         <div class="col-md-8">
                             <input type="text" id="nome" name="nome" required="required" class="form-control col-md-7 col-xs-12">
                         </div>                    
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Data de nascimento</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="data_nascimento">Data nascimento *</label>
                         <div class="col-md-8">
                             <input type="text" class='form-control' id="data_nascimento" name="data_nascimento" required='required' data-inputmask="'mask' : '99/99/9999'">
                         </div>
                     </div>                    
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12">Sexo
+                        <label class="col-md-3 col-sm-3 col-xs-12">Sexo *
                         </label>
                         <div class="col-md-8">
                             <select class="form-control" id="sexo" name="sexo">
@@ -43,13 +43,13 @@
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="rg">RG</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="rg">RG *</label>
                         <div class="col-md-8">
                             <input type="text" id="rg" name="rg" class="form-control" required="required" data-inputmask="'mask' : '99.999.999-9'">
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="email">Email</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="email">Email *</label>
                         <div class="col-md-8">
                             <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
@@ -65,37 +65,37 @@
                 </div>
                 <div class="x_content">
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="cep">CEP</label>                        
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="cep">CEP *</label>                        
                         <div class="col-md-8">
                             <input type="text" id="cep" name="cep" class="form-control col-md-7 col-xs-12" required="required" data-inputmask="'mask' : '99999-999'">
                         </div>
                     </div>               
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="rua">Rua</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="rua">Rua *</label>
                         <div class="col-md-8">
                             <input type="text" id="rua" name="rua" required="required" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>                
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="bairro">Bairro</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="bairro">Bairro *</label>
                         <div class="col-md-8">
                             <input type="text" id="bairro" name="bairro" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="cidade">Cidade</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="cidade">Cidade *</label>
                         <div class="col-md-8">
                             <input type="text" id="cidade" name="cidade" required="required" class="form-control">
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="estado">Estado</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="estado">Estado *</label>
                         <div class="col-md-8">
                             <input type="text" id="estado" name="estado" class="form-control" required="required">
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-3 col-sm-3 col-xs-12" for="numero">Número</label>
+                        <label class="col-md-3 col-sm-3 col-xs-12" for="numero">Número *</label>
                         <div class="col-md-8">
                             <input type="text" id="numero" name="numero" class="form-control" required="required">
                         </div>
@@ -125,13 +125,13 @@
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-4 col-sm-3 col-xs-12" for="celular">Telefone Celular</label>
+                        <label class="col-md-4 col-sm-3 col-xs-12" for="celular">Telefone Celular *</label>
                         <div class="col-md-5">
                             <input id="celular" name="celular" type="text" class="form-control" required="required" data-inputmask="'mask' : '(99) 99999-9999'">
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="col-md-4 col-sm-3 col-xs-12" for="contato">Telefone Para Contato</label>
+                        <label class="col-md-4 col-sm-3 col-xs-12" for="contato">Telefone Para Contato *</label>
                         <div class="col-md-5">
                             <input id="contato" name="contato" type="text" class="form-control" required="required" data-inputmask="'mask' : '(99) 99999-9999'">
                         </div>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="x_content">               
                     <div class="item form-group">
-                        <label class="col-md-4 col-sm-3 col-xs-12" for="especialidade">Perfil</label>
+                        <label class="col-md-4 col-sm-3 col-xs-12" for="especialidade">Perfil *</label>
                         <div class="col-md-7">
                             <select class="form-control" id="perfil" name="perfil">
                                 <option >Selecione</option>

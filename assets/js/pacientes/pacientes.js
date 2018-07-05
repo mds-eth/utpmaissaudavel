@@ -5,8 +5,14 @@ var pacientes = {
         especialidades = [];
 
         date = new Date();
+        days = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09'};
         months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
-        currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+
+        if (date.getDate() <= 9) {
+            currentDate = days[date.getDate()] + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+        } else {
+            currentDate = date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+        }
 
         $('#cep').on('blur', pacientes.buscaCep);
         $('#cpf').on('blur', pacientes.validaCpf);
@@ -111,13 +117,7 @@ var pacientes = {
             $('#rg').css('border', '1px solid red');
             swal("Atenção!", "Campo RG não pode ficar vazio!", "error");
             return;
-        }
-        if ($('#email').val() === '') {
-            $('#email').focus();
-            $('#email').css('border', '1px solid red');
-            swal("Atenção!", "Campo Email  não pode ficar vazio!", "error");
-            return;
-        }
+        }        
         if ($('#cep').val() === '') {
             $('#cep').focus();
             $('#cep').css('border', '1px solid red');
@@ -153,13 +153,7 @@ var pacientes = {
             $('#numero').css('border', '1px solid red');
             swal("Atenção!", "Campo Número  não pode ficar vazio!", "error");
             return;
-        }
-        if ($('#complemento').val() === '') {
-            $('#complemento').focus();
-            $('#complemento').css('border', '1px solid red');
-            swal("Atenção!", "Campo Complemento  não pode ficar vazio!", "error");
-            return;
-        }
+        }        
         if ($('#celular').val() === '') {
             $('#celular').focus();
             $('#celular').css('border', '1px solid red');
@@ -248,10 +242,11 @@ var pacientes = {
 
     validarIdadePessoa: function () {
 
-        if ($('#data_nascimento').val() > currentDate) {
+        if (pacientes.convertData($('#data_nascimento').val()) > pacientes.convertData(currentDate)) {
             $('#data_nascimento').focus();
             $('#data_nascimento').css('border', '1px solid red');
             swal("Atenção!", "Informe uma data válida!", "error");
+            $('#data_nascimento').val('');
             return false;
         }
 
@@ -269,11 +264,12 @@ var pacientes = {
             $('#label-responsavel-paciente').html("");
             $('#input-responsavel-paciente').html("");
 
-            var labelResponsavel = "Nome Responsavel";
-            var inputResponsavel = "<input type='text' id='responsavel' name='responsavel' required='required' class='form-control col-md-7 col-xs-12'>";
+            var labelResponsavel = "Nome Responsavel *";
+            var inputResponsavel = "<input type='text' id='responsavel' name='responsavel' required='required' class='form-control col-md-7 col-xs-12'>";            
 
             $('#label-responsavel-paciente').append(labelResponsavel);
             $('#input-responsavel-paciente').append(inputResponsavel);
+            $('#responsavel').focus();
         } else {
 
             $('#label-responsavel-paciente').html("");
@@ -319,6 +315,16 @@ var pacientes = {
         $('#btn-salvar-alteracoes-agenda-paciente').append(btn);
 
         $('.edit').hide();
+    },
+
+    convertData: function (data) {
+
+        var dia = data.split("/")[0];
+        var mes = data.split("/")[1];
+        var ano = data.split("/")[2];
+
+        return ano + '-' + ("0" + mes).slice(-2) + '-' + ("0" + dia).slice(-2);
+
     }
 };
 $(document).ready(function () {

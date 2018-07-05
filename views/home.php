@@ -80,7 +80,7 @@
                                     <td><?= date('d/m/Y', strtotime($data)) ?></td>
                                     <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA): ?>
                                         <td>
-                                            <a href="<?php echo URL ?>/agendamentos/vinculacao" id="<?= $paciente['id_pessoa'] ?>" class="home-agendar-paciente btn btn-info btn-xs editar">Agendar</a>                                            
+                                            <a href="<?php echo URL ?>/agendamentos/existentes/<?= $paciente['id_pessoa'] ?>" id="<?= $paciente['id_pessoa'] ?>" class="home-agendar-paciente btn btn-info btn-xs editar">Agendar</a>                                            
                                         </td>
                                     <?php endif; ?>
                                 </tr>                    

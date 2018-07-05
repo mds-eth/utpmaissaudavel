@@ -35,8 +35,8 @@
                                             <ul class="nav child_menu">
                                                 <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>
                                                     <li><a href="<?php echo URL; ?>/agendamentos/agenda">Agenda Semestral</a></li>
-                                                <?php endif ?>
-                                                <li><a href="<?php echo URL; ?>/agendamentos/listagem">Visualizar Agendas</a></li>
+                                                    <li><a href="<?php echo URL; ?>/agendamentos/listagem">Visualizar Agendas</a></li>
+                                                <?php endif ?>                                                
                                                 <li><a href="<?php echo URL; ?>/agendamentos/vinculacao">Vincular Pacientes</a></li>
                                             </ul>
                                         </li>

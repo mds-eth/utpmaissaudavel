@@ -45,8 +45,9 @@
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
                             </select>
-                        </div>
+                        </div>                        
                     </div>
+                    <div id="quais-musculatura" class="form-group"></div>
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Batimento da Asa do Nariz</label>
                         <div class="col-md-8">
@@ -147,6 +148,7 @@
                             </select>
                         </div>
                     </div>
+                    <div id="quais-deformidades-posturais" class="form-group"></div>
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Mobilidade Torácica</label>
                         <div class="col-md-8">
@@ -351,20 +353,61 @@
                             </select>
                         </div>
                     </div>
+                    <div id="topografia-cicatrizes" class="form-group"></div>
+                    <div id="lado-topografia-cicatrizes" class="form-group"></div>
                     <div class="item form-group">
-                        <label class="col-md-4 col-sm-3 col-xs-12">Topografia</label>
+                        <label class="col-md-4 col-sm-3 col-xs-12">Cianose</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="topografia" name="topografia">
+                            <select class="form-control" id="cianose" name="cianose">
                                 <option>Selecione</option>
-                                <option value="1">Tórax</option>
-                                <option value="2">Abdômen</option>                                
-                                <option value="2">Membros Superiores</option>                                
-                                <option value="2">Membros Inferiores</option>                                
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>                                
                             </select>
                         </div>
-                    </div>
+                    </div> 
+                    <div class="item form-group">
+                        <label class="col-md-4 col-sm-3 col-xs-12">Hematoma</label>
+                        <div class="col-md-8">
+                            <select class="form-control" id="hematoma" name="hematoma">
+                                <option>Selecione</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>                                
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="item form-group">
+                        <label class="col-md-4 col-sm-3 col-xs-12">Eritema</label>
+                        <div class="col-md-8">
+                            <select class="form-control" id="eritema" name="eritema">
+                                <option>Selecione</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>                                
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="item form-group">
+                        <label class="col-md-4 col-sm-3 col-xs-12">Edema</label>
+                        <div class="col-md-8">
+                            <select class="form-control" id="edema" name="edema">
+                                <option>Selecione</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>                                
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="item form-group">
+                        <label class="col-md-4 col-sm-3 col-xs-12">Alteração de Temperatura</label>
+                        <div class="col-md-8">
+                            <select class="form-control" id="alteracao-temperatura" name="alteracao-temperatura">
+                                <option>Selecione</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>                                
+                            </select>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo URL; ?>/assets/js/avaliacoes/pneumologia.js"></script>

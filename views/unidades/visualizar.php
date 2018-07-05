@@ -32,8 +32,7 @@
                                 <td><?= date('d/m/Y', strtotime($data)) ?></td>
                                 <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA) : ?>                            
                                     <td>
-                                        <button value="<?= $unidade['id_unidade_de_saude'] ?>" class="editar btn btn-info btn-xs editar">Editar</button>
-                                        <button value="<?= $unidade['id_unidade_de_saude'] ?>" class="excluir btn btn-danger btn-xs excluir">Excluir</button>                                
+                                        <button value="<?= $unidade['id_unidade_de_saude'] ?>" class="editar btn btn-info btn-xs editar">Editar</button>                                        
                                     </td>
                                 <?php endif; ?>
                             </tr>                    

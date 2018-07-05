@@ -20,9 +20,9 @@ class AgendamentosController extends controller {
         $this->agendamentos = new Agendamentos();
         $this->especialidade = new Especialidades();
 
-        if (!$this->url->verificaUrlSessaoUsuario()) {
-            header('Location: ' . URL . '/home');
-        }
+        /* if (!$this->url->verificaUrlSessaoUsuario()) {
+          header('Location: ' . URL . '/home');
+          } */
     }
 
     public function agenda() {
@@ -71,6 +71,42 @@ class AgendamentosController extends controller {
         $this->loadTemplate('agendamentos/listagem', $dados);
     }
 
+    public function existentes($id) {
+
+        $agendaEspecialidades = $this->agendamentos->buscaAgendaAtiva();
+        $dados['paciente'] = $this->agendamentos->buscarDadosPacienteSemAgendamento($id);
+
+        if (empty($dados['paciente'])) {
+            header('Location: ' . URL . '/home');
+        }
+
+        $dados['alunos'] = $this->usuario->buscarAlunosParaRenderizarAgenda();
+
+        if (!empty($agendaEspecialidades)) {
+            foreach ($agendaEspecialidades as $agenda) {
+                switch ($agenda['id_agenda_dias']) {
+                    case 1:
+                        $dados['segunda'][] = $agenda;
+                        break;
+                    case 2:
+                        $dados['terca'][] = $agenda;
+                        break;
+                    case 3:
+                        $dados['quarta'][] = $agenda;
+                        break;
+                    case 4:
+                        $dados['quinta'][] = $agenda;
+                        break;
+                    case 5:
+                        $dados['sexta'][] = $agenda;
+                        break;
+                }
+            }
+        }
+
+        $this->loadTemplate('agendamentos/existentes', $dados);
+    }
+
     public function vinculacao() {
 
         $agendaEspecialidades = $this->agendamentos->buscaAgendaAtiva();
@@ -110,18 +146,18 @@ class AgendamentosController extends controller {
 
             if ($this->post()) {
 
-                $dadosPaciente = $this->agendamentos->buscarDadosPacienteSemAgendamento();
+                $dadosPaciente = $this->agendamentos->buscarDadosPacienteSemAgendamento(null);
 
                 if (is_null($dadosPaciente)) {
                     echo $dadosPaciente;
                 } else if (count($dadosPaciente) > 1) {
+                    $especialidades = "";
+                    foreach ($dadosPaciente as &$paciente) {
 
-                    foreach ($dadosPaciente as $paciente) {
-
-                        $especialidades[] = $paciente['especialidade'] . ' | ';
+                        $especialidades .= $paciente['especialidade'] . ' | ';
                     }
 
-                    $dadosPaciente[0]['especialidade'] = $especialidades[0] . $especialidades[1];
+                    $dadosPaciente[0]['especialidade'] = $especialidades;
                 }
 
                 echo json_encode($dadosPaciente[0]);

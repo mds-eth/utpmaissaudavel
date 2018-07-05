@@ -28,8 +28,7 @@
                                     <?php $data = $inativa['pessoa_criado_em'] ?>
                                     <td style="text-align: center"><?= date('d/m/Y', strtotime($data)) ?></td>
                                     <td style="text-align: center">
-                                        <button id="reativar" value="<?= $inativa['id_pessoa'] ?>" class="reativar btn btn-success btn-xs">Reativar</button>                                    
-                                        <button id="excluir-pessoa" value="<?= $inativa['id_pessoa'] ?>" class="btn btn-danger btn-xs">Excluir</button>                                    
+                                        <button id="reativar" value="<?= $inativa['id_pessoa'] ?>" class="reativar btn btn-success btn-xs">Reativar</button>                                                                            
                                     </td>                            
                                 </tr>                    
                             <?php endforeach; ?>

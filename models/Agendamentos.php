@@ -115,14 +115,11 @@ class Agendamentos extends Model {
         return empty($retorno) || $retorno == false ? true : false;
     }
 
-    public function buscarDadosPacienteSemAgendamento() {
-
-        $id = $this->buscaIdUltimoPaciente();
-        $return = $this->verificaSePacientePossuiAgenda($id->id_pessoa);
+    public function buscarDadosPacienteSemAgendamento($idSemAgendamento) {
 
         try {
 
-            if ($return) {
+            if (!empty($idSemAgendamento)) {
 
                 $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, responsavel, especialidade
                             FROM pessoas p
@@ -133,13 +130,35 @@ class Agendamentos extends Model {
                             JOIN especialidades e
                             ON pe.fk_id_especialidade = e.id_especialidade
                             AND p.id_pessoa = :id");
-                $sql->bindValue(':id', $id->id_pessoa, PDO::PARAM_INT);
+                $sql->bindValue(':id', $idSemAgendamento, PDO::PARAM_INT);
                 $sql->execute();
 
                 $paciente = $sql->fetchAll();
                 return $paciente;
             } else {
-                return null;
+
+                $id = $this->buscaIdUltimoPaciente();
+                $return = $this->verificaSePacientePossuiAgenda($id->id_pessoa);
+
+                if ($return) {
+
+                    $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, responsavel, especialidade
+                            FROM pessoas p
+                            JOIN dados_pacientes dp
+                            ON p.id_pessoa = dp.fk_id_paciente
+                            JOIN paciente_especialidades pe
+                            ON p.id_pessoa = pe.fk_id_paciente
+                            JOIN especialidades e
+                            ON pe.fk_id_especialidade = e.id_especialidade
+                            AND p.id_pessoa = :id");
+                    $sql->bindValue(':id', $id->id_pessoa, PDO::PARAM_INT);
+                    $sql->execute();
+
+                    $paciente = $sql->fetchAll();
+                    return $paciente;
+                } else {
+                    return null;
+                }
             }
         } catch (Exception $exc) {
             $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $this->idUsuario);

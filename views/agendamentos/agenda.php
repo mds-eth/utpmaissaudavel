@@ -5,11 +5,11 @@
         <div class="x_title">  
             <div class="clearfix"></div>
             <div class="item form-group">
-                <label class="col-md-1 col-sm-3 col-xs-12" for="dataInicial">Data início</label>
+                <label class="col-md-1 col-sm-3 col-xs-12" for="dataInicial">Data início *</label>
                 <div class="col-md-2">
                     <input id="dataInicial" name="dataInicial" class="form-control" data-inputmask="'mask' : '99/99/9999'" />
                 </div>   
-                <label class="col-md-1 col-sm-3 col-xs-12" for="dataFinal">Data fim</label>
+                <label class="col-md-1 col-sm-3 col-xs-12" for="dataFinal">Data fim *</label>
                 <div class="col-md-2">
                     <input id="dataFinal" name="dataFinal" class="form-control" data-inputmask="'mask' : '99/99/9999'" />
                 </div> 
