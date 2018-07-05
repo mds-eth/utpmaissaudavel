@@ -47,7 +47,7 @@
         </div>
     </div>
 <?php endif; ?>
-<?php if ($_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA): ?>
+<?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA): ?>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
@@ -64,7 +64,7 @@
                                 <th style="text-align: center">Email</th>
                                 <th style="text-align: center">Unidade de Saúde</th>
                                 <th style="text-align: center">Data Cadastro</th>  
-                                <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA): ?>
+                                <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA): ?>
                                     <th style="text-align: center">Ações</th>  
                                 <?php endif; ?>
                             </tr>
@@ -78,7 +78,7 @@
                                     <td><?= $paciente['nome_unidade'] ?></td>                                    
                                     <?php $data = $paciente['pessoa_criado_em'] ?>
                                     <td><?= date('d/m/Y', strtotime($data)) ?></td>
-                                    <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA): ?>
+                                    <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::SECRETARIA): ?>
                                         <td>
                                             <a href="<?php echo URL ?>/agendamentos/existentes/<?= $paciente['id_pessoa'] ?>" id="<?= $paciente['id_pessoa'] ?>" class="home-agendar-paciente btn btn-info btn-xs editar">Agendar</a>                                            
                                         </td>
@@ -93,7 +93,7 @@
     </div>            
 <?php endif; ?>
 <?php if ($_SESSION['usuario']['id_perfil'] == Perfis::ADMINISTRADOR || $_SESSION['usuario']['id_perfil'] == Perfis::COORDENADOR || $_SESSION['usuario']['id_perfil'] == Perfis::FISIOTERAPEUTA): ?>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -160,6 +160,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 <?php endif; ?>
 <script type="text/javascript" src="<?php echo URL; ?>/assets/js/home/home.js"></script>

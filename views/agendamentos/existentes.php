@@ -9,7 +9,7 @@
                     <div class="item form-group">
                         <label class="col-md-3 col-sm-3 col-xs-12" for="paciente">Paciente</label>
                         <div class="col-md-8">
-                            <input type="hidden" id="id-paciente" name="id-paciente">
+                            <input type="hidden" id="id-paciente" name="id-paciente" value="<?= isset($paciente[0]) ? $paciente[0]['id_pessoa'] : '' ?>">
                             <input type="text" id="paciente" name="paciente" readonly="true" value="<?= isset($paciente[0]) ? $paciente[0]['nome_pessoa'] : '' ?>" class="form-control col-md-7 col-xs-12">
                         </div>                    
                     </div>
@@ -292,7 +292,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Cancelar</button>
-                <button id="btn-modal-confirmar-agenda-paciente" class="btn btn-success btn-xs">Salvar</button>
+                <button id="btn-modal-confirmar-agenda-paciente-existente" class="btn btn-success btn-xs">Salvar</button>
             </div>
         </div>
     </div>

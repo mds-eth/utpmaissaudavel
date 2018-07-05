@@ -50,6 +50,7 @@ var agendas = {
         $('#btn-salvar-agenda-especialidade').on('click', agendas.gravarAgenda);
         $('#btn-visualizar-agenda-paciente').on('click', agendas.validaCamposAgendaPaciente);
         $('#btn-modal-confirmar-agenda-paciente').on('click', agendas.gravaAgendaPaciente);
+        $('#btn-modal-confirmar-agenda-paciente-existente').on('click', agendas.gravaAgendaPaciente);
     },
 
     errorDataMenor: function () {
@@ -60,6 +61,10 @@ var agendas = {
     errorFinalDeSemana: function () {
 
         return swal("Atenção!", "Favor marcar sessões somente de Segunda a Sexta!", "error");
+    },
+
+    errorHoraSessaoMaior: function () {
+        return swal("Atenção!", "Hora inicial não pode ser maior que hora final!", "error");
     },
 
     montarAgendaSegunda: function () {
@@ -205,6 +210,14 @@ var agendas = {
             return;
         }
 
+        if ($('#hora-inicio-primeira-sessao').val() > $('#hora-fim-primeira-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
+            $('#data-primeira-sessao').val("");
+            $('#hora-inicio-primeira-sessao').val("");
+            $('#hora-fim-primeira-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -230,6 +243,14 @@ var agendas = {
         var dia = agendas.validaDiaSemanal($('#data-segunda-sessao').val());
         if (dia === 'Sábado' || dia === 'Domingo') {
             agendas.errorFinalDeSemana();
+            $('#data-segunda-sessao').val("");
+            $('#hora-inicio-segunda-sessao').val("");
+            $('#hora-fim-segunda-sessao').val("");
+            return;
+        }
+
+        if ($('#hora-inicio-segunda-sessao').val() > $('#hora-fim-segunda-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
             $('#data-segunda-sessao').val("");
             $('#hora-inicio-segunda-sessao').val("");
             $('#hora-fim-segunda-sessao').val("");
@@ -267,6 +288,14 @@ var agendas = {
             return;
         }
 
+        if ($('#hora-inicio-terceira-sessao').val() > $('#hora-fim-terceira-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
+            $('#data-terceira-sessao').val("");
+            $('#hora-inicio-terceira-sessao').val("");
+            $('#hora-fim-terceira-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -292,6 +321,14 @@ var agendas = {
         var dia = agendas.validaDiaSemanal($('#data-quarta-sessao').val());
         if (dia === 'Sábado' || dia === 'Domingo') {
             agendas.errorFinalDeSemana();
+            $('#data-quarta-sessao').val("");
+            $('#hora-inicio-quarta-sessao').val("");
+            $('#hora-fim-quarta-sessao').val("");
+            return;
+        }
+
+        if ($('#hora-inicio-quarta-sessao').val() > $('#hora-fim-quarta-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
             $('#data-quarta-sessao').val("");
             $('#hora-inicio-quarta-sessao').val("");
             $('#hora-fim-quarta-sessao').val("");
@@ -329,6 +366,14 @@ var agendas = {
             return;
         }
 
+        if ($('#hora-inicio-quinta-sessao').val() > $('#hora-fim-quinta-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
+            $('#data-quinta-sessao').val("");
+            $('#hora-inicio-quinta-sessao').val("");
+            $('#hora-fim-quinta-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -354,6 +399,14 @@ var agendas = {
         var dia = agendas.validaDiaSemanal($('#data-sexta-sessao').val());
         if (dia === 'Sábado' || dia === 'Domingo') {
             agendas.errorFinalDeSemana();
+            $('#data-sexta-sessao').val("");
+            $('#hora-inicio-sexta-sessao').val("");
+            $('#hora-fim-sexta-sessao').val("");
+            return;
+        }
+
+        if ($('#hora-inicio-sexta-sessao').val() > $('#hora-fim-sexta-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
             $('#data-sexta-sessao').val("");
             $('#hora-inicio-sexta-sessao').val("");
             $('#hora-fim-sexta-sessao').val("");
@@ -391,6 +444,14 @@ var agendas = {
             return;
         }
 
+        if ($('#hora-inicio-setima-sessao').val() > $('#hora-fim-setima-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
+            $('#data-setima-sessao').val("");
+            $('#hora-inicio-setima-sessao').val("");
+            $('#hora-fim-setima-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -416,6 +477,14 @@ var agendas = {
         var dia = agendas.validaDiaSemanal($('#data-oitava-sessao').val());
         if (dia === 'Sábado' || dia === 'Domingo') {
             agendas.errorFinalDeSemana();
+            $('#data-oitava-sessao').val("");
+            $('#hora-inicio-oitava-sessao').val("");
+            $('#hora-fim-oitava-sessao').val("");
+            return;
+        }
+
+        if ($('#hora-inicio-oitava-sessao').val() > $('#hora-fim-oitava-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
             $('#data-oitava-sessao').val("");
             $('#hora-inicio-oitava-sessao').val("");
             $('#hora-fim-oitava-sessao').val("");
@@ -453,6 +522,14 @@ var agendas = {
             return;
         }
 
+        if ($('#hora-inicio-nona-sessao').val() > $('#hora-fim-nona-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
+            $('#data-nona-sessao').val("");
+            $('#hora-inicio-nona-sessao').val("");
+            $('#hora-fim-nona-sessao').val("");
+            return;
+        }
+
         var horario = {
 
             title: $('#paciente').val(),
@@ -478,6 +555,14 @@ var agendas = {
         var dia = agendas.validaDiaSemanal($('#data-decima-sessao').val());
         if (dia === 'Sábado' || dia === 'Domingo') {
             agendas.errorFinalDeSemana();
+            $('#data-decima-sessao').val("");
+            $('#hora-inicio-decima-sessao').val("");
+            $('#hora-fim-decima-sessao').val("");
+            return;
+        }
+
+        if ($('#hora-inicio-decima-sessao').val() > $('#hora-fim-decima-sessao').val()) {
+            agendas.errorHoraSessaoMaior();
             $('#data-decima-sessao').val("");
             $('#hora-inicio-decima-sessao').val("");
             $('#hora-fim-decima-sessao').val("");
