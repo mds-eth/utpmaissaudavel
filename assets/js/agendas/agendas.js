@@ -5,8 +5,14 @@ var agendas = {
         horarios = [];
         checkAgenda = false;
         date = new Date();
+        days = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09'};
         months = {1: '01', 2: '02', 3: '03', 4: '04', 5: '05', 6: '06', 7: '07', 8: '08', 9: '09', 10: '10', 11: '11', 11: '12'};
-        currentDate = '0' + date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+
+        if (date.getDate() <= 9) {
+            currentDate = days[date.getDate()] + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+        } else {
+            currentDate = date.getDate() + '/' + months[date.getMonth() + 1] + '/' + date.getFullYear();
+        }
 
         segundaIds = [];
         segundaEspecialidades = [];

@@ -152,7 +152,7 @@ var unidades = {
                     swal({
                         title: "Cadastrado com Sucesso!",
                         icon: "success"
-                    }, window.location = URL + '/unidades/visualizar');
+                    }, window.location = URL + '/unidades/regionais');
                 } else {
                     swal({
                         type: 'warning',

@@ -134,9 +134,7 @@ class Pacientes extends Model {
                                                         where a.fk_id_paciente = pa.fk_id_paciente)");
         $sql->execute();
 
-        $pacientes = $sql->fetchAll();
-
-        return $pacientes;
+        return !empty($pacientes = $sql->fetchAll()) ? $pacientes : null;
     }
 
     function getFkIdUnidadeSaude() {

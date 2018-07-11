@@ -20,9 +20,9 @@ class AgendamentosController extends controller {
         $this->agendamentos = new Agendamentos();
         $this->especialidade = new Especialidades();
 
-        /* if (!$this->url->verificaUrlSessaoUsuario()) {
-          header('Location: ' . URL . '/home');
-          } */
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
+        }
     }
 
     public function agenda() {
@@ -60,8 +60,7 @@ class AgendamentosController extends controller {
 
         if ($this->post()) {
 
-            $status = $_POST['status'];
-            echo $this->agendamentos->validaSeExisteOutraAgendaAtiva($status);
+            echo $this->agendamentos->validaSeExisteOutraAgendaAtiva($_POST['status']);
         }
     }
 

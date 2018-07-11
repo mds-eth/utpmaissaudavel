@@ -11,9 +11,7 @@ class Model {
 
         global $config;
         $this->date = date("Y-m-d H-i-s");
-        if (!empty($_SESSION['usuario'])) {
-            $this->idUsuario = $_SESSION['usuario']['id_usuario'];
-        }
+        $this->idUsuario = !empty($_SESSION['usuario']) ? $_SESSION['usuario']['id_usuario'] : null;
 
         try {
 

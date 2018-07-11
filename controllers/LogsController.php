@@ -7,7 +7,6 @@ class LogsController extends controller {
 
     public function __construct() {
 
-        $this->url = new Urls();
         $this->usuario = new Usuarios();
 
         if (!$this->usuario->logado()) {

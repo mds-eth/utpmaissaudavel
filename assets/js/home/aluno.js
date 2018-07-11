@@ -2,13 +2,16 @@ var home = {
 
     init: function () {
 
-        pacientes = [];
-
         home.buscaMeusPacientes();
         home.renderizaCalendario();
 
-        $('.home-agendar-paciente').on('click', home.buscaPacienteSemAgenda);
         $('#btn-modal-iniciar-sessao-paciente').on('click', home.iniciarSessao);
+    },
+
+    iniciarSessao: function () {
+
+        window.location.href = URL + '/avaliacoes/paciente/' + $('#id-paciente').val();
+
     },
 
     buscaMeusPacientes: function () {
@@ -29,6 +32,7 @@ var home = {
                         title: paciente.nome_pessoa,
                         start: home.convertData(paciente.data_sessao) + " " + paciente.hora_inicio,
                         end: home.convertData(paciente.data_sessao) + " " + paciente.hora_fim,
+                        sessao: paciente.sessao,
                         color: 'black'
                     };
                     $('#calendario').fullCalendar('renderEvent', horario, true);
@@ -47,7 +51,7 @@ var home = {
                 right: 'month, agendaWeek, agendaDay'
             },
             height: 'auto',
-            defaultView: 'agendaWeek',
+            defaultView: 'month',
             hiddenDays: [0, 6],
             navLinks: true,
             minTime: "08:00:00",
@@ -55,18 +59,16 @@ var home = {
             eventClick: function (event) {
 
                 $('#body-modal-paciente-selecionado').html("");
+                var input = "<input type='hidden' id='id-paciente' name='id-paciente' value='" + event.id + "'>";
                 var paciente = "Nome paciente:  <b>" + event.title + "</b><br>" +
                         "Data/Hora início: <b>" + $.fullCalendar.formatDate(event.start, 'DD-MM-YYYY hh:mm') + "</b><br>" +
-                        "Data/Hora fim: <b>" + $.fullCalendar.formatDate(event.end, 'DD-MM-YYYY hh:mm') + "</b>";
+                        "Data/Hora fim: <b>" + $.fullCalendar.formatDate(event.end, 'DD-MM-YYYY hh:mm') + "</b><br>" +
+                        "Sessão: <b>" + event.sessao + "</b>";
 
-                $('#body-modal-paciente-selecionado').append(paciente);
+                $('#body-modal-paciente-selecionado').append(paciente, input);
                 $('#modal-paciente-selecionado').modal("show");
             }
         });
-
-    },
-
-    buscaPacienteSemAgenda: function () {
 
     },
 

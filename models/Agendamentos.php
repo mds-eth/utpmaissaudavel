@@ -89,9 +89,7 @@ class Agendamentos extends Model {
         $sql = $this->db->prepare("SELECT * FROM agenda_dias_especialidades");
         $sql->execute();
 
-        $agendas = $sql->fetchAll();
-
-        return $agendas;
+        return !empty($agendas = $sql->fetchAll()) ? $agendas : null;
     }
 
     public function buscaIdUltimoPaciente() {
@@ -176,14 +174,12 @@ class Agendamentos extends Model {
                     AND ae.status = 1");
         $sql->execute();
 
-        $agenda = $sql->fetchAll();
-
-        return $agenda;
+        return !empty($agenda = $sql->fetchAll()) ? $agenda : null;
     }
 
     public function buscaPacientesAlunoSelecionado($id) {
 
-        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, data_sessao, hora_inicio, hora_fim FROM pessoas p
+        $sql = $this->db->prepare("SELECT id_pessoa, nome_pessoa, data_sessao, hora_inicio, hora_fim, sessao FROM pessoas p
                                     JOIN agendamentos a ON p.id_pessoa = a.fk_id_paciente
                                     AND DATE_FORMAT(STR_TO_DATE(data_sessao, '%d/%m/%Y'), '%Y-%m-%d')  >=  current_date()
                                     AND a.fk_id_aluno = :id");

@@ -3,7 +3,9 @@
 class PessoasController extends controller {
 
     private $url;
+    private $log;
     private $pessoa;
+    private $perfil;
     private $usuario;
     private $telefone;
     private $endereco;
@@ -11,7 +13,9 @@ class PessoasController extends controller {
     public function __construct() {
 
         $this->url = new Urls();
+        $this->log = new Logs();
         $this->pessoa = new Pessoas();
+        $this->perfil = new Perfis();
         $this->usuario = new Usuarios();
         $this->telefone = new Telefones();
         $this->endereco = new Enderecos();
@@ -66,14 +70,11 @@ class PessoasController extends controller {
                 echo true;
             } else {
 
-                $perfis = new Perfis();
-                $dados['perfis'] = $perfis->buscaPerfis();
-
+                $dados['perfis'] = $this->perfil->buscaPerfis();
                 $this->loadTemplate('pessoas/cadastrar', $dados);
             }
         } catch (Exception $exc) {
-
-            $this->mandaEmailAdmErroAplicacao($exc);
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 
@@ -112,7 +113,7 @@ class PessoasController extends controller {
                 echo true;
             }
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 
@@ -122,13 +123,12 @@ class PessoasController extends controller {
 
             if ($this->post()) {
 
-                $idPessoa = $_POST['idPessoa'];
-                $this->pessoa->inativarPessoa($idPessoa);
+                $this->pessoa->inativarPessoa($_POST['idPessoa']);
 
                 echo true;
             }
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 
@@ -144,7 +144,7 @@ class PessoasController extends controller {
                 echo json_encode($pessoaEdicao[0]);
             }
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 
@@ -160,7 +160,7 @@ class PessoasController extends controller {
                 echo json_encode($pessoaExclusao[0]);
             }
         } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
+            $this->log->logError(__CLASS__, __FUNCTION__, $exc->getMessage(), $_SESSION['usuario']['id_usuario']);
         }
     }
 
@@ -202,8 +202,7 @@ class PessoasController extends controller {
 
         if ($this->post()) {
 
-            $cpf = $_POST['cpf'];
-            $retorno = $this->pessoa->validaCpf($cpf);
+            $retorno = $this->pessoa->validaCpf($_POST['cpf']);
 
             echo json_encode($retorno);
         }

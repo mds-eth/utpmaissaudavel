@@ -27,7 +27,7 @@
                         <br>
                         <div>
                             <button id="logar" class="btn btn-success">Logar</button>
-                            <a class="reset_pass" href="#">Esqueci minha senha</a>
+                            <!-- <a class="reset_pass" href="#">Esqueci minha senha</a>-->
                         </div>
                     </form>
                 </section>

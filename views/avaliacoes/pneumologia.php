@@ -1,6 +1,41 @@
 <div class="form-horizontal">   
     <div class="row">
-        <div class="col-md-4 col-sm-12 col-xs-12" style="height: 100%">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="div-agenda x_panel">
+                <div class="x_title">
+                    <h4><b>Dados Paciente</b></h4>                
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">    
+                    <div class="item form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12">Nome</label>
+                        <div class="col-md-8">
+                            <span><?= $paciente->nome_pessoa ?></span>                            
+                        </div>                    
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12">Data Nascimento</label>
+                        <div class="col-md-8">
+                            <span><?= $paciente->data_nascimento ?></span>                            
+                        </div>                    
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12">Sexo</label>
+                        <div class="col-md-8">
+                            <span><?= $paciente->sexo ?></span>                            
+                        </div>                    
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-md-2 col-sm-3 col-xs-12">Unidade de Saúde</label>
+                        <div class="col-md-8">
+                            <span><?= $paciente->nome_unidade ?></span>                            
+                        </div>                    
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="div-agenda x_panel">
                 <div class="x_title">
                     <h4><b>Inspeção</b></h4>                
@@ -167,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-sm-12 col-xs-12" style="height: 100%">
+        <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="div-agenda x_panel">
                 <div class="x_title">
                     <h4><b>Palpação</b></h4>                
@@ -239,34 +274,34 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            0
+                                            <b>0</b>
                                         </td>
                                         <td>
-                                            Paralisia
+                                            <b>Paralisia</b>
                                         </td>                                        
                                     </tr>
                                     <tr>
                                         <td>
-                                            1
+                                            <b>1</b>
                                         </td>
                                         <td>
-                                            Tônus
+                                            <b>Tônus</b>
                                         </td>                                        
                                     </tr>
                                     <tr>
                                         <td>
-                                            2
+                                            <b>2</b>
                                         </td>
                                         <td>
-                                            Tônus / Expande
+                                            <b>Tônus / Expande</b>
                                         </td>                                        
                                     </tr>
                                     <tr>
                                         <td>
-                                            3
+                                            <b>3</b>
                                         </td>
                                         <td>
-                                            Tônus / Expande / Expulsa
+                                            <b>Tônus / Expande / Expulsa</b>
                                         </td>                                        
                                     </tr>
                                 </tbody>
@@ -276,7 +311,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-sm-12 col-xs-12" style="height: 100%">
+        <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="div-agenda x_panel">
                 <div class="x_title">
                     <h4><b>Ascultura Pulmonar</b></h4>                
@@ -364,7 +399,8 @@
                                 <option value="2">Não</option>                                
                             </select>
                         </div>
-                    </div> 
+                    </div>
+                    <div id="topografia-cianose" class="form-group"></div>
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Hematoma</label>
                         <div class="col-md-8">
@@ -374,7 +410,8 @@
                                 <option value="2">Não</option>                                
                             </select>
                         </div>
-                    </div> 
+                    </div>
+                    <div id="topografia-hematoma" class="form-group"></div>
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Eritema</label>
                         <div class="col-md-8">
@@ -384,7 +421,8 @@
                                 <option value="2">Não</option>                                
                             </select>
                         </div>
-                    </div> 
+                    </div>
+                    <div id="topografia-eritema" class="form-group"></div>
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Edema</label>
                         <div class="col-md-8">
@@ -394,7 +432,8 @@
                                 <option value="2">Não</option>                                
                             </select>
                         </div>
-                    </div> 
+                    </div>
+                    <div id="topografia-edema" class="form-group"></div>
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Alteração de Temperatura</label>
                         <div class="col-md-8">
@@ -407,6 +446,13 @@
                     </div> 
                 </div>
             </div>
+            <div class="form-group">
+                <div class="col-md-8" style="float: left">
+                    <button id="gravar-avalicao" class="btn btn-success btn-xs">Gravar</button>
+                    <button id="limpar-avalicao" class="btn btn-primary btn-xs" type="reset">Limpar</button>
+                    <a href="<?php echo URL ?>/home"><button class="btn btn-danger btn-xs" type="button">Cancelar</button></a>
+                </div>
+            </div> 
         </div>
     </div>
 </div>
