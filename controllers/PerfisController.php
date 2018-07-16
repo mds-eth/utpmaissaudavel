@@ -12,12 +12,13 @@ class PerfisController extends controller {
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
-        $this->perfil = new Perfis();
 
         $this->url = new Urls();
         if (!$this->url->verificaUrlSessaoUsuario()) {
             header('Location: ' . URL . '/home');
         }
+
+        $this->perfil = new Perfis();
     }
 
     public function index() {

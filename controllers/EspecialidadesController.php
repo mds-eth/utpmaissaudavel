@@ -8,17 +8,17 @@ class EspecialidadesController extends controller {
 
     public function __construct() {
 
-        $this->url = new Urls();
         $this->usuario = new Usuarios();
-        $this->especialidade = new Especialidades();
-
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
 
-        /* if (!$this->url->verificaUrlSessaoUsuario()) {
-          header('Location: ' . URL . '/home');
-          } */
+        $this->url = new Urls();
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
+        }
+
+        $this->especialidade = new Especialidades();
     }
 
     public function cadastrar() {

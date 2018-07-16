@@ -13,11 +13,14 @@ class PacientesController extends controller {
 
     public function __construct() {
 
-        $this->url = new Urls();
         $this->usuario = new Usuarios();
-
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
+        }
+
+        $this->url = new Urls();
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
         }
 
         $this->pessoa = new Pessoas();
@@ -120,6 +123,6 @@ class PacientesController extends controller {
         } else {
             header('Location: ' . URL . '/pacientes/listagem');
         }
-    }    
+    }
 
 }

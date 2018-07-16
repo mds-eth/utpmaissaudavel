@@ -16,13 +16,13 @@ class AgendamentosController extends controller {
         }
 
         $this->url = new Urls();
-        $this->log = new Logs();
-        $this->agendamentos = new Agendamentos();
-        $this->especialidade = new Especialidades();
-
         if (!$this->url->verificaUrlSessaoUsuario()) {
             header('Location: ' . URL . '/home');
         }
+
+        $this->log = new Logs();
+        $this->agendamentos = new Agendamentos();
+        $this->especialidade = new Especialidades();
     }
 
     public function agenda() {

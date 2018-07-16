@@ -13,12 +13,11 @@ class UrlsController extends controller {
             header('Location: ' . URL . '/login');
         }
 
-        $this->perfil = new Perfis();
-
         $this->url = new Urls();
         if (!$this->url->verificaUrlSessaoUsuario()) {
             header('Location: ' . URL . '/home');
         }
+        $this->perfil = new Perfis();
     }
 
     public function cadastrar() {

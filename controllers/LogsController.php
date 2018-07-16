@@ -8,7 +8,6 @@ class LogsController extends controller {
     public function __construct() {
 
         $this->usuario = new Usuarios();
-
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }

@@ -1,3 +1,8 @@
+<style>
+    .error{
+        border: 1px solid red;
+    }
+</style>
 <div class="form-horizontal">   
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -10,6 +15,7 @@
                     <div class="item form-group">
                         <label class="col-md-2 col-sm-3 col-xs-12">Nome</label>
                         <div class="col-md-8">
+                            <input type="hidden" id="id-paciente" name="id-paciente" value="<?= $paciente->id_pessoa ?>">
                             <span><?= $paciente->nome_pessoa ?></span>                            
                         </div>                    
                     </div>
@@ -19,6 +25,14 @@
                             <span><?= $paciente->data_nascimento ?></span>                            
                         </div>                    
                     </div>
+                    <?php if (!is_null($paciente->responsavel)): ?>
+                        <div class="item form-group">
+                            <label class="col-md-2 col-sm-3 col-xs-12">Responsável</label>
+                            <div class="col-md-8">
+                                <span><?= $paciente->responsavel ?></span>                            
+                            </div>                    
+                        </div>
+                    <?php endif; ?>
                     <div class="item form-group">
                         <label class="col-md-2 col-sm-3 col-xs-12">Sexo</label>
                         <div class="col-md-8">
@@ -34,7 +48,7 @@
 
                 </div>
             </div>
-        </div>
+        </div>        
         <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="div-agenda x_panel">
                 <div class="x_title">
@@ -45,7 +59,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Tosse</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="tosse" name="tosse">
+                            <select class="inspecao form-control" id="tosse" name="tosse">
                                 <option>Selecione</option>
                                 <option value="1">Seca</option>
                                 <option value="2">Quintosa</option>
@@ -61,7 +75,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Aspecto da Secreção</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="aspecto-secrecao" name="aspecto-secrecao">
+                            <select class="inspecao form-control" id="aspecto-secrecao" name="aspecto-secrecao">
                                 <option>Selecione</option>
                                 <option value="1">Musoca</option>
                                 <option value="2">Hemoptise</option>
@@ -75,7 +89,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Uso de Musculatura Acessoria</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="musculatura-acessoria" name="musculatura-acessoria">
+                            <select class="inspecao form-control" id="musculatura-acessoria" name="musculatura-acessoria">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -86,7 +100,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Batimento da Asa do Nariz</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="batimento-asa-nariz" name="batimento-asa-nariz">
+                            <select class="inspecao form-control" id="batimento-asa-nariz" name="batimento-asa-nariz">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -96,7 +110,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Presença de Triagem Intercostal</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="presenca-triagem-intercostal" name="presenca-triagem-intercostal">
+                            <select class="inspecao form-control" id="presenca-triagem-intercostal" name="presenca-triagem-intercostal">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -106,7 +120,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Predomínio Respiratória</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="predominio-respiratoria" name="predominio-respiratoria">
+                            <select class="inspecao form-control" id="predominio-respiratoria" name="predominio-respiratoria">
                                 <option>Selecione</option>
                                 <option value="1">Inspiração e Expiração Oral</option>
                                 <option value="2">Inspiração Nasal e Expiração Oral</option>                                
@@ -118,7 +132,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Morfologia Torácica</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="morfologia-toracica" name="morfologia-toracica">
+                            <select class="inspecao form-control" id="morfologia-toracica" name="morfologia-toracica">
                                 <option>Selecione</option>
                                 <option value="1">DIAM. ANT POST = DIAM TRANSVERSO</option>
                                 <option value="2">DIAM. ANT POST MAIOR DIAM TRANSVERSO</option>                                
@@ -131,7 +145,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Expansibilidade Torácica</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="expansibilidade-toracica" name="expansibilidade-toracica">
+                            <select class="inspecao form-control" id="expansibilidade-toracica" name="expansibilidade-toracica">
                                 <option>Selecione</option>
                                 <option value="1">Aumentado</option>
                                 <option value="2">Diminuído</option>                                                                
@@ -141,7 +155,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Ritmo Respiratório</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="ritmo-respiratorio" name="ritmo-respiratorio">
+                            <select class="inspecao form-control" id="ritmo-respiratorio" name="ritmo-respiratorio">
                                 <option>Selecione</option>
                                 <option value="1">Dispineia</option>
                                 <option value="2">Taquipneia</option>                                                                
@@ -163,7 +177,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Dispineia Escala MRC</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="dispineia-escala-mrc" name="dispineia-escala-mrc">
+                            <select class="inspecao form-control" id="dispineia-escala-mrc" name="dispineia-escala-mrc">
                                 <option>Selecione</option>
                                 <option value="1">Grandes Esforços</option>
                                 <option value="2">Pequenos Esforços</option>                                                                
@@ -176,7 +190,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Presença de Deformidades Posturais</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="presenca-deformidades-posturais" name="presenca-deformidades-posturais">
+                            <select class="inspecao form-control" id="presenca-deformidades-posturais" name="presenca-deformidades-posturais">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -187,7 +201,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Mobilidade Torácica</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="mobilidade-toracica" name="dispineia-escala-mrc">
+                            <select class="inspecao form-control" id="mobilidade-toracica" name="dispineia-escala-mrc">
                                 <option>Selecione</option>
                                 <option value="1">HTxD EXPANDE MAIS</option>
                                 <option value="2">HTxD EXPANDE IGUALMENTE</option>                                                                
@@ -198,7 +212,6 @@
                             </select>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -208,14 +221,14 @@
                     <h4><b>Palpação</b></h4>                
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">                    
+                <div class="palpacao x_content">                    
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Grau de Força (CUELLO)</label>
                     </div> 
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Diafragma</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="diafragma" name="diafragma">
+                            <select class="palpacao form-control" id="diafragma" name="diafragma">
                                 <option>Selecione</option>
                                 <option value="1">Direito</option>
                                 <option value="2">Esquerdo</option>                                
@@ -225,7 +238,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Intercostais</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="intercostais" name="intercostais">
+                            <select class="palpacao form-control" id="intercostais" name="intercostais">
                                 <option>Selecione</option>
                                 <option value="1">Direito</option>
                                 <option value="2">Esquerdo</option>                            
@@ -238,7 +251,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Axilar</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="axilar" name="axilar">
+                            <select class="palpacao form-control" id="axilar" name="axilar">
                                 <option>Selecione</option>
                                 <option value="1">Normal</option>
                                 <option value="2">Insp Max</option>                                
@@ -249,7 +262,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Mamilar</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="Mamilar" name="Mamilar">
+                            <select class="palpacao form-control" id="mamilar" name="mamilar">
                                 <option>Selecione</option>
                                 <option value="1">Normal</option>
                                 <option value="2">Insp Max</option>                                
@@ -260,7 +273,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Últimos Arcos Costais</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="Mamilar" name="Mamilar">
+                            <select class="palpacao form-control" id="ultimos-arcos-costais" name="ultimos-arcos-costais">
                                 <option>Selecione</option>
                                 <option value="1">Normal</option>
                                 <option value="2">Insp Max</option>                                
@@ -317,11 +330,11 @@
                     <h4><b>Ascultura Pulmonar</b></h4>                
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">                    
+                <div class="ascultura x_content">                    
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">CPP MV</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="cpp-mv" name="cpp-mv">
+                            <select class="ascultura form-control" id="cpp-mv" name="cpp-mv">
                                 <option>Selecione</option>
                                 <option value="1">Presente Simétrico</option>
                                 <option value="2">Presente Assimétrico</option>                                                                
@@ -337,7 +350,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Secos</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="ruidos-secos" name="ruidos-secos">
+                            <select class="ascultura form-control" id="ruidos-secos" name="ruidos-secos">
                                 <option>Selecione</option>
                                 <option value="1">Roncos</option>
                                 <option value="2">Sibilos</option>                                
@@ -347,7 +360,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Úmidos</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="ruidos-umidos" name="ruidos-umidos">
+                            <select class="ascultura form-control" id="ruidos-umidos" name="ruidos-umidos">
                                 <option>Selecione</option>
                                 <option value="1">Bolhosos</option>
                                 <option value="2">Creptantes</option>                                
@@ -360,7 +373,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Tônus</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="motora-tonus" name="motora-tonus">
+                            <select class="ascultura form-control" id="motora-tonus" name="motora-tonus">
                                 <option>Selecione</option>
                                 <option value="1">Hipotonico</option>
                                 <option value="2">Hipertonico</option>                                
@@ -371,7 +384,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Trofismo</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="trofismo" name="trofismo">
+                            <select class="ascultura form-control" id="trofismo" name="trofismo">
                                 <option>Selecione</option>
                                 <option value="1">Hipotrofico</option>
                                 <option value="2">Hipertrofico</option>                                
@@ -381,7 +394,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Cicatrizes</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="cicatrizes" name="cicatrizes">
+                            <select class="ascultura form-control" id="cicatrizes" name="cicatrizes">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -393,7 +406,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Cianose</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="cianose" name="cianose">
+                            <select class="ascultura form-control" id="cianose" name="cianose">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -404,7 +417,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Hematoma</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="hematoma" name="hematoma">
+                            <select class="ascultura form-control" id="hematoma" name="hematoma">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -415,7 +428,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Eritema</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="eritema" name="eritema">
+                            <select class="ascultura form-control" id="eritema" name="eritema">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -426,7 +439,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Edema</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="edema" name="edema">
+                            <select class="ascultura form-control" id="edema" name="edema">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                
@@ -437,7 +450,7 @@
                     <div class="item form-group">
                         <label class="col-md-4 col-sm-3 col-xs-12">Alteração de Temperatura</label>
                         <div class="col-md-8">
-                            <select class="form-control" id="alteracao-temperatura" name="alteracao-temperatura">
+                            <select class="ascultura form-control" id="alteracao-temperatura" name="alteracao-temperatura">
                                 <option>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="2">Não</option>                                

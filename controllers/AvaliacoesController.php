@@ -6,6 +6,7 @@ class AvaliacoesController extends controller {
     private $log;
     private $usuario;
     private $paciente;
+    private $avaliacao;
 
     public function __construct() {
 
@@ -15,13 +16,13 @@ class AvaliacoesController extends controller {
         }
 
         $this->url = new Urls();
-
-        /* if (!$this->url->verificaUrlSessaoUsuario()) {
-          header('Location: ' . URL . '/home');
-          } */
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
+        }
 
         $this->log = new Logs();
         $this->paciente = new Pacientes();
+        $this->avaliacao = new Avaliacoes();
     }
 
     public function paciente($id) {
@@ -32,6 +33,15 @@ class AvaliacoesController extends controller {
             $this->loadTemplate('avaliacoes/pneumologia', $dados);
         } else {
             header('Location: ' . URL . '/home');
+        }
+    }
+
+    public function salvaDadosFormPneumologia() {
+
+        if ($this->post()) {
+
+            var_dump($_POST);
+            die('salvaDadosFormPneumologia');
         }
     }
 

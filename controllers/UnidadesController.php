@@ -8,17 +8,17 @@ class UnidadesController extends controller {
 
     public function __construct() {
 
-        $this->url = new Urls();
         $this->usuario = new Usuarios();
-        $this->unidade = new Unidades();
-
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
 
+        $this->url = new Urls();
         if (!$this->url->verificaUrlSessaoUsuario()) {
             header('Location: ' . URL . '/home');
         }
+
+        $this->unidade = new Unidades();
     }
 
     public function cadastrar() {
@@ -67,7 +67,7 @@ class UnidadesController extends controller {
             $id = $_POST['id'];
 
             $unidade['unidade'] = $this->unidade->buscaUnidadeParaEdicao($id);
-            $unidade['regionais'] = $this->unidade->listaRegionais();           
+            $unidade['regionais'] = $this->unidade->listaRegionais();
 
             echo json_encode($unidade);
         }

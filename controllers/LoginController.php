@@ -6,6 +6,7 @@ class LoginController extends controller {
     private $url;
 
     public function __construct() {
+
         $this->url = new Urls();
         $this->login = new Login;
 

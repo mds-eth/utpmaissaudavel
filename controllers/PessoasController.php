@@ -12,21 +12,21 @@ class PessoasController extends controller {
 
     public function __construct() {
 
-        $this->url = new Urls();
-        $this->log = new Logs();
-        $this->pessoa = new Pessoas();
-        $this->perfil = new Perfis();
         $this->usuario = new Usuarios();
-        $this->telefone = new Telefones();
-        $this->endereco = new Enderecos();
-
         if (!$this->usuario->logado()) {
             header('Location: ' . URL . '/login');
         }
 
-        /* if (!$this->url->verificaUrlSessaoUsuario()) {
-          header('Location: ' . URL . '/home');
-          } */
+        $this->url = new Urls();
+        if (!$this->url->verificaUrlSessaoUsuario()) {
+            header('Location: ' . URL . '/home');
+        }
+
+        $this->log = new Logs();
+        $this->perfil = new Perfis();
+        $this->pessoa = new Pessoas();
+        $this->telefone = new Telefones();
+        $this->endereco = new Enderecos();
     }
 
     public function cadastrar() {

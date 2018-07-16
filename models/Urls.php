@@ -86,17 +86,14 @@ class Urls extends Model {
 
         $retorno = $sql->fetchObject();
 
-        if (empty($retorno) || is_null($retorno)) {
-            return true;
-        } else {
-            return false;
-        }
+        return empty($retorno) || is_null($retorno) ? true : false;
     }
 
     public function verificaUrlSessaoUsuario() {
 
         $url = $_SERVER['REQUEST_URI'];
-
+        $explodeUrl = explode('/', $url);
+        $new = '/' . $explodeUrl[1] . '/' . $explodeUrl[2];
         $idPerfilUsuarioLogado = $_SESSION['usuario']['id_perfil'];
 
         $sql = $this->db->prepare("select nome_url from urls u
@@ -105,25 +102,17 @@ class Urls extends Model {
                             and u.nome_url = :url");
 
         $sql->bindValue(':idPerfil', $idPerfilUsuarioLogado, PDO::PARAM_INT);
-        $sql->bindValue(':url', $url, PDO::PARAM_STR);
+        $sql->bindValue(':url', $new, PDO::PARAM_STR);
         $sql->execute();
 
         $retorno = $sql->fetchColumn();
 
-        if ($retorno == false) {
-            return false;
-        } else {
-            return true;
-        }
+        return empty($retorno) || $retorno == false || is_null($retorno) ? false : true;
     }
 
     public function validaSessaoTemporaria() {
 
-        if (isset($_SESSION['usuario'])) {
-            return true;
-        } else {
-            return false;
-        }
+        return isset($_SESSION['usuario']) ? true : false;
     }
 
 }
