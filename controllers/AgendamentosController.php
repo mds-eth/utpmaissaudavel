@@ -168,8 +168,7 @@ class AgendamentosController extends controller {
 
     public function buscaPacientesAlunoSelecionado() {
 
-        if ($this->post()) {
-
+        if ($this->post()) {            
             echo json_encode($this->agendamentos->buscaPacientesAlunoSelecionado($_POST['id']));
         }
     }

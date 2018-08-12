@@ -2,10 +2,29 @@
 
 class AvaliacoesController extends controller {
 
+    /**
+     * @var $url
+     */
     private $url;
+
+    /**
+     * @var $log;
+     */
     private $log;
+
+    /**
+     * @var $usuario
+     */
     private $usuario;
+
+    /**
+     * @var $paciente
+     */
     private $paciente;
+
+    /**
+     * @var $avaliacao
+     */
     private $avaliacao;
 
     public function __construct() {

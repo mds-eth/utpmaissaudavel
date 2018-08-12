@@ -18,7 +18,7 @@ class PessoasController extends controller {
         }
 
         $this->url = new Urls();
-        if (!$this->url->verificaUrlSessaoUsuario()) {
+        if (!$this->url->verificaUrlSessaoUsuario()) {            
             header('Location: ' . URL . '/home');
         }
 

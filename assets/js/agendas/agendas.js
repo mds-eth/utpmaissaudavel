@@ -759,6 +759,10 @@ var agendas = {
 
     validaCamposAgendaPaciente: function () {
 
+        var errorSessoes = {1: 'Atenção!", "Data 1º sessão não pode ficar vazio!", "error',
+                       
+                      };
+
         if ($('#aluno').val() === 'Selecione') {
             $('#aluno').css('border', '1px solid red');
             swal("Atenção!", "Selecione um aluno para vincular as sessões do paciente!", "error");

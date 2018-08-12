@@ -3,6 +3,7 @@
 class Agendamentos extends Model {
 
     private $fk = 1;
+    private $sessao = 1;
     private $log;
     private $dataInicial;
     private $dataFinal;
@@ -192,12 +193,12 @@ class Agendamentos extends Model {
     public function gravaAgendaInicialPaciente($sessoes, $fkIdAluno, $fkIdPaciente) {
 
         try {
-
+            
             foreach ($sessoes as $sessao) {
 
-                $sql = $this->db->prepare("INSERT INTO agendamentos(fk_id_aluno, fk_id_paciente, data_sessao, hora_inicio, hora_fim, agendamento_criado_por, 
+                $sql = $this->db->prepare("INSERT INTO agendamentos(fk_id_aluno, fk_id_paciente, data_sessao, hora_inicio, hora_fim, sessao, agendamento_criado_por, 
                                     agendamento_criado_em, agendamento_atualizado_por, agendamento_atualizado_em) 
-                                    VALUES(:fk_id_aluno, :fk_id_paciente, :data_sessao, :hora_inicio, :hora_fim, :agendamento_criado_por, :agendamento_criado_em, 
+                                    VALUES(:fk_id_aluno, :fk_id_paciente, :data_sessao, :hora_inicio, :hora_fim, :sessao, :agendamento_criado_por, :agendamento_criado_em, 
                                     :agendamento_atualizado_por, :agendamento_atualizado_em)");
 
                 $sql->bindValue(':fk_id_aluno', $fkIdAluno, PDO::PARAM_INT);
@@ -205,12 +206,14 @@ class Agendamentos extends Model {
                 $sql->bindValue(':data_sessao', $sessao['data'], PDO::PARAM_STR);
                 $sql->bindValue(':hora_inicio', $sessao['horaInicio'], PDO::PARAM_STR);
                 $sql->bindValue(':hora_fim', $sessao['horaFim'], PDO::PARAM_STR);
+                $sql->bindValue(':sessao', $this->sessao, PDO::PARAM_INT);
                 $sql->bindValue(':agendamento_criado_por', $this->idUsuario, PDO::PARAM_INT);
                 $sql->bindValue(':agendamento_criado_em', $this->date, PDO::PARAM_STR);
                 $sql->bindValue(':agendamento_atualizado_por', $this->idUsuario, PDO::PARAM_INT);
                 $sql->bindValue(':agendamento_atualizado_em', $this->date, PDO::PARAM_STR);
 
                 $sql->execute();
+                $this->sessao = $this->sessao + 1;
             }
 
             $this->gravaTabelaAlunosPacientes($fkIdAluno, $fkIdPaciente);
